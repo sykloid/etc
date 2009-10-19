@@ -1,13 +1,16 @@
 -- XMonad Tiling Window Manager Configuration.
 -- P.C. Shyamshankar <sykora@lucentbeing.com>
 
-import IO
+import System.IO
 import System.Exit
 
 import qualified Data.Map as M
 
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run
 
 import qualified XMonad.StackSet as W
 
@@ -25,6 +28,15 @@ myDMenu = "x=$(dmenu_path | dmenu -i " ++
           "-sb \"#ECAB00\" " ++
           "-sf \"#FFFFFF\" " ++
           ") && eval \"exec $x\""
+
+-- Statusbar
+
+myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1680 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
+
+dzenLogger handle = dynamicLogWithPP $ defaultPP {
+    ppCurrent = dzenColor "#FFCC00" "#000000" . pad,
+    ppOutput  = hPutStrLn handle
+}
 
 -- Layouts
 
@@ -89,19 +101,25 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, button5), (\_ -> nextWS)) -- Switch to next workspace.
     ]
 
--- Amalgamation of settings.
-
-myConfig = defaultConfig {
-    terminal      = myTerminal,
-
-    modMask       = myModMask,
-    keys          = myKeys,
-    mouseBindings = myMouseBindings,
-
-    borderWidth   = myBorderWidth
-}
-
 -- Run it.
 
 main = do
-    xmonad $ myConfig
+    dzenBar <- spawnPipe myDzenBar
+    xmonad $ defaultConfig {
+
+        -- Basics
+        terminal      = myTerminal,
+
+        -- Appearance
+        borderWidth   = myBorderWidth,
+
+        -- Interaction
+        keys          = myKeys,
+        modMask       = myModMask,
+        mouseBindings = myMouseBindings,
+
+        -- Hooks
+        layoutHook    = myLayoutHook,
+        logHook       = dzenLogger dzenBar,
+        manageHook    = manageDocks
+    }
