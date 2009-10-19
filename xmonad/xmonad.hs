@@ -11,6 +11,10 @@ import XMonad.Actions.CycleWS
 
 import qualified XMonad.StackSet as W
 
+-- Appearance
+
+myBorderWidth = 0 -- No borders around windows, I think I can manage.
+
 -- Default Applications
 
 myTerminal = "urxvtc"
@@ -67,9 +71,12 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 
 myConfig = defaultConfig {
     terminal      = myTerminal,
+
     modMask       = myModMask,
     keys          = myKeys,
-    mouseBindings = myMouseBindings
+    mouseBindings = myMouseBindings,
+
+    borderWidth   = myBorderWidth
 }
 
 -- Run it.
