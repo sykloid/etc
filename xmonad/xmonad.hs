@@ -40,6 +40,14 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m .|. shiftMask, xK_F12), io (exitWith ExitSuccess)), -- Quit XMonad.
 
     ]
+    ++
+
+    -- Map the workspace access keys.
+    -- mod + xK_0 .. xK_9 -> Switch to the corresponding workspace (greedyView) 
+    -- mod + shift + xK_0 .. xK_9 -> Move current window to corresponding workspace. 
+    [((m .|. shiftMask', numberKey), windows $ windowAction workspace)
+        | (workspace, numberKey) <- zip (XMonad.workspaces config) [xK_1 .. xK_9]
+        , (shiftMask', windowAction) <- [(0, W.greedyView), (shiftMask, W.shift)]]
 
 -- Amalgamation of settings.
 
