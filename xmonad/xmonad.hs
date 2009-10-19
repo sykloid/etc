@@ -10,6 +10,10 @@ import XMonad
 
 import qualified XMonad.StackSet as W
 
+-- Default Applications
+
+myTerminal = "urxvtc"
+
 -- Keys
 
 myModMask = mod4Mask -- The Windows Key, aka "Super"
@@ -52,8 +56,9 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
 -- Amalgamation of settings.
 
 myConfig = defaultConfig {
-    modMask = myModMask,
-    keys    = myKeys
+    terminal = myTerminal,
+    modMask  = myModMask,
+    keys     = myKeys
 }
 
 -- Run it.
