@@ -26,6 +26,18 @@ myDMenu = "x=$(dmenu_path | dmenu -i " ++
           "-sf \"#FFFFFF\" " ++
           ") && eval \"exec $x\""
 
+-- Layouts
+
+-- A constructed default tiling layout, 2 panes of windows.
+tiledLayout = Tall masterCapacity resizeDelta defaultRatio
+    where
+        masterCapacity = 1 -- Number of master windows by default.
+        resizeDelta    = 3/100 -- Percent to increase the size by each time.
+        defaultRatio   = 1/2 -- Default screen ratio of master : others.
+
+-- avoidStruts makes room for the status bars.
+myLayoutHook = avoidStruts $ tiledLayout ||| Mirror tiledLayout ||| Full
+
 -- Keys
 
 myModMask = mod4Mask -- The Windows Key, aka "Super"
