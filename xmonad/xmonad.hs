@@ -18,6 +18,13 @@ myBorderWidth = 0 -- No borders around windows, I think I can manage.
 -- Default Applications
 
 myTerminal = "urxvtc"
+myDMenu = "x=$(dmenu_path | dmenu -i " ++
+          "-fn xft:'Envy Code R':pixelsize=18 " ++
+          "-nb \"#000000\" " ++
+          "-nf \"#AFAFAF\" " ++
+          "-sb \"#ECAB00\" " ++
+          "-sf \"#FFFFFF\" " ++
+          ") && eval \"exec $x\""
 
 -- Keys
 
@@ -43,6 +50,9 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
         ((m, xK_comma), sendMessage (IncMasterN 1)), -- Increment number of master windows.
         ((m, xK_period), sendMessage (IncMasterN (-1))), -- Decrement number of master windows.
+
+        -- Application Shortcuts
+        ((m, xK_p), spawn myDMenu),
 
         -- XMonad Control
         ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
