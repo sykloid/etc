@@ -22,7 +22,7 @@ myBorderWidth = 0 -- No borders around windows, I think I can manage.
 -- Default Applications
 
 myTerminal = "urxvtc"
-myDMenu = "x=$(dmenu_path | dmenu -i " ++
+myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
           "-fn xft:'Envy Code R':pixelsize=18 " ++
           "-nb \"#000000\" " ++
           "-nf \"#AFAFAF\" " ++
