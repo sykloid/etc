@@ -8,6 +8,7 @@ import qualified Data.Map as M
 
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
@@ -41,6 +42,7 @@ dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
     ppOutput  = hPutStrLn handle,
     ppCurrent = (\wsID -> "^fg(#FFAF00)[" ++ wsID ++ "]^fg()"),
     ppSep = " | ",
+    ppTitle = (\title -> "^fg(#92FF00)" ++ title ++ "^fg()"),
     ppLayout = (\layout -> case layout of
                     "Tall" -> "Tall ^i(/home/sykora/.icons/dzen2/tall.xbm)"
                     "Mirror Tall" -> "Mirror Tall ^i(/home/sykora/.icons/dzen2/mirror_tall.xbm)"
@@ -89,6 +91,9 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
         ((m, xK_comma), sendMessage (IncMasterN 1)), -- Increment number of master windows.
         ((m, xK_period), sendMessage (IncMasterN (-1))), -- Decrement number of master windows.
+
+        -- Mouse Management.
+        ((m, xK_b), banish LowerRight), -- Banish mouse to the lower right corner of the screen.
 
         -- Application Shortcuts
         ((m, xK_p), spawn myDMenu),
