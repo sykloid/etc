@@ -38,6 +38,7 @@ myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 540 -p -ta r -fn \"Envy Code R:size=1
 
 myDzenDateBar = "dzen2 -x 1440 -y 0 -h 18 -w 240 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
 
+-- Custom PrettyPrinter for status output from XMonad -> Dzen2
 dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
     ppOutput  = hPutStrLn handle,
     ppCurrent = (\wsID -> "^fg(#FFAF00)[" ++ wsID ++ "]^fg()"),
@@ -86,6 +87,8 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
 
         ((m .|. shiftMask, xK_t), windows W.swapDown), -- Swap with next.
         ((m .|. shiftMask, xK_s), windows W.swapUp), -- Swap with previous.
+
+        ((m, xK_j), withFocused $ windows . W.sink), -- Bring floating windows back to tile.
 
         -- Layout Management
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
