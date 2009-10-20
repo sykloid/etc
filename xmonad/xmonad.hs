@@ -11,6 +11,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.WindowNavigation
 import XMonad.Util.Run
 
 import qualified XMonad.StackSet as W
@@ -66,7 +67,7 @@ tiledLayout = Tall masterCapacity resizeDelta defaultRatio
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
-myLayoutHook = avoidStruts $ tiledLayout ||| Mirror tiledLayout ||| Full
+myLayoutHook = windowNavigation $ avoidStruts $ tiledLayout ||| Mirror tiledLayout ||| Full
 
 -- Keys
 
@@ -81,6 +82,11 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         -- Window Navigation
         ((m, xK_t), windows W.focusDown), -- Focus next window.
         ((m, xK_s), windows W.focusUp), -- Focus previous window.
+
+        ((m, xK_n), sendMessage $ Go L), -- Go left.
+        ((m, xK_e), sendMessage $ Go D), -- Go down.
+        ((m, xK_i), sendMessage $ Go U), -- Go up.
+        ((m, xK_o), sendMessage $ Go R), -- Go right.
 
         -- Window Management
         ((m, xK_x), kill), -- Kill the window.
