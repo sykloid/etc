@@ -12,6 +12,7 @@ import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.WindowNavigation
+import XMonad.Prompt
 import XMonad.Util.Run
 
 import qualified XMonad.StackSet as W
@@ -19,6 +20,17 @@ import qualified XMonad.StackSet as W
 -- Appearance
 
 myBorderWidth = 0 -- No borders around windows, I think I can manage.
+
+-- XMonad.Prompt Appearance
+
+myXPConfig = defaultXPConfig {
+    font = "xft:Envy Code R:pixelsize=14:autohint=true",
+    fgHLight = "#FFCC00",
+    bgHLight = "#000000",
+    bgColor = "#000000",
+    borderColor = "#222222",
+    height = 22
+}
 
 -- Default Applications
 
