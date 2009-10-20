@@ -38,6 +38,10 @@ dzenLogger handle = dynamicLogWithPP $ defaultPP {
     ppOutput  = hPutStrLn handle
 }
 
+-- Workspaces
+
+myWorkspaces = ["main", "web", "3", "4", "5", "6", "7", "8", "irc"]
+
 -- Layouts
 
 -- A constructed default tiling layout, 2 panes of windows.
@@ -109,6 +113,7 @@ main = do
 
         -- Basics
         terminal      = myTerminal,
+        workspaces    = myWorkspaces,
 
         -- Appearance
         borderWidth   = myBorderWidth,
