@@ -31,12 +31,23 @@ myDMenu = "x=$(dmenu_path | dmenu -i " ++
 
 -- Statusbar
 
-myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1680 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
+myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 900 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
 
-dzenLogger handle = dynamicLogWithPP $ defaultPP {
-    ppCurrent = dzenColor "#FFCC00" "#000000" . pad,
-    ppOutput  = hPutStrLn handle
+myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 540 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#FF00AA\""
+
+myDzenDateBar = "dzen2 -x 1440 -y 0 -h 18 -w 240 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
+
+dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
+    ppOutput  = hPutStrLn handle,
+    ppCurrent = (\wsID -> "^fg(#FFAF00)[" ++ wsID ++ "]^fg()"),
+    ppSep = " | ",
+    ppLayout = (\layout -> case layout of
+                    "Tall" -> "Tall ^i(/home/sykora/.icons/dzen2/tall.xbm)"
+                    "Mirror Tall" -> "Mirror Tall ^i(/home/sykora/.icons/dzen2/mirror_tall.xbm)"
+                    "Full" -> "Full ^i(/home/sykora/.icons/dzen2/full.xbm)"
+                )
 }
+
 
 -- Workspaces
 
@@ -109,6 +120,8 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 
 main = do
     dzenBar <- spawnPipe myDzenBar
+    dzenDateBar <- spawnPipe $ "/home/sykora/_etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
+    dzenMPDBar <- spawnPipe $ "/home/sykora/_etc/xmonad/dzen_mpd_bar.zsh | " ++ myDzenMPDBar
     xmonad $ defaultConfig {
 
         -- Basics
@@ -125,6 +138,6 @@ main = do
 
         -- Hooks
         layoutHook    = myLayoutHook,
-        logHook       = dzenLogger dzenBar,
+        logHook       = dzenStatusLogger dzenBar,
         manageHook    = manageDocks
     }
