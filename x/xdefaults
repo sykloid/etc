@@ -50,3 +50,11 @@ urxvt.scrollStyle: plain
 urxvt.scrollTtyOutput: False
 urxvt.scrollWithBuffer: True
 urxvt.scrollTtyKeypress: True
+
+urxvt.saveLines: 12000
+
+! Settings for urxvt-perl-extensions.
+urxvt.perl-ext: default,matcher
+urxvt.matcher.button: 2
+urxvt.urlLauncher: sensible-browser
+urxvt.searchable-scrollback: M-Tab
