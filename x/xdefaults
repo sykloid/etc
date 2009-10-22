@@ -5,6 +5,25 @@
 urxvt.background: Black
 urxvt.foreground: Grey
 
+! Some nice colors to soothe the eye. Lifted from a friendly person on the
+! Archlinux forum.
+urxvt.color0: #000000
+urxvt.color1: #FF6565
+urxvt.color2: #93D44F
+urxvt.color3: #EAB93D
+urxvt.color4: #204A87
+urxvt.color5: #CE5C00
+urxvt.color6: #89B6E2
+urxvt.color7: #CCCCCC
+urxvt.color8: #555753
+urxvt.color9: #FF8D8D
+urxvt.color10: #C8E7A8
+urxvt.color11: #FFC123
+urxvt.color12: #3465A4
+urxvt.color13: #F57900
+urxvt.color14: #46A4FF
+urxvt.color15: #FFFFFF
+
 ! Set some nice fonts.
 urxvt.font: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
 urxvt.boldfont: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
