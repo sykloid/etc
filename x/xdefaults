@@ -1,5 +1,14 @@
 ! Resources for X applications.
 ! P.C. Shyamshankar <sykora@lucentbeing.com>
+!
+! vim:ft=xdefaults
+
+! Xft Font Settings.
+Xft.dpi: 96
+Xft.antialias: True
+Xft.rgba: rgb
+Xft.hinting: True
+Xft.hintstyle: hintslight
 
 ! Basic Appearance
 urxvt.background: Black
@@ -23,6 +32,10 @@ urxvt.color12: #3465A4
 urxvt.color13: #F57900
 urxvt.color14: #46A4FF
 urxvt.color15: #FFFFFF
+
+urxvt.transparent: False
+urxvt.fading: 30
+urxvt.shading: 70
 
 ! Set some nice fonts.
 urxvt.font: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
