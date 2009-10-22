@@ -1,0 +1,20 @@
+! Resources for X applications.
+! P.C. Shyamshankar <sykora@lucentbeing.com>
+
+! Basic Appearance
+urxvt.background: Black
+urxvt.foreground: Grey
+
+! Set some nice fonts.
+urxvt.font: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
+urxvt.boldfont: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
+urxvt.italicfont: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
+urxvt.boldItalicfont: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
+
+! Custom scrolling behaviour
+urxvt.scrollBar: False
+urxvt.scrollBar_right: False
+urxvt.scrollStyle: plain
+urxvt.scrollTtyOutput: False
+urxvt.scrollWithBuffer: True
+urxvt.scrollTtyKeypress: True
