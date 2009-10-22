@@ -34,7 +34,7 @@ myXPConfig = defaultXPConfig {
 
 -- Default Applications
 
-myTerminal = "urxvtc"
+myTerminal = "urxvt"
 myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
           "-fn xft:'Envy Code R':pixelsize=18 " ++
           "-nb \"#000000\" " ++
@@ -47,9 +47,9 @@ myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
 
 myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 900 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
 
-myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 540 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#FF00AA\""
+myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 530 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#FF00AA\""
 
-myDzenDateBar = "dzen2 -x 1440 -y 0 -h 18 -w 240 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
+myDzenDateBar = "dzen2 -x 1430 -y 0 -h 18 -w 250 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
 
 -- Custom PrettyPrinter for status output from XMonad -> Dzen2
 dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
@@ -146,8 +146,8 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 
 main = do
     dzenBar <- spawnPipe myDzenBar
-    dzenDateBar <- spawnPipe $ "/home/sykora/_etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
-    dzenMPDBar <- spawnPipe $ "/home/sykora/_etc/xmonad/dzen_mpd_bar.zsh | " ++ myDzenMPDBar
+    dzenDateBar <- spawnPipe $ "~/etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
+    dzenMPDBar <- spawnPipe $ "~/etc/xmonad/dzen_mpd_bar.zsh | " ++ myDzenMPDBar
     xmonad $ defaultConfig {
 
         -- Basics
