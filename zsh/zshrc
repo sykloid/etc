@@ -1,0 +1,8 @@
+# .zshrc: Configuration for the Z-Shell.
+# P.C. Shyamshankar <sykora@lucentbeing.com>
+
+# Where everything is.
+Z=~/etc/zsh
+
+# Set up a working environment.
+source $Z/environment.zsh
