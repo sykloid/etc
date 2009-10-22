@@ -6,3 +6,6 @@ Z=~/etc/zsh
 
 # Set up a working environment.
 source $Z/environment.zsh
+
+# Set up some aliases
+source $Z/aliases.zsh
