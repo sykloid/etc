@@ -9,6 +9,11 @@ source ~/etc/vim/colemak.vim
 filetype plugin indent on
 syntax enable
 
+" Set the colorscheme.
+if &t_Co == 256
+    colorscheme lucius
+endif
+
 " Some general options.
 set modeline " Allow vim to interpret modelines, to determine per-file options.
 set mouse=a " Enable mouse on all modes.
@@ -18,7 +23,7 @@ set virtualedit=block " Allow choosing perfect rectangles in Visual Block mode.
 " Windowing
 set splitright " Open horizontally split windows to the right of the current window.
 set splitbelow " Open vertically split windows to below the current window.
-set laststatus " Always show a status bar.
+set laststatus=2 " Always show a status bar.
 
 " Completion
 set wildmenu " Advanced completion, showing matches above the command line.
