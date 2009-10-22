@@ -1,0 +1,18 @@
+#! /bin/zsh
+# Custom X initialization script
+# P.C. Shyamshankar <sykora@lucentbeing.com>
+
+# Load some defaults
+xrdb < ~/etc/x/xdefaults
+
+# Load the Colemak keymap.
+xmodmap ~/etc/x/colemak.xmodmap
+
+# Make sure the CapsLock key (now backspace) can repeat.
+xset r 66
+
+# Set the mouse pointer.
+xsetroot -cursor_name left_ptr
+
+# Start my favorite window manager.
+xmonad
