@@ -1,0 +1,5 @@
+" .vimrc file.
+" P.C. Shyamshankar <sykora@lucentbeing.com>
+
+" Pull in Colemak keybindings.
+source ~/etc/vim/colemak.vim
