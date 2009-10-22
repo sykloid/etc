@@ -1,0 +1,9 @@
+; Git Configuration
+; P.C. Shyamshankar <sykora@lucentbeing.com>
+
+[user]
+	name = P.C. Shyamshankar
+	email = sykora@lucentbeing.com
+
+[core]
+	editor = vim
