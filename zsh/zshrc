@@ -10,6 +10,9 @@ source $Z/environment.zsh
 # Set up some aliases
 source $Z/aliases.zsh
 
+# Set some options.
+source $Z/options.zsh
+
 # Set the prompt.
 source $Z/prompt.zsh
 
