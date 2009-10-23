@@ -47,9 +47,9 @@ myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
 
 myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 900 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
 
-myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 530 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#FF00AA\""
+myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 520 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#FF00AA\""
 
-myDzenDateBar = "dzen2 -x 1430 -y 0 -h 18 -w 250 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
+myDzenDateBar = "dzen2 -x 1420 -y 0 -h 18 -w 260 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
 
 -- Custom PrettyPrinter for status output from XMonad -> Dzen2
 dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
