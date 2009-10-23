@@ -16,4 +16,7 @@ source $Z/options.zsh
 # Set the prompt.
 source $Z/prompt.zsh
 
+# Define some functions.
+source $Z/functions.zsh
+
 if (( C == 256 )); source $Z/ls_colors_256.zsh
