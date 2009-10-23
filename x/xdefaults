@@ -17,20 +17,20 @@ urxvt.foreground: Grey
 ! Some nice colors to soothe the eye. Lifted from a friendly person on the
 ! Archlinux forum.
 urxvt.color0: #000000
-urxvt.color1: #FF6565
-urxvt.color2: #93D44F
-urxvt.color3: #EAB93D
-urxvt.color4: #204A87
-urxvt.color5: #CE5C00
-urxvt.color6: #89B6E2
+urxvt.color1: #D32A2F
+urxvt.color2: #27DE3A
+urxvt.color3: #CE5C00
+urxvt.color4: #0066FF
+urxvt.color5: #AC00FF
+urxvt.color6: #208F93
 urxvt.color7: #CCCCCC
 urxvt.color8: #555753
-urxvt.color9: #FF8D8D
-urxvt.color10: #C8E7A8
+urxvt.color9: #FF2963
+urxvt.color10: #A4FF00
 urxvt.color11: #FFC123
-urxvt.color12: #3465A4
-urxvt.color13: #F57900
-urxvt.color14: #46A4FF
+urxvt.color12: #46A4FF
+urxvt.color13: #FF00BB
+urxvt.color14: #23D9E0
 urxvt.color15: #FFFFFF
 
 urxvt.transparent: False
