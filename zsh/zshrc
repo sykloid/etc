@@ -19,4 +19,8 @@ source $Z/prompt.zsh
 # Define some functions.
 source $Z/functions.zsh
 
+# Set up some colors for directory listings.
 if (( C == 256 )); source $Z/ls_colors_256.zsh
+
+# Initialize the completion system.
+source $Z/completion.zsh
