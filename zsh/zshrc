@@ -12,3 +12,5 @@ source $Z/aliases.zsh
 
 # Set the prompt.
 source $Z/prompt.zsh
+
+if (( C == 256 )); source $Z/ls_colors_256.zsh
