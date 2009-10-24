@@ -9,6 +9,7 @@ case $TERM in
         # Special function preexec, executed before running each command.
         function preexec () {
             # Set the terminal title to the currently executing command.
-            print -Pn "\e]0;$1 (%~): %n@%m\a"
+            command=$(print -P "%60>...>$1")
+            print -Pn "\e]0;$command (%~) : %n@%m\a"
         }
 esac
