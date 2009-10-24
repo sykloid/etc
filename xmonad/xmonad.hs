@@ -64,7 +64,6 @@ dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
                 )
 }
 
-
 -- Workspaces
 
 myWorkspaces = ["main", "web", "3", "4", "5", "6", "7", "8", "irc"]
@@ -80,6 +79,10 @@ tiledLayout = Tall masterCapacity resizeDelta defaultRatio
 
 -- avoidStruts makes room for the status bars.
 myLayoutHook = windowNavigation $ avoidStruts $ tiledLayout ||| Mirror tiledLayout ||| Full
+
+-- Shortcuts
+
+myKillAllDzen = "for pid in $(pgrep dzen); do kill $pid; done"
 
 -- Keys
 
@@ -120,8 +123,8 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_p), spawn myDMenu),
 
         -- XMonad Control
-        ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
-        ((m .|. shiftMask, xK_F12), io (exitWith ExitSuccess)) -- Quit XMonad.
+        ((m, xK_q), spawn myKillAllDzen >> restart "xmonad" True), -- Restart XMonad.
+        ((m .|. shiftMask, xK_F12), spawn myKillAllDzen >> io (exitWith ExitSuccess)) -- Quit XMonad.
     ]
     ++
 
@@ -146,8 +149,8 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 
 main = do
     dzenBar <- spawnPipe myDzenBar
-    dzenDateBar <- spawnPipe $ "~/etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
-    dzenMPDBar <- spawnPipe $ "~/etc/xmonad/dzen_mpd_bar.zsh | " ++ myDzenMPDBar
+    spawn $ "~/etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
+    spawn $ "~/etc/xmonad/dzen_mpd_bar.zsh | " ++ myDzenMPDBar
     xmonad $ defaultConfig {
 
         -- Basics
