@@ -44,7 +44,8 @@ set smarttab " Automatically detect if you want to delete a <Tab>'s worth of spa
 set autoindent " Automatically indent the next line the same as the current line.
 
 " Search
-set smartcase " Be case insensitive unless search term is mixed case, then be sensitive.
+set ignorecase " Be case insensitive while searching.
+set smartcase " Except when there are upper-case letters in the search term.
 set incsearch " Highlight matches as the term is typed.
 set nohlsearch " Don't highlight matches afterwards.
 
