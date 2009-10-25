@@ -2,7 +2,8 @@
 # P.C. Shyamshankar <sykora@lucentbeing.com>
 
 # Various Paths
-path=(~/bin $path /usr/local/bin)
+typeset -U path
+path=(~/bin ~/lib/python{2.6,3.1}/bin $path /usr/local/bin)
 export PATH
 
 # Proxy Settings.
