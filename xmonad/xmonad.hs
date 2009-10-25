@@ -13,6 +13,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.WindowNavigation
 import XMonad.Prompt
+import XMonad.Prompt.AppendFile
 import XMonad.Util.Run
 
 import qualified XMonad.StackSet as W
@@ -24,12 +25,12 @@ myBorderWidth = 0 -- No borders around windows, I think I can manage.
 -- XMonad.Prompt Appearance
 
 myXPConfig = defaultXPConfig {
-    font = "xft:Envy Code R:pixelsize=14:autohint=true",
+    font = "-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso8859-1",
     fgHLight = "#FFCC00",
     bgHLight = "#000000",
     bgColor = "#000000",
     borderColor = "#222222",
-    height = 22
+    height = 24
 }
 
 -- Default Applications
@@ -45,11 +46,9 @@ myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
 
 -- Statusbar
 
-myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 900 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
+myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1400 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
 
-myDzenMPDBar = "dzen2 -x 900 -y 0 -h 18 -w 500 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#FF00AA\""
-
-myDzenDateBar = "dzen2 -x 1400 -y 0 -h 18 -w 870 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
+myDzenDateBar = "dzen2 -x 1400 -y 0 -h 18 -w 280 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
 
 -- Custom PrettyPrinter for status output from XMonad -> Dzen2
 dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
@@ -122,6 +121,9 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         -- Application Shortcuts
         ((m, xK_p), spawn myDMenu),
 
+        -- XMonad Prompts.
+        ((m, xK_f), appendFilePrompt myXPConfig "/home/sykora/.notes"),
+
         -- XMonad Control
         ((m, xK_q), spawn myKillAllDzen >> restart "xmonad" True), -- Restart XMonad.
         ((m .|. shiftMask, xK_F12), spawn myKillAllDzen >> io (exitWith ExitSuccess)) -- Quit XMonad.
@@ -150,7 +152,6 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 main = do
     dzenBar <- spawnPipe myDzenBar
     spawn $ "~/etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
-    spawn $ "~/etc/xmonad/dzen_mpd_bar.zsh | " ++ myDzenMPDBar
     xmonad $ defaultConfig {
 
         -- Basics
