@@ -14,3 +14,6 @@ export https_proxy=127.0.0.1:5865
 # Color-related settings _must_ use this if they don't want to blow up on less
 # endowed terminals.
 C=$(tput colors)
+
+# Python per-user site-packages.
+export PYTHONUSERBASE=~
