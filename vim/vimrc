@@ -53,3 +53,7 @@ set nohlsearch " Don't highlight matches afterwards.
 command! W w
 command! Q q
 command! Wq wq
+
+" Script specific settings
+
+let g:NERDSpaceDelims = 1
