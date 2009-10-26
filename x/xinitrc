@@ -17,5 +17,8 @@ xsetroot -cursor_name left_ptr
 # Set the wallpaper
 ~/bin/cycle-wallpaper
 
+# Save my wrists.
+xwrits +clock +breakclock +idle +top typetime=55 break=5 after=10 -multiply break=7 &
+
 # Start my favorite window manager.
 xmonad
