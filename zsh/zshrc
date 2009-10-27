@@ -13,15 +13,15 @@ source $Z/aliases.zsh
 # Set some options.
 source $Z/options.zsh
 
+# Define some functions.
+source $Z/functions.zsh
+
 # Set the prompt.
 if (( C == 256 )); then
     source $Z/prompt_256.zsh
 else
     source $Z/prompt.zsh
 fi
-
-# Define some functions.
-source $Z/functions.zsh
 
 # Set up some colors for directory listings.
 if (( C == 256 )); then
