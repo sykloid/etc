@@ -17,6 +17,26 @@ case $TERM in
         function precmd() {
             # Set the terminal title to the current working directory.
             print -Pn "\e]0;%~: %n@%m\a"
+
+            # Get the current git branch into the prompt.
+            current_branch=$(git_current_branch)
+
+            if [[ ${current_branch} != "" ]]; then
+                if (( C == 256 )); then
+                    git_status=$(git status)
+                    if [[ ${git_status} == *"Changed but not updated"* ]]; then
+                        branch_color=160
+                    elif [[ ${git_status} == *"Changes to be committed"* ]]; then
+                        branch_color=082
+                    else
+                        branch_color=222
+                    fi
+
+                    git_branch=":%{$FX[reset]$FG[${branch_color}]%}${current_branch}"
+                else
+                    git_branch=":${current_branch}"
+                fi
+            fi
         }
 
         # Special function preexec, executed before running each command.
