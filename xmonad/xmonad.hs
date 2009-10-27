@@ -1,6 +1,8 @@
 -- XMonad Tiling Window Manager Configuration.
 -- P.C. Shyamshankar <sykora@lucentbeing.com>
 
+{-# LANGUAGE NoMonomorphismRestriction #-}
+
 import System.IO
 import System.Exit
 
@@ -9,6 +11,7 @@ import qualified Data.Map as M
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
+import XMonad.Actions.GridSelect
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.WindowNavigation
@@ -32,6 +35,31 @@ myXPConfig = defaultXPConfig {
     borderColor = "#222222",
     height = 24
 }
+
+-- XMonad.GridSelect Appearance
+
+myGSConfig = defaultGSConfig {
+    gs_cellheight = 50,
+    gs_cellwidth = 200,
+    gs_navigate = M.unions
+        [
+            myGSResetKey,
+            myGSNavigationKeys,
+            gs_navigate $ defaultGSConfig `asTypeOf` myGSConfig
+        ]
+    }
+    where
+        myGSResetKey = M.singleton (0, xK_space) (const(0, 0))
+        myGSNavigationKeys = M.map addPair $ M.fromList
+            [
+                ((0, xK_n), (-1, 0)),
+                ((0, xK_e), (0, 1)),
+                ((0, xK_i), (0, -1)),
+                ((0, xK_o), (1, 0))
+            ]
+        addPair (a, b) (x, y) = (a + x, b + y)
+
+
 
 -- Default Applications
 
@@ -125,6 +153,7 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_f), appendFilePrompt myXPConfig "/home/sykora/.notes"),
 
         -- XMonad Control
+        ((m, xK_d), goToSelected myGSConfig),
         ((m, xK_q), spawn myKillAllDzen >> restart "xmonad" True), -- Restart XMonad.
         ((m .|. shiftMask, xK_F12), spawn myKillAllDzen >> io (exitWith ExitSuccess)) -- Quit XMonad.
     ]
