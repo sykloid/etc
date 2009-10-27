@@ -20,5 +20,8 @@ xsetroot -cursor_name left_ptr
 # Save my wrists.
 xwrits +clock +breakclock +idle +top typetime=55 break=5 after=10 -multiply break=7 &
 
+# /me loves lots of fast terminals
+urxvtd -q -o -f
+
 # Start my favorite window manager.
 xmonad

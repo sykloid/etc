@@ -35,7 +35,7 @@ myXPConfig = defaultXPConfig {
 
 -- Default Applications
 
-myTerminal = "urxvt"
+myTerminal = "urxvtc"
 myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
           "-fn xft:'Envy Code R':pixelsize=18 " ++
           "-nb \"#000000\" " ++
