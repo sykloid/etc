@@ -6,6 +6,9 @@ typeset -U path
 path=(~/bin ~/lib/python{2.6,3.1}/bin $path /usr/local/bin)
 export PATH
 
+typeset -U fpath
+fpath=($Z/functions $fpath)
+
 # Proxy Settings.
 export http_proxy=127.0.0.1:5865
 export ftp_proxy=127.0.0.1:5865
