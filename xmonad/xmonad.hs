@@ -176,6 +176,15 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, button5), (\_ -> nextWS)) -- Switch to next workspace.
     ]
 
+-- Managing everything.
+
+myManageHook = composeAll
+
+    [
+        className =? "MPlayer" --> doFloat,
+        manageDocks
+    ]
+
 -- Run it.
 
 main = do
@@ -198,5 +207,5 @@ main = do
         -- Hooks
         layoutHook    = myLayoutHook,
         logHook       = dzenStatusLogger dzenBar,
-        manageHook    = manageDocks
+        manageHook    = myManageHook
     }
