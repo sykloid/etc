@@ -28,7 +28,7 @@ myBorderWidth = 0 -- No borders around windows, I think I can manage.
 -- XMonad.Prompt Appearance
 
 myXPConfig = defaultXPConfig {
-    font = "-misc-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-iso8859-1",
+    font = "xft:Envy Code R",
     fgHLight = "#FFCC00",
     bgHLight = "#000000",
     bgColor = "#000000",
