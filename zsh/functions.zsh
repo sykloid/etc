@@ -19,6 +19,7 @@ case $TERM in
             print -Pn "\e]0;%~: %n@%m\a"
 
             # Get the current git branch into the prompt.
+            git_branch=""
             current_branch=$(git_current_branch)
 
             if [[ ${current_branch} != "" ]]; then
