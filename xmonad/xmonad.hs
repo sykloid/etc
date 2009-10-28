@@ -39,8 +39,9 @@ myXPConfig = defaultXPConfig {
 -- XMonad.GridSelect Appearance
 
 myGSConfig = defaultGSConfig {
-    gs_cellheight = 50,
-    gs_cellwidth = 200,
+    gs_font = "xft:Envy Code R:pixelsize=14",
+    gs_cellheight = 40,
+    gs_cellwidth = 400,
     gs_navigate = M.unions
         [
             myGSResetKey,
@@ -58,8 +59,6 @@ myGSConfig = defaultGSConfig {
                 ((0, xK_o), (1, 0))
             ]
         addPair (a, b) (x, y) = (a + x, b + y)
-
-
 
 -- Default Applications
 
