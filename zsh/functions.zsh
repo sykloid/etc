@@ -47,3 +47,7 @@ case $TERM in
             print -Pn "\e]0;$command (%~) : %n@%m\a"
         }
 esac
+
+# Autoload some useful utilities.
+autoload -Uz zmv
+autoload -Uz zargs
