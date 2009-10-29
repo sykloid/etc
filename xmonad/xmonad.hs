@@ -63,6 +63,8 @@ myGSConfig = defaultGSConfig {
 -- Default Applications
 
 myTerminal = "urxvtc"
+myBrowser = "uzbl"
+
 myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
           "-fn xft:'Envy Code R':pixelsize=18 " ++
           "-nb \"#000000\" " ++
@@ -147,9 +149,10 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
 
         -- Application Shortcuts
         ((m, xK_p), spawn myDMenu),
+        ((m, xK_f), spawn myBrowser),
 
         -- XMonad Prompts.
-        ((m, xK_f), appendFilePrompt myXPConfig "/home/sykora/.notes"),
+        ((m, xK_semicolon), appendFilePrompt myXPConfig "/home/sykora/.notes"),
 
         -- XMonad Control
         ((m, xK_d), goToSelected myGSConfig),
