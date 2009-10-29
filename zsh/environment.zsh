@@ -21,3 +21,14 @@ C=$(tput colors)
 
 # Python per-user site-packages.
 export PYTHONUSERBASE=~
+
+# Important applications.
+export EDITOR=vim
+
+# History Settings
+export SAVEHIST=2000
+export HISTSIZE=2000
+export HISTFILE=~/.zsh_history
+
+# Zsh Reporting
+export REPORTTIME=5
