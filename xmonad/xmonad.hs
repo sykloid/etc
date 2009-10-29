@@ -14,6 +14,9 @@ import XMonad.Actions.Warp
 import XMonad.Actions.GridSelect
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Named
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Tabbed
 import XMonad.Layout.WindowNavigation
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile
@@ -60,6 +63,17 @@ myGSConfig = defaultGSConfig {
             ]
         addPair (a, b) (x, y) = (a + x, b + y)
 
+-- XMonad.Layout.Tabbed appearance
+
+myTabTheme = defaultTheme {
+    fontName = "xft:Envy Code R:pixelsize=12",
+    inactiveColor = "#333333",
+    activeColor = "#FFCC00",
+    activeTextColor = "#000000",
+    inactiveTextColor = "#BDBDBD"
+
+}
+
 -- Default Applications
 
 myTerminal = "urxvtc"
@@ -89,6 +103,8 @@ dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
                     "Tall" -> "Tall ^i(/home/sykora/.icons/dzen2/tall.xbm)"
                     "Mirror Tall" -> "Mirror Tall ^i(/home/sykora/.icons/dzen2/mirror_tall.xbm)"
                     "Full" -> "Full ^i(/home/sykora/.icons/dzen2/full.xbm)"
+                    "Tabbed" -> "Tabbed"
+                    _ -> layout
                 )
 }
 
@@ -106,7 +122,11 @@ tiledLayout = Tall masterCapacity resizeDelta defaultRatio
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
-myLayoutHook = windowNavigation $ avoidStruts $ tiledLayout ||| Mirror tiledLayout ||| Full
+myLayoutHook = windowNavigation $ avoidStruts $
+               onWorkspaces ["web"] (tabbedLayout ||| tiledLayout ||| Mirror tiledLayout ||| Full) $
+               tiledLayout ||| Mirror tiledLayout ||| Full
+    where
+        tabbedLayout = named "Tabbed" $ tabbed shrinkText myTabTheme
 
 -- Shortcuts
 
