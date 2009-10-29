@@ -55,6 +55,8 @@ urxvt.saveLines: 12000
 
 ! Settings for urxvt-perl-extensions.
 urxvt.perl-ext: default,matcher
+urxvt.keysym.C-g: perl:matcher
 urxvt.matcher.button: 2
-urxvt.urlLauncher: sensible-browser
+urxvt.matcher.rend.0: Uline fg14 bg1
+urxvt.urlLauncher: urxvt2uzbl.zsh
 urxvt.searchable-scrollback: M-Tab
