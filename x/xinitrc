@@ -23,5 +23,8 @@ xwrits +clock +breakclock +idle +top typetime=55 break=5 after=10 -multiply brea
 # /me loves lots of fast terminals
 urxvtd -q -o -f
 
+# Hide the mouse
+unclutter &
+
 # Start my favorite window manager.
 xmonad
