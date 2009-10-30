@@ -16,6 +16,9 @@ source $Z/options.zsh
 # Define some functions.
 source $Z/functions.zsh
 
+# Set up the Z line editor.
+source $Z/zle.zsh
+
 # Set the prompt.
 if (( C == 256 )); then
     source $Z/prompt_256.zsh
