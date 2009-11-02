@@ -98,4 +98,7 @@ settings = {
         term_charset = "UTF-8";
     }
 
+    "perl/core/scripts" = {
+        autoaway_timeout = "3600";
+    };
 };

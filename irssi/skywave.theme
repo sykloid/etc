@@ -51,6 +51,9 @@ abstracts = {
     sb_act_msg = "%W%_$*%_%n"; # Normal messages.
     sb_act_hilight = "%R%_$0-%n"; # Highlighted messages.
     sb_act_hilight_color = "%_$0$1-%_%n"; # Highlighted in a particular color $0.
+
+    # The Prompt
+    prompt = "%_%Y[$*]>%n ";
 };
 
 # Message formats.
