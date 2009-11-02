@@ -18,6 +18,29 @@ servers = (
     }
 );
 
+# Aliases
+aliases = {
+    c = "connect";
+    j = "join";
+    m = "msg";
+    q = "query";
+    wi = "whois";
+};
+
+# Ignores
+ignores = (
+    {
+        level = "JOINS PARTS QUITS";
+        channels = ("#archlinux");
+    },
+
+    {
+        level = "JOINS PARTS QUITS";
+        channels = ("#python");
+    }
+);
+
+# The Statusbar.
 statusbar = {
     items = {
         time = "{sb $Z}";
