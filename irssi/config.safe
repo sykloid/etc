@@ -17,6 +17,29 @@ servers = (
     }
 );
 
+statusbar = {
+    default = {
+        topic = {
+            disabled = "yes";
+        };
+
+        window_inact = {
+            disabled = "yes";
+        };
+
+        window = {
+            placement = "top";
+        };
+
+        channel = {
+            items = {
+                awl_0 = {};
+            }
+            placement = "bottom";
+        };
+    };
+};
+
 # Settings
 settings = {
     core = {
