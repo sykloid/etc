@@ -1,0 +1,31 @@
+# Irssi Configuration
+# P.C. Shyamshankar <sykora@lucentbeing.com>
+
+# Networks
+chatnets = {
+    freenode = {
+        type = "IRC";
+    };
+};
+
+# Servers
+servers = (
+    {
+        address = "irc.freenode.net";
+        chatnet = "freenode";
+        port = "6667";
+    }
+);
+
+# Settings
+settings = {
+    core = {
+        real_name = "sykora";
+        user_name = "sykora";
+        nick      = "sykora";
+
+        timestamp_format = "%H:%M:%S";
+
+        settings_autosave = "no";
+    };
+};
