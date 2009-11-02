@@ -67,6 +67,8 @@ settings = {
     };
 
     "fe-common/core" = {
+        theme = "skywave";
+
         window_history = "yes";
         windows_auto_renumber = "yes";
 
