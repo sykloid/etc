@@ -11,7 +11,7 @@ syntax enable
 
 " Set the colorscheme.
 if &t_Co == 256
-    colorscheme lucius
+    colorscheme skywave
 endif
 
 " Some general options.
@@ -27,7 +27,7 @@ set laststatus=2 " Always show a status bar.
 
 " Completion
 set wildmenu " Advanced completion, showing matches above the command line.
-set wildmode="list:longest",full " On multiple matches, list all, complete longest, then full.
+set wildmode=full " On multiple matches, list all, complete longest, then full.
 
 " Display
 
