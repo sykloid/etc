@@ -26,6 +26,18 @@ settings = {
 
         timestamp_format = "%H:%M:%S";
 
+        recode_fallback = "UTF-8";
+        recode_transliterate = "yes";
+        recode_out_default_charset = "UTF-8";
+
         settings_autosave = "no";
     };
+
+    "fe-common/core" = {
+        window_history = "yes";
+        windows_auto_renumber = "yes";
+
+        term_charset = "UTF-8";
+    }
+
 };
