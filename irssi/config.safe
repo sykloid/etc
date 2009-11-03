@@ -86,6 +86,9 @@ settings = {
         recode_transliterate = "yes";
         recode_out_default_charset = "UTF-8";
 
+        bell_beeps = "yes";
+        beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
+
         settings_autosave = "no";
     };
 
