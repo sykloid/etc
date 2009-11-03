@@ -46,6 +46,8 @@ abstracts = {
 
     sbaway = "%c(%R---away---%c)%n";
 
+    sbmore = " %C%_--- more ---%C%_ ";
+
     # Statusbar activity colors.
     sb_act_text = "%c$*%n"; # Normal text, messages from the server, etc.
     sb_act_msg = "%W%_$*%_%n"; # Normal messages.
