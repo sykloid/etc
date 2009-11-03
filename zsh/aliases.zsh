@@ -12,3 +12,8 @@ alias g="grep -EiR --color=tty"
 alias m="mplayer"
 alias u="uzbl"
 alias z="zathura"
+
+# The many forms of zmv.
+alias zmv="zmv -wM"
+alias zcp="zmv -wC"
+alias zln="zmv -wL"
