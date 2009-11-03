@@ -12,6 +12,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
 import XMonad.Actions.GridSelect
+import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
@@ -230,6 +231,6 @@ main = do
 
         -- Hooks
         layoutHook    = myLayoutHook,
-        logHook       = dzenStatusLogger dzenBar,
+        logHook       = dzenStatusLogger dzenBar >> updatePointer (Relative 0.98 0.98),
         manageHook    = myManageHook
     }
