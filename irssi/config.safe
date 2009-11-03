@@ -18,6 +18,17 @@ servers = (
     }
 );
 
+# Channels
+channels = (
+    { name = "#archlinux"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#django"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#grind"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#haskell"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#python"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#xmonad"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#zsh"; chatnet = "freenode"; autojoin = "No"; },
+);
+
 # Aliases
 aliases = {
     c = "connect";
@@ -103,5 +114,6 @@ settings = {
 
     "perl/core/scripts" = {
         autoaway_timeout = "3600";
+        awl_display_key_active = "%Y%_[$Q=$N]$H$C$S%n";
     };
 };
