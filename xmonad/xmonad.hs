@@ -14,6 +14,7 @@ import XMonad.Actions.Warp
 import XMonad.Actions.GridSelect
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Named
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Tabbed
@@ -97,6 +98,7 @@ myDzenDateBar = "dzen2 -x 1400 -y 0 -h 18 -w 280 -p -ta r -fn \"Envy Code R:size
 dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
     ppOutput  = hPutStrLn handle,
     ppCurrent = (\wsID -> "^fg(#FFAF00)[" ++ wsID ++ "]^fg()"),
+    ppUrgent = (\wsID -> "^fn(Envy Code R:style=bold)^fg(#FF0000)" ++ wsID ++ "^fg()^fn()"),
     ppSep = " | ",
     ppTitle = (\title -> "^fg(#92FF00)" ++ title ++ "^fg()"),
     ppLayout = (\layout -> case layout of
@@ -212,7 +214,7 @@ myManageHook = composeAll
 main = do
     dzenBar <- spawnPipe myDzenBar
     spawn $ "~/etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
-    xmonad $ defaultConfig {
+    xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
 
         -- Basics
         terminal      = myTerminal,
