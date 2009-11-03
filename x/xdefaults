@@ -12,6 +12,8 @@ Xft.hintstyle: hintslight
 
 urxvt.termName: rxvt-unicode-256color
 
+urxvt.urgentOnBell: True
+
 ! Basic Appearance
 urxvt.background: Black
 urxvt.foreground: Grey
