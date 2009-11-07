@@ -31,12 +31,15 @@ abstracts = {
     # When some prepends your nick to a message in a public channel.
     # menick refers to _their_ nick.
     pubmsgmenick = "{msgnick $0 $1-}";
-    menick = "%M$*%n";
+    menick = "%M%_$*%n";
 
     ownprivmsgnick = "{msgnick $*}"; # How your messages are printed in a query.
     ownprivnick = "%W$*%n"; # How your nick is printed in a query.
 
     privmsgnick = "{msgnick %R$0%n}"; # How the other person's message is printed in a query.
+
+    # Actions
+    action = "%B%_-> $* %n";
 
     # Statusbar
     sb_background = "%B%w";
