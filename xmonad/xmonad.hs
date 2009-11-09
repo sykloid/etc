@@ -3,6 +3,7 @@
 
 {-# LANGUAGE NoMonomorphismRestriction #-}
 
+import Control.Monad (liftM2)
 import System.IO
 import System.Exit
 
@@ -207,8 +208,12 @@ myManageHook = composeAll
 
     [
         className =? "MPlayer" --> doFloat,
+        className =? "uzbl" --> doShiftAndGo "web",
         manageDocks
     ]
+
+  where
+    doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
 
 -- Run it.
 
