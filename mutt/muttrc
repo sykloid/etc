@@ -1,0 +1,38 @@
+# Configuration for mutt, the MUA that sucks less.
+# P.C. Shyamshankar <sykora@lucentbeing.com>
+
+# Personal Preferences
+set realname = "P.C. Shyamshankar"
+set from     = "sykora@lucentbeing.com"
+set use_from = yes
+set editor   = "vim"
+
+# Delegation
+set my_config_dir      = "~/etc/mutt"
+
+set my_aliases         = $my_config_dir/aliases.muttrc
+set my_colors          = $my_config_dir/colors.muttrc
+set my_crypto_settings = $my_config_dir/crypto.muttrc
+set my_keybindings     = $my_config_dir/keybindings.muttrc
+set my_mailboxes       = $my_config_dir/mailboxes.muttrc
+
+# Core Settings
+set mbox_type = Maildir
+set folder = ~/.mail
+
+# Mailboxes
+set spoolfile = "+inbox"
+set record = "+sent"
+set postponed = "+drafts"
+set mbox = "+archives"
+
+# Appearance
+ source $my_colors
+
+set sidebar_visible = yes
+set sidebar_width   = 20
+
+# The Index
+set sort         = "threads"
+set sort_aux     = "reverse-date"
+set index_format = "%4C %Z %{%b %d} %-30.30L (%?l?%4l&%4c?) %s"
