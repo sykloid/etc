@@ -8,7 +8,7 @@ alias l="ls -lhB --color=tty"
 alias ...=../..
 
 # Some application shortcuts.
-alias g="grep -EiR --color=tty"
+alias g="grep -EiRn --color=tty"
 alias m="mplayer"
 alias u="uzbl"
 alias z="zathura"
