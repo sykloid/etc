@@ -118,5 +118,6 @@ settings = {
     "perl/core/scripts" = {
         autoaway_timeout = "3600";
         awl_display_key_active = "%Y%_[$Q=$N]$H$C$S%n";
+        browse_command = "uzbl %u > /dev/null &";
     };
 };
