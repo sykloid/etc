@@ -150,6 +150,8 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_t), windows W.focusDown), -- Focus next window.
         ((m, xK_s), windows W.focusUp), -- Focus previous window.
 
+        ((m, xK_Return), windows W.focusMaster), -- Focus master window.
+
         ((m, xK_n), sendMessage $ Go L), -- Go left.
         ((m, xK_e), sendMessage $ Go D), -- Go down.
         ((m, xK_i), sendMessage $ Go U), -- Go up.
@@ -161,10 +163,14 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m .|. shiftMask, xK_t), windows W.swapDown), -- Swap with next.
         ((m .|. shiftMask, xK_s), windows W.swapUp), -- Swap with previous.
 
+        ((m .|. shiftMask, xK_Return), windows W.swapMaster), -- Focus master window.
+
         ((m, xK_j), withFocused $ windows . W.sink), -- Bring floating windows back to tile.
 
         -- Layout Management
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
+        ((m .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook config), -- Reset layout.
+
         ((m, xK_comma), sendMessage (IncMasterN 1)), -- Increment number of master windows.
         ((m, xK_period), sendMessage (IncMasterN (-1))), -- Decrement number of master windows.
 
