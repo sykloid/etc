@@ -10,6 +10,7 @@ alias ...=../..
 # Some application shortcuts.
 alias g="grep -EiRn --color=tty"
 alias m="mplayer"
+alias o="okular"
 alias u="uzbl"
 alias z="zathura"
 
