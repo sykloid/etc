@@ -22,6 +22,10 @@ C=$(tput colors)
 # Python per-user site-packages.
 export PYTHONUSERBASE=~
 
+# Python Virtualenvwrapper initialization
+export WORKON_HOME=~/.virtualenvs
+source =virtualenvwrapper_bashrc
+
 # Important applications.
 export EDITOR=vim
 
