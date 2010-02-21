@@ -78,3 +78,7 @@ noremap m p
 noremap M P 
 noremap ]m ]p
 noremap ]M ]P
+
+" Fuzzy Finder mappings.
+nnoremap <Leader>fb :FufBuffer<CR>
+nnoremap <Leader>ff :FufFileWithCurrentBufferDir<CR>
