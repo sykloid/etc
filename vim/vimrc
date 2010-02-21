@@ -57,3 +57,5 @@ command! Wq wq
 " Script specific settings
 
 let g:NERDSpaceDelims = 1
+
+let g:VCSCommandMapPrefix = '<Leader>v'
