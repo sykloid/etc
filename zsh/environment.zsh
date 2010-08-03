@@ -3,7 +3,7 @@
 
 # Various Paths
 typeset -U path
-path=(~/bin ~/lib/python{2.6,3.1}/bin $path /usr/local/bin)
+path=(~/bin ~/lib/python{2.6,3.1}/bin ~/.cabal/bin $path /usr/local/bin)
 export PATH
 
 typeset -U fpath
@@ -24,7 +24,7 @@ export PYTHONUSERBASE=~
 
 # Python Virtualenvwrapper initialization
 export WORKON_HOME=~/.virtualenvs
-source =virtualenvwrapper_bashrc
+source =virtualenvwrapper.sh
 
 # Important applications.
 export EDITOR=vim
