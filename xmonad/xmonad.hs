@@ -34,7 +34,7 @@ myBorderWidth = 0 -- No borders around windows, I think I can manage.
 -- XMonad.Prompt Appearance
 
 myXPConfig = defaultXPConfig {
-    font = "xft:Envy Code R",
+    font = "xft:Envy Code R:pixelsize=14",
     fgHLight = "#FFCC00",
     bgHLight = "#000000",
     bgColor = "#000000",
@@ -83,7 +83,7 @@ myTerminal = "urxvtc"
 myBrowser = "uzbl"
 
 myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
-          "-fn xft:'Envy Code R':pixelsize=18 " ++
+          "-fa 'Envy Code R':pixelsize=14 " ++
           "-nb \"#000000\" " ++
           "-nf \"#AFAFAF\" " ++
           "-sb \"#ECAB00\" " ++
