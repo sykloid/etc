@@ -23,6 +23,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.WindowNavigation
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile
+import XMonad.Prompt.Shell
 import XMonad.Util.Run
 
 import qualified XMonad.StackSet as W
@@ -80,15 +81,7 @@ myTabTheme = defaultTheme {
 -- Default Applications
 
 myTerminal = "urxvtc"
-myBrowser = "uzbl"
-
-myDMenu = "x=$(dmenu_path | yeganesh -- -i " ++
-          "-fa 'Envy Code R':pixelsize=14 " ++
-          "-nb \"#000000\" " ++
-          "-nf \"#AFAFAF\" " ++
-          "-sb \"#ECAB00\" " ++
-          "-sf \"#FFFFFF\" " ++
-          ") && eval \"exec $x\""
+myBrowser = "chrome"
 
 -- Statusbar
 
@@ -178,7 +171,7 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_b), warpToWindow 0.98 0.98), -- Banish mouse to the lower right corner of the screen.
 
         -- Application Shortcuts
-        ((m, xK_p), spawn myDMenu),
+        ((m, xK_p), shellPrompt myXPConfig),
         ((m, xK_f), spawn myBrowser),
 
         -- XMonad Prompts.
