@@ -13,6 +13,7 @@ fpath=($Z/functions $fpath)
 export http_proxy=http://127.0.0.1:5865
 export ftp_proxy=http://127.0.0.1:5865
 export https_proxy=http://127.0.0.1:5865
+export no_proxy=localhost,127.0.0.1
 
 # Find out how many colors the terminal is capable of putting out.
 # Color-related settings _must_ use this if they don't want to blow up on less
