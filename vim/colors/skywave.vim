@@ -108,3 +108,11 @@ highlight Ignore       cterm=none         ctermfg=000         ctermbg=0
 highlight Error        cterm=bold         ctermfg=197         ctermbg=0
                                                     
 highlight TODO         cterm=bold         ctermfg=172         ctermbg=0
+
+highlight User1        cterm=none         ctermfg=215         ctermbg=232
+highlight User2        cterm=none         ctermfg=082         ctermbg=232
+highlight User3        cterm=none         ctermfg=051         ctermbg=232
+highlight User4        cterm=none         ctermfg=196         ctermbg=232
+highlight User5        cterm=none         ctermfg=069         ctermbg=232
+highlight User6        cterm=none         ctermfg=220         ctermbg=232
+highlight User7        cterm=none         ctermfg=255         ctermbg=232
