@@ -97,7 +97,7 @@ highlight PreProc      cterm=none         ctermfg=167         ctermbg=0
 highlight Type         cterm=none         ctermfg=216         ctermbg=0
 highlight Structure    cterm=none         ctermfg=216         ctermbg=0
                                                     
-highlight Special      cterm=none         ctermfg=224         ctermbg=0
+highlight Special      cterm=bold         ctermfg=224         ctermbg=0
 highlight SpecialChar  cterm=none         ctermfg=224         ctermbg=0
 highlight Delimiter    cterm=none         ctermfg=015         ctermbg=0
                                                     
