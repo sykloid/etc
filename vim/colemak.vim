@@ -111,3 +111,7 @@ omap <silent> h]e <plug>CamelCaseMotion_ie
 xmap <silent> h]w <plug>CamelCaseMotion_iw
 xmap <silent> h]b <plug>CamelCaseMotion_ib
 xmap <silent> h]e <plug>CamelCaseMotion_ie
+
+" Swap parameters script mappings
+noremap sb <silent> :call SwapParams("forwards")<CR>
+noremap sB <silent> :call SwapParams("backwards")<CR>
