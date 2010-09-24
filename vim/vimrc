@@ -56,7 +56,7 @@ command! Wq wq
 
 " The StatusLine
 
-let g:statusline = "%1*%n:%f%0* %2*[%{strlen(&ft)?&ft:'none'}]%0* %3*%{fugitive#statusline()}%0* %4*%m%r%w%0*%=%5*(%l, %v)%0* %6*<0x%03.3B>%0* %7*%P%0*"
+let g:statusline = "%1*%n:%f%0* %2*[%{strlen(&ft)?&ft:'none'}]%0* %3*%{fugitive#statusline()}%0* %4*%m%r%w%0*%=%5*(%l, %v)%0* %6*<0x%04.4B>%0* %7*%P%0*"
 let g:statuslinenc = "%n:%f [%{strlen(&ft)?&ft:'none'}] %{fugitive#statusline()} %m%r%w%=(%l, %v) <0x%B> %P"
 
 au BufEnter,WinEnter * let &l:statusline = g:statusline
