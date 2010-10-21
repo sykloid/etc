@@ -7,3 +7,6 @@
 [submodule "vim/bundle/repeat"]
 	path = vim/bundle/repeat
 	url = git://github.com/vim-scripts/repeat.vim
+[submodule "vim/bundle/NERDCommenter"]
+	path = vim/bundle/NERDCommenter
+	url = git://github.com/vim-scripts/The-NERD-Commenter
