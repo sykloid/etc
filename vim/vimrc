@@ -1,6 +1,10 @@
 " .vimrc file.
 " P.C. Shyamshankar <sykora@lucentbeing.com>
 
+" Pathogen calls to hack runtime path.
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 " Set up some keys.
 let mapleader = ' '
 source ~/etc/vim/colemak.vim
