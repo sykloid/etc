@@ -13,3 +13,6 @@
 [submodule "vim/bundle/abolish"]
 	path = vim/bundle/abolish
 	url = git://github.com/vim-scripts/abolish.vim
+[submodule "vim/bundle/matchit"]
+	path = vim/bundle/matchit
+	url = git://github.com/vim-scripts/matchit.zip
