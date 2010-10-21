@@ -10,3 +10,6 @@
 [submodule "vim/bundle/NERDCommenter"]
 	path = vim/bundle/NERDCommenter
 	url = git://github.com/vim-scripts/The-NERD-Commenter
+[submodule "vim/bundle/abolish"]
+	path = vim/bundle/abolish
+	url = git://github.com/vim-scripts/abolish.vim
