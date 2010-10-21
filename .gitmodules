@@ -16,3 +16,9 @@
 [submodule "vim/bundle/matchit"]
 	path = vim/bundle/matchit
 	url = git://github.com/vim-scripts/matchit.zip
+[submodule "vim/bundle/L9"]
+	path = vim/bundle/L9
+	url = git://github.com/vim-scripts/L9
+[submodule "vim/bundle/fuzzyfinder"]
+	path = vim/bundle/fuzzyfinder
+	url = git://github.com/vim-scripts/FuzzyFinder
