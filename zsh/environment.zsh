@@ -19,7 +19,6 @@ export PYTHONUSERBASE=~
 
 # Python Virtualenvwrapper initialization
 export WORKON_HOME=~/.virtualenvs
-source =virtualenvwrapper.sh
 
 # Important applications.
 export EDITOR=vim
