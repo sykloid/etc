@@ -85,9 +85,9 @@ myBrowser = "chrome"
 
 -- Statusbar
 
-myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1380 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
+myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1620 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
 
-myDzenDateBar = "dzen2 -x 1380 -y 0 -h 18 -w 300 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
+myDzenDateBar = "dzen2 -x 1620 -y 0 -h 18 -w 300 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
 
 -- Custom PrettyPrinter for status output from XMonad -> Dzen2
 dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
