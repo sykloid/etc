@@ -27,7 +27,7 @@ case $TERM in
                     git_status=$(git status)
                     if [[ ${git_status} == *"Changed not staged for commit"* ]]; then
                         branch_color=160
-                    if [[ ${git_status} == *"Untracked files"* ]]; then
+                    elif [[ ${git_status} == *"Untracked files"* ]]; then
                         branch_color=160
                     elif [[ ${git_status} == *"Changes to be committed"* ]]; then
                         branch_color=082
