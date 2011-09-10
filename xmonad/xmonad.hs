@@ -145,11 +145,6 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
 
         ((m, xK_Return), windows W.focusMaster), -- Focus master window.
 
-        ((m, xK_n), sendMessage $ Go L), -- Go left.
-        ((m, xK_e), sendMessage $ Go D), -- Go down.
-        ((m, xK_i), sendMessage $ Go U), -- Go up.
-        ((m, xK_o), sendMessage $ Go R), -- Go right.
-
         -- Window Management
         ((m, xK_x), kill), -- Kill the window.
 
