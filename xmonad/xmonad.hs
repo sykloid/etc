@@ -189,7 +189,14 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- mod + shift + xK_0 .. xK_9 -> Move current window to corresponding workspace. 
     [((m .|. shiftMask', numberKey), windows $ windowAction workspace)
         | (workspace, numberKey) <- zip (XMonad.workspaces config) [xK_1 .. xK_9]
-        , (shiftMask', windowAction) <- [(0, W.greedyView), (shiftMask, W.shift)]]
+        , (shiftMask', windowAction) <- [(0, W.greedyView), (shiftMask, W.shift)]
+    ]
+    ++
+
+    [((m .|. shiftMask', screenKey), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (screenKey, sc) <- zip [xK_n, xK_e] [0..]
+        , (f, shiftMask') <- [(W.view 0), (W.shift, shiftMask)]
+    ]
 
 myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 
