@@ -12,6 +12,10 @@ irssi:
 	ln -s `pwd`/irssi ~/.irssi
 	cp ~/.irssi/config.safe ~/.irssi/config
 
+tmux:
+	rm -rf ~/.tmux.conf
+	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf
+
 vim:
 	rm -rf ~/.vim ~/.vimrc
 	ln -s `pwd`/vim ~/.vim
