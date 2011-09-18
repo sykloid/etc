@@ -24,15 +24,13 @@ case $TERM in
 
             if [[ ${current_branch} != "" ]]; then
                 if (( C == 256 )); then
-                    git_status=$(git status)
-                    if [[ ${git_status} == *"Changed not staged for commit"* ]]; then
-                        branch_color=160
-                    elif [[ ${git_status} == *"Untracked files"* ]]; then
-                        branch_color=160
-                    elif [[ ${git_status} == *"Changes to be committed"* ]]; then
-                        branch_color=082
-                    else
+                    git_status=$(git status --porcelain)
+                    if [[ $git_status == "" ]]; then
                         branch_color=222
+                    elif (( $(echo $git_status | grep -c "^.M\|??") > 0 )); then
+                        branch_color=160
+                    else
+                        branch_color=082
                     fi
 
                     git_branch=":%{$FX[reset]$FG[${branch_color}]%}${current_branch}"
