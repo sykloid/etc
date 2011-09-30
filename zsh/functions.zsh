@@ -16,7 +16,7 @@ case $TERM in
         # Special function precmd, executed before displaying each prompt.
         function precmd() {
             # Set the terminal title to the current working directory.
-            print -Pn "\e]0;%~: %n@%m\a"
+            print -Pn "\e]0;%n@%m:%~\a"
 
             # Get the current git branch into the prompt.
             git_branch=""
