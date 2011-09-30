@@ -42,9 +42,7 @@ case $TERM in
 
         # Special function preexec, executed before running each command.
         function preexec () {
-            # Set the terminal title to the currently executing command.
-            command=$(print -P "%60>...>$1")
-            print -Pn "\e]0;$command (%~) : %n@%m\a"
+            print -Pn "\e]2;[${2:q}]\a"
         }
 esac
 
