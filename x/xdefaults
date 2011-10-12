@@ -42,10 +42,18 @@ urxvt.fading: 30
 urxvt.shading: 70
 
 ! Set some nice fonts.
-urxvt.font: xft:Envy Code R:style=Regular:pixelsize=14:autohint=true
-urxvt.boldFont: xft:Envy Code R:style=Bold:pixelsize=14:autohint=true
-urxvt.italicFont: xft:Envy Code R:style=Italic:pixelsize=14:autohint=true
-urxvt.boldItalicFont: xft:Envy Code R:style=Bold:style=Italic:pixelsize=14:autohint=true
+urxvt.font: \
+    xft:Envy Code R:style=Regular:pixelsize=14:autohint=true, \
+    xft:DejaVu Sans Mono:style=Regular:pixelsize=14:autohint=true
+urxvt.boldFont: \
+    xft:Envy Code R:style=Bold:pixelsize=14:autohint=true, \
+    xft:DejaVu Sans Mono:style=Bold:pixelsize=14:autohint=true
+urxvt.italicFont:
+    xft:Envy Code R:style=Italic:pixelsize=14:autohint=true, \
+    xft:DejaVu Sans Mono:style=Italic:pixelsize=14:autohint=true
+urxvt.boldItalicFont: \
+    xft:Envy Code R:style=Bold:style=Italic:pixelsize=14:autohint=true, \
+    xft:DejaVu Sans Mono:style=Bold:style=Italic:pixelsize=14:autohint=true
 
 ! Custom scrolling behaviour
 urxvt.scrollBar: False
