@@ -19,3 +19,6 @@ alias z="zathura"
 alias zmv="zmv -wM"
 alias zcp="zmv -wC"
 alias zln="zmv -wL"
+
+# Not exactly an alias, but a workaround for completion's sake.
+which hub > /dev/null; (( 1 - $? )) && function git() { hub "$@" }
