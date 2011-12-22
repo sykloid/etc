@@ -22,6 +22,7 @@ export WORKON_HOME=~/.virtualenvs
 
 # Important applications.
 export EDITOR=vim
+export BROWSER=google-chrome
 
 # History Settings
 export SAVEHIST=2000
