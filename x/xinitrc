@@ -29,5 +29,8 @@ urxvtd -q -o -f
 # Hide the mouse
 unclutter -idle 5 -noevents -root &
 
+# Reload my backgrounds
+nitrogen --restore
+
 # Start my favorite window manager.
 xmonad
