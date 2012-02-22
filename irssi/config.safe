@@ -42,13 +42,8 @@ aliases = {
 ignores = (
     {
         level = "JOINS PARTS QUITS";
-        channels = ("#archlinux");
+        channels = ("#archlinux,#haskell,#python");
     },
-
-    {
-        level = "JOINS PARTS QUITS";
-        channels = ("#python");
-    }
 );
 
 # The Statusbar.
