@@ -32,5 +32,8 @@ unclutter -idle 5 -noevents -root &
 # Reload my backgrounds
 nitrogen --restore
 
+# Start the screensaver.
+xscreensaver -no-splash &
+
 # Start my favorite window manager.
 xmonad
