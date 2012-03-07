@@ -54,4 +54,7 @@ keycode  61 =        slash      question     questiondown        asciitilde
 keycode  66 =    BackSpace     BackSpace        BackSpace         BackSpace            
 keycode  94 =        minus    underscore           endash            emdash            
 keycode  65 =        space         space            space      nobreakspace            
+
 clear Lock
+
+keycode 135 = Multi_key Multi_key Multi_key Multi_key
