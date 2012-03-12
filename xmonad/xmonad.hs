@@ -43,29 +43,29 @@ myXPConfig = defaultXPConfig {
     height = 24
 }
 
--- XMonad.GridSelect Appearance
-
+-- XMonad.GridSelect Configuration.
 myGSConfig = defaultGSConfig {
-    gs_font = "xft:Envy Code R:pixelsize=14",
-    gs_cellheight = 40,
-    gs_cellwidth = 400,
-    gs_navigate = M.unions
-        [
-            myGSResetKey,
-            myGSNavigationKeys,
-            gs_navigate $ defaultGSConfig `asTypeOf` myGSConfig
-        ]
+        gs_font = "xft:Envy Code R:pixelsize=14",
+        gs_cellheight = 40,
+        gs_cellwidth = 512,
+        gs_navigate = myGSNavigation
     }
-    where
-        myGSResetKey = M.singleton (0, xK_space) (const(0, 0))
-        myGSNavigationKeys = M.map addPair $ M.fromList
-            [
-                ((0, xK_n), (-1, 0)),
-                ((0, xK_e), (0, 1)),
-                ((0, xK_i), (0, -1)),
-                ((0, xK_o), (1, 0))
-            ]
-        addPair (a, b) (x, y) = (a + x, b + y)
+  where
+    myGSNavigation :: TwoD a (Maybe a)
+    myGSNavigation = makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
+    navKeyMap = M.fromList [
+            ((0, xK_Escape), cancel),
+            ((0, xK_q),      cancel),
+            ((0, xK_Return), select),
+            ((0, xK_slash),  substringSearch myGSNavigation),
+            ((0, xK_space),  setPos (0, 0) >> myGSNavigation),
+
+            ((0, xK_n), move (-1, 0) >> myGSNavigation),
+            ((0, xK_e), move (0, 1)  >> myGSNavigation),
+            ((0, xK_i), move (0, -1) >> myGSNavigation),
+            ((0, xK_o), move (1, 0)  >> myGSNavigation)
+        ]
+    navDefaultHandler = const myGSNavigation
 
 -- XMonad.Layout.Tabbed appearance
 
