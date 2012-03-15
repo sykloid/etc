@@ -42,7 +42,7 @@ aliases = {
 ignores = (
     {
         level = "JOINS PARTS QUITS";
-        channels = ("#archlinux,#haskell,#python");
+        channels = ("#archlinux", "#haskell" , "#python");
     },
 );
 
