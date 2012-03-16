@@ -73,5 +73,5 @@ urxvt.perl-ext: default,matcher
 urxvt.keysym.C-g: perl:matcher
 urxvt.matcher.button: 2
 urxvt.matcher.rend.0: Uline fg14
-urxvt.urlLauncher: urxvt2uzbl.zsh
+urxvt.urlLauncher: google-chrome
 urxvt.searchable-scrollback: M-Tab
