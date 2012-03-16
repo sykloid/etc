@@ -6,7 +6,7 @@
 xrdb < ~/etc/x/xdefaults
 
 # Load the Colemak keymap.
-xmodmap ~/etc/x/colemak.xmodmap
+setxkbmap us -variant colemak -option compose:menu
 
 # Make sure the CapsLock key (now backspace) can repeat.
 xset r 66
