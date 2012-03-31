@@ -25,3 +25,6 @@
 [submodule "vim/bundle/speeddating"]
 	path = vim/bundle/speeddating
 	url = git://github.com/vim-scripts/speeddating.vim
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = git://github.com/vim-scripts/Syntastic.git
