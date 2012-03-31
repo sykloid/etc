@@ -90,19 +90,12 @@ myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1620 -p -ta l -fn \"Envy Code R:size=11\" 
 myDzenDateBar = "dzen2 -x 1620 -y 0 -h 18 -w 300 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
 
 -- Custom PrettyPrinter for status output from XMonad -> Dzen2
-dzenStatusLogger handle = dynamicLogWithPP $ defaultPP {
-    ppOutput  = hPutStrLn handle,
-    ppCurrent = (\wsID -> "^fg(#FFAF00)[" ++ wsID ++ "]^fg()"),
-    ppUrgent = (\wsID -> "^fn(Envy Code R:style=bold)^fg(#FF0000)" ++ wsID ++ "^fg()^fn()"),
-    ppSep = " | ",
-    ppTitle = (\title -> "^fg(#92FF00)" ++ title ++ "^fg()"),
-    ppLayout = (\layout -> case layout of
-                    "Tall" -> "Tall ^i(/home/sykora/.icons/dzen2/tall.xbm)"
-                    "Mirror Tall" -> "Mirror Tall ^i(/home/sykora/.icons/dzen2/mirror_tall.xbm)"
-                    "Full" -> "Full ^i(/home/sykora/.icons/dzen2/full.xbm)"
-                    "Tabbed" -> "Tabbed"
-                    _ -> layout
-                )
+xmobarLogger handle = dynamicLogWithPP $ defaultPP {
+    ppOutput    = hPutStrLn handle,
+    ppCurrent   = (\wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>"),
+    ppUrgent    = (\wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>"),
+    ppSep       = " | ",
+    ppTitle     = (\wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>")
 }
 
 -- Workspaces
@@ -219,8 +212,7 @@ myManageHook = composeAll
 -- Run it.
 
 main = do
-    dzenBar <- spawnPipe myDzenBar
-    spawn $ "~/etc/xmonad/dzen_date_bar.zsh | " ++ myDzenDateBar
+    xmobarPipe <- spawnPipe "xmobar ~/etc/xmonad/xmobar.config"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
 
         -- Basics
@@ -237,6 +229,6 @@ main = do
 
         -- Hooks
         layoutHook    = myLayoutHook,
-        logHook       = dzenStatusLogger dzenBar >> updatePointer (Relative 0.98 0.98),
+        logHook       = xmobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.98),
         manageHook    = myManageHook
     }
