@@ -2,7 +2,7 @@
 " P.C. Shyamshankar <sykora@lucentbeing.com>
 
 " Pathogen calls to hack runtime path.
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 " Set up some keys.
 let mapleader = ' '
