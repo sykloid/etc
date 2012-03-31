@@ -29,11 +29,12 @@ import XMonad.Util.Run
 import qualified XMonad.StackSet as W
 
 -- Appearance
+-------------
 
+-- Window Appearance
 myBorderWidth = 0 -- No borders around windows, I think I can manage.
 
 -- XMonad.Prompt Appearance
-
 myXPConfig = defaultXPConfig {
     font = "xft:Envy Code R:pixelsize=14",
     fgHLight = "#FFCC00",
@@ -68,7 +69,6 @@ myGSConfig = defaultGSConfig {
     navDefaultHandler = const myGSNavigation
 
 -- XMonad.Layout.Tabbed appearance
-
 myTabTheme = defaultTheme {
     fontName = "xft:Envy Code R:pixelsize=12",
     inactiveColor = "#333333",
@@ -78,34 +78,30 @@ myTabTheme = defaultTheme {
 
 }
 
--- Default Applications
-
-myTerminal = "urxvtc"
-myBrowser = "chrome"
-
--- Statusbar
-
-myDzenBar = "dzen2 -x 0 -y 0 -h 18 -w 1620 -p -ta l -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#AFAFAF\""
-
-myDzenDateBar = "dzen2 -x 1620 -y 0 -h 18 -w 300 -p -ta r -fn \"Envy Code R:size=11\" -bg \"#000000\" -fg \"#6294CF\""
-
--- Custom PrettyPrinter for status output from XMonad -> Dzen2
-xmobarLogger handle = dynamicLogWithPP $ defaultPP {
+-- XMobar pretty printing configuration.
+myXMobarLogger handle = dynamicLogWithPP $ defaultPP {
     ppOutput    = hPutStrLn handle,
-    ppCurrent   = (\wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>"),
-    ppUrgent    = (\wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>"),
+    ppCurrent   = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>",
+    ppUrgent    = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>",
     ppSep       = " | ",
-    ppTitle     = (\wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>")
+    ppTitle     = \wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>"
 }
 
+-- Applications
+---------------
+
+myTerminal = "urxvtc"
+
 -- Workspaces
+-------------
 
 myWorkspaces = ["main", "web", "3", "4", "5", "6", "7", "8", "irc"]
 
 -- Layouts
+----------
 
 -- A constructed default tiling layout, 2 panes of windows.
-tiledLayout = Tall masterCapacity resizeDelta defaultRatio
+myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
     where
         masterCapacity = 1 -- Number of master windows by default.
         resizeDelta    = 3/100 -- Percent to increase the size by each time.
@@ -113,24 +109,23 @@ tiledLayout = Tall masterCapacity resizeDelta defaultRatio
 
 -- avoidStruts makes room for the status bars.
 myLayoutHook = windowNavigation $ avoidStruts $
-               onWorkspaces ["web"] (tabbedLayout ||| tiledLayout ||| Mirror tiledLayout ||| Full) $
-               tiledLayout ||| Mirror tiledLayout ||| Full
+               onWorkspaces ["web"] (tabbedLayout ||| myTiledLayout ||| Mirror myTiledLayout ||| Full) $
+               myTiledLayout ||| Mirror myTiledLayout ||| Full
     where
         tabbedLayout = named "Tabbed" $ tabbed shrinkText myTabTheme
 
--- Shortcuts
-
-myKillAllDzen = "for pid in $(pgrep dzen); do kill $pid; done"
-
 -- Keys
+-------
 
+-- Global Modifier
 myModMask = mod4Mask -- The Windows Key, aka "Super"
 
-myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
+-- Keymap
+myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
 
     [
         -- The Terminal
-        ((m, xK_c), spawn $ XMonad.terminal config), -- Start a new terminal.
+        ((m, xK_c), spawn $ XMonad.terminal xconfig), -- Start a new terminal.
 
         -- Window Navigation
         ((m, xK_t), windows W.focusDown), -- Focus next window.
@@ -150,7 +145,7 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
 
         -- Layout Management
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
-        ((m .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook config), -- Reset layout.
+        ((m .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook xconfig), -- Reset layout.
 
         ((m, xK_comma), sendMessage (IncMasterN 1)), -- Increment number of master windows.
         ((m, xK_period), sendMessage (IncMasterN (-1))), -- Decrement number of master windows.
@@ -160,15 +155,14 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
 
         -- Application Shortcuts
         ((m, xK_p), shellPrompt myXPConfig),
-        ((m, xK_f), spawn myBrowser),
 
         -- XMonad Prompts.
         ((m, xK_semicolon), appendFilePrompt myXPConfig "/home/sykora/.notes"),
 
         -- XMonad Control
         ((m, xK_d), goToSelected myGSConfig),
-        ((m, xK_q), spawn myKillAllDzen >> restart "xmonad" True), -- Restart XMonad.
-        ((m .|. shiftMask, xK_F12), spawn myKillAllDzen >> io (exitWith ExitSuccess)) -- Quit XMonad.
+        ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
+        ((m .|. shiftMask, xK_F12), io exitSuccess) -- Quit XMonad.
     ]
     ++
 
@@ -176,7 +170,7 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- mod + xK_0 .. xK_9 -> Switch to the corresponding workspace (greedyView) 
     -- mod + shift + xK_0 .. xK_9 -> Move current window to corresponding workspace. 
     [((m .|. shiftMask', numberKey), windows $ windowAction workspace)
-        | (workspace, numberKey) <- zip (XMonad.workspaces config) [xK_1 .. xK_9]
+        | (workspace, numberKey) <- zip (XMonad.workspaces xconfig) [xK_1 .. xK_9]
         , (shiftMask', windowAction) <- [(0, W.greedyView), (shiftMask, W.shift)]
     ]
     ++
@@ -186,18 +180,17 @@ myKeys config@(XConfig {XMonad.modMask = m}) = M.fromList $
         , (f, shiftMask') <- [(W.view, 0), (W.shift, shiftMask)]
     ]
 
-myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
+myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList
 
     [
-        ((m, button1), (\w -> focus w >> mouseMoveWindow w)), -- Float and move while dragging.
-        ((m, button2), (\w -> focus w >> windows W.swapMaster)), -- Raise window to top of stack.
-        ((m, button3), (\w -> focus w >> mouseResizeWindow w)), -- Float and resize while dragging.
-        ((m, button4), (\_ -> prevWS)), -- Switch to previous workspace.
-        ((m, button5), (\_ -> nextWS)) -- Switch to next workspace.
+        ((m, button1), \w -> focus w >> mouseMoveWindow w), -- Float and move while dragging.
+        ((m, button2), \w -> focus w >> windows W.swapMaster), -- Raise window to top of stack.
+        ((m, button3), \w -> focus w >> mouseResizeWindow w), -- Float and resize while dragging.
+        ((m, button4), \_ -> prevWS), -- Switch to previous workspace.
+        ((m, button5), \_ -> nextWS) -- Switch to next workspace.
     ]
 
 -- Managing everything.
-
 myManageHook = composeAll
 
     [
@@ -210,7 +203,7 @@ myManageHook = composeAll
     doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
 
 -- Run it.
-
+main :: IO ()
 main = do
     xmobarPipe <- spawnPipe "xmobar ~/etc/xmonad/xmobar.config"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
@@ -229,6 +222,6 @@ main = do
 
         -- Hooks
         layoutHook    = myLayoutHook,
-        logHook       = xmobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.98),
+        logHook       = myXMobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.98),
         manageHook    = myManageHook
     }
