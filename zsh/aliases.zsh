@@ -20,5 +20,8 @@ alias zmv="zmv -wM"
 alias zcp="zmv -wC"
 alias zln="zmv -wL"
 
+# Start a Vim Server, I'm told it's useful.
+alias vim='vim --servername $(date +"%Y-%m-%D/%H:%M:%S")'
+
 # Not exactly an alias, but a workaround for completion's sake.
 which hub > /dev/null; (( 1 - $? )) && function git() { hub "$@" }
