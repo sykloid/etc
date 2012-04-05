@@ -7,11 +7,7 @@
 " TODO
 " Keys that are available:
 " 
-" w - Do I need the forward-word functionality?
-" g, j, l
-" b - Look at 'w'
 " Shifted versions of most characters
-" Spacebar - Mapleader?
 
 " Marking
 nnoremap , m
