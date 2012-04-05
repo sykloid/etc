@@ -69,8 +69,9 @@ au BufLeave,WinLeave * let &l:statusline = g:statuslinenc
 
 let g:NERDSpaceDelims = 1
 
-let g:VCSCommandMapPrefix = '<Leader>v'
-
 let g:surround_no_mappings = 1
 
 let g:syntastic_check_on_open = 1
+
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
