@@ -162,6 +162,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         -- XMonad Control
         ((m, xK_d), goToSelected myGSConfig),
         ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
+        ((m .|. shiftMask, xK_F11), spawn "xscreensaver-command -activate"),
         ((m .|. shiftMask, xK_F12), io exitSuccess) -- Quit XMonad.
     ]
     ++
