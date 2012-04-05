@@ -25,3 +25,6 @@
 [submodule "vim/bundle/latex-box"]
 	path = vim/bundle/latex-box
 	url = git://github.com/vim-scripts/LaTeX-Box
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
+	url = git://github.com/vim-scripts/ctrlp.vim
