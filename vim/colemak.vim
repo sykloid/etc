@@ -79,10 +79,6 @@ noremap M P
 noremap ]m ]p
 noremap ]M ]P
 
-" Fuzzy Finder mappings.
-nnoremap <Leader>fb :FufBuffer<CR>
-nnoremap <Leader>ff :FufFileWithCurrentBufferDir<CR>
-
 " Surround plugin mappings.
 nmap ds   <Plug>Dsurround
 nmap cs   <Plug>Csurround
@@ -93,11 +89,11 @@ nmap jSs  <Plug>YSsurround
 nmap jSS  <Plug>YSsurround
 
 if exists(":xmap")
-    xmap  j    <Plug>Vsurround
-    xmap  J    <Plug>VSurround
+    xmap  js    <Plug>Vsurround
+    xmap  Js    <Plug>VSurround
 else
-    vmap  j    <Plug>Vsurround
-    vmap  J    <Plug>VSurround
+    vmap  js    <Plug>Vsurround
+    vmap  Js    <Plug>VSurround
 endif
 
 " Camelcase Motion mappings
