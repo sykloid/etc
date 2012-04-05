@@ -28,3 +28,9 @@
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = git://github.com/vim-scripts/ctrlp.vim
+[submodule "vim/bundle/swap-parameters"]
+	path = vim/bundle/swap-parameters
+	url = git://github.com/vim-scripts/swap-parameters/
+[submodule "vim/bundle/camel-case-motion"]
+	path = vim/bundle/camel-case-motion
+	url = git://github.com/vim-scripts/camelcasemotion/

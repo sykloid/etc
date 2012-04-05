@@ -101,9 +101,9 @@ else
 endif
 
 " Camelcase Motion mappings
-nmap <silent> ]w <plug>CamelCaseMotion_w
-nmap <silent> ]b <plug>CamelCaseMotion_b
-nmap <silent> ]e <plug>CamelCaseMotion_e
+map <silent> ]w <plug>CamelCaseMotion_w
+map <silent> ]b <plug>CamelCaseMotion_b
+map <silent> ]e <plug>CamelCaseMotion_e
 
 omap <silent> h]w <plug>CamelCaseMotion_iw
 omap <silent> h]b <plug>CamelCaseMotion_ib
@@ -113,5 +113,5 @@ xmap <silent> h]b <plug>CamelCaseMotion_ib
 xmap <silent> h]e <plug>CamelCaseMotion_ie
 
 " Swap parameters script mappings
-noremap sb <silent> :call SwapParams("forwards")<CR>
-noremap sB <silent> :call SwapParams("backwards")<CR>
+noremap <silent> sb :call SwapParams("forwards")<CR>
+noremap <silent> sB :call SwapParams("backwards")<CR>
