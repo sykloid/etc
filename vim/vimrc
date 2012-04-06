@@ -22,6 +22,7 @@ set modeline " Allow vim to interpret modelines, to determine per-file options.
 set mouse=a " Enable mouse on all modes.
 set formatoptions=t,c,r,o,q,n,l " Various hints for automatic formatting.
 set virtualedit=block " Allow choosing perfect rectangles in Visual Block mode.
+set undofile " Allow persistent undos.
 
 " Windowing
 set splitright " Open horizontally split windows to the right of the current window.
