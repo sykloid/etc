@@ -1,2 +1,5 @@
+*.swp
+*.un~
+
 tags
 tags-ja
