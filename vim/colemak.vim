@@ -107,3 +107,6 @@ xmap <silent> h]e <plug>CamelCaseMotion_ie
 " Swap parameters script mappings
 noremap <silent> sb :call SwapParams("forwards")<CR>
 noremap <silent> sB :call SwapParams("backwards")<CR>
+
+" Strange binding to get arrow keys to work inside tmux.
+map <ESC>[B <DOWN>
