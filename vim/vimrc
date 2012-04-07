@@ -81,3 +81,10 @@ let g:syntastic_check_on_open = 1
 
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
+let g:ctrlp_user_command = {
+\     'types': {
+\         1: ['.git/', 'cd %s && git ls-files'],
+\         2: ['.hg', 'hg --cwd %s locate -I .'],
+\     },
+\ }
