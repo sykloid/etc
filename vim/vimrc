@@ -33,6 +33,11 @@ set laststatus=2 " Always show a status bar.
 set wildmenu " Advanced completion, showing matches above the command line.
 set wildmode=full " On multiple matches, list all, complete longest, then full.
 
+" Patterns to ignore during completion inside vim.
+set wildignore=*.swp,*.un~  " Ignore vim's temporaries.
+set wildignore+=*.cmo,*.cmi " Ignore OCaml's build artifacts
+set wildignore+=*.pdf,*.dvi " Ignore prepared documents (common with LaTeX).
+
 " Display
 
 set wrap " Wrap long lines, instead of cutting them off, or making me scroll.
