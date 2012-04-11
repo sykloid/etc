@@ -34,3 +34,6 @@
 [submodule "vim/bundle/camel-case-motion"]
 	path = vim/bundle/camel-case-motion
 	url = git://github.com/vim-scripts/camelcasemotion/
+[submodule "vim/bundle/tabular"]
+	path = vim/bundle/tabular
+	url = git://github.com/vim-scripts/Tabular
