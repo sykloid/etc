@@ -29,6 +29,10 @@ set splitright " Open horizontally split windows to the right of the current win
 set splitbelow " Open vertically split windows to below the current window.
 set laststatus=2 " Always show a status bar.
 
+" The Title String
+set title
+set titlestring=vim:\ %F\ %m
+
 " Completion
 set wildmenu " Advanced completion, showing matches above the command line.
 set wildmode=full " On multiple matches, list all, complete longest, then full.
