@@ -37,3 +37,6 @@
 [submodule "vim/bundle/tabular"]
 	path = vim/bundle/tabular
 	url = git://github.com/vim-scripts/Tabular
+[submodule "vim/bundle/let-modeline"]
+	path = vim/bundle/let-modeline
+	url = git://github.com/vim-scripts/let-modeline.vim
