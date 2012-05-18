@@ -14,6 +14,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
 import XMonad.Actions.GridSelect
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.WorkspaceNames
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
@@ -79,13 +80,13 @@ myTabTheme = defaultTheme {
 }
 
 -- XMobar pretty printing configuration.
-myXMobarLogger handle = dynamicLogWithPP $ defaultPP {
+myXMobarLogger handle = workspaceNamesPP defaultPP {
     ppOutput    = hPutStrLn handle,
     ppCurrent   = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>",
     ppUrgent    = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>",
     ppSep       = " | ",
     ppTitle     = \wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>"
-}
+} >>= dynamicLogWithPP
 
 -- Applications
 ---------------
@@ -95,7 +96,7 @@ myTerminal = "urxvtc"
 -- Workspaces
 -------------
 
-myWorkspaces = ["main", "web", "3", "4", "5", "6", "7", "8", "irc"]
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- Layouts
 ----------
@@ -162,6 +163,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         -- XMonad Control
         ((m, xK_d), goToSelected myGSConfig),
         ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
+        ((m, xK_l), renameWorkspace myXPConfig),
         ((m .|. shiftMask, xK_F11), spawn "xscreensaver-command -activate"),
         ((m .|. shiftMask, xK_F12), io exitSuccess) -- Quit XMonad.
     ]
@@ -206,7 +208,7 @@ myManageHook = composeAll
 -- Run it.
 main :: IO ()
 main = do
-    xmobarPipe <- spawnPipe "xmobar ~/etc/xmonad/xmobar.config"
+    xmobarPipe <- spawnPipe "xmobar -x 1 ~/etc/xmonad/xmobar.config"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
 
         -- Basics
