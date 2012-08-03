@@ -42,7 +42,9 @@ myXPConfig = defaultXPConfig {
     bgHLight = "#000000",
     bgColor = "#000000",
     borderColor = "#222222",
-    height = 24
+    height = 24,
+
+    historyFilter = deleteConsecutive
 }
 
 -- XMonad.GridSelect Configuration.
