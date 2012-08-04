@@ -24,6 +24,8 @@ set formatoptions=t,c,r,o,q,n,l " Various hints for automatic formatting.
 set virtualedit=block " Allow choosing perfect rectangles in Visual Block mode.
 set undofile " Allow persistent undos.
 
+set textwidth=100 " An arbitrarily good number, based on my common working resolution.
+
 " Windowing
 set splitright " Open horizontally split windows to the right of the current window.
 set splitbelow " Open vertically split windows to below the current window.
