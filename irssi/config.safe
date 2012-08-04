@@ -25,6 +25,7 @@ channels = (
     { name = "#grind"; chatnet = "freenode"; autojoin = "No"; },
     { name = "#haskell"; chatnet = "freenode"; autojoin = "No"; },
     { name = "#python"; chatnet = "freenode"; autojoin = "No"; },
+    { name = "#vim"; chatnet = "freenode"; autojoin = "No"; },
     { name = "#xmonad"; chatnet = "freenode"; autojoin = "No"; },
     { name = "#zsh"; chatnet = "freenode"; autojoin = "No"; },
 );
@@ -42,7 +43,7 @@ aliases = {
 ignores = (
     {
         level = "JOINS PARTS QUITS";
-        channels = ("#archlinux", "#haskell" , "#python");
+        channels = ("#archlinux", "#haskell" , "#python", "#vim", "#xmonad", "#zsh");
     },
 );
 
