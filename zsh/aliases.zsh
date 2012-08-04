@@ -12,8 +12,6 @@ alias b="sudo -E bauerbill"
 alias g="grep -EiRn --color=tty"
 alias m="mplayer"
 alias o="okular"
-alias u="uzbl"
-alias z="zathura"
 
 # The many forms of zmv.
 alias zmv="zmv -wM"
