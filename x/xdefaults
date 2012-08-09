@@ -14,7 +14,7 @@ urxvt.termName: rxvt-unicode-256color
 
 urxvt.urgentOnBell: True
 
-urxvt.iso14755: True
+urxvt.iso14755: False
 urxvt.iso14755_52: False
 
 ! Basic Appearance
