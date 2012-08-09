@@ -1,5 +1,14 @@
+# Vim
 *.swp
+*.swo
 *.un~
 
+# CTags
 tags
 tags-ja
+
+# Haskell
+.hsenv*
+
+# LaTeX
+*.fdb_latexmk
