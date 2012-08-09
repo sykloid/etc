@@ -155,6 +155,8 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_b), warpToWindow 0.98 0.98), -- Banish mouse to the lower right corner of the screen.
 
         -- Application Shortcuts
+        ((0, xK_Print), spawn "scrot"),
+        ((m, xK_m), spawn "urxvtc -e ncmpcpp"),
         ((m, xK_p), shellPrompt myXPConfig),
 
         -- XMonad Prompts.
@@ -198,7 +200,6 @@ myManageHook = composeAll
 
     [
         className =? "MPlayer" --> doFloat,
-        className =? "uzbl" --> doShiftAndGo "web",
         manageDocks
     ]
 
