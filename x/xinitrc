@@ -11,6 +11,9 @@ setxkbmap us -variant colemak -option compose:menu
 # Make sure the CapsLock key (now backspace) can repeat.
 xset r 66
 
+# Disable the bell.
+xset -b off
+
 # Set the mouse pointer.
 xsetroot -cursor_name left_ptr
 
