@@ -12,7 +12,7 @@ function git_current_branch() {
 }
 
 case $TERM in
-    *xterm*|*rxvt*)
+    *xterm*|*rxvt*|*screen*)
         # Special function precmd, executed before displaying each prompt.
         function precmd() {
             # Set the terminal title to the current working directory.
