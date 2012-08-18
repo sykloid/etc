@@ -12,7 +12,7 @@ setxkbmap us -variant colemak -option compose:menu
 xset r 66
 
 # Disable the bell.
-xset -b off
+xset b off
 
 # Set the mouse pointer.
 xsetroot -cursor_name left_ptr
