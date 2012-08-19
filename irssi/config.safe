@@ -11,9 +11,9 @@ chatnets = {
 # Servers
 servers = (
     {
-        address = "irc.freenode.net";
+        address = "chat.freenode.net";
         chatnet = "freenode";
-        port = "6667";
+        port = "6666";
         autoconnect = "yes";
     }
 );
