@@ -5,11 +5,10 @@ if (( C == 256 )); then
     autoload spectrum && spectrum # Set up 256 color support.
 fi
 
-# Simple function to get the current git branch.
-function git_current_branch() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    print "${ref#refs/heads/}"
-}
+# Autoload some useful utilities.
+autoload -Uz zmv
+autoload -Uz zargs
+autoload -Uz vcs_info
 
 case $TERM in
     *xterm*|*rxvt*|*screen*)
@@ -19,33 +18,12 @@ case $TERM in
             print -Pn "\e]0;%n@%m:%~\a"
 
             # Get the current git branch into the prompt.
-            git_branch=""
-            current_branch=$(git_current_branch)
-
-            if [[ ${current_branch} != "" ]]; then
-                if (( C == 256 )); then
-                    git_status=$(git status --porcelain)
-                    if [[ $git_status == "" ]]; then
-                        branch_color=222
-                    elif (( $(echo $git_status | grep -c "^.M\|??") > 0 )); then
-                        branch_color=160
-                    else
-                        branch_color=082
-                    fi
-
-                    git_branch=":%{$FX[reset]$FG[${branch_color}]%}${current_branch}"
-                else
-                    git_branch=":${current_branch}"
-                fi
-            fi
+            vcs_info
         }
 
         # Special function preexec, executed before running each command.
         function preexec () {
+            # Set the terminal title to the curently running command.
             print -Pn "\e]2;[${2:q}]\a"
         }
 esac
-
-# Autoload some useful utilities.
-autoload -Uz zmv
-autoload -Uz zargs

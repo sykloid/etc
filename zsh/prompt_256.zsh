@@ -13,7 +13,13 @@ local last="%(?..%{$FX[reset]$FG[203]%}%??${p}:)"
 local hist="%{$FX[reset]$FG[220]%}%!!"
 local priv="%{$FX[reset]$FG[245]%}%#"
 
-git_branch=""
+# Use zshcontrib's vcs_info to get information about any current version control systems.
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "%{$FX[reset]$FG[082]%}"
+zstyle ':vcs_info:*' unstagedstr "%{$FX[reset]$FG[160]%}"
+zstyle ':vcs_info:*' formats ":%{$FX[reset]$FG[222]%}%c%u%b"
 
-PROMPT="${p}(${name}${p}@${host}${p})-${jobs}(${time}${p})-(${dir}${p}\${git_branch}${p})
+local vcsi="\${vcs_info_msg_0_}"
+
+PROMPT="${p}(${name}${p}@${host}${p})-${jobs}(${time}${p})-(${dir}${p}${vcsi}${p})
 (${last}${p}${hist}${p}:${priv}${p})- %{$FX[reset]%}"
