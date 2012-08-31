@@ -54,3 +54,6 @@
 	path = vim/bundle/let-modeline
 	url = git://github.com/vim-scripts/let-modeline.vim
     ignore = dirty
+[submodule "vim/bundle/alternate"]
+	path = vim/bundle/alternate
+	url = git://github.com/vim-scripts/a.vim
