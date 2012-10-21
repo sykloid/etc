@@ -8,7 +8,6 @@ alias l="ls -lhB --color=tty"
 alias ...=../..
 
 # Some application shortcuts.
-alias b="sudo -E bauerbill"
 alias g="grep -EiRn --color=tty"
 alias m="mplayer"
 alias o="okular"
