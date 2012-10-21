@@ -22,7 +22,11 @@ set modeline " Allow vim to interpret modelines, to determine per-file options.
 set mouse=a " Enable mouse on all modes.
 set formatoptions=t,c,r,o,q,n,l " Various hints for automatic formatting.
 set virtualedit=block " Allow choosing perfect rectangles in Visual Block mode.
-set undofile " Allow persistent undos.
+
+" Only in Vim 7.3+
+if version >= 730
+    set undofile " Allow persistent undos.
+endif
 
 set textwidth=100 " An arbitrarily good number, based on my common working resolution.
 
