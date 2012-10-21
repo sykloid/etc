@@ -19,7 +19,7 @@ alias zln="zmv -wL"
 
 # Start a Vim Server, I'm told it's useful.
 # But only if it can.
-if (( ! $(=vim --version | grep '+clientserver') )); then
+if [[ -n $(=vim --version | grep '+clientserver') ]]; then
     alias vim='vim --servername $(date +"%Y-%m-%d/%H:%M:%S")'
 fi
 
