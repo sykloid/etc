@@ -110,3 +110,5 @@ noremap <silent> sB :call SwapParams("backwards")<CR>
 
 " Strange binding to get arrow keys to work inside tmux.
 map <ESC>[B <DOWN>
+
+map  <leader>a :A<CR>
