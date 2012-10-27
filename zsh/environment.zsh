@@ -20,6 +20,9 @@ export PYTHONUSERBASE=~
 # Python Virtualenvwrapper initialization
 export WORKON_HOME=~/.virtualenvs
 
+# Java Options
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
 # Important applications.
 export EDITOR=vim
 export BROWSER=google-chrome
