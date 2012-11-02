@@ -17,9 +17,6 @@ xset b off
 # Set the mouse pointer.
 xsetroot -cursor_name left_ptr
 
-# Set the wallpaper
-~/bin/cycle-wallpaper
-
 # Start the scrobbler
 sudo /etc/rc.d/mpdscribble restart
 
