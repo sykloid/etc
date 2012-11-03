@@ -97,3 +97,6 @@ let g:LatexBox_no_mappings = 1
 let g:ctrlp_prompt_mappings = {
 \   'PrtClearCache()': ['<F5>'],
 \}
+
+let g:UltiSnipsExpandTrigger = "<C-o>"
+let g:UltiSnipsJumpForwardTrigger = "<C-o>"
