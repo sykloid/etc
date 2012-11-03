@@ -57,3 +57,6 @@
 [submodule "vim/bundle/alternate"]
 	path = vim/bundle/alternate
 	url = git://github.com/vim-scripts/a.vim
+[submodule "vim/bundle/ultisnips"]
+	path = vim/bundle/ultisnips
+	url = git://github.com/vim-scripts/UltiSnips.git
