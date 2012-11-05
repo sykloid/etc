@@ -8,6 +8,7 @@ export PATH
 
 typeset -U fpath
 fpath=($Z/functions $fpath)
+export FPATH
 
 # Find out how many colors the terminal is capable of putting out.
 # Color-related settings _must_ use this if they don't want to blow up on less
@@ -22,6 +23,11 @@ export WORKON_HOME=~/.virtualenvs
 
 # Java Options
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+# OCaml Options
+export PATH=~/.opam/system/bin:$PATH
+export OCAML_TOPLEVEL_PATH=~/.opam/system/lib/toplevel
+export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs
 
 # Important applications.
 export EDITOR=vim
