@@ -147,6 +147,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         -- Layout Management
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
         ((m .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook xconfig), -- Reset layout.
+        ((m, xK_k), sendMessage ToggleStruts), -- Toggle Docks
 
         ((m, xK_comma), sendMessage (IncMasterN 1)), -- Increment number of master windows.
         ((m, xK_period), sendMessage (IncMasterN (-1))), -- Decrement number of master windows.
@@ -196,15 +197,7 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList
     ]
 
 -- Managing everything.
-myManageHook = composeAll
-
-    [
-        className =? "MPlayer" --> doFloat,
-        manageDocks
-    ]
-
-  where
-    doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
+myManageHook = manageDocks
 
 -- Run it.
 main :: IO ()
