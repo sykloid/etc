@@ -23,8 +23,8 @@ set mouse=a " Enable mouse on all modes.
 set formatoptions=t,c,r,o,q,n,l " Various hints for automatic formatting.
 set virtualedit=block " Allow choosing perfect rectangles in Visual Block mode.
 
-" Only in Vim 7.3+
-if version >= 730
+" Some of my machines don't have persistent undos.
+if has("persistent_undo")
     set undofile " Allow persistent undos.
 endif
 

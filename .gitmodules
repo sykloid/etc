@@ -60,3 +60,6 @@
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
 	url = git://github.com/vim-scripts/UltiSnips.git
+[submodule "vim/bundle/vimux"]
+	path = vim/bundle/vimux
+	url = git://github.com/vim-scripts/vimux/
