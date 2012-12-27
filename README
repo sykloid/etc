@@ -1,11 +1,11 @@
-Hello, and welcome to my `~/etc`. This is where I put my configuration files, for a large number of
-the programs I use on a regular basis. Most of the files are commented, so they should be relatively
-easy to decipher.
+Hello, and welcome to my `~/etc`. This is where I put my configuration files,
+for a large number of the programs I use on a regular basis. Most of the files
+are commented, so they should be relatively easy to decipher.
 
 Points of Interest:
 
-    * Spectrum, my simple abstraction for managing 256-color codes in `zsh`, is in
-      `zsh/functions/spectrum`.
+    * Spectrum, my simple abstraction for managing 256-color codes in `zsh`, is
+      in `zsh/functions/spectrum`.
     * My Colemak key-bindings for `vim` are in `vim/colemak.vim`.
-    * My `vim` plugins are listed (indirectly) in the `.gitmodules` file, they are pulled in as
-      separate repositories and managed by pathogen.
+    * My `vim` plugins are listed (indirectly) in the `.gitmodules` file, they
+      are pulled in as separate repositories and managed by pathogen.
