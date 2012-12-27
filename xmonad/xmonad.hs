@@ -16,6 +16,7 @@ import XMonad.Actions.GridSelect
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.WorkspaceNames
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Named
@@ -218,6 +219,7 @@ main = do
         mouseBindings = myMouseBindings,
 
         -- Hooks
+        handleEventHook = fullscreenEventHook,
         layoutHook    = myLayoutHook,
         logHook       = myXMobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.98),
         manageHook    = myManageHook
