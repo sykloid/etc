@@ -168,7 +168,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_d), goToSelected myGSConfig),
         ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
         ((m, xK_l), renameWorkspace myXPConfig),
-        ((m .|. shiftMask, xK_F11), spawn "xscreensaver-command -activate"),
+        ((m .|. shiftMask, xK_F8), spawn "xscreensaver-command -activate"), -- Start the screen saver, lock the screen.
         ((m .|. shiftMask, xK_F12), io exitSuccess) -- Quit XMonad.
     ]
     ++
