@@ -47,6 +47,7 @@ set wildmode=full " On multiple matches, list all, complete longest, then full.
 set wildignore=*.swp,*.un~  " Ignore vim's temporaries.
 set wildignore+=*.cmo,*.cmi " Ignore OCaml's build artifacts
 set wildignore+=*.pdf,*.dvi " Ignore prepared documents (common with LaTeX).
+set wildignore+=*.class     " Ignore java class files.
 
 " Display
 
