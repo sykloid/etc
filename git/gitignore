@@ -12,3 +12,7 @@ tags-ja
 
 # LaTeX
 *.fdb_latexmk
+*.aux
+*.fls
+*.log
+*.pdf
