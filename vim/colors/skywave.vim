@@ -72,7 +72,7 @@ highlight Search       cterm=reverse      ctermfg=253         ctermbg=0
 highlight IncSearch    cterm=reverse
                                       
 " Syntax Groups
-highlight Comment      cterm=italic         ctermfg=238         ctermbg=0
+highlight Comment      cterm=none           ctermfg=238         ctermbg=0
                                                     
 highlight Constant     cterm=none         ctermfg=147         ctermbg=0
 highlight String       cterm=none         ctermfg=147         ctermbg=0
