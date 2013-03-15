@@ -63,3 +63,6 @@
 [submodule "vim/bundle/vimux"]
 	path = vim/bundle/vimux
 	url = git://github.com/vim-scripts/vimux/
+[submodule "vim/bundle/local"]
+	path = vim/bundle/local
+	url = git://github.com/vim-scripts/localvimrc/
