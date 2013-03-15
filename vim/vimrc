@@ -23,11 +23,6 @@ set mouse=a " Enable mouse on all modes.
 set formatoptions=t,c,r,o,q,n,l " Various hints for automatic formatting.
 set virtualedit=block " Allow choosing perfect rectangles in Visual Block mode.
 
-" Some of my machines don't have persistent undos.
-if has("persistent_undo")
-    set undofile " Allow persistent undos.
-endif
-
 set textwidth=100 " An arbitrarily good number, based on my common working resolution.
 
 " Windowing
@@ -39,15 +34,25 @@ set laststatus=2 " Always show a status bar.
 set title
 set titlestring=vim:\ %F\ %m
 
-" Completion
-set wildmenu " Advanced completion, showing matches above the command line.
-set wildmode=full " On multiple matches, list all, complete longest, then full.
+" 21. Command Line Editing
 
-" Patterns to ignore during completion inside vim.
-set wildignore=*.swp,*.un~  " Ignore vim's temporaries.
+set history=100
+
+set wildchar=<Tab>  " Key used to start command-line completion.
+set wildmode=full   " On multiple matches, list all, complete longest, then full.
+set wildmenu        " Shows matches above the command line.
+
+set wildignore+=*.swp,*.un~ " Ignore vim's temporaries.
+set wildignore+=*.a,*.o     " Ignore standard build artifacts.
 set wildignore+=*.cmo,*.cmi " Ignore OCaml's build artifacts
 set wildignore+=*.pdf,*.dvi " Ignore prepared documents (common with LaTeX).
-set wildignore+=*.class     " Ignore java class files.
+set wildignore+=*.class     " Ignore Java class files.
+set wildignore+=*.hi        " Ignore Haskell interface files.
+set wildignore+=*.pyc       " Ignore Python byte-code.
+
+set cedit=<F2>  " Key used to open command-line edit buffer.
+
+set undofile    " Allow persistent undos.
 
 " Display
 
