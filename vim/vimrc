@@ -97,6 +97,7 @@ let g:syntastic_check_on_open = 1
 
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|\.hsenv.*$\|dist.*$'
+let g:ctrlp_working_path_mode = 'ra'
 
 let g:LatexBox_no_mappings = 1
 
