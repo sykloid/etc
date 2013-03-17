@@ -26,10 +26,6 @@
 	path = vim/bundle/speeddating
 	url = git://github.com/vim-scripts/speeddating.vim
     ignore = dirty
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
-	url = git://github.com/vim-scripts/Syntastic.git
-    ignore = dirty
 [submodule "vim/bundle/latex-box"]
 	path = vim/bundle/latex-box
 	url = git://github.com/vim-scripts/LaTeX-Box
