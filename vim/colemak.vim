@@ -3,11 +3,34 @@
 "
 " Meant for colemak, but this file contains all keymappings I use, colemak
 " specific or not.
-"
-" TODO
-" Keys that are available:
-" 
-" Shifted versions of most characters
+
+" Movement
+nnoremap n h
+nnoremap e gj
+nnoremap i gk
+nnoremap o l
+
+vnoremap n h
+vnoremap e gj
+vnoremap i gk
+vnoremap o l
+
+" Moving between windows.
+noremap <C-w><C-n> <C-w><C-h>
+noremap <C-w><C-e> <C-w><C-j>
+noremap <C-w><C-i> <C-w><C-k>
+noremap <C-w><C-o> <C-w><C-l>
+
+noremap <C-w>n <C-w><C-h>
+noremap <C-w>e <C-w><C-j>
+noremap <C-w>i <C-w><C-k>
+noremap <C-w>o <C-w><C-l>
+
+" Moving windows around.
+noremap <C-w>N <C-w>H
+noremap <C-w>E <C-w>J
+noremap <C-w>I <C-w>K
+noremap <C-w>O <C-w>L
 
 " Marking
 nnoremap , m
@@ -28,36 +51,11 @@ nnoremap ss gg
 vnoremap ss gg
 vnoremap sq gq
 
-" Movement
-nnoremap n h
-nnoremap e gj
-nnoremap i gk
-nnoremap o l
-
-vnoremap n h
-vnoremap e gj
-vnoremap i gk
-vnoremap o l
-
-noremap <M-n> <C-w><C-h>
-noremap <M-e> <C-w><C-j>
-noremap <M-i> <C-w><C-k>
-noremap <M-o> <C-w><C-l>
-
-" For terminal vim
-noremap <C-w><C-n> <C-w><C-h>
-noremap <C-w><C-e> <C-w><C-j>
-noremap <C-w><C-i> <C-w><C-k>
-noremap <C-w><C-o> <C-w><C-l>
-
-noremap <C-w>n <C-w><C-h>
-noremap <C-w>e <C-w><C-j>
-noremap <C-w>i <C-w><C-k>
-noremap <C-w>o <C-w><C-l>
-
+" Open new lines.
 noremap y o
 noremap Y O
 
+" Next search result.
 nnoremap t n
 nnoremap T N
 
