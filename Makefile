@@ -1,7 +1,7 @@
 # Makefile: Deploys links in all the right places.
 # P.C. Shyamshankar <sykora@lucentbeing.com>
 
-all: git irssi vim x xmonad zsh
+all: ghc git irssi latexmk tmux vim x xmonad zsh
 
 ghc:
 	rm -rf ~/.ghci
