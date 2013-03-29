@@ -16,6 +16,10 @@ irssi:
 	ln -s `pwd`/irssi ~/.irssi
 	cp ~/.irssi/config.safe ~/.irssi/config
 
+latexmk:
+	rm -rf ~/.latexmkrc
+	ln -s `pwd`/latexmk/latexmkrc ~/.latexmkrc
+
 tmux:
 	rm -rf ~/.tmux.conf
 	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf
