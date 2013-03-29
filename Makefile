@@ -3,6 +3,10 @@
 
 all: git irssi vim x xmonad zsh
 
+ghc:
+	rm -rf ~/.ghci
+	ln -s `pwd`/ghc/ghci ~/.ghci
+
 git:
 	rm -rf ~/.gitconfig
 	ln -s `pwd`/git/gitconfig ~/.gitconfig

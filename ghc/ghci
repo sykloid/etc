@@ -1,0 +1,5 @@
+-- Set the prompt.
+:set prompt "λ> "
+
+-- Run an expression through hlint, get its opinion.
+:def hlint \line -> return $ ":!echo \"" ++ line ++ "\" | hlint -"
