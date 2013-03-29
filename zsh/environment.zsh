@@ -42,5 +42,5 @@ export HISTFILE=~/.zsh_history
 export REPORTTIME=5
 
 # EC2
-export EC2_PRIVATE_KEY=~/.ec2/pk-x509-$(hostname)-$(logname).pem
-export EC2_CERT=~/.ec2/cert-x509-$(hostname)-$(logname).pem
+export EC2_PRIVATE_KEY=~/.ec2/pk-x509-$(hostname)-$(whoami).pem
+export EC2_CERT=~/.ec2/cert-x509-$(hostname)-$(whoami).pem
