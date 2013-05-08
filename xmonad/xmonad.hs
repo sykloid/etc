@@ -99,7 +99,7 @@ myTerminal = "urxvtc"
 -- Workspaces
 -------------
 
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = (map show [1..9]) ++ [show 0] ++ (map (("F"++) . show) [1..12])
 
 -- Layouts
 ----------
@@ -168,8 +168,8 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_d), goToSelected myGSConfig),
         ((m, xK_q), restart "xmonad" True), -- Restart XMonad.
         ((m, xK_l), renameWorkspace myXPConfig),
-        ((m .|. shiftMask, xK_F8), spawn "xscreensaver-command -activate"), -- Start the screen saver, lock the screen.
-        ((m .|. shiftMask, xK_F12), io exitSuccess) -- Quit XMonad.
+        ((m .|. shiftMask, xK_p), spawn "xscreensaver-command -activate"), -- Start the screen saver, lock the screen.
+        ((m .|. shiftMask, xK_q), io exitSuccess) -- Quit XMonad.
     ]
     ++
 
@@ -177,7 +177,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- mod + xK_0 .. xK_9 -> Switch to the corresponding workspace (greedyView) 
     -- mod + shift + xK_0 .. xK_9 -> Move current window to corresponding workspace. 
     [((m .|. shiftMask', numberKey), windows $ windowAction workspace)
-        | (workspace, numberKey) <- zip (XMonad.workspaces xconfig) [xK_1 .. xK_9]
+        | (workspace, numberKey) <- zip (XMonad.workspaces xconfig) ([xK_1 .. xK_9] ++ [xK_0] ++ [xK_F1 .. xK_F12])
         , (shiftMask', windowAction) <- [(0, W.greedyView), (shiftMask, W.shift)]
     ]
     ++
