@@ -72,7 +72,7 @@ urxvt.saveLines: 12000
 urxvt.perl-ext: default,matcher
 urxvt.matcher.button: 2
 urxvt.matcher.rend.0: Uline fg14
-urxvt.urlLauncher: chromium
+urxvt.url-launcher: firefox
 urxvt.searchable-scrollback: M-Tab
 
 urxvt.keysym.M-g: perl:matcher
