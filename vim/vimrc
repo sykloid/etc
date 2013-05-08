@@ -64,6 +64,10 @@ set cedit=<F2>  " Key used to open command-line edit buffer.
 
 set undofile    " Allow persistent undos.
 
+" 26. Various
+
+set viminfo^=!  " Allow for persistent state. Required for some plugins, like localvimrc.
+
 " Display
 
 set wrap " Wrap long lines, instead of cutting them off, or making me scroll.
@@ -110,3 +114,5 @@ let g:ctrlp_prompt_mappings = {
 let g:UltiSnipsExpandTrigger = "<C-o>"
 let g:UltiSnipsJumpForwardTrigger = "<C-o>"
 let g:UltiSnipsSnippetsDir = "snippets"
+
+let g:localvimrc_persistent = 1
