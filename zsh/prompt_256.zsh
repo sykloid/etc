@@ -19,6 +19,9 @@ zstyle ':vcs_info:*' stagedstr "%{$FX[reset]$FG[082]%}"
 zstyle ':vcs_info:*' unstagedstr "%{$FX[reset]$FG[160]%}"
 zstyle ':vcs_info:*' formats ":%{$FX[reset]$FG[222]%}%c%u%b"
 
+# Use unaliased VCS commands.
+zstyle ':vcs_info:git:*:-all-' command =git
+
 local vcsi="\${vcs_info_msg_0_}"
 
 PROMPT="${p}(${name}${p}@${host}${p})-${jobs}(${time}${p})-(${dir}${p}${vcsi}${p})
