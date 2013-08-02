@@ -1,6 +1,7 @@
 # zlogin: Actions to be taken on login.
 
 # Start the dropbox daemon if it isn't running.
-if [[ $+commands[dropbox] == 1 && $(dropbox status) =~ "Dropbox isn't running\!" ]]; then
-    dropbox start
+if [[ $+commands[keychain] == 1 ]]; then
+	keychain --quiet id_rsa
+	source .keychain/$HOST-sh
 fi
