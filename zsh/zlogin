@@ -1,7 +1,8 @@
 # zlogin: Actions to be taken on login.
 
 # Start the dropbox daemon if it isn't running.
-if [[ $+commands[keychain] == 1 ]]; then
-	keychain --quiet id_rsa
+if [ $+commands[keychain] ]; then
+	keychain --quiet id_rsa FD108941
 	source .keychain/$HOST-sh
+    source .keychain/$HOST-sh-gpg
 fi
