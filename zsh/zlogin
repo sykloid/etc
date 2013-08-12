@@ -3,6 +3,6 @@
 # Start the dropbox daemon if it isn't running.
 if [ $+commands[keychain] ]; then
 	keychain --quiet id_rsa FD108941
-	source .keychain/$HOST-sh
-    source .keychain/$HOST-sh-gpg
+    source ~/.keychain/$HOST-sh
+    source ~/.keychain/$HOST-sh-gpg
 fi
