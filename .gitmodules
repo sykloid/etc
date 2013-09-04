@@ -65,3 +65,7 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/argumentative"]
+	path = vim/bundle/argumentative
+	url = git://github.com/vim-scripts/argumentative.vim
+    ignore = dirty
