@@ -53,18 +53,23 @@
 [submodule "vim/bundle/alternate"]
 	path = vim/bundle/alternate
 	url = git://github.com/vim-scripts/a.vim
+    ignore = dirty
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
 	url = git://github.com/vim-scripts/UltiSnips.git
+    ignore = dirty
 [submodule "vim/bundle/vimux"]
 	path = vim/bundle/vimux
 	url = git://github.com/vim-scripts/vimux/
+    ignore = dirty
 [submodule "vim/bundle/local"]
 	path = vim/bundle/local
 	url = git://github.com/vim-scripts/localvimrc/
+    ignore = dirty
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+    ignore = dirty
 [submodule "vim/bundle/argumentative"]
 	path = vim/bundle/argumentative
 	url = git://github.com/vim-scripts/argumentative.vim
