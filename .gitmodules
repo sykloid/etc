@@ -28,7 +28,7 @@
     ignore = dirty
 [submodule "vim/bundle/latex-box"]
 	path = vim/bundle/latex-box
-	url = git://github.com/vim-scripts/LaTeX-Box
+	url = git://github.com/LaTeX-Box-Team/LaTeX-Box/
     ignore = dirty
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
