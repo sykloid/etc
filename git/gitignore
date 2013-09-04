@@ -2,6 +2,7 @@
 *.swp
 *.swo
 *.un~
+.lvimrc
 
 # CTags
 tags
