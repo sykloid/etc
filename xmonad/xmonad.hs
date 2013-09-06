@@ -99,7 +99,7 @@ myTerminal = "urxvtc"
 -- Workspaces
 -------------
 
-myWorkspaces = (map show [1..9]) ++ [show 0] ++ (map (("F"++) . show) [1..12])
+myWorkspaces = map show [1..9] ++ [show 0] ++ map (("F"++) . show) [1..12]
 
 -- Layouts
 ----------
@@ -112,7 +112,7 @@ myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
-myLayoutHook = windowNavigation $ avoidStruts $ (myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full)
+myLayoutHook = windowNavigation $ avoidStruts $ myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
     where
         tabbedLayout = named "Tabbed" $ tabbed shrinkText myTabTheme
 
@@ -193,8 +193,8 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList
         ((m, button1), \w -> focus w >> mouseMoveWindow w), -- Float and move while dragging.
         ((m, button2), \w -> focus w >> windows W.swapMaster), -- Raise window to top of stack.
         ((m, button3), \w -> focus w >> mouseResizeWindow w), -- Float and resize while dragging.
-        ((m, button4), \_ -> prevWS), -- Switch to previous workspace.
-        ((m, button5), \_ -> nextWS) -- Switch to next workspace.
+        ((m, button4), const prevWS), -- Switch to previous workspace.
+        ((m, button5), const nextWS) -- Switch to next workspace.
     ]
 
 -- Managing everything.
