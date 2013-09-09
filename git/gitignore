@@ -8,8 +8,12 @@
 tags
 tags-ja
 
+.tags
+
 # Haskell
 .hsenv*
+cabal.sandbox.config
+.cabal-sandbox
 
 # LaTeX
 *.fdb_latexmk
