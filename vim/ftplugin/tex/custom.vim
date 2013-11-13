@@ -2,6 +2,7 @@ map <leader>ll :Latexmk<CR>
 map <leader>lv :LatexView<CR>
 
 nmap <leader>lce <plug>LatexChangeEnv
+vmap <leader>lwc <plug>LatexWrapSelection
 vmap <leader>lwe <plug>LatexEnvWrapSelection
 
 vmap h$ <plug>LatexBox_SelectInlineMathInner
