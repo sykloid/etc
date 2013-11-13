@@ -47,7 +47,8 @@ urxvt.shading: 70
 ! Set some nice fonts.
 urxvt.font: \
     xft:Envy Code R:style=Regular:pixelsize=14:autohint=true, \
-    xft:DejaVu Sans Mono:style=Regular:pixelsize=14:autohint=true
+    xft:DejaVu Sans Mono:style=Regular:pixelsize=14:autohint=true \
+    xft:unifont:style=Medium:pixelsize=14:autohint=true
 urxvt.boldFont: \
     xft:Envy Code R:style=Bold:pixelsize=14:autohint=true, \
     xft:DejaVu Sans Mono:style=Bold:pixelsize=14:autohint=true
