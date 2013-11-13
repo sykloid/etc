@@ -21,3 +21,4 @@ cabal.sandbox.config
 *.fls
 *.log
 *.pdf
+*.toc
