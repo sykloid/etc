@@ -70,7 +70,7 @@ urxvt.scrollTtyKeypress: True
 urxvt.saveLines: 12000
 
 ! Settings for urxvt-perl-extensions.
-urxvt.perl-ext: default,matcher
+urxvt.perl-ext: default,matcher,font-size,unichr
 urxvt.matcher.button: 2
 urxvt.matcher.rend.0: Uline fg14
 urxvt.url-launcher: firefox
@@ -78,3 +78,6 @@ urxvt.searchable-scrollback: M-Tab
 
 urxvt.keysym.M-g: perl:matcher
 urxvt.keysym.M-l: perl:matcher:list
+
+urxvt.keysym.M-Up: perl:font-size:increase
+urxvt.keysym.M-Down: perl:font-size:decrease
