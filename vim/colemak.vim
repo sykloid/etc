@@ -50,6 +50,7 @@ vnoremap S G
 nnoremap ss gg
 vnoremap ss gg
 vnoremap sq gq
+nmap sp `[v`]
 
 " Open new lines.
 noremap y o
