@@ -5,8 +5,9 @@
 # Load some defaults
 xrdb < ~/etc/x/xdefaults
 
-# Load the Colemak keymap.
-setxkbmap us -variant colemak -option compose:menu
+source ~/etc/x/input/keyboard
+source ~/etc/x/input/mouse
+source ~/etc/x/input/synaptics
 
 # Make sure the CapsLock key (now backspace) can repeat.
 xset r 66

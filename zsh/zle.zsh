@@ -69,7 +69,7 @@ bindkey "^V" quoted-insert
 bindkey "^K" kill-line
 bindkey "^U" kill-whole-line
 
-bindkey "^I" expand-or-complete
+bindkey "[Z" expand-or-complete-prefix
 
 bindkey "^L" clear-screen
 bindkey "^K" insert-composed-char
