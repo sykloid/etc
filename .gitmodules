@@ -74,3 +74,9 @@
 	path = vim/bundle/argumentative
 	url = git://github.com/vim-scripts/argumentative.vim
     ignore = dirty
+[submodule "vim/bundle/signify"]
+	path = vim/bundle/signify
+	url = git://github.com/mhinz/vim-signify/
+[submodule "vim/bundle/haskell"]
+	path = vim/bundle/haskell
+	url = git://github.com/wlangstroth/vim-haskell

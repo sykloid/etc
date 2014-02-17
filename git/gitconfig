@@ -13,8 +13,8 @@
     ui = auto
 
 [alias]
-	timeline = log --abbrev-commit --graph \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n\" --all
-	longline = log --abbrev-commit --graph \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n%b\" --all
+	timeline = log --abbrev-commit --stat --graph --all \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n\"
+	longline = log --abbrev-commit --stat --graph --all \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n%b\"
 
 [diff]
 	mnemonicprefix = true
