@@ -19,6 +19,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.Maximize
 import XMonad.Layout.Named
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Tabbed
@@ -112,7 +113,7 @@ myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
-myLayoutHook = windowNavigation $ avoidStruts $ myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
+myLayoutHook = windowNavigation $ avoidStruts $ maximize $ myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
     where
         tabbedLayout = named "Tabbed" $ tabbed shrinkText myTabTheme
 
@@ -144,6 +145,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m .|. shiftMask, xK_Return), windows W.swapMaster), -- Focus master window.
 
         ((m, xK_j), withFocused $ windows . W.sink), -- Bring floating windows back to tile.
+        ((m, xK_backslash), withFocused $ sendMessage . maximizeRestore),
 
         -- Layout Management
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
