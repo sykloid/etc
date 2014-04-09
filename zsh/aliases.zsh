@@ -9,7 +9,7 @@ alias ...=../..
 
 # Some application shortcuts.
 alias g="grep -EiRn --color=tty"
-alias m="mplayer"
+alias m="mpv"
 alias o="okular"
 
 # The many forms of zmv.
