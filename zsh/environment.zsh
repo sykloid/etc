@@ -3,7 +3,7 @@
 
 # Various Paths
 typeset -U path
-path=(~/bin ~/lib/python{2.6,3.1}/bin ~/.cabal/bin $path /usr/bin/vendor_perl /usr/local/bin)
+path=(.cabal-sandbox/bin ~/bin ~/lib/python{2.6,3.1}/bin ~/.gem/ruby/2.1.0/bin ~/.cabal/bin $path /usr/bin/vendor_perl /usr/local/bin)
 export PATH
 
 typeset -U fpath
