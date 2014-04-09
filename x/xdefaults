@@ -81,3 +81,19 @@ urxvt.keysym.M-l: perl:matcher:list
 
 urxvt.keysym.M-Up: perl:font-size:increase
 urxvt.keysym.M-Down: perl:font-size:decrease
+
+! Settings for XAutolock
+xautolock.time: 5
+xautolock.locker: xlock
+xautolock.nowlocker: xlock -lockdelay 0
+xautolock.killtime: 10
+xautolock.killer: "(( $(cat /proc/sys/vm/laptop_mode) )) && sudo pm-suspend"
+
+! Settings for XLock
+xlock.mode: blank
+xlock.lockdelay: 120
+xlock.dpmsoff: 150
+xlock.mousemotion: True
+xlock.usefirst: False
+xlock.echokeys: True
+xlock.echokey: *

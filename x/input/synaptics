@@ -1,0 +1,6 @@
+synclient TapButton1=1
+synclient TapButton2=3
+synclient TapButton3=2
+
+synclient PalmDetect=1
+# vim:set ft=sh:

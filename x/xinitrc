@@ -9,20 +9,10 @@ source ~/etc/x/input/keyboard
 source ~/etc/x/input/mouse
 source ~/etc/x/input/synaptics
 
-# Make sure the CapsLock key (now backspace) can repeat.
-xset r 66
+feh --bg-scale ~/img/wallpapers/current
 
 # Disable the bell.
 xset b off
-
-# Set the mouse pointer.
-xsetroot -cursor_name left_ptr
-
-# Start the scrobbler
-sudo /etc/rc.d/mpdscribble restart
-
-# Save my wrists.
-xwrits +clock +breakclock +idle +top typetime=55 break=5 after=10 -multiply break=7 &
 
 # /me loves lots of fast terminals
 urxvtd -q -o -f
@@ -30,11 +20,11 @@ urxvtd -q -o -f
 # Hide the mouse
 unclutter -idle 5 -noevents -root &
 
-# Reload my backgrounds
-nitrogen --restore
-
 # Start the screensaver.
-xscreensaver -no-splash &
+xautolock -detectsleep &
+
+# Start the xbindkeys listener
+xbindkeys
 
 # Start my favorite window manager.
 xmonad
