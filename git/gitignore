@@ -3,6 +3,7 @@
 *.swo
 *.un~
 .lvimrc
+*~
 
 # CTags
 tags
