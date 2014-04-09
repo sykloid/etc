@@ -114,7 +114,7 @@ let g:ctrlp_prompt_mappings = {
 
 let g:UltiSnipsExpandTrigger = "<C-o>"
 let g:UltiSnipsJumpForwardTrigger = "<C-o>"
-let g:UltiSnipsSnippetsDir = "snippets"
+let g:UltiSnipsSnippetDirectories = ["snippets"]
 
 let g:localvimrc_persistent = 1
 
