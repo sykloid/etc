@@ -111,3 +111,7 @@ noremap <silent> sB :call SwapParams("backwards")<CR>
 map <ESC>[B <DOWN>
 
 map  <leader>a :A<CR>
+
+map <leader>fe <plug>(signify-next-hunk)
+map <leader>fi <plug>(signify-prev-hunk)
+map <leader>ft :SignifyToggle<CR>
