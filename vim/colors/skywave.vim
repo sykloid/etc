@@ -116,3 +116,7 @@ highlight User4        cterm=none         ctermfg=196         ctermbg=232
 highlight User5        cterm=none         ctermfg=069         ctermbg=232
 highlight User6        cterm=none         ctermfg=220         ctermbg=232
 highlight User7        cterm=none         ctermfg=255         ctermbg=232
+
+highlight SignifySignAdd    cterm=bold ctermfg=118 ctermbg=none
+highlight SignifySignChange cterm=bold ctermfg=214 ctermbg=none
+highlight SignifySignDelete cterm=bold ctermfg=196 ctermbg=none
