@@ -44,3 +44,6 @@ export REPORTTIME=5
 # EC2
 export EC2_PRIVATE_KEY=~/.ec2/pk-x509-$(hostname)-$(whoami).pem
 export EC2_CERT=~/.ec2/cert-x509-$(hostname)-$(whoami).pem
+
+# Allow GTK applications to make use of X11 dead keys, including they multi-key.
+export GTK_IM_MODULE="xim"
