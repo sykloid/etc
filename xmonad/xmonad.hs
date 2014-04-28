@@ -155,6 +155,9 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_comma), sendMessage (IncMasterN 1)), -- Increment number of master windows.
         ((m, xK_period), sendMessage (IncMasterN (-1))), -- Decrement number of master windows.
 
+        ((m .|. shiftMask, xK_comma), sendMessage Shrink),
+        ((m .|. shiftMask, xK_period), sendMessage Expand),
+
         -- Mouse Management.
         ((m, xK_b), warpToWindow 0.98 0.98), -- Banish mouse to the lower right corner of the screen.
 
