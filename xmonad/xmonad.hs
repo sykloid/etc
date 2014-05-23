@@ -3,7 +3,6 @@
 
 {-# LANGUAGE NoMonomorphismRestriction #-}
 
-import Control.Monad (liftM2)
 import System.IO
 import System.Exit
 
@@ -21,7 +20,6 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Maximize
 import XMonad.Layout.Named
-import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Tabbed
 import XMonad.Layout.WindowNavigation
 import XMonad.Prompt
