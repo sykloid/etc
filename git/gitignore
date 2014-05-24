@@ -4,6 +4,7 @@
 *.un~
 .lvimrc
 *~
+\#*\#
 
 # CTags
 tags
