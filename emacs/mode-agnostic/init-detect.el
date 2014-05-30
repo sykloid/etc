@@ -18,6 +18,8 @@
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (add-hook 'org-mode-hook (lambda () (load-library "init-org")))
 
+(add-hook 'python-mode-hook (lambda () (load-library "init-python")))
+
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
 
 (provide 'init-detect)
