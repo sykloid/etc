@@ -30,7 +30,7 @@ export OCAML_TOPLEVEL_PATH=~/.opam/system/lib/toplevel
 export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs
 
 # Important applications.
-export EDITOR=vim
+export EDITOR=emacs
 export BROWSER=firefox
 
 # History Settings
