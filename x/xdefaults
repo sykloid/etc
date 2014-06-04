@@ -79,8 +79,9 @@ urxvt.searchable-scrollback: M-Tab
 urxvt.keysym.M-g: perl:matcher
 urxvt.keysym.M-l: perl:matcher:list
 
-urxvt.keysym.M-Up: perl:font-size:increase
-urxvt.keysym.M-Down: perl:font-size:decrease
+urxvt.keysym.M-plus: perl:font-size:increase
+urxvt.keysym.M-minus: perl:font-size:decrease
+urxvt.keysym.M-equal: perl:font-size:reset
 
 ! Settings for XAutolock
 xautolock.time: 5
