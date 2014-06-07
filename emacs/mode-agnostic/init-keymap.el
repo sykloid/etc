@@ -50,9 +50,6 @@
     (comment-dwim arg)))
 (evil-leader/set-key "c" 'comment-dwim-toggle)
 
-(evil-leader/set-key "p" 'ido-find-file)
-(evil-leader/set-key "b" 'ido-switch-buffer)
-
 ;; Tags
 (evil-leader/set-key "tf" 'find-tag)
 (evil-leader/set-key "tb" 'pop-tag-mark)
@@ -66,5 +63,30 @@
 
 ;; Multiple-Cursors Bindings
 (evil-leader/set-key "mc" 'mc/mark-all-like-this-dwim)
+
+;; Ido-Mode
+
+(require 'ido)
+
+(defun define-ido-bindings ()
+  (define-key ido-completion-map (kbd "C-e") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-i") 'ido-prev-match))
+
+(add-hook 'ido-setup-hook 'define-ido-bindings)
+
+(evil-leader/set-key "p" 'ido-find-file)
+(evil-leader/set-key "b" 'ido-switch-buffer)
+
+;; Undo-Tree
+
+(evil-define-key 'motion undo-tree-visualizer-mode-map (kbd "n") 'undo-tree-visualize-switch-branch-left)
+(evil-define-key 'motion undo-tree-visualizer-mode-map (kbd "e") 'undo-tree-visualize-redo)
+(evil-define-key 'motion undo-tree-visualizer-mode-map (kbd "i") 'undo-tree-visualize-undo)
+(evil-define-key 'motion undo-tree-visualizer-mode-map (kbd "o") 'undo-tree-visualize-switch-branch-right)
+
+(require 'auto-complete)
+
+(define-key ac-complete-mode-map (kbd "C-e") 'ac-next)
+(define-key ac-complete-mode-map (kbd "C-i") 'ac-previous)
 
 (provide 'init-keymap)
