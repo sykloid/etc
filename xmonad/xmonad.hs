@@ -18,6 +18,8 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.BoringWindows
+import XMonad.Layout.Minimize
 import XMonad.Layout.Maximize
 import XMonad.Layout.Named
 import XMonad.Layout.Tabbed
@@ -111,7 +113,7 @@ myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
-myLayoutHook = windowNavigation $ avoidStruts $ maximize $ myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
+myLayoutHook = windowNavigation $ avoidStruts $ maximize $ minimize $ boringWindows $ myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
     where
         tabbedLayout = named "Tabbed" $ tabbed shrinkText myTabTheme
 
@@ -129,8 +131,8 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m, xK_c), spawn $ XMonad.terminal xconfig), -- Start a new terminal.
 
         -- Window Navigation
-        ((m, xK_t), windows W.focusDown), -- Focus next window.
-        ((m, xK_s), windows W.focusUp), -- Focus previous window.
+        ((m, xK_t), focusDown), -- Focus next window.
+        ((m, xK_s), focusUp), -- Focus previous window.
 
         ((m, xK_Return), windows W.focusMaster), -- Focus master window.
 
@@ -144,6 +146,8 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
 
         ((m, xK_j), withFocused $ windows . W.sink), -- Bring floating windows back to tile.
         ((m, xK_backslash), withFocused $ sendMessage . maximizeRestore),
+        ((m, xK_minus), withFocused minimizeWindow >> markBoring),
+        ((m .|. shiftMask, xK_minus), sendMessage RestoreNextMinimizedWin >> clearBoring),
 
         -- Layout Management
         ((m, xK_space), sendMessage NextLayout), -- Rotate to next layout.
@@ -157,7 +161,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         ((m .|. shiftMask, xK_period), sendMessage Expand),
 
         -- Mouse Management.
-        ((m, xK_b), warpToWindow 0.98 0.98), -- Banish mouse to the lower right corner of the screen.
+        ((m, xK_b), warpToWindow 0.98 0.95), -- Banish mouse to the lower right corner of the screen.
 
         -- Application Shortcuts
         ((0, xK_Print), spawn "scrot"),
@@ -177,8 +181,8 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
     ++
 
     -- Map the workspace access keys.
-    -- mod + xK_0 .. xK_9 -> Switch to the corresponding workspace (greedyView) 
-    -- mod + shift + xK_0 .. xK_9 -> Move current window to corresponding workspace. 
+    -- mod + xK_0 .. xK_9 -> Switch to the corresponding workspace (greedyView)
+    -- mod + shift + xK_0 .. xK_9 -> Move current window to corresponding workspace.
     [((m .|. shiftMask', numberKey), windows $ windowAction workspace)
         | (workspace, numberKey) <- zip (XMonad.workspaces xconfig) ([xK_1 .. xK_9] ++ [xK_0] ++ [xK_F1 .. xK_F12])
         , (shiftMask', windowAction) <- [(0, W.greedyView), (shiftMask, W.shift)]
@@ -224,6 +228,6 @@ main = do
         -- Hooks
         handleEventHook = fullscreenEventHook,
         layoutHook    = myLayoutHook,
-        logHook       = myXMobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.98),
+        logHook       = myXMobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.95),
         manageHook    = myManageHook
     }
