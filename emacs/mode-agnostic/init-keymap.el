@@ -8,6 +8,8 @@
 (evil-add-hjkl-bindings evil-normal-state-map)
 (evil-add-hjkl-bindings evil-visual-state-map)
 
+(define-key evil-normal-state-map "s" nil)
+
 (define-key evil-window-map "n" 'evil-window-left)
 (define-key evil-window-map "e" 'evil-window-down)
 (define-key evil-window-map "i" 'evil-window-up)
@@ -39,6 +41,7 @@
 
 (define-key evil-visual-state-map "." 'er/expand-region)
 
+(define-key evil-visual-state-map "sv" 'evil-visual-restore)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 
