@@ -45,6 +45,10 @@
 (define-key evil-visual-state-map "." 'er/expand-region)
 
 (define-key evil-visual-state-map "sv" 'evil-visual-restore)
+
+(define-key evil-normal-state-map "sff" 'ffap)
+(define-key evil-normal-state-map "sfo" 'ffap-other-window)
+
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 
