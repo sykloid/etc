@@ -23,6 +23,9 @@
 (define-key evil-normal-state-map "t" 'evil-search-next)
 (define-key evil-normal-state-map "T" 'evil-search-previous)
 
+(define-key evil-motion-state-map "t" 'evil-search-next)
+(define-key evil-motion-state-map "t" 'evil-search-previous)
+
 (define-key evil-normal-state-map "h" 'evil-insert)
 (define-key evil-normal-state-map "y" 'evil-open-below)
 (define-key evil-normal-state-map "Y" 'evil-open-above)
