@@ -35,6 +35,7 @@ import qualified XMonad.StackSet as W
 -------------
 
 -- Window Appearance
+myBorderWidth :: Integral a => a
 myBorderWidth = 0 -- No borders around windows, I think I can manage.
 
 -- XMonad.Prompt Appearance
@@ -50,6 +51,7 @@ myXPConfig = defaultXPConfig {
 }
 
 -- XMonad.GridSelect Configuration.
+myGSConfig :: HasColorizer a => GSConfig a
 myGSConfig = defaultGSConfig {
         gs_font = "xft:Envy Code R:pixelsize=14",
         gs_cellheight = 40,
@@ -74,6 +76,7 @@ myGSConfig = defaultGSConfig {
     navDefaultHandler = const myGSNavigation
 
 -- XMonad.Layout.Tabbed appearance
+myTabTheme :: Theme
 myTabTheme = defaultTheme {
     fontName = "xft:Envy Code R:pixelsize=12",
     inactiveColor = "#333333",
@@ -84,6 +87,7 @@ myTabTheme = defaultTheme {
 }
 
 -- XMobar pretty printing configuration.
+myXMobarLogger :: Handle -> X ()
 myXMobarLogger handle = workspaceNamesPP defaultPP {
     ppOutput    = hPutStrLn handle,
     ppCurrent   = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>",
@@ -95,17 +99,20 @@ myXMobarLogger handle = workspaceNamesPP defaultPP {
 -- Applications
 ---------------
 
+myTerminal :: String
 myTerminal = "urxvtc"
 
 -- Workspaces
 -------------
 
+myWorkspaces :: [String]
 myWorkspaces = map show [1..9] ++ [show 0] ++ map (("F"++) . show) [1..12]
 
 -- Layouts
 ----------
 
 -- A constructed default tiling layout, 2 panes of windows.
+myTiledLayout :: Tall a
 myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
     where
         masterCapacity = 1 -- Number of master windows by default.
@@ -194,6 +201,7 @@ myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
         , (f, shiftMask') <- [(W.view, 0), (W.shift, shiftMask)]
     ]
 
+myMouseBindings :: XConfig a -> M.Map (KeyMask, Button) (Window -> X())
 myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList
 
     [
