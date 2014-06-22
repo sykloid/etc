@@ -49,6 +49,19 @@
 (define-key evil-normal-state-map "sff" 'ffap)
 (define-key evil-normal-state-map "sfo" 'ffap-other-window)
 
+(require 'evil-args)
+
+(add-to-list 'evil-args-openers "<")
+(add-to-list 'evil-args-closers ">")
+
+(define-key evil-inner-text-objects-map "," 'evil-inner-arg)
+(define-key evil-outer-text-objects-map "," 'evil-outer-arg)
+
+(define-key evil-normal-state-map "]," 'evil-forward-arg)
+(define-key evil-normal-state-map "[," 'evil-backward-arg)
+(define-key evil-motion-state-map "]," 'evil-forward-arg)
+(define-key evil-motion-state-map "[," 'evil-backward-arg)
+
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 
