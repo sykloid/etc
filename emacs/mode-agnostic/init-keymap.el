@@ -112,4 +112,11 @@
 (define-key ac-complete-mode-map (kbd "C-e") 'ac-next)
 (define-key ac-complete-mode-map (kbd "C-i") 'ac-previous)
 
+;; Git-Mode
+
+(require 'magit)
+
+(evil-leader/set-key "gs" 'magit-status)
+(evil-leader/set-key "gb" 'magit-blame-mode)
+
 (provide 'init-keymap)
