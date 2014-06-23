@@ -8,6 +8,11 @@
   "Location of mode-specific init-*.el files.")
 (add-to-list 'load-path mode-specific-init-directory)
 
+(defvar scratch-directory
+  (concat user-emacs-directory "scratch")
+  "Location of temporary scratch elisp.")
+(add-to-list 'load-path scratch-directory)
+
 (require 'init-overrides)
 (require 'init-packages)
 (require 'init-interface)
