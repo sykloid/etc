@@ -98,3 +98,11 @@ xlock.mousemotion: True
 xlock.usefirst: False
 xlock.echokeys: True
 xlock.echokey: *
+
+emacs.background: #000000
+emacs.foreground: #CCCCCC
+
+emacs.cursorBlink: off
+emacs.menuBar: off
+emacs.toolBar: 0
+emacs.verticalScrollBars: off
