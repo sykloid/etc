@@ -42,7 +42,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
 
-  (set-fringe-style '(8 . 0)))
+  (set-fringe-style '(8 . 0))
+
+  (set-frame-font "Fantasque Sans Mono-11"))
 
 (provide 'init)
 ;;; init.el ends here
