@@ -46,5 +46,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set-frame-font "Fantasque Sans Mono-11"))
 
+;;;; Packages
+
+(after ('emacs)
+  (require 'package)
+  (set 'package-user-dir (concat user-emacs-directory "elpa"))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+  (package-initialize))
+
 (provide 'init)
 ;;; init.el ends here
