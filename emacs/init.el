@@ -32,5 +32,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (declare (indent defun))
   `(eval-after-load-all ,features ((lambda () (quote (progn ,@body))))))
 
+;;;; Appearance
+
+(after ('emacs)
+  (set 'inhibit-splash-screen t)
+
+  (blink-cursor-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+
+  (set-fringe-style '(8 . 0)))
+
 (provide 'init)
 ;;; init.el ends here
