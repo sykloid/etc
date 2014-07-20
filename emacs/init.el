@@ -65,6 +65,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('evil)
 
   ;; Cursor Movement
+
   (define-key evil-normal-state-map "n" 'evil-backward-char)
   (define-key evil-normal-state-map "e" 'evil-next-line)
   (define-key evil-normal-state-map "i" 'evil-previous-line)
@@ -81,17 +82,25 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-visual-state-map "o" 'evil-forward-char)
 
   ;; Window Movement
+
   (define-key evil-window-map "n" 'evil-window-left)
   (define-key evil-window-map "e" 'evil-window-down)
   (define-key evil-window-map "i" 'evil-window-up)
   (define-key evil-window-map "o" 'evil-window-right)
 
-  (define-key evil-normal-state-map "h" 'evil-insert-state))
   (define-key evil-window-map "\C-n" 'evil-window-left)
   (define-key evil-window-map "\C-e" 'evil-window-down)
   (define-key evil-window-map "\C-i" 'evil-window-up)
   (define-key evil-window-map "\C-o" 'evil-window-right)
 
+  ;; Entering Insert Mode
+
+  (define-key evil-normal-state-map "h" 'evil-insert-state)
+  (define-key evil-normal-state-map "H" 'evil-insert-line)
+  (define-key evil-normal-state-map "a" 'evil-append)
+  (define-key evil-normal-state-map "A" 'evil-append-line)
+  (define-key evil-normal-state-map "y" 'evil-open-below)
+  (define-key evil-normal-state-map "Y" 'evil-open-above))
 
 (provide 'init)
 ;;; init.el ends here
