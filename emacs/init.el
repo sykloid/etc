@@ -55,5 +55,36 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
   (package-initialize))
 
+;;; Evil/Keymaps
+
+(after ('evil-autoloads)
+  (evil-mode t))
+
+(after ('evil)
+
+  ;; Cursor Movement
+  (define-key evil-normal-state-map "n" 'evil-backward-char)
+  (define-key evil-normal-state-map "e" 'evil-next-line)
+  (define-key evil-normal-state-map "i" 'evil-previous-line)
+  (define-key evil-normal-state-map "o" 'evil-forward-char)
+
+  (define-key evil-motion-state-map "n" 'evil-backward-char)
+  (define-key evil-motion-state-map "e" 'evil-next-line)
+  (define-key evil-motion-state-map "i" 'evil-previous-line)
+  (define-key evil-motion-state-map "o" 'evil-forward-char)
+
+  (define-key evil-visual-state-map "n" 'evil-backward-char)
+  (define-key evil-visual-state-map "e" 'evil-next-line)
+  (define-key evil-visual-state-map "i" 'evil-previous-line)
+  (define-key evil-visual-state-map "o" 'evil-forward-char)
+
+  ;; Window Movement
+  (define-key evil-window-map "n" 'evil-window-left)
+  (define-key evil-window-map "e" 'evil-window-down)
+  (define-key evil-window-map "i" 'evil-window-up)
+  (define-key evil-window-map "o" 'evil-window-right)
+
+  (define-key evil-normal-state-map "h" 'evil-insert-state))
+
 (provide 'init)
 ;;; init.el ends here
