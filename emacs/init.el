@@ -87,6 +87,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-window-map "o" 'evil-window-right)
 
   (define-key evil-normal-state-map "h" 'evil-insert-state))
+  (define-key evil-window-map "\C-n" 'evil-window-left)
+  (define-key evil-window-map "\C-e" 'evil-window-down)
+  (define-key evil-window-map "\C-i" 'evil-window-up)
+  (define-key evil-window-map "\C-o" 'evil-window-right)
+
 
 (provide 'init)
 ;;; init.el ends here
