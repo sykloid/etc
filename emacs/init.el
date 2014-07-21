@@ -32,6 +32,25 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (declare (indent defun))
   `(eval-after-load-all ,features ((lambda () (quote (progn ,@body))))))
 
+;;;; Packages and Libraries
+
+(after ('emacs)
+  (require 'package)
+  (set 'package-user-dir (concat user-emacs-directory "elpa"))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+  (package-initialize)
+
+
+  (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
+  (add-to-list 'load-path user-lisp-directory)
+
+  (defvar user-theme-directory (concat user-lisp-directory "themes/"))
+  (add-to-list 'custom-theme-load-path user-theme-directory)
+  (set 'custom-file (concat user-lisp-directory "customizations.el"))
+
+  (load-library custom-file))
+
 ;;;; Appearance
 
 (after ('emacs)
@@ -46,16 +65,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'scroll-step 1)
 
-  (set-frame-font "Fantasque Sans Mono-11"))
+  (set-frame-font "Fantasque Sans Mono-11")
 
-;;;; Packages
-
-(after ('emacs)
-  (require 'package)
-  (set 'package-user-dir (concat user-emacs-directory "elpa"))
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-  (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
-  (package-initialize))
+  (if (display-graphic-p)
+      (load-theme 'skywave-gui)
+    (load-theme 'skywave-tty)))
 
 ;;; Evil/Keymaps
 
