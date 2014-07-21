@@ -129,7 +129,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   ;; Text-Objects and Motions
 
   (define-key evil-visual-state-map "h" evil-inner-text-objects-map)
-  (define-key evil-operator-state-map "h" evil-inner-text-objects-map))
+  (define-key evil-operator-state-map "h" evil-inner-text-objects-map)
+
+  ;; Search
+
+  (define-key evil-normal-state-map "t" 'evil-search-next)
+  (define-key evil-normal-state-map "T" 'evil-search-previous))
 
 (provide 'init)
 ;;; init.el ends here
