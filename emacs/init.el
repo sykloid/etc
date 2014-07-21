@@ -114,7 +114,22 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-normal-state-map "a" 'evil-append)
   (define-key evil-normal-state-map "A" 'evil-append-line)
   (define-key evil-normal-state-map "y" 'evil-open-below)
-  (define-key evil-normal-state-map "Y" 'evil-open-above))
+  (define-key evil-normal-state-map "Y" 'evil-open-above)
+
+  ;; Copying and Pasting
+
+  (define-key evil-normal-state-map "k" 'evil-yank)
+  (define-key evil-normal-state-map "m" 'evil-paste-after)
+  (define-key evil-normal-state-map "M" 'evil-paste-before)
+
+  (define-key evil-visual-state-map "k" 'evil-yank)
+  (define-key evil-visual-state-map "m" 'evil-paste-after)
+  (define-key evil-visual-state-map "M" 'evil-paste-before)
+
+  ;; Text-Objects and Motions
+
+  (define-key evil-visual-state-map "h" evil-inner-text-objects-map)
+  (define-key evil-operator-state-map "h" evil-inner-text-objects-map))
 
 (provide 'init)
 ;;; init.el ends here
