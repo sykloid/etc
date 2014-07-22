@@ -134,7 +134,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   ;; Search
 
   (define-key evil-normal-state-map "t" 'evil-search-next)
-  (define-key evil-normal-state-map "T" 'evil-search-previous))
+  (define-key evil-normal-state-map "T" 'evil-search-previous)
+
+  ;; Miscellaneous -- the `s'-map is my `g'-map.
+
+  (define-key evil-normal-state-map "s" nil))
 
 (provide 'init)
 ;;; init.el ends here
