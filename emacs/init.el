@@ -136,6 +136,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   ;; Text-Objects and Motions
 
+  (define-key evil-visual-state-map "y" 'evil-visual-exchange-corners)
   (define-key evil-visual-state-map "h" evil-inner-text-objects-map)
   (define-key evil-operator-state-map "h" evil-inner-text-objects-map)
 
