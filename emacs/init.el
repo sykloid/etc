@@ -233,6 +233,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil-leader)
     (evil-leader/set-key "u" 'undo-tree-visualize)))
 
+;;; Multiple-Cursors
+
+(after ('multiple-cursors-autoloads)
+  (after ('evil-leader)
+    (evil-leader/set-key "mt" 'mc/mark-all-like-this-dwim)))
+
 ;;;; Major Modes
 
 ;; Emacs-Lisp
