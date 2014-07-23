@@ -151,5 +151,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-normal-state-map "sff" 'ffap)
   (define-key evil-normal-state-map "sfo" 'ffap-other-window))
 
+;;; Evil-Leader
+
+(after ('evil-leader-autoloads)
+  (global-evil-leader-mode t)
+  (evil-leader/set-leader "<SPC>"))
+
 (provide 'init)
 ;;; init.el ends here
