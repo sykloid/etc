@@ -168,5 +168,25 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-visual-state-map "js" 'evil-surround-region)
     (define-key evil-visual-state-map "jS" 'evil-Surround-region)))
 
+;;;; Extensions
+
+;;; Ido*
+
+(after ('emacs)
+  (ido-mode t)
+  (ido-everywhere t)
+
+  (set 'ido-max-prospects 6)
+
+  (after ('evil-leader)
+    (evil-leader/set-key "pf" 'ido-find-file)
+    (evil-leader/set-key "pb" 'ido-switch-buffer))
+
+  (after ('ido-ubiquitous-autoloads)
+    (ido-ubiquitous-mode t))
+
+  (after ('ido-vertical-mode-autoloads)
+    (ido-vertical-mode t)))
+
 (provide 'init)
 ;;; init.el ends here
