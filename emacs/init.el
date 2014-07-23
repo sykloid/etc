@@ -195,5 +195,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gb" 'magit-blame-mode)))
 
+(after ('undo-tree)
+  (after ('evil)
+    (define-key evil-normal-state-map "u" 'undo-tree-undo)
+    (define-key evil-normal-state-map "U" 'undo-tree-redo))
+
+  (after ('evil-leader)
+    (evil-leader/set-key "u" 'undo-tree-visualize)))
+
 (provide 'init)
 ;;; init.el ends here
