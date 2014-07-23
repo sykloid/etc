@@ -157,5 +157,16 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (global-evil-leader-mode t)
   (evil-leader/set-leader "<SPC>"))
 
+;;; Evil-Surround
+
+(after ('evil-surround-autoloads)
+  (global-evil-surround-mode t)
+
+  (after ('evil)
+    (define-key evil-normal-state-map "js" 'evil-surround-region)
+    (define-key evil-normal-state-map "jS" 'evil-surround-region)
+    (define-key evil-visual-state-map "js" 'evil-surround-region)
+    (define-key evil-visual-state-map "jS" 'evil-Surround-region)))
+
 (provide 'init)
 ;;; init.el ends here
