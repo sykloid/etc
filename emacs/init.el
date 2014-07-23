@@ -152,6 +152,26 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-normal-state-map "sff" 'ffap)
   (define-key evil-normal-state-map "sfo" 'ffap-other-window))
 
+;;; Evil-Args
+
+(after ('evil-args-autoloads)
+
+  (require 'evil-args)
+
+  (add-to-list 'evil-args-openers "<")
+  (add-to-list 'evil-args-closers ">")
+
+  (add-to-list 'evil-args-delimiters ";")
+
+  (after ('evil)
+    (define-key evil-inner-text-objects-map "," 'evil-inner-arg)
+    (define-key evil-outer-text-objects-map "," 'evil-outer-arg)
+
+    (define-key evil-normal-state-map "]," 'evil-forward-arg)
+    (define-key evil-normal-state-map "[," 'evil-backward-arg)
+    (define-key evil-motion-state-map "]," 'evil-forward-arg)
+    (define-key evil-motion-state-map "[," 'evil-backward-arg)))
+
 ;;; Evil-Leader
 
 (after ('evil-leader-autoloads)
