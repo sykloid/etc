@@ -203,5 +203,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil-leader)
     (evil-leader/set-key "u" 'undo-tree-visualize)))
 
+;;;; Major Modes
+
+;; Emacs-Lisp
+
+(after ('emacs)
+  (add-hook 'emacs-lisp-mode-hook
+    (lambda () (font-lock-add-keywords nil '(("\\<after\\>" . font-lock-keyword-face)))))
+  (after ('paredit-autoloads)
+    (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode t)))))
+
 (provide 'init)
 ;;; init.el ends here
