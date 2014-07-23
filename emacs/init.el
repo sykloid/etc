@@ -36,10 +36,18 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('emacs)
   (require 'package)
+
   (set 'package-user-dir (concat user-emacs-directory "elpa"))
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
   (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
   (package-initialize)
+
+  (require 'package-filter)
+
+  (after ('package-filter)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+    (add-to-list 'package-archive-enable-alist '("melpa" . 'evil-surround))
+    (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode)))
 
 
   (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
@@ -47,8 +55,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (defvar user-theme-directory (concat user-lisp-directory "themes/"))
   (add-to-list 'custom-theme-load-path user-theme-directory)
-  (set 'custom-file (concat user-lisp-directory "customizations.el"))
 
+  (set 'custom-file (concat user-lisp-directory "customizations.el"))
   (load-library custom-file))
 
 ;;;; Appearance
