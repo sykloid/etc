@@ -188,5 +188,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('ido-vertical-mode-autoloads)
     (ido-vertical-mode t)))
 
+;;; Magit
+
+(after ('magit-autoloads)
+  (after ('evil-leader)
+    (evil-leader/set-key "gs" 'magit-status)
+    (evil-leader/set-key "gb" 'magit-blame-mode)))
+
 (provide 'init)
 ;;; init.el ends here
