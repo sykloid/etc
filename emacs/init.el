@@ -193,6 +193,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;;; Extensions
 
+;;; Expand-Region
+
+(after ('expand-region-autoloads)
+  (after ('evil)
+    (define-key evil-visual-state-map "." 'er/expand-region)))
+
 ;;; Ido*
 
 (after ('emacs)
