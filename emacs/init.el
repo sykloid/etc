@@ -146,7 +146,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   ;; Miscellaneous -- the `s'-map is my `g'-map.
 
-  (define-key evil-normal-state-map "s" nil))
+  (define-key evil-normal-state-map "s" nil)
+  (define-key evil-normal-state-map "sv" 'evil-visual-restore)
+  (define-key evil-normal-state-map "sff" 'ffap)
+  (define-key evil-normal-state-map "sfo" 'ffap-other-window))
 
 (provide 'init)
 ;;; init.el ends here
