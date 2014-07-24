@@ -55,7 +55,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('package-filter)
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'evil-surround))
-    (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode)))
+    (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode))
+    (add-to-list 'package-archive-enable-alist '("melpa" . 'yaml-mode)))
 
 
   (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
@@ -86,6 +87,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (if (display-graphic-p)
       (load-theme 'skywave-gui)
     (load-theme 'skywave-tty)))
+
+;;;; Mode Detection
+
+(after ('emacs)
+  (add-to-list 'auto-mode-alist '("\\.ya?ml" . yaml-mode)))
 
 ;;; Evil/Keymaps
 
