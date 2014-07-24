@@ -215,6 +215,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil)
     (define-key evil-visual-state-map "." 'er/expand-region)))
 
+;;; Flycheck
+
+(after ('flycheck-autoloads)
+  (global-flycheck-mode t))
+
 ;;; Ido*
 
 (after! ('ido)
