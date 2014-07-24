@@ -45,14 +45,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('emacs)
   (require 'package)
 
-  (set 'package-user-dir (concat user-emacs-directory "elpa"))
+  (set 'package-user-dir (concat user-emacs-directory "elpa/"))
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
   (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
   (package-initialize)
 
-  (require 'package-filter)
-
-  (after ('package-filter)
+  (after! ('package-filter)
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'evil-surround))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode))
