@@ -32,6 +32,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (declare (indent defun))
   `(eval-after-load-all ,features ((lambda () (quote (progn ,@body))))))
 
+(defmacro after! (features &rest body)
+  "Arrange that if, and only if, all `FEATURES' are loaded, `BODY' is evaluated.
+Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled."
+  (declare (indent defun))
+  `(progn
+     (mapc 'require (list ,@features))
+     (eval-after-load-all ,features ((lambda () (quote (progn ,@body)))))))
+
 ;;;; Packages and Libraries
 
 (after ('emacs)
@@ -156,9 +164,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;; Evil-Args
 
-(after ('evil-args-autoloads)
-
-  (require 'evil-args)
+(after! ('evil-args)
 
   (add-to-list 'evil-args-openers "<")
   (add-to-list 'evil-args-closers ">")
@@ -193,6 +199,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;;; Extensions
 
+(after! ('comment-dwim-toggle)
+  (after ('evil-leader)
+    (evil-leader/set-key "c" 'comment-dwim-toggle)))
+
 ;;; Expand-Region
 
 (after ('expand-region-autoloads)
@@ -201,7 +211,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;; Ido*
 
-(after ('emacs)
+(after! ('ido)
   (ido-mode t)
   (ido-everywhere t)
 
@@ -251,7 +261,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('emacs)
   (add-hook 'emacs-lisp-mode-hook
-    (lambda () (font-lock-add-keywords nil '(("\\<after\\>" . font-lock-keyword-face)))))
+    (lambda () (font-lock-add-keywords nil '(("\\<after!?\\>" . font-lock-keyword-face)))))
   (after ('paredit-autoloads)
     (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode t)))))
 
