@@ -278,5 +278,18 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('paredit-autoloads)
     (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode t)))))
 
+;; Haskell
+
+(after ('haskell-mode)
+  (add-hook 'haskell-mode-hook
+    (lambda () (progn (turn-on-haskell-decl-scan)
+		      (turn-on-haskell-doc)
+		      (turn-on-haskell-indent))))
+
+  (add-hook 'haskell-mode-hook
+    (lambda () (face-remap-add-relative 'font-lock-doc-face 'font-lock-comment-face)))
+
+  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+
 (provide 'init)
 ;;; init.el ends here
