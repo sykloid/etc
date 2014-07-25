@@ -270,6 +270,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('emacs)
   (add-hook 'emacs-lisp-mode-hook
+    (lambda () (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc)))
+
+  (add-hook 'emacs-lisp-mode-hook
     (lambda () (font-lock-add-keywords nil '(("\\<after!?\\>" . font-lock-keyword-face)))))
   (add-hook 'emacs-lisp-mode-hook
     (lambda () (turn-on-eldoc-mode)))
