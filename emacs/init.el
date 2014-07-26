@@ -241,12 +241,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('ido-vertical-mode-autoloads)
     (ido-vertical-mode t))
 
-  (defun ido-setup-bindings ()
-    (progn
+  (with-hook 'ido-setup-hook
     (define-key ido-completion-map "\C-e" 'ido-next-match)
     (define-key ido-completion-map "\C-i" 'ido-prev-match)))
-
-  (add-hook 'ido-setup-hook 'ido-setup-bindings))
 
 ;;; Magit
 
