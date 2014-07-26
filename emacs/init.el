@@ -40,6 +40,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
      (mapc 'require (list ,@features))
      (eval-after-load-all ,features ((lambda () (quote (progn ,@body)))))))
 
+(defmacro with-hook (hook &rest body)
+  "Add to the value of `HOOK', all of the actions in `BODY'."
+  (declare (indent 1))
+  `(add-hook ,hook (lambda () (progn ,@body))))
+
 ;;;; Packages and Libraries
 
 (after ('emacs)
