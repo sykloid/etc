@@ -274,15 +274,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;; Emacs-Lisp
 
 (after ('emacs)
-  (add-hook 'emacs-lisp-mode-hook
-    (lambda () (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc)))
-
-  (add-hook 'emacs-lisp-mode-hook
-    (lambda () (font-lock-add-keywords nil '(("\\<after!?\\>" . font-lock-keyword-face)))))
-  (add-hook 'emacs-lisp-mode-hook
-    (lambda () (turn-on-eldoc-mode)))
   (after ('paredit-autoloads)
-    (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode t)))))
+    (with-hook 'emacs-lisp-mode-hook
+      (paredit-mode t)))
+
+  (with-hook 'emacs-lisp-mode-hook
+    (turn-on-eldoc-mode)
+
+    (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc)
+
+    (font-lock-add-keywords nil '(("\\<after!?\\>" . font-lock-keyword-face)))
+    (font-lock-add-keywords nil '(("\\<with-hook\\>" . font-lock-keyword-face)))))
 
 ;; Haskell
 
