@@ -286,15 +286,16 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;; Haskell
 
 (after ('haskell-mode)
-  (add-hook 'haskell-mode-hook
-    (lambda () (progn (turn-on-haskell-decl-scan)
-		      (turn-on-haskell-doc)
-		      (turn-on-haskell-indent))))
+  (with-hook 'haskell-mode-hook
+    (turn-on-haskell-decl-scan)
+    (turn-on-haskell-doc)
+    (turn-on-haskell-indent)
 
-  (add-hook 'haskell-mode-hook
-    (lambda () (face-remap-add-relative 'font-lock-doc-face 'font-lock-comment-face)))
+    (face-remap-add-relative 'font-lock-doc-face 'font-lock-comment-face))
 
-  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+  (after ('flycheck)
+    (with-hook 'flycheck-mode-hook
+      #'flycheck-haskell-setup)))
 
 (provide 'init)
 ;;; init.el ends here
