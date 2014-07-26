@@ -303,5 +303,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (with-hook 'flycheck-mode-hook
       #'flycheck-haskell-setup)))
 
+;; Org-Mode
+
+(after ('org)
+  (set 'org-adapt-indentation nil)
+  (set 'org-ellipsis " ↩"))
+
 (provide 'init)
 ;;; init.el ends here
