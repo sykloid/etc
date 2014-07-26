@@ -91,6 +91,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
       (load-theme 'skywave-gui)
     (load-theme 'skywave-tty)))
 
+;;; Interface
+
+(after ('emacs)
+  (set 'fill-column 100)
+  (set 'show-trailing-whitespace t))
+
 ;;;; Mode Detection
 
 (after ('emacs)
