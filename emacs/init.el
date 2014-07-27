@@ -82,6 +82,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
+  (tooltip-mode -1)
 
   (set 'scroll-step 1)
 
