@@ -307,7 +307,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('org)
   (set 'org-adapt-indentation nil)
-  (set 'org-ellipsis " ↩"))
+  (set 'org-ellipsis " ↩")
+
+  (with-hook 'org-mode-hook
+    (refill-mode t)))
 
 (provide 'init)
 ;;; init.el ends here
