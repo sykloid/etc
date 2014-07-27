@@ -33,7 +33,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   `(eval-after-load-all ,features ((lambda () (quote (progn ,@body))))))
 
 (defmacro after! (features &rest body)
-  "Arrange that if, and only if, all `FEATURES' are loaded, `BODY' is evaluated.
+  "Load `FEATURES' now, and arrange that `BODY' is evaluated when they are.
 Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled."
   (declare (indent defun))
   `(progn
