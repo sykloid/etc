@@ -310,6 +310,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-adapt-indentation nil)
   (set 'org-ellipsis " ↩")
 
+  (set 'org-src-fontify-natively t)
+
   (with-hook 'org-mode-hook
     (auto-fill-mode t)
 
