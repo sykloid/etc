@@ -71,6 +71,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'custom-file (concat user-lisp-directory "customizations.el"))
   (load-library custom-file))
 
+;;;; Mode Detection
+
+(after ('emacs)
+  (autoload 'K3-mode "K3-mode")
+  (add-to-list 'auto-mode-alist '("\\.k3" . K3-mode))
+
+  (add-to-list 'auto-mode-alist '("\\.ya?ml" . yaml-mode)))
+
 ;;;; Appearance
 
 (after ('emacs)
@@ -97,11 +105,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('emacs)
   (set-default 'fill-column 100)
   (set 'show-trailing-whitespace t))
-
-;;;; Mode Detection
-
-(after ('emacs)
-  (add-to-list 'auto-mode-alist '("\\.ya?ml" . yaml-mode)))
 
 ;;; Evil/Keymaps
 
