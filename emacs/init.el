@@ -311,7 +311,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-ellipsis " ↩")
 
   (with-hook 'org-mode-hook
-    (refill-mode t)))
+    (auto-fill-mode t)
 
 (provide 'init)
 ;;; init.el ends here
