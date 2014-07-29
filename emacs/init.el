@@ -222,6 +222,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil-leader)
     (evil-leader/set-key "c" 'comment-dwim-toggle)))
 
+;;; Compilation
+(after ('compile)
+  (set 'compilation-scroll-output t))
+
 ;;; Expand-Region
 
 (after ('expand-region-autoloads)
