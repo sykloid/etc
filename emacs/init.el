@@ -226,6 +226,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('compile)
   (set 'compilation-scroll-output t))
 
+;;; Company
+(after ('company-autoloads)
+  (global-company-mode t))
+
 ;;; Expand-Region
 
 (after ('expand-region-autoloads)
