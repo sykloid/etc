@@ -326,5 +326,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (with-hook 'org-mode-hook
     (auto-fill-mode t)
 
+    (define-key evil-normal-state-local-map "\M-n" 'org-metaleft)
+    (define-key evil-normal-state-local-map "\M-e" 'org-metadown)
+    (define-key evil-normal-state-local-map "\M-i" 'org-metaup)
+    (define-key evil-normal-state-local-map "\M-o" 'org-metaright)
+
+    (define-key evil-insert-state-local-map "\M-n" 'org-metaleft)
+    (define-key evil-insert-state-local-map "\M-e" 'org-metadown)
+    (define-key evil-insert-state-local-map "\M-i" 'org-metaup)
+    (define-key evil-insert-state-local-map "\M-o" 'org-metaright)
+
+    (define-key evil-normal-state-local-map "\M-y" 'org-open-heading-below-and-insert)
+    (define-key evil-normal-state-local-map "\M-Y" 'org-open-heading-above-and-insert)))
 (provide 'init)
 ;;; init.el ends here
