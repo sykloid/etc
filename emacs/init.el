@@ -298,8 +298,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
     (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc)
 
-    (font-lock-add-keywords nil '(("\\<after!?\\>" . font-lock-keyword-face)))
-    (font-lock-add-keywords nil '(("\\<with-hook\\>" . font-lock-keyword-face)))))
+    (font-lock-add-keywords nil '(("(\\(\\<after!?\\>\\)" 1 'font-lock-keyword-face)))
+    (font-lock-add-keywords nil '(("(\\(\\<with-hook\\>\\)" 1 'font-lock-keyword-face)))))
 
 ;; Haskell
 
