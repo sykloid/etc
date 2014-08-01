@@ -326,6 +326,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (with-hook 'org-mode-hook
     (auto-fill-mode t)
 
+    (require 'org-open-heading)
+
     (define-key evil-normal-state-local-map "\M-n" 'org-metaleft)
     (define-key evil-normal-state-local-map "\M-e" 'org-metadown)
     (define-key evil-normal-state-local-map "\M-i" 'org-metaup)
