@@ -239,7 +239,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;;; Flycheck
 
 (after ('flycheck-autoloads)
-  (global-flycheck-mode t))
+  (global-flycheck-mode t)
+
+  (after ('evil-leader)
+    (evil-leader/set-key "fe" 'flycheck-next-error)
+    (evil-leader/set-key "fi" 'flycheck-previous-error)
+    (evil-leader/set-key "fl" 'flycheck-list-errors)
+    (evil-leader/set-key "fc" 'flycheck-buffer)))
 
 ;;; Ido*
 
