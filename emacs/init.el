@@ -74,8 +74,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;;;; Mode Detection
 
 (after ('emacs)
+
   (autoload 'K3-mode "K3-mode")
   (add-to-list 'auto-mode-alist '("\\.k3" . K3-mode))
+
+  (add-to-list 'auto-mode-alist '("\\.ldg" . ledger-mode))
 
   (add-to-list 'auto-mode-alist '("\\.ya?ml" . yaml-mode)))
 
@@ -320,6 +323,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('flycheck)
     (with-hook 'flycheck-mode-hook
       #'flycheck-haskell-setup)))
+
+;; Ledger
+
+(after ('ledger-mode-autoloads)
+  (set 'ledger-post-amount-alignment-column 80)
+
+  (after ('evil-leader)
+    (evil-leader/set-key-for-mode 'ledger-mode "lq" 'ledger-post-align-xact))
+
+  (after ('flycheck)
+    (require 'flycheck-ledger)))
 
 ;; Org-Mode
 
