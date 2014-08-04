@@ -270,7 +270,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (with-hook 'ido-setup-hook
     (define-key ido-completion-map "\C-e" 'ido-next-match)
-    (define-key ido-completion-map "\C-i" 'ido-prev-match)))
+    (define-key ido-completion-map "\C-i" 'ido-prev-match)
+    (define-key ido-completion-map "\C-o" 'ido-restrict-to-matches)))
 
 ;;; Magit
 
