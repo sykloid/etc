@@ -343,6 +343,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('org)
   (set 'org-adapt-indentation nil)
+
+  (set 'org-edit-src-indentation 0)
   (set 'org-ellipsis " ↩")
 
   (set 'org-src-fontify-natively t)
