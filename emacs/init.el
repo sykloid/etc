@@ -328,13 +328,16 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;; Ledger
 
 (after ('ledger-mode-autoloads)
+  (set 'ledger-clear-whole-transactions t)
   (set 'ledger-post-amount-alignment-column 80)
+  (set 'ledger-reconcile-default-commodity "USD")
 
   (after ('evil-leader)
     (evil-leader/set-key-for-mode 'ledger-mode "lq" 'ledger-post-align-xact))
 
   (after ('flycheck)
-    (require 'flycheck-ledger)))
+    (require 'flycheck-ledger)
+    (set 'flycheck-ledger-pedantic t)))
 
 ;; Org-Mode
 
