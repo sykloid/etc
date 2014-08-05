@@ -351,22 +351,24 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-src-fontify-natively t)
 
+
+  (after ('evil)
+    (evil-define-key 'normal org-mode-map "\M-n" 'org-metaleft)
+    (evil-define-key 'normal org-mode-map "\M-e" 'org-metadown)
+    (evil-define-key 'normal org-mode-map "\M-i" 'org-metaup)
+    (evil-define-key 'normal org-mode-map "\M-o" 'org-metaright)
+
+    (evil-define-key 'insert org-mode-map "\M-n" 'org-metaleft)
+    (evil-define-key 'insert org-mode-map "\M-e" 'org-metadown)
+    (evil-define-key 'insert org-mode-map "\M-i" 'org-metaup)
+    (evil-define-key 'insert org-mode-map "\M-o" 'org-metaright)
+
+    (after! ('org-open-heading)
+      (evil-define-key 'normal org-mode-map "\M-y" 'org-open-heading-below-and-insert)
+      (evil-define-key 'normal org-mode-map "\M-Y" 'org-open-heading-above-and-insert)))
+
   (with-hook 'org-mode-hook
-    (auto-fill-mode t)
+    (auto-fill-mode t)))
 
-    (require 'org-open-heading)
-
-    (define-key evil-normal-state-local-map "\M-n" 'org-metaleft)
-    (define-key evil-normal-state-local-map "\M-e" 'org-metadown)
-    (define-key evil-normal-state-local-map "\M-i" 'org-metaup)
-    (define-key evil-normal-state-local-map "\M-o" 'org-metaright)
-
-    (define-key evil-insert-state-local-map "\M-n" 'org-metaleft)
-    (define-key evil-insert-state-local-map "\M-e" 'org-metadown)
-    (define-key evil-insert-state-local-map "\M-i" 'org-metaup)
-    (define-key evil-insert-state-local-map "\M-o" 'org-metaright)
-
-    (define-key evil-normal-state-local-map "\M-y" 'org-open-heading-below-and-insert)
-    (define-key evil-normal-state-local-map "\M-Y" 'org-open-heading-above-and-insert)))
 (provide 'init)
 ;;; init.el ends here
