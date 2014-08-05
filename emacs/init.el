@@ -101,7 +101,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (if (display-graphic-p)
       (load-theme 'skywave-gui)
-    (load-theme 'skywave-tty)))
+    (load-theme 'skywave-tty))
+
+  (defalias 'yes-or-no-p 'y-or-n-p))
 
 ;;; Interface
 
