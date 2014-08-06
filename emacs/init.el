@@ -258,6 +258,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (ido-mode t)
   (ido-everywhere t)
 
+  (set 'ido-auto-merge-work-directories-length -1)
   (set 'ido-max-prospects 6)
 
   (after ('evil-leader)
