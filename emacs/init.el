@@ -273,8 +273,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'ido-max-prospects 6)
 
   (after ('evil-leader)
+    (evil-leader/set-key "pb" 'ido-switch-buffer)
     (evil-leader/set-key "pf" 'ido-find-file)
-    (evil-leader/set-key "pb" 'ido-switch-buffer))
+    (evil-leader/set-key "pk" 'ido-kill-buffer))
 
   (after ('ido-ubiquitous-autoloads)
     (ido-ubiquitous-mode t))
