@@ -235,6 +235,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('company-autoloads)
   (global-company-mode t))
 
+(after ('company)
+  (after ('evil)
+    (define-key company-active-map "\C-e" 'company-select-next)
+    (define-key company-active-map "\C-i" 'company-select-previous)))
+
 ;;; Expand-Region
 
 (after ('expand-region-autoloads)
