@@ -346,9 +346,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'ledger-clear-whole-transactions t)
   (set 'ledger-post-amount-alignment-column 80)
   (set 'ledger-reconcile-default-commodity "USD")
+  (after ('evil)
+    (evil-set-initial-state 'ledger-report-mode 'emacs))
 
   (after ('evil-leader)
-    (evil-leader/set-key-for-mode 'ledger-mode "lq" 'ledger-post-align-xact))
+    (evil-leader/set-key-for-mode 'ledger-mode "lq" 'ledger-post-align-xact)
+    (evil-leader/set-key-for-mode 'ledger-mode "lr" 'ledger-report))
 
   (after ('flycheck)
     (require 'flycheck-ledger)
