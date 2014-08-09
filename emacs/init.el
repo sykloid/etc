@@ -311,6 +311,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gb" 'magit-blame-mode)))
 
+(after! ('smex)
+  (smex-initialize)
+  (global-set-key "\M-x" 'smex)
+  (global-set-key "\M-X" 'smex-major-mode-commands)
+  (global-set-key "\C-c\C-c\M-x" 'execute-extended-command))
+
 (after ('undo-tree)
   (after ('evil)
     (define-key evil-normal-state-map "u" 'undo-tree-undo)
