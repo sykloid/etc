@@ -270,6 +270,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (ido-everywhere t)
 
   (set 'ido-auto-merge-work-directories-length -1)
+  (set 'ido-cannot-complete-command 'ido-next-match)
   (set 'ido-max-prospects 6)
 
   (after ('evil-leader)
@@ -286,7 +287,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (with-hook 'ido-setup-hook
     (define-key ido-completion-map "\C-e" 'ido-next-match)
     (define-key ido-completion-map "\C-i" 'ido-prev-match)
-    (define-key ido-completion-map "\C-o" 'ido-restrict-to-matches)))
+    (define-key ido-completion-map "\C-o" 'ido-restrict-to-matches)
+
+    (define-key ido-completion-map (kbd "<tab>") 'ido-complete-space)
+    (define-key ido-completion-map (kbd "<backtab>") 'ido-prev-match)))
 
 ;;; Magit
 
