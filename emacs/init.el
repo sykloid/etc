@@ -323,6 +323,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;;; Major Modes
 
+(after ('cc-mode)
+  (after! ('prepaint)
+    (prepaint-global-mode t)
+    (with-hook 'c-mode-common-hook
+      (face-remap-add-relative 'prepaint-face 'font-lock-variable-name-face))))
+
 ;; Emacs-Lisp
 
 (after ('emacs)
