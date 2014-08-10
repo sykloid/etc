@@ -33,5 +33,12 @@
  '(font-lock-type-face ((t (:foreground "#FAC78C"))))
  '(font-lock-variable-name-face ((t (:foreground "#4ED998")))))
 
+ ;; Org-Mode
+
+ '(org-bold ((t (:bold t))))
+ '(org-italic ((t (:italic t))))
+ '(org-code ((t (:foreground "#69ACC8"))))
+ '(org-verbatim ((t (:foreground "#F0E9A1"))))
+
 (provide-theme 'skywave-gui)
 ;;; skywave-gui-theme.el ends here

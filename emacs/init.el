@@ -398,9 +398,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-edit-src-indentation 0)
   (set 'org-ellipsis " ↩")
+  (set 'org-emphasis-alist
+       '(("*" org-bold "<strong>" "</strong>")
+  	 ("/" org-italic "<em>" "</em>")
+  	 ("=" org-code "<code>" "</code>")
+  	 ("~" org-verbatim "<code>" "</code>")))
 
   (set 'org-src-fontify-natively t)
-
 
   (after ('evil)
     (evil-define-key 'normal org-mode-map "\M-n" 'org-metaleft)
