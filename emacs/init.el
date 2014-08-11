@@ -333,6 +333,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;;; Major Modes
 
+;; TeX/LaTeX
+(after ('auctex-autoloads)
+  (set 'font-latex-fontify-sectioning 'color))
+
 (after ('cc-mode)
   (after! ('prepaint)
     (prepaint-global-mode t)
