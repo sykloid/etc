@@ -380,6 +380,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 	 ("payee" "ledger -f %(ledger-file) register @%(payee)")
 	 ("register" "ledger -f %(ledger-file) register")))
 
+  ; Not really specific to ledger, but close enough.
+  (set 'pcomplete-termination-string "")
+
   (after ('evil)
     (evil-set-initial-state 'ledger-report-mode 'emacs))
 
