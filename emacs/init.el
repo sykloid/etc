@@ -298,8 +298,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil)
     (evil-set-initial-state 'magit-status-mode 'motion)
 
-    (evil-define-key 'motion magit-status-mode-map "TAB" 'magit-toggle-section)
-    (evil-define-key 'motion magit-status-mode-map "RET" 'magit-visit-item)
+    (evil-define-key 'motion magit-status-mode-map (kbd "<tab>") 'magit-toggle-section)
+    (evil-define-key 'motion magit-status-mode-map (kbd "<return>") 'magit-visit-item)
     (evil-define-key 'motion magit-status-mode-map "c" 'magit-key-mode-popup-committing)
     (evil-define-key 'motion magit-status-mode-map "f" 'magit-key-mode-popup-fetching)
     (evil-define-key 'motion magit-status-mode-map "l" 'magit-key-mode-popup-logging)
