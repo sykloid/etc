@@ -419,6 +419,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'normal org-mode-map "\M-i" 'org-metaup)
     (evil-define-key 'normal org-mode-map "\M-o" 'org-metaright)
 
+    (evil-define-key 'normal org-mode-map "\M-\S-n" 'org-shiftmetaleft)
+    (evil-define-key 'normal org-mode-map "\M-\S-e" 'org-shiftmetadown)
+    (evil-define-key 'normal org-mode-map "\M-\S-i" 'org-shiftmetaup)
+    (evil-define-key 'normal org-mode-map "\M-\S-o" 'org-shiftmetaright)
+
     (evil-define-key 'insert org-mode-map "\M-n" 'org-metaleft)
     (evil-define-key 'insert org-mode-map "\M-e" 'org-metadown)
     (evil-define-key 'insert org-mode-map "\M-i" 'org-metaup)
