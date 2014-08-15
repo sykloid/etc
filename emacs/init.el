@@ -247,13 +247,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "tf" 'find-tag)))
 
 ;;; Expand-Region
-
 (after ('expand-region-autoloads)
   (after ('evil)
     (define-key evil-visual-state-map "." 'er/expand-region)))
 
-;;; Flycheck
+;;; ffap
+(after! ('ffap))
 
+;;; Flycheck
 (after ('flycheck-autoloads)
   (global-flycheck-mode t)
 
@@ -422,15 +423,20 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'normal org-mode-map "\M-i" 'org-metaup)
     (evil-define-key 'normal org-mode-map "\M-o" 'org-metaright)
 
-    (evil-define-key 'normal org-mode-map "\M-\S-n" 'org-shiftmetaleft)
-    (evil-define-key 'normal org-mode-map "\M-\S-e" 'org-shiftmetadown)
-    (evil-define-key 'normal org-mode-map "\M-\S-i" 'org-shiftmetaup)
-    (evil-define-key 'normal org-mode-map "\M-\S-o" 'org-shiftmetaright)
+    (evil-define-key 'normal org-mode-map "\S-n" 'org-shiftleft)
+    (evil-define-key 'normal org-mode-map "\S-e" 'org-shiftdown)
+    (evil-define-key 'normal org-mode-map "\S-i" 'org-shiftup)
+    (evil-define-key 'normal org-mode-map "\S-o" 'org-shiftright)
 
     (evil-define-key 'insert org-mode-map "\M-n" 'org-metaleft)
     (evil-define-key 'insert org-mode-map "\M-e" 'org-metadown)
     (evil-define-key 'insert org-mode-map "\M-i" 'org-metaup)
     (evil-define-key 'insert org-mode-map "\M-o" 'org-metaright)
+
+    (evil-define-key 'normal org-mode-map "\M-\S-n" 'org-shiftmetaleft)
+    (evil-define-key 'normal org-mode-map "\M-\S-e" 'org-shiftmetadown)
+    (evil-define-key 'normal org-mode-map "\M-\S-i" 'org-shiftmetaup)
+    (evil-define-key 'normal org-mode-map "\M-\S-o" 'org-shiftmetaright)
 
     (after! ('org-open-heading)
       (evil-define-key 'normal org-mode-map "\M-y" 'org-open-heading-below-and-insert)
