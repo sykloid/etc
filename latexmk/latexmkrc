@@ -1,6 +1,6 @@
 # Configuration file for latexmk, a LaTeX compilation tool.
 
 $latex = 'latex --shell-escape';
-$pdflatex = 'pdflatex --shell-escape';
+$pdflatex = 'pdflatex -shell-escape -interaction=nonstopmode -file-line-error -synctex=1';
 
 $pdf_previewer = 'okular'
