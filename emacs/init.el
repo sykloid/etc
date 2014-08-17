@@ -238,6 +238,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (global-company-mode t))
 
 (after ('company)
+  (set 'company-dabbrev-downcase nil)
+  (set 'company-dabbrev-ignore-case nil)
+  (set 'company-dabbrev-code-ignore-case nil)
+
   (after ('evil)
     (define-key company-active-map "\C-e" 'company-select-next)
     (define-key company-active-map "\C-i" 'company-select-previous)))
