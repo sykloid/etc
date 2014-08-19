@@ -149,6 +149,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-window-map "\C-i" 'evil-window-up)
   (define-key evil-window-map "\C-o" 'evil-window-right)
 
+  (define-key evil-window-map "q" 'delete-other-windows)
+  (define-key evil-window-map "Q" 'delete-other-windows-vertically)
+
   ;; Entering Insert Mode
 
   (define-key evil-normal-state-map "h" 'evil-insert-state)
