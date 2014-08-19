@@ -426,6 +426,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-src-fontify-natively t)
 
+  (set 'org-tags-column -100)
+  (set 'org-agenda-tags-column -100)
+
   (after ('evil)
     (evil-define-key 'normal org-mode-map "\M-n" 'org-metaleft)
     (evil-define-key 'normal org-mode-map "\M-e" 'org-metadown)
