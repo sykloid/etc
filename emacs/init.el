@@ -345,7 +345,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; TeX/LaTeX/AucTeX/RefTeX
 (after ('latex)
-  (set 'font-latex-fontify-sectioning 'color))
+  (set 'font-latex-fontify-sectioning 'color)
+
+  (set 'LaTeX-indent-level 4)
+  (set 'LaTeX-item-indent -2))
 
   (set 'TeX-newline-function 'reindent-then-newline-and-indent)
 
