@@ -369,7 +369,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   ; Hack to fix bidirectional search in okular. Should be fixed in AUCTeX 11.88.
   (add-to-list 'TeX-expand-list '("%a" (lambda () (expand-file-name (buffer-file-name)))))
-  (setcdr (assoc "Okular" TeX-view-program-list-builtin) '(("okular --unique %o" (mode-io-correlate "#src:%n%a")))))
+  (setcdr (assoc "Okular" TeX-view-program-list-builtin) '(("okular --unique %o" (mode-io-correlate "#src:%n%a"))))
+
+  (require 'auctex-latexmk)
+
+  (after ('evil-leader)
+    (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-run-LaTeXMk)
+    (evil-leader/set-key-for-mode 'latex-mode "lv" 'TeX-view)
+    (evil-leader/set-key-for-mode 'latex-mode "li" 'reftex-toc)))
+
 
 
 (after ('cc-mode)
