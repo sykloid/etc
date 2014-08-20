@@ -343,9 +343,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;;; Major Modes
 
-;; TeX/LaTeX
-(after ('auctex-autoloads)
-  (set 'font-latex-fontify-sectioning 'color)
+;; TeX/LaTeX/AucTeX/RefTeX
+(after ('latex)
+  (set 'font-latex-fontify-sectioning 'color))
+
   (set 'TeX-newline-function 'reindent-then-newline-and-indent)
 
   (TeX-global-PDF-mode t))
