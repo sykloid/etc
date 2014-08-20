@@ -409,7 +409,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc)
 
     (font-lock-add-keywords nil '(("(\\(\\<after!?\\>\\)" 1 'font-lock-keyword-face)))
-    (font-lock-add-keywords nil '(("(\\(\\<with-hook\\>\\)" 1 'font-lock-keyword-face)))))
+    (font-lock-add-keywords nil '(("(\\(\\<with-hook\\>\\)" 1 'font-lock-keyword-face)))
+
+
+    (set 'imenu-prev-index-position-function nil)
+    (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t)))
+
 
 ;; Haskell
 
