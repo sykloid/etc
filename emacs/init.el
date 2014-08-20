@@ -357,6 +357,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'LaTeX-indent-level 4)
   (set 'LaTeX-item-indent -2)
 
+  (TeX-global-PDF-mode t)
+  (TeX-source-correlate-mode t)
+
   (set 'TeX-source-correlate-method 'synctex)
   (set 'TeX-newline-function 'reindent-then-newline-and-indent)
 
