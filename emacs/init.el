@@ -357,10 +357,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'LaTeX-indent-level 4)
   (set 'LaTeX-item-indent -2)
 
-  (set 'TeX-source-correlate-method 'synctex))
+  (set 'TeX-source-correlate-method 'synctex)
   (set 'TeX-newline-function 'reindent-then-newline-and-indent)
 
-  (TeX-global-PDF-mode t))
+  (add-to-list 'LaTeX-indent-environment-list '("minted" current-indentation)))
+
 
 (after ('cc-mode)
   (after! ('prepaint)
