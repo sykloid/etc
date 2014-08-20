@@ -109,7 +109,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('emacs)
   (set-default 'fill-column 100)
-  (set-default 'show-trailing-whitespace t)
+  (with-hook 'prog-mode-hook
+    (set 'show-trailing-whitespace t))
 
   (set 'sentence-end-double-space nil))
 
