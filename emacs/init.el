@@ -273,8 +273,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "fl" 'flycheck-list-errors)
     (evil-leader/set-key "fc" 'flycheck-buffer)))
 
-;;; Ido*
 
+;;; Ido*
 (after! ('ido)
   (ido-mode t)
   (ido-everywhere t)
@@ -287,7 +287,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "pb" 'ido-switch-buffer)
     (evil-leader/set-key "pf" 'ido-find-file)
     (evil-leader/set-key "pk" 'ido-kill-buffer)
-    (evil-leader/set-key "pm" 'imenu))
+    )
 
   (after ('ido-ubiquitous-autoloads)
     (ido-ubiquitous-mode t))
@@ -302,6 +302,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
     (define-key ido-completion-map (kbd "<tab>") 'ido-complete-space)
     (define-key ido-completion-map (kbd "<backtab>") 'ido-prev-match)))
+
+(after ('imenu)
+  (set 'imenu-space-replacement "-")
+
+  (after ('evil-leader)
+    (evil-leader/set-key "pm" 'imenu)))
 
 ;;; Magit
 
