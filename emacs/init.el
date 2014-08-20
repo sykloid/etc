@@ -413,6 +413,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; Org-Mode
 
+(after ('org-autoloads)
+  (after ('evil-leader)
+    (evil-leader/set-key "oa" 'org-agenda)
+    (evil-leader/set-key "oc" 'org-capture)))
+
 (after ('org)
   (set 'org-adapt-indentation nil)
 
