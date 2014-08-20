@@ -376,10 +376,20 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil-leader)
     (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-run-LaTeXMk)
     (evil-leader/set-key-for-mode 'latex-mode "lv" 'TeX-view)
-    (evil-leader/set-key-for-mode 'latex-mode "li" 'reftex-toc)))
+    (evil-leader/set-key-for-mode 'latex-mode "li" 'reftex-toc))
 
+  (after ('reftex)
+    (set 'reftex-plug-into-AUCTeX t))
 
+  (after ('reftex-toc)
+    (define-key reftex-toc-map "e" 'reftex-toc-next)
+    (define-key reftex-toc-map "i" 'reftex-toc-previous))
 
+  (with-hook 'LaTeX-mode-hook
+    (auto-fill-mode)
+    (turn-on-reftex)))
+
+;; C/C++ Modes
 (after ('cc-mode)
   (after! ('prepaint)
     (prepaint-global-mode t)
