@@ -360,7 +360,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'TeX-source-correlate-method 'synctex)
   (set 'TeX-newline-function 'reindent-then-newline-and-indent)
 
-  (add-to-list 'LaTeX-indent-environment-list '("minted" current-indentation)))
+  (add-to-list 'LaTeX-indent-environment-list '("minted" current-indentation))
+
+  (setcdr (assoc 'output-pdf TeX-view-program-selection) '("Okular"))
+
+  ; Hack to fix bidirectional search in okular. Should be fixed in AUCTeX 11.88.
+  (add-to-list 'TeX-expand-list '("%a" (lambda () (expand-file-name (buffer-file-name)))))
+  (setcdr (assoc "Okular" TeX-view-program-list-builtin) '(("okular --unique %o" (mode-io-correlate "#src:%n%a")))))
 
 
 (after ('cc-mode)
