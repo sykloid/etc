@@ -114,6 +114,19 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'sentence-end-double-space nil))
 
+;;; Files
+(after ('emacs)
+  ; Backups
+  (set 'backup-by-copying t)
+  (set 'backup-directory-alist `(("." . ,(concat user-emacs-directory "tmp/backups/"))))
+  (set 'delete-old-versions t)
+  (set 'kept-new-versions 6)
+  (set 'kept-old-versions 2)
+  (set 'version-control t)
+
+  ; Auto-Saves
+  (set 'auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "tmp/auto-saves/") t))))
+
 ;;; Evil/Keymaps
 
 (after ('evil-autoloads)
