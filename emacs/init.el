@@ -106,9 +106,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (defalias 'yes-or-no-p 'y-or-n-p))
 
 ;;; Interface
-
 (after ('emacs)
+  (global-visual-line-mode)
+
   (set-default 'fill-column 100)
+
   (with-hook 'prog-mode-hook
     (set 'show-trailing-whitespace t))
 
