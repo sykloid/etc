@@ -287,6 +287,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "fl" 'flycheck-list-errors)
     (evil-leader/set-key "fc" 'flycheck-buffer)))
 
+;;; Help
+(after! ('help-fns+))
 
 ;;; Ido*
 (after! ('ido)
@@ -410,7 +412,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
       (face-remap-add-relative 'prepaint-face 'font-lock-variable-name-face))))
 
 ;; Emacs-Lisp
-
 (after ('emacs)
   (after ('paredit-autoloads)
     (with-hook 'emacs-lisp-mode-hook
