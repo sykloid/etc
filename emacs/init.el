@@ -74,7 +74,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;;;; Mode Detection
 
 (after ('emacs)
-
   (autoload 'K3-mode "K3-mode")
   (add-to-list 'auto-mode-alist '("\\.k3" . K3-mode))
 
@@ -481,6 +480,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('org)
   (set 'org-adapt-indentation nil)
+
+  (set 'org-attach-auto-tag "@")
+  (set 'org-attach-file-list-property "ATTACHMENTS")
 
   (set 'org-edit-src-indentation 0)
   (set 'org-ellipsis " ↩")
