@@ -485,6 +485,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-attach-file-list-property "ATTACHMENTS")
 
   (set 'org-edit-src-content-indentation 0)
+  (set 'org-file-apps '((auto-mode . emacs)
+			("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
+			("\\.pdf" . "okular --unique %s")))
+
   (set 'org-edit-src-indentation 0)
   (set 'org-ellipsis " ↩")
   (set 'org-emphasis-alist
