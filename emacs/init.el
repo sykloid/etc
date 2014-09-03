@@ -484,6 +484,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-attach-auto-tag "@")
   (set 'org-attach-file-list-property "ATTACHMENTS")
 
+  (set 'org-edit-src-content-indentation 0)
   (set 'org-edit-src-indentation 0)
   (set 'org-ellipsis " ↩")
   (set 'org-emphasis-alist
