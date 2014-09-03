@@ -489,6 +489,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 			("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
 			("\\.pdf" . "okular --unique %s")))
 
+  (with-hook 'org-capture-mode-hook
+      (evil-insert-state))
+
   (set 'org-edit-src-indentation 0)
   (set 'org-ellipsis " ↩")
   (set 'org-emphasis-alist
