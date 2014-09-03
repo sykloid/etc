@@ -502,8 +502,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-src-fontify-natively t)
 
-  (set 'org-tags-column -100)
   (set 'org-agenda-tags-column -100)
+  (set 'org-tags-column -100)
+
+  (defun org-tags-attachment-last (x y)
+    (if (string= org-attach-auto-tag x)
+	nil
+      (if (string= org-attach-auto-tag y)
+	  t
+	(string< x y))))
+
+  (set 'org-tags-sort-function 'org-tags-attachment-last)
 
   (after ('evil)
     (evil-define-key 'normal org-mode-map "\M-n" 'org-metaleft)
