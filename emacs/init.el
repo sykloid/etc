@@ -330,6 +330,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 (after ('magit-autoloads)
   (after ('evil)
+
+    (add-to-list 'evil-emacs-state-modes 'magit-process-mode 'emacs)
+    (add-to-list 'evil-emacs-state-modes 'magit-branch-manager-mode 'emacs)
+    (add-to-list 'evil-emacs-state-modes 'magit-wazzup-mode 'emacs)
+
     (evil-define-key 'emacs magit-status-mode-map "n" 'evil-backward-char)
     (evil-define-key 'emacs magit-status-mode-map "e" 'evil-next-line)
     (evil-define-key 'emacs magit-status-mode-map "i" 'evil-previous-line)
