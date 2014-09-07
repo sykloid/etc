@@ -59,6 +59,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'evil-surround))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode))
+    (add-to-list 'package-archive-enable-alist '("melpa" . 'volatile-highlights))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'yaml-mode)))
 
 
@@ -225,13 +226,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-motion-state-map "[," 'evil-backward-arg)))
 
 ;;; Evil-Leader
-
 (after ('evil-leader-autoloads)
   (global-evil-leader-mode t)
   (evil-leader/set-leader "<SPC>"))
 
 ;;; Evil-Surround
-
 (after ('evil-surround-autoloads)
   (global-evil-surround-mode t)
 
@@ -242,7 +241,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-visual-state-map "jS" 'evil-Surround-region)))
 
 ;;;; Extensions
-
 (after! ('comment-dwim-toggle)
   (after ('evil-leader)
     (evil-leader/set-key "c" 'comment-dwim-toggle)))
@@ -368,6 +366,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('multiple-cursors-autoloads)
   (after ('evil-leader)
     (evil-leader/set-key "mt" 'mc/mark-all-like-this-dwim)))
+
+;;; Volatile Highlights
+(after! ('volatile-highlights)
+  (volatile-highlights-mode t))
 
 ;;;; Major Modes
 
