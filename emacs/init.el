@@ -347,6 +347,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gb" 'magit-blame-mode)))
 
+(after ('ediff)
+  (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
+  (set 'ediff-split-window-function 'split-window-horizontally))
+
 (after! ('smex)
   (smex-initialize)
   (global-set-key "\M-x" 'smex)
