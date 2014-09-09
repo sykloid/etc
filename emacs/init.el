@@ -483,13 +483,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (set 'flycheck-ledger-pedantic t)))
 
 ;; Org-Mode
-
 (after ('org-autoloads)
   (after ('evil-leader)
     (evil-leader/set-key "oa" 'org-agenda)
     (evil-leader/set-key "oc" 'org-capture)))
 
 (after ('org)
+  (set 'org-directory "~/org")
+  (set 'org-agenda-files '("~/org/staging.org" "~/org/agenda"))
+
   (set 'org-adapt-indentation nil)
 
   (set 'org-attach-auto-tag "@")
