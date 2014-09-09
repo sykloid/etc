@@ -1,3 +1,6 @@
+# Emacs
+.dir-locals.el
+
 # Vim
 *.swp
 *.swo
@@ -6,8 +9,13 @@
 *~
 \#*\#
 
+# C/C++
+*.gch
+*.o
+
 # CTags
 tags
+TAGS
 tags-ja
 
 .tags
@@ -31,3 +39,6 @@ cabal.sandbox.config
 *.synctex.gz
 *.tdo
 *.toc
+
+# Python
+__pycache__
