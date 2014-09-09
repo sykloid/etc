@@ -110,6 +110,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (global-visual-line-mode)
 
   (set-default 'fill-column 100)
+  (set-default 'indent-tabs-mode nil)
 
   (with-hook 'prog-mode-hook
     (set 'show-trailing-whitespace t))
