@@ -18,7 +18,6 @@
 ;;; Code:
 
 ;;;; Scaffolding
-
 (defmacro eval-after-load-all (features form)
   "Arrange that if, and only if, all `FEATURES' are loaded, `FORM' is evaluated."
   (declare (indent defun))
@@ -46,7 +45,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   `(add-hook ,hook (lambda () (progn ,@body))))
 
 ;;;; Packages and Libraries
-
 (after ('emacs)
   (require 'package)
 
@@ -73,7 +71,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (load-library custom-file))
 
 ;;;; Mode Detection
-
 (after ('emacs)
   (autoload 'K3-mode "K3-mode")
   (add-to-list 'auto-mode-alist '("\\.k3" . K3-mode))
@@ -83,7 +80,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'auto-mode-alist '("\\.ya?ml" . yaml-mode)))
 
 ;;;; Appearance
-
 (after ('emacs)
   (set 'inhibit-splash-screen t)
 
@@ -105,7 +101,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (defalias 'yes-or-no-p 'y-or-n-p))
 
-;;; Interface
+;;;; Interface
 (after ('emacs)
   (global-visual-line-mode)
 
@@ -117,7 +113,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'sentence-end-double-space nil))
 
-;;; Files
+;;;; Files
 (after ('emacs)
   ; Backups
   (set 'backup-by-copying t)
@@ -130,15 +126,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   ; Auto-Saves
   (set 'auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "tmp/auto-saves/") t))))
 
-;;; Evil/Keymaps
-
+;;;; Evil/Keymaps
 (after ('evil-autoloads)
   (evil-mode t))
 
 (after ('evil)
 
   ;; Cursor Movement
-
   (define-key evil-normal-state-map "n" 'evil-backward-char)
   (define-key evil-normal-state-map "e" 'evil-next-line)
   (define-key evil-normal-state-map "i" 'evil-previous-line)
@@ -155,7 +149,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-visual-state-map "o" 'evil-forward-char)
 
   ;; Window Movement
-
   (define-key evil-window-map "n" 'evil-window-left)
   (define-key evil-window-map "e" 'evil-window-down)
   (define-key evil-window-map "i" 'evil-window-up)
@@ -170,7 +163,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-window-map "Q" 'delete-other-windows-vertically)
 
   ;; Entering Insert Mode
-
   (define-key evil-normal-state-map "h" 'evil-insert-state)
   (define-key evil-normal-state-map "H" 'evil-insert-line)
   (define-key evil-normal-state-map "a" 'evil-append)
@@ -179,7 +171,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-normal-state-map "Y" 'evil-open-above)
 
   ;; Copying and Pasting
-
   (define-key evil-normal-state-map "k" 'evil-yank)
   (define-key evil-normal-state-map "m" 'evil-paste-after)
   (define-key evil-normal-state-map "M" 'evil-paste-before)
@@ -189,27 +180,23 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-visual-state-map "M" 'evil-paste-before)
 
   ;; Text-Objects and Motions
-
   (define-key evil-visual-state-map "y" 'evil-visual-exchange-corners)
   (define-key evil-visual-state-map "h" evil-inner-text-objects-map)
   (define-key evil-operator-state-map "h" evil-inner-text-objects-map)
 
   ;; Search
-
   (define-key evil-normal-state-map "t" 'evil-search-next)
   (define-key evil-normal-state-map "T" 'evil-search-previous)
   (define-key evil-motion-state-map "t" 'evil-search-next)
   (define-key evil-motion-state-map "T" 'evil-search-previous)
 
   ;; Miscellaneous -- the `s'-map is my `g'-map.
-
   (define-key evil-normal-state-map "s" nil)
   (define-key evil-normal-state-map "sv" 'evil-visual-restore)
   (define-key evil-normal-state-map "sff" 'ffap)
   (define-key evil-normal-state-map "sfo" 'ffap-other-window))
 
-;;; Evil-Args
-
+;; Evil-Args
 (after! ('evil-args)
 
   (add-to-list 'evil-args-openers "<")
@@ -226,12 +213,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-motion-state-map "]," 'evil-forward-arg)
     (define-key evil-motion-state-map "[," 'evil-backward-arg)))
 
-;;; Evil-Leader
+;; Evil-Leader
 (after ('evil-leader-autoloads)
   (global-evil-leader-mode t)
   (evil-leader/set-leader "<SPC>"))
 
-;;; Evil-Surround
+;; Evil-Surround
 (after ('evil-surround-autoloads)
   (global-evil-surround-mode t)
 
@@ -242,15 +229,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-visual-state-map "jS" 'evil-Surround-region)))
 
 ;;;; Extensions
+
+;; Comments
 (after! ('comment-dwim-toggle)
   (after ('evil-leader)
     (evil-leader/set-key "c" 'comment-dwim-toggle)))
 
-;;; Compilation
-(after ('compile)
-  (set 'compilation-scroll-output t))
-
-;;; Company
+;; Company
 (after ('company-autoloads)
   (global-company-mode t))
 
@@ -263,21 +248,31 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key company-active-map "\C-e" 'company-select-next)
     (define-key company-active-map "\C-i" 'company-select-previous)))
 
+;; Compilation
+(after ('compile)
+  (set 'compilation-scroll-output t))
+
+;; EDiff
+(after ('ediff)
+  (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
+  (set 'ediff-split-window-function 'split-window-horizontally))
+
+;; ETags
 (after ('etags)
   (after ('evil-leader)
     (evil-leader/set-key "tb" 'pop-tag-mark)
     (evil-leader/set-key "tr" 'find-tag)
     (evil-leader/set-key "tf" 'find-tag)))
 
-;;; Expand-Region
+;; Expand-Region
 (after ('expand-region-autoloads)
   (after ('evil)
     (define-key evil-visual-state-map "." 'er/expand-region)))
 
-;;; ffap
+;; Ffap
 (after! ('ffap))
 
-;;; Flycheck
+;; Flycheck
 (after ('flycheck-autoloads)
   (global-flycheck-mode t)
 
@@ -287,10 +282,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "fl" 'flycheck-list-errors)
     (evil-leader/set-key "fc" 'flycheck-buffer)))
 
-;;; Help
+;; Help
 (after! ('help-fns+))
 
-;;; Ido*
+;; Ido*
 (after! ('ido)
   (ido-mode t)
   (ido-everywhere t)
@@ -302,8 +297,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil-leader)
     (evil-leader/set-key "pb" 'ido-switch-buffer)
     (evil-leader/set-key "pf" 'ido-find-file)
-    (evil-leader/set-key "pk" 'ido-kill-buffer)
-    )
+    (evil-leader/set-key "pk" 'ido-kill-buffer))
 
   (after ('ido-ubiquitous-autoloads)
     (ido-ubiquitous-mode t))
@@ -319,14 +313,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key ido-completion-map (kbd "<tab>") 'ido-complete-space)
     (define-key ido-completion-map (kbd "<backtab>") 'ido-prev-match)))
 
+;; IMenu
 (after ('imenu)
   (set 'imenu-space-replacement "-")
 
   (after ('evil-leader)
     (evil-leader/set-key "pm" 'imenu)))
 
-;;; Magit
-
+;; Magit
 (after ('magit-autoloads)
   (after ('evil)
 
@@ -348,16 +342,19 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gb" 'magit-blame-mode)))
 
-(after ('ediff)
-  (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
-  (set 'ediff-split-window-function 'split-window-horizontally))
+;; Multiple-Cursors
+(after ('multiple-cursors-autoloads)
+  (after ('evil-leader)
+    (evil-leader/set-key "mt" 'mc/mark-all-like-this-dwim)))
 
+;; SMex
 (after! ('smex)
   (smex-initialize)
   (global-set-key "\M-x" 'smex)
   (global-set-key "\M-X" 'smex-major-mode-commands)
   (global-set-key "\C-c\C-c\M-x" 'execute-extended-command))
 
+;; Undo
 (after ('undo-tree)
   (after ('evil)
     (define-key evil-normal-state-map "u" 'undo-tree-undo)
@@ -365,12 +362,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (after ('evil-leader)
     (evil-leader/set-key "u" 'undo-tree-visualize)))
-
-;;; Multiple-Cursors
-
-(after ('multiple-cursors-autoloads)
-  (after ('evil-leader)
-    (evil-leader/set-key "mt" 'mc/mark-all-like-this-dwim)))
 
 ;;; Volatile Highlights
 (after! ('volatile-highlights)
@@ -458,16 +449,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
       #'flycheck-haskell-setup)))
 
 ;; Ledger
-
 (after ('ledger-mode-autoloads)
   (set 'ledger-clear-whole-transactions t)
   (set 'ledger-post-amount-alignment-column 80)
   (set 'ledger-reconcile-default-commodity "USD")
   (set 'ledger-reports
        '(("account" "ledger -f %(ledger-file) register %(account)")
-	 ("balance" "ledger -f %(ledger-file) balance")
-	 ("payee" "ledger -f %(ledger-file) register @%(payee)")
-	 ("register" "ledger -f %(ledger-file) register")))
+         ("balance" "ledger -f %(ledger-file) balance")
+         ("payee" "ledger -f %(ledger-file) register @%(payee)")
+         ("register" "ledger -f %(ledger-file) register")))
 
   ; Not really specific to ledger, but close enough.
   (set 'pcomplete-termination-string "")
