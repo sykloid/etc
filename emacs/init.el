@@ -367,6 +367,18 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after! ('volatile-highlights)
   (volatile-highlights-mode t))
 
+;;; YASnippet
+(after ('yasnippet-autoloads)
+  (set-default 'yas-prompt-functions '(yas-ido-prompt))
+  (set 'yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
+
+  (set 'yas-trigger-key "\C-o")
+
+  (after ('evil)
+    (define-key evil-insert-state-map "\C-o" nil))
+
+  (yas-global-mode))
+
 ;;;; Major Modes
 
 ;; TeX/LaTeX/AucTeX/RefTeX
