@@ -502,8 +502,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-edit-src-content-indentation 0)
   (set 'org-file-apps '((auto-mode . emacs)
-			("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
-			("\\.pdf" . "okular --unique %s")))
+                        ("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
+                        ("\\.pdf" . "okular --unique %s")))
+
 
   (with-hook 'org-capture-mode-hook
       (evil-insert-state))
@@ -518,10 +519,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (defun org-tags-attachment-last (x y)
     (if (string= org-attach-auto-tag x)
-	nil
+        nil
       (if (string= org-attach-auto-tag y)
-	  t
-	(string< x y))))
+          t
+        (string< x y))))
 
   (set 'org-tags-sort-function 'org-tags-attachment-last)
 
