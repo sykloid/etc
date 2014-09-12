@@ -60,7 +60,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (add-to-list 'package-archive-enable-alist '("melpa" . 'volatile-highlights))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'yaml-mode)))
 
-
   (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
   (add-to-list 'load-path user-lisp-directory)
 
@@ -447,7 +446,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 
 ;; Haskell
-
 (after ('haskell-mode)
   (with-hook 'haskell-mode-hook
     (turn-on-haskell-decl-scan)
@@ -501,6 +499,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-attach-file-list-property "ATTACHMENTS")
 
   (set 'org-edit-src-content-indentation 0)
+
   (set 'org-file-apps '((auto-mode . emacs)
                         ("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
                         ("\\.pdf" . "okular --unique %s")))
