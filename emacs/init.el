@@ -492,7 +492,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "oc" 'org-capture)))
 
 (after ('org)
-  (set 'org-directory "~/org")
+  (set 'org-directory "~/org/")
   (set 'org-agenda-files '("~/org/staging.org" "~/org/agenda"))
 
   (set 'org-adapt-indentation nil)
