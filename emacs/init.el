@@ -505,6 +505,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
                         ("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
                         ("\\.pdf" . "okular --unique %s")))
 
+  (set 'org-refile-use-outline-path 'file)
+  (set 'org-refile-targets '((org-agenda-files :maxlevel . 9)))
+
 
   (with-hook 'org-capture-mode-hook
       (evil-insert-state))
