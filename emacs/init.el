@@ -508,7 +508,16 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-refile-use-outline-path 'file)
   (set 'org-refile-targets '((org-agenda-files :maxlevel . 9)))
 
+  (set 'org-capture-templates
+       `(("z" "Miscellaneous")
+         ("zl" "Link" entry (file+headline ,(concat org-directory "staging.org") "Links")
+          "* %^{Description}: [[%x]]\n" :kill-buffer t :immediate-finish t)
+         ("zn" "Note" entry (file+headline ,(concat org-directory "staging.org") "Notes")
+          "* %^{Subject}\n%?" :kill-buffer t :prepend t)
+         ("zt" "Task" entry (file+headline (concat org-directory "staging.org") "Tasks")
+          "* TODO %?" :kill-buffer t :prepend t)))
 
+  ; Predominantly, I want to start capture typing text, not commands.
   (with-hook 'org-capture-mode-hook
       (evil-insert-state))
 
