@@ -537,6 +537,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-tags-sort-function 'org-tags-attachment-last)
 
+  (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
+
   (after ('evil)
     (evil-define-key 'normal org-mode-map "\M-n" 'org-metaleft)
     (evil-define-key 'normal org-mode-map "\M-e" 'org-metadown)
@@ -557,6 +559,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'normal org-mode-map "\M-\S-e" 'org-shiftmetadown)
     (evil-define-key 'normal org-mode-map "\M-\S-i" 'org-shiftmetaup)
     (evil-define-key 'normal org-mode-map "\M-\S-o" 'org-shiftmetaright)
+
+    (evil-define-key 'emacs org-agenda-mode-map "e" 'next-line)
+    (evil-define-key 'emacs org-agenda-mode-map "i" 'previous-line)
 
     (after! ('org-open-heading)
       (evil-define-key 'normal org-mode-map "\M-y" 'org-open-heading-below-and-insert)
