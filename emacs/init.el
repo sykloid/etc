@@ -301,7 +301,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('ido-ubiquitous-autoloads)
     (ido-ubiquitous-mode t))
 
-  (after ('ido-vertical-mode-autoloads)
+  (after! ('ido-vertical-mode)
     (ido-vertical-mode t))
 
   (with-hook 'ido-setup-hook
