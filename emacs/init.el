@@ -521,7 +521,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
       (evil-insert-state))
 
   (set 'org-edit-src-indentation 0)
-  (set 'org-ellipsis " ↩")
+  (set 'org-ellipsis "…")
 
   (set 'org-src-fontify-natively t)
 
