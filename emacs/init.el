@@ -368,15 +368,16 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;; YASnippet
 (after ('yasnippet-autoloads)
-  (set-default 'yas-prompt-functions '(yas-ido-prompt))
   (set 'yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
+  (yas-global-mode))
 
-  (set 'yas-trigger-key "\C-o")
+(after ('yasnippet)
+  (set-default 'yas-prompt-functions '(yas-ido-prompt))
 
   (after ('evil)
     (define-key evil-insert-state-map "\C-o" nil))
 
-  (yas-global-mode))
+  (define-key yas-minor-mode-map "\C-o" 'yas-expand))
 
 ;;;; Major Modes
 
