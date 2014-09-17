@@ -40,5 +40,8 @@
  '(org-code ((t (:foreground "#69ACC8"))))
  '(org-verbatim ((t (:foreground "#F0E9A1"))))
 
+ '(org-agenda-structure ((t (:foreground "#8EE5EE"))))
+ '(org-agenda-calendar-event ((t (:foreground "#FFFFFF")))))
+
 (provide-theme 'skywave-gui)
 ;;; skywave-gui-theme.el ends here
