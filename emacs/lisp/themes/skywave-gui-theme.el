@@ -21,7 +21,6 @@
  'skywave-gui
 
  ;; Built-In Faces
-
  '(font-lock-builtin-face ((t (:foreground "#56AEE8"))))
  '(font-lock-comment-face ((t (:foreground "#666666"))))
  '(font-lock-constant-face ((t (:foreground "#C45271"))))
@@ -31,10 +30,11 @@
  '(font-lock-preprocessor-face ((t (:foreground "#F0355A"))))
  '(font-lock-string-face ((t (:foreground "#CEA3F7"))))
  '(font-lock-type-face ((t (:foreground "#FAC78C"))))
- '(font-lock-variable-name-face ((t (:foreground "#4ED998")))))
+ '(font-lock-variable-name-face ((t (:foreground "#4ED998"))))
+
+ '(region ((t (:foreground nil :background "#333333"))))
 
  ;; Org-Mode
-
  '(org-bold ((t (:bold t))))
  '(org-italic ((t (:italic t))))
  '(org-code ((t (:foreground "#69ACC8"))))
