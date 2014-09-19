@@ -559,8 +559,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'normal org-mode-map "\M-\S-i" 'org-shiftmetaup)
     (evil-define-key 'normal org-mode-map "\M-\S-o" 'org-shiftmetaright)
 
-    (evil-define-key 'emacs org-agenda-mode-map "e" 'next-line)
-    (evil-define-key 'emacs org-agenda-mode-map "i" 'previous-line)
+    (evil-define-key 'emacs org-agenda-mode-map "e" 'org-agenda-next-item)
+    (evil-define-key 'emacs org-agenda-mode-map "i" 'org-agenda-previous-item)
 
     (after! ('org-open-heading)
       (evil-define-key 'normal org-mode-map "\M-y" 'org-open-heading-below-and-insert)
