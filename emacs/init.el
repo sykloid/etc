@@ -421,6 +421,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; C/C++ Modes
 (after ('cc-mode)
+  (set 'c-basic-offset 2)
+  (c-set-offset 'access-label '/)
   (after! ('prepaint)
     (prepaint-global-mode t)
     (with-hook 'c-mode-common-hook
