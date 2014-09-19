@@ -446,7 +446,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (set 'imenu-prev-index-position-function nil)
     (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t)))
 
-
 ;; Haskell
 (after ('haskell-mode)
   (with-hook 'haskell-mode-hook
@@ -531,10 +530,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-tags-column -100)
 
   (defun org-tags-attachment-last (x y)
-    (if (string= org-attach-auto-tag x)
-        nil
-      (if (string= org-attach-auto-tag y)
-          t
+    (if (string= org-attach-auto-tag x) nil
+      (if (string= org-attach-auto-tag y) t
         (string< x y))))
 
   (set 'org-tags-sort-function 'org-tags-attachment-last)
