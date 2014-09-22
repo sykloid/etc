@@ -250,6 +250,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('compile)
   (set 'compilation-scroll-output t))
 
+;; Dired
+(after ('dired)
+  (add-to-list 'evil-emacs-state-modes 'dired-mode)
+
+  (define-key dired-mode-map "e" 'dired-next-line)
+  (define-key dired-mode-map "i" 'dired-previous-line))
+
 ;; EDiff
 (after ('ediff)
   (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
