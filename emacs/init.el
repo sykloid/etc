@@ -107,6 +107,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set-default 'indent-tabs-mode nil)
 
   (with-hook 'prog-mode-hook
+    (modify-syntax-entry ?{ "(}")
+    (modify-syntax-entry ?} "){")
+
     (set 'show-trailing-whitespace t))
 
   (set 'sentence-end-double-space nil))
