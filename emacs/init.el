@@ -217,7 +217,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;; Evil-Leader
 (after ('evil-leader-autoloads)
   (global-evil-leader-mode t)
-  (evil-leader/set-leader "<SPC>"))
+  (evil-leader/set-leader "<SPC>")
+
+  (evil-leader/set-key "bb" 'bury-buffer)
+  (evil-leader/set-key "bk" 'kill-this-buffer)
+  (evil-leader/set-key "bo" 'evil-buffer))
 
 ;; Evil-Surround
 (after ('evil-surround-autoloads)
