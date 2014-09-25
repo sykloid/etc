@@ -386,6 +386,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('evil)
     (define-key evil-insert-state-map "\C-o" nil))
 
+  ; This is one of the most aggressive keybinds in existence.
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map [(tab)] nil)
+
   (define-key yas-minor-mode-map "\C-o" 'yas-expand))
 
 ;;;; Major Modes
