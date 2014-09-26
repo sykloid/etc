@@ -57,6 +57,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'evil-surround))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode))
+    (add-to-list 'package-archive-enable-alist '("melpa" . 'smartparens))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'volatile-highlights))
     (add-to-list 'package-archive-enable-alist '("melpa" . 'yaml-mode)))
 
@@ -358,6 +359,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('multiple-cursors-autoloads)
   (after ('evil-leader)
     (evil-leader/set-key "mt" 'mc/mark-all-like-this-dwim)))
+
+;; Smart-Parens
+(after ('smartparens-autoloads)
+  (smartparens-global-strict-mode)
+  (smartparens-global-mode))
 
 ;; SMex
 (after! ('smex)
