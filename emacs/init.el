@@ -365,6 +365,16 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (smartparens-global-strict-mode)
   (smartparens-global-mode))
 
+(after ('smartparens)
+  (sp-local-pair 'emacs-lisp-mode "`" "`" :actions nil)
+  (sp-local-pair 'lisp-interaction-mode "`" "`" :actions nil)
+
+  (sp-local-pair 'emacs-lisp-mode "`" "'" :when '(sp-in-string-p))
+  (sp-local-pair 'lisp-interaction-mode "`" "'" :when '(sp-in-string-p))
+
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
+
 ;; SMex
 (after! ('smex)
   (smex-initialize)
