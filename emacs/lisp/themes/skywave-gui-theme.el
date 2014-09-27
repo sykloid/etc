@@ -34,14 +34,17 @@
 
  '(region ((t (:foreground nil :background "#333333"))))
 
- ;; Org-Mode
- '(org-bold ((t (:bold t))))
- '(org-italic ((t (:italic t))))
+ ;; Org-Mode/Outline-Mode
  '(org-code ((t (:foreground "#69ACC8"))))
  '(org-verbatim ((t (:foreground "#F0E9A1"))))
 
  '(org-agenda-structure ((t (:foreground "#8EE5EE"))))
  '(org-agenda-calendar-event ((t (:foreground "#FFFFFF")))))
+ '(outline-1 ((t (:foreground "#FAC78C"))))
+ '(outline-2 ((t (:foreground "#6EB8F5"))))
+ '(outline-3 ((t (:foreground "#C45271"))))
+ '(outline-4 ((t (:foreground "#4ED998"))))
+
 
 (provide-theme 'skywave-gui)
 ;;; skywave-gui-theme.el ends here
