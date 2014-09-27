@@ -12,6 +12,7 @@
 # C/C++
 *.gch
 *.o
+*.a
 
 # CTags
 tags
