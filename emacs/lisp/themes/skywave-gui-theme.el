@@ -45,6 +45,11 @@
  '(outline-3 ((t (:foreground "#C45271"))))
  '(outline-4 ((t (:foreground "#4ED998"))))
 
+ '(org-date ((t (:foreground "#22D9E3":underline nil))))
+ '(org-link ((t (:foreground "#22D9E3":underline t))))
+ '(org-todo ((t (:foreground "#FFFFFF" :underline t))))
+ '(org-done ((t (:foreground "#777777"))))
+
 
 (provide-theme 'skywave-gui)
 ;;; skywave-gui-theme.el ends here
