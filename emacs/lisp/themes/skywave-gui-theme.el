@@ -38,8 +38,6 @@
  '(org-code ((t (:foreground "#69ACC8"))))
  '(org-verbatim ((t (:foreground "#F0E9A1"))))
 
- '(org-agenda-structure ((t (:foreground "#8EE5EE"))))
- '(org-agenda-calendar-event ((t (:foreground "#FFFFFF")))))
  '(outline-1 ((t (:foreground "#FAC78C"))))
  '(outline-2 ((t (:foreground "#6EB8F5"))))
  '(outline-3 ((t (:foreground "#C45271"))))
@@ -50,6 +48,10 @@
  '(org-todo ((t (:foreground "#FFFFFF" :underline t))))
  '(org-done ((t (:foreground "#777777"))))
 
+ '(org-upcoming-deadline ((t (:foreground "#F5F3B8"))))
+ '(org-warning ((t (:foreground "#E5C5F0"))))
+
+ '(org-agenda-structure ((t (:foreground "#8EE5EE")))))
 
 (provide-theme 'skywave-gui)
 ;;; skywave-gui-theme.el ends here
