@@ -270,6 +270,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
   (set 'ediff-split-window-function 'split-window-horizontally))
 
+;; EShell
+(after ('eshell)
+  (set 'eshell-scroll-show-maximum-output nil))
+
 ;; ETags
 (after ('etags)
   (after ('evil-leader)
