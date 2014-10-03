@@ -370,6 +370,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (smartparens-global-mode))
 
 (after ('smartparens)
+  (sp-pair "'" "'" :unless '(sp-point-after-word-p))
+
   (sp-local-pair 'emacs-lisp-mode "`" "`" :actions nil)
   (sp-local-pair 'lisp-interaction-mode "`" "`" :actions nil)
 
