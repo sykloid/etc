@@ -70,6 +70,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'custom-file (concat user-lisp-directory "customizations.el"))
   (load-library custom-file))
 
+;;;; Miscellaneous Directives
+(after ('emacs)
+  (put 'narrow-to-region 'disabled nil))
+
 ;;;; Mode Detection
 (after ('emacs)
   (autoload 'K3-mode "K3-mode")
