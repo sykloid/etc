@@ -107,6 +107,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set-default 'fill-column 100)
   (set-default 'indent-tabs-mode nil)
 
+  (set 'blink-matching-delay 0.75)
+
   (with-hook 'prog-mode-hook
     (modify-syntax-entry ?{ "(}")
     (modify-syntax-entry ?} "){")
