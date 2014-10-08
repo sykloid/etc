@@ -142,18 +142,18 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   ;; Cursor Movement
   (define-key evil-normal-state-map "n" 'evil-backward-char)
-  (define-key evil-normal-state-map "e" 'evil-next-line)
-  (define-key evil-normal-state-map "i" 'evil-previous-line)
+  (define-key evil-normal-state-map "e" 'evil-next-visual-line)
+  (define-key evil-normal-state-map "i" 'evil-previous-visual-line)
   (define-key evil-normal-state-map "o" 'evil-forward-char)
 
   (define-key evil-motion-state-map "n" 'evil-backward-char)
-  (define-key evil-motion-state-map "e" 'evil-next-line)
-  (define-key evil-motion-state-map "i" 'evil-previous-line)
+  (define-key evil-motion-state-map "e" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "i" 'evil-previous-visual-line)
   (define-key evil-motion-state-map "o" 'evil-forward-char)
 
   (define-key evil-visual-state-map "n" 'evil-backward-char)
-  (define-key evil-visual-state-map "e" 'evil-next-line)
-  (define-key evil-visual-state-map "i" 'evil-previous-line)
+  (define-key evil-visual-state-map "e" 'evil-next-visual-line)
+  (define-key evil-visual-state-map "i" 'evil-previous-visual-line)
   (define-key evil-visual-state-map "o" 'evil-forward-char)
 
   ;; Window Movement
