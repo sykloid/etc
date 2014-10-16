@@ -264,6 +264,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('compile)
   (set 'compilation-scroll-output t))
 
+;; Diminish
+(after! ('diminish-autoloads)
+  (diminish 'global-visual-line-mode)
+  (diminish 'visual-line-mode)
+  (diminish 'undo-tree-mode))
+
 ;; Dired
 (after ('dired)
   (add-to-list 'evil-emacs-state-modes 'dired-mode)
