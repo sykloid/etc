@@ -282,6 +282,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
   (set 'ediff-split-window-function 'split-window-horizontally))
 
+;; Eldoc
+(after ('eldoc)
+  (diminish 'eldoc-mode))
+
 ;; EShell
 (after ('eshell)
   (set 'eshell-scroll-show-maximum-output nil))
@@ -371,6 +375,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gb" 'magit-blame-mode)))
 
+(after ('magit)
+  (diminish 'magit-auto-revert-mode))
+
 ;; Multiple-Cursors
 (after ('multiple-cursors-autoloads)
   (after ('evil-leader)
@@ -382,6 +389,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (smartparens-global-mode))
 
 (after ('smartparens)
+  (diminish 'smartparens-mode)
+
   (sp-pair "'" "'" :unless '(sp-point-after-word-p))
 
   (sp-local-pair 'emacs-lisp-mode "`" "`" :actions nil)
@@ -411,7 +420,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;; Volatile Highlights
 (after! ('volatile-highlights)
-  (volatile-highlights-mode t))
+  (volatile-highlights-mode t)
+  (diminish 'volatile-highlights-mode))
 
 ;;; YASnippet
 (after ('yasnippet-autoloads)
@@ -419,6 +429,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (yas-global-mode))
 
 (after ('yasnippet)
+  (diminish 'yas-minor-mode)
   (set-default 'yas-prompt-functions '(yas-ido-prompt))
 
   (after ('evil)
@@ -504,6 +515,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (turn-on-haskell-decl-scan)
     (turn-on-haskell-doc)
     (turn-on-haskell-indent)
+
+    (diminish 'haskell-doc-mode)
+    (diminish 'haskell-indent-mode)
+
 
     (face-remap-add-relative 'font-lock-doc-face 'font-lock-comment-face))
 
