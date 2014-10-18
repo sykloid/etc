@@ -98,9 +98,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set-frame-font "Fantasque Sans Mono-11")
 
-  (if (display-graphic-p)
-      (load-theme 'skywave-gui)
-    (load-theme 'skywave-tty))
+  (set 'default-frame-alist '((font . "Fantasque Sans Mono-11")))
+
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (load-theme 'skywave-gui))))
+    (load-theme 'skywave-gui))
 
   (defalias 'yes-or-no-p 'y-or-n-p))
 
