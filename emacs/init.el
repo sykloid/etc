@@ -249,7 +249,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; Company
 (after ('company-autoloads)
-  (global-company-mode t))
+  (global-company-mode t)
+  (diminish 'company-mode))
 
 (after ('company)
   (set 'company-dabbrev-downcase nil)
