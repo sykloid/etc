@@ -272,7 +272,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; Diminish
 (after! ('diminish-autoloads)
-  (diminish 'global-visual-line-mode)
   (diminish 'visual-line-mode)
   (diminish 'undo-tree-mode))
 
