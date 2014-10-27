@@ -418,7 +418,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('undo-tree)
   (after ('evil)
     (define-key evil-normal-state-map "u" 'undo-tree-undo)
-    (define-key evil-normal-state-map "U" 'undo-tree-redo))
+    (define-key evil-normal-state-map "U" 'undo-tree-redo)
+
+    (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs)
+
+    (define-key undo-tree-visualizer-mode-map "n" 'undo-tree-visualize-switch-branch-left)
+    (define-key undo-tree-visualizer-mode-map "e" 'undo-tree-visualize-redo)
+    (define-key undo-tree-visualizer-mode-map "i" 'undo-tree-visualize-undo)
+    (define-key undo-tree-visualizer-mode-map "o" 'undo-tree-visualize-switch-branch-right))
 
   (after ('evil-leader)
     (evil-leader/set-key "u" 'undo-tree-visualize)))
