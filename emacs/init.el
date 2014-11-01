@@ -470,11 +470,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (add-to-list 'LaTeX-indent-environment-list '("minted" current-indentation))
 
-  (setcdr (assoc 'output-pdf TeX-view-program-selection) '("Okular"))
-
-  ; Hack to fix bidirectional search in okular. Should be fixed in AUCTeX 11.88.
-  (add-to-list 'TeX-expand-list '("%a" (lambda () (expand-file-name (buffer-file-name)))))
-  (setcdr (assoc "Okular" TeX-view-program-list-builtin) '(("okular --unique %o" (mode-io-correlate "#src:%n%a"))))
+  (add-to-list 'TeX-view-program-list '("Zathura" ("zathura %o" (mode-io-correlate " --synctex-forward %n:1:%b"))))
+  (setcdr (assoc 'output-pdf TeX-view-program-selection) '("Zathura"))
 
   (require 'auctex-latexmk)
 
