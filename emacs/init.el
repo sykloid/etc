@@ -473,7 +473,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'TeX-view-program-list '("Zathura" ("zathura %o" (mode-io-correlate " --synctex-forward %n:1:%b"))))
   (setcdr (assoc 'output-pdf TeX-view-program-selection) '("Zathura"))
 
-  (require 'auctex-latexmk)
+  (after! ('auctex-latexmk)
+    (auctex-latexmk-setup))
 
   (after ('evil-leader)
     (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-run-LaTeXMk)
