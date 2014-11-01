@@ -477,9 +477,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (auctex-latexmk-setup))
 
   (after ('evil-leader)
-    (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-run-LaTeXMk)
     (evil-leader/set-key-for-mode 'latex-mode "lv" 'TeX-view)
-    (evil-leader/set-key-for-mode 'latex-mode "li" 'reftex-toc))
+    (evil-leader/set-key-for-mode 'latex-mode "li" 'reftex-toc)
+    (after ('TeX-texify)
+      (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-texify)))
 
   (after ('reftex)
     (set 'reftex-plug-into-AUCTeX t))
@@ -487,6 +488,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (after ('reftex-toc)
     (define-key reftex-toc-map "e" 'reftex-toc-next)
     (define-key reftex-toc-map "i" 'reftex-toc-previous))
+
+  (after! ('TeX-texify)
+    (set 'TeX-texify-Show nil))
 
   (with-hook 'LaTeX-mode-hook
     (auto-fill-mode)
@@ -528,7 +532,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
     (diminish 'haskell-doc-mode)
     (diminish 'haskell-indent-mode)
-
 
     (face-remap-add-relative 'font-lock-doc-face 'font-lock-comment-face))
 
