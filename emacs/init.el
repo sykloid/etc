@@ -459,8 +459,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('latex)
   (set 'font-latex-fontify-sectioning 'color)
 
-  (set 'LaTeX-indent-level 4)
-  (set 'LaTeX-item-indent -2)
+  (set 'LaTeX-indent-level 2)
+  (set 'LaTeX-item-indent 0)
 
   (TeX-global-PDF-mode t)
   (TeX-source-correlate-mode t)
