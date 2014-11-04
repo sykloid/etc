@@ -1,0 +1,4 @@
+# Verbatim environments, whose contents need not be checked.
+VerbEnvir {
+  Verbatim
+}
