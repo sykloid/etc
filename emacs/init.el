@@ -482,6 +482,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (after ('TeX-texify)
       (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-texify)))
 
+  (after ('flycheck)
+    (set 'flycheck-chktexrc (expand-file-name "~/.chktexrc")))
+
   (after ('reftex)
     (set 'reftex-plug-into-AUCTeX t))
 
