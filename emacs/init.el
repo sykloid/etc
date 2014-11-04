@@ -465,6 +465,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (TeX-global-PDF-mode t)
   (TeX-source-correlate-mode t)
 
+  (set-default 'LaTeX-verbatim-environments-local '("Verbatim"))
+
   (set 'TeX-source-correlate-method 'synctex)
   (set 'TeX-newline-function 'reindent-then-newline-and-indent)
 
