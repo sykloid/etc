@@ -2,3 +2,8 @@
 VerbEnvir {
   Verbatim
 }
+
+Silent {
+  \textbackslash
+  \EndIf \EndFor \Repeat \State
+}
