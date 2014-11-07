@@ -227,6 +227,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-motion-state-map "]," 'evil-forward-arg)
     (define-key evil-motion-state-map "[," 'evil-backward-arg)))
 
+(after! ('evil-exchange)
+  (set 'evil-exchange-key "sx")
+  (set 'evil-exchange-cancel-key "sX")
+  (evil-exchange-install))
+
+(after! ('evil-exchange-args)
+  (define-key evil-normal-state-map "sw" 'evil-exchange-forward-arg)
+  (define-key evil-normal-state-map "sW" 'evil-exchange-backward-arg))
+
 ;; Evil-Leader
 (after ('evil-leader-autoloads)
   (global-evil-leader-mode t)
