@@ -5,5 +5,7 @@ VerbEnvir {
 
 Silent {
   \textbackslash
-  \EndIf \EndFor \Repeat \State
+
+  # Algorithmic Macros
+  \Else \EndFor \EndIf \Repeat \State
 }
