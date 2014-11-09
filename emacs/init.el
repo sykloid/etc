@@ -68,6 +68,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'custom-theme-load-path user-theme-directory)
 
   (set 'custom-file (concat user-lisp-directory "customizations.el"))
+
+  (after! ('alist-utils))
   (load-library custom-file))
 
 ;;;; Miscellaneous Directives
