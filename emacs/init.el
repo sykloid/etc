@@ -485,6 +485,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'TeX-view-program-list '("Zathura" ("zathura %o" (mode-io-correlate " --synctex-forward %n:1:%b"))))
   (setcdr (assoc 'output-pdf TeX-view-program-selection) '("Zathura"))
 
+  (after! ('TeX-indent-item-continuation)
+   (upsert-alist "enumerate" '(LaTeX-indent-item) LaTeX-indent-environment-list)
+   (upsert-alist "description" '(LaTeX-indent-item) LaTeX-indent-environment-list)
+   (upsert-alist "itemize" '(LaTeX-indent-item) LaTeX-indent-environment-list))
+
   (after! ('auctex-latexmk)
     (auctex-latexmk-setup))
 
