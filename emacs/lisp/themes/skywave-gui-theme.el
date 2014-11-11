@@ -33,6 +33,8 @@
  '(font-lock-variable-name-face ((t (:foreground "#4ED998"))))
 
  '(region ((t (:foreground nil :background "#333333"))))
+ '(highlight ((t (:foreground nil :background "#444444"))))
+
 
  ;; Org-Mode/Outline-Mode
  '(org-code ((t (:foreground "#69ACC8"))))

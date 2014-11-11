@@ -669,7 +669,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
       (evil-define-key 'normal org-mode-map "\M-Y" 'org-open-heading-above-and-insert)))
 
   (with-hook 'org-mode-hook
-    (auto-fill-mode t)))
+    (auto-fill-mode t))
+
+  (with-hook 'org-agenda-mode-hook
+    (hl-line-mode)))
 
 (provide 'init)
 ;;; init.el ends here
