@@ -612,6 +612,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-capture-templates
        `(("z" "Miscellaneous")
+         ("za" "Appointment" entry (file+headline ,(concat org-directory "agenda/schedule.org") "Impromptu")
+          "* %^{Subject}\n%^T\n%?" :kill-buffer t :prepend t)
+         ("zi" "Idea" entry (file+headline ,(concat org-directory "staging.org") "Ideas")
+          "* %^{Subject}\n%?" :kill-buffer t :prepend t)
          ("zl" "Link" entry (file+headline ,(concat org-directory "staging.org") "Links")
           "* %^{Description}: [[%x]]\n" :kill-buffer t :immediate-finish t)
          ("zn" "Note" entry (file+headline ,(concat org-directory "staging.org") "Notes")
