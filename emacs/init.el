@@ -305,7 +305,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; EShell
 (after ('eshell)
-  (set 'eshell-scroll-show-maximum-output nil))
+  (set 'eshell-scroll-show-maximum-output nil)
+
+  (with-hook 'eshell-mode-hook
+    (evil-define-key 'insert eshell-mode-map (kbd "<return>") 'eshell-queue-input)))
 
 ;; ETags
 (after ('etags)
