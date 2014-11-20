@@ -329,6 +329,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('flycheck-autoloads)
   (global-flycheck-mode t)
 
+  (add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
+
   (after ('evil-leader)
     (evil-leader/set-key "fe" 'flycheck-next-error)
     (evil-leader/set-key "fi" 'flycheck-previous-error)
