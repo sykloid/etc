@@ -600,6 +600,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('org)
   (set 'org-directory "~/org/")
   (set 'org-agenda-files '("~/org/staging.org" "~/org/agenda"))
+  (set 'org-drawers '("LOG" "CLOCK" "PROPERTIES" "RESULTS"))
 
   (set 'org-adapt-indentation nil)
 
@@ -611,6 +612,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'org-file-apps '((auto-mode . emacs)
                         ("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
                         ("\\.pdf" . "okular --unique %s")))
+
+  (set 'org-log-note-clock-out t)
+  (set 'org-log-into-drawer "LOG")
 
   (set 'org-refile-use-outline-path 'file)
   (set 'org-refile-targets '((org-agenda-files :maxlevel . 9)))
