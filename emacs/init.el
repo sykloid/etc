@@ -613,6 +613,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
                         ("\\.pdf::\\([0-9]+\\)" . "okular --page %1 --unique %s")
                         ("\\.pdf" . "okular --unique %s")))
 
+  (set 'org-log-done 'note)
   (set 'org-log-note-clock-out t)
   (set 'org-log-into-drawer "LOG")
 
