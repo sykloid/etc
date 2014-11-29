@@ -27,6 +27,9 @@ cabal.sandbox.config
 .cabal-sandbox
 *.hi
 
+# Java
+*.class
+
 # LaTeX
 *.aux
 *.bbl
