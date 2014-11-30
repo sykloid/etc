@@ -1,0 +1,11 @@
+[Unit]
+Description=Emacs Server [%i]
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon=%i
+ExecStop=/usr/bin/emacsclient -s %i --eval "(kill-emacs 0)"
+KillMode=none
+
+[Install]
+WantedBy=default.target
