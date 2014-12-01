@@ -1,7 +1,5 @@
 ! Resources for X applications.
 ! P.C. Shyamshankar <sykora@lucentbeing.com>
-!
-! vim:ft=xdefaults
 
 ! Xft Font Settings.
 Xft.dpi: 96
