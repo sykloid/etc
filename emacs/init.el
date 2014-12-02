@@ -280,7 +280,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; Compilation
 (after ('compile)
-  (set 'compilation-scroll-output t))
+  (set 'compilation-scroll-output t)
+
+  (after ('evil-leader)
+    (evil-leader/set-key "rr" 'recompile)
+    (evil-leader/set-key "rk" 'kill-compilation)))
+
 
 ;; Diminish
 (after! ('diminish-autoloads)
