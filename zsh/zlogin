@@ -1,7 +1,7 @@
 # zlogin: Actions to be taken on login.
 
-# Start the dropbox daemon if it isn't running.
-if [ $+commands[keychain] ]; then
-    keychain --quiet id_rsa
-    source ~/.keychain/$HOST-sh
+if type envoy > /dev/null; then
+  envoy -u
+  source <(envoy -p)
+  systemctl --user import-environment SSH_AUTH_SOCK
 fi
