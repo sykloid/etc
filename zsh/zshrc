@@ -29,3 +29,15 @@ fi
 
 # Initialize the completion system.
 source $Z/completion.zsh
+
+# Cop-out for dumb terminals.
+if [[ $TERM == "dumb" ]]; then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+
+  unfunction precmd
+  unfunction preexec
+
+  PROMPT='$ '
+fi
