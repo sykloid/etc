@@ -319,7 +319,6 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 (after ('etags)
   (after ('evil-leader)
     (evil-leader/set-key "tb" 'pop-tag-mark)
-    (evil-leader/set-key "tr" 'find-tag)
     (evil-leader/set-key "tf" 'find-tag)))
 
 ;; Expand-Region
