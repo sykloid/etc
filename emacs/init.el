@@ -294,6 +294,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;; Dired
 (after ('dired)
+  (set 'dired-dwim-target t)
+  (set 'dired-listing-switches "-alhD --group-directories-first")
+
   (add-to-list 'evil-emacs-state-modes 'dired-mode)
 
   (define-key dired-mode-map "e" 'dired-next-line)
