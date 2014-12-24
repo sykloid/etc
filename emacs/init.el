@@ -210,7 +210,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-normal-state-map "s" nil)
   (define-key evil-normal-state-map "sv" 'evil-visual-restore)
   (define-key evil-normal-state-map "sff" 'ffap)
-  (define-key evil-normal-state-map "sfo" 'ffap-other-window))
+  (define-key evil-normal-state-map "sfo" 'ffap-other-window)
+
+  ;; Inject window movement keys into emacs state.
+  (define-key evil-emacs-state-map "\C-w" evil-window-map))
 
 ;; Evil-Args
 (after! ('evil-args)
