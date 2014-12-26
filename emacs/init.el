@@ -432,7 +432,27 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (sp-local-pair 'lisp-interaction-mode "`" "'" :when '(sp-in-string-p))
 
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
+  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+
+  (after ('evil)
+    (set 'sp-fast-map (make-sparse-keymap))
+    (define-key evil-normal-state-map "sk" sp-fast-map)
+
+    (define-key sp-fast-map "n" 'sp-previous-sexp)
+    (define-key sp-fast-map "e" 'sp-down-sexp)
+    (define-key sp-fast-map "i" 'sp-up-sexp)
+    (define-key sp-fast-map "o" 'sp-next-sexp)
+
+    (define-key sp-fast-map "\M-n" 'sp-backward-slurp-sexp)
+    (define-key sp-fast-map "\M-\S-n" 'sp-backward-barf-sexp)
+    (define-key sp-fast-map "\M-o" 'sp-forward-slurp-sexp)
+    (define-key sp-fast-map "\M-\S-o" 'sp-forward-barf-sexp)
+
+    (define-key sp-fast-map "j" 'sp-join-sexp)
+    (define-key sp-fast-map "k" 'sp-kill-sexp)
+    (define-key sp-fast-map "l" 'sp-emit-sexp)
+    (define-key sp-fast-map "r" 'sp-raise-sexp)
+    (define-key sp-fast-map "s" 'sp-split-sexp)))
 
 ;; SMex
 (after! ('smex)
