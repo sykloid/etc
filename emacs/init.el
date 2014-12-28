@@ -69,7 +69,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'custom-file (concat user-lisp-directory "customizations.el"))
 
-  (after! ('alist-utils))
+  (require 'alist-utils)
+  (require 'autoload-provide-feature)
+
   (load-library custom-file))
 
 ;;;; Miscellaneous Directives
