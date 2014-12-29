@@ -83,6 +83,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (autoload 'K3-mode "K3-mode")
   (add-to-list 'auto-mode-alist '("\\.k3" . K3-mode))
   (add-to-list 'auto-mode-alist '("\\.ldg" . ledger-mode))
+  (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.ya?ml" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.zsh" . sh-mode)))
 
