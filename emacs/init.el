@@ -292,6 +292,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-leader/set-key "rr" 'recompile)
     (evil-leader/set-key "rk" 'kill-compilation)))
 
+(after ('compilation-manager)
+  (after ('evil-leader)
+    (evil-leader/set-key "rp" 'compilation-manager-run-profile)
+    (evil-leader/set-key "rn" 'compilation-manager-name-last-profile)))
 
 ;; Diminish
 (after! ('diminish-autoloads)
