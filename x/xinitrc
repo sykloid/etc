@@ -18,7 +18,7 @@ xset b off
 urxvtd -q -o -f
 
 # Hide the mouse
-unclutter -idle 5 -noevents -root &
+unclutter -grab -idle 5 -noevents -root &
 
 # Start the screensaver.
 xautolock -detectsleep &
