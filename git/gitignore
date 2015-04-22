@@ -44,5 +44,8 @@ cabal.sandbox.config
 *.tdo
 *.toc
 
+_region_.tex
+ltxpng
+
 # Python
 __pycache__
