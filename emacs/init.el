@@ -715,6 +715,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
    '((calc . t)
      (sh . t)))
 
+  (after ('ob-sh)
+    (if (executable-find "zsh")
+        (set 'org-babel-sh-command "zsh")))
+
   (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
 
   (after ('evil)
