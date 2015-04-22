@@ -19,3 +19,8 @@ alias zln="zmv -wL"
 
 # Not exactly an alias, but a workaround for completion's sake.
 which hub &> /dev/null; (( 1 - $? )) && function git() { hub "$@" }
+
+# Also not exactly an alias, but it's pretty much aliasing every command that doesn't exist.
+if [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]]; then
+   source /usr/share/doc/pkgfile/command-not-found.zsh
+fi
