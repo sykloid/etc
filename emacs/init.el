@@ -291,7 +291,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (after ('evil-leader)
     (evil-leader/set-key "rr" 'recompile)
-    (evil-leader/set-key "rk" 'kill-compilation)))
+    (evil-leader/set-key "rk" 'kill-compilation))
+
+  (after ('ansi-color)
+    (defun colorize-compilation-buffer ()
+      (let ((inhibit-read-only t))
+        (ansi-color-apply-on-region (point-min) (point-max))))
+    (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)))
 
 (after ('compilation-manager)
   (after ('evil-leader)
