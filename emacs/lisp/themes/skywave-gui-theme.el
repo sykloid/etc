@@ -32,6 +32,8 @@
  '(font-lock-type-face ((t (:foreground "#FAC78C"))))
  '(font-lock-variable-name-face ((t (:foreground "#4ED998"))))
 
+ '(font-lock-fic-face ((t (:foreground "#FAB637" :underline t :bold t))))
+
  '(region ((t (:foreground nil :background "#333333"))))
  '(highlight ((t (:foreground nil :background "#444444"))))
 
