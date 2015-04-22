@@ -409,7 +409,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'emacs magit-status-mode-map "\S-n" 'magit-goto-previous-sibling-section)
     (evil-define-key 'emacs magit-status-mode-map "\S-e" 'magit-goto-next-section)
     (evil-define-key 'emacs magit-status-mode-map "\S-i" 'magit-goto-previous-section)
-    (evil-define-key 'emacs magit-status-mode-map "\S-o" 'magit-goto-next-sibling-section))
+    (evil-define-key 'emacs magit-status-mode-map "\S-o" 'magit-goto-next-sibling-section)
+
+    (evil-define-key 'emacs magit-diff-mode-map "n" 'evil-backward-char)
+    (evil-define-key 'emacs magit-diff-mode-map "e" 'evil-next-line)
+    (evil-define-key 'emacs magit-diff-mode-map "i" 'evil-previous-line)
+    (evil-define-key 'emacs magit-diff-mode-map "o" 'evil-forward-char)
+
+    (evil-define-key 'emacs magit-diff-mode-map "\S-e" 'magit-goto-next-section)
+    (evil-define-key 'emacs magit-diff-mode-map "\S-i" 'magit-goto-previous-section))
 
   (after ('evil-leader)
     (evil-leader/set-key "gs" 'magit-status)
