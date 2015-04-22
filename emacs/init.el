@@ -709,6 +709,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'org-tags-sort-function 'org-tags-attachment-last)
 
+  ;; Org-Babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((calc . t)
+     (sh . t)))
+
   (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
 
   (after ('evil)
