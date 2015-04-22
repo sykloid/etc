@@ -510,6 +510,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
 ;;;; Major Modes
 
+;; General Programming Mode configuration.
+(after ('prog-mode)
+  (after ('fic-mode)
+    (diminish 'fic-mode)
+    (with-hook 'prog-mode-hook
+      (turn-on-fic-mode))))
+
 ;; TeX/LaTeX/AucTeX/RefTeX
 (after ('latex)
   (set 'font-latex-fontify-sectioning 'color)
