@@ -72,7 +72,8 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (require 'alist-utils)
   (require 'autoload-provide-feature)
 
-  (load-library custom-file))
+  (when (file-exists-p custom-file)
+      (load custom-file)))
 
 ;;;; Miscellaneous Directives
 (after ('emacs)
