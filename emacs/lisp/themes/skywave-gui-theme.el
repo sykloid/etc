@@ -39,6 +39,8 @@
 
  '(error ((t (:foreground "#FF6EB4"))))
 
+ ;; LaTeX
+ '(font-latex-verbatim-face ((t (:foreground "#FFFFFF"))))
 
  ;; Org-Mode/Outline-Mode
  '(org-code ((t (:foreground "#69ACC8"))))
