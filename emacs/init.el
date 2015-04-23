@@ -5,39 +5,22 @@
 
 ;;; This configuration method is inspired by MilkyPostman's single-file setup at
 ;;; `http://milkbox.net/note/single-file-master-emacs-configuration/'. It makes
-;;; use of the same `after' macro, tweaked slightly to accommodate multiple load
-;;; targets.
-
-;;; I also take inspiration from an extension of the above approach described at
-;;; `http://nullprogram.com/blog/2013/06/02/'. This method permits dependencies
-;;; on more than one package, but also goes ahead and installs all packages.
-;;; While I still fundamentally want the ability to install all missing packages
-;;; mentioned in the configuration, I'd rather not have that happen without my
-;;; explicit authorization.
+;;; use of a similar `after' macro --- now called `with-load', using 24.4's
+;;; `with-eval-after-load'.
 
 ;;; Code:
 
 ;;;; Scaffolding
-(defmacro eval-after-load-all (features form)
-  "Arrange that if, and only if, all `FEATURES' are loaded, `FORM' is evaluated."
-  (declare (indent defun))
-  (if (null (cdr features))
-      `(eval-after-load ,(car features) ,form)
-    `(eval-after-load ,(car features) (eval-after-load-all ,(cdr features) ,form))))
+(defalias 'with-load 'with-eval-after-load)
+(put 'with-load 'lisp-indent-function 1)
 
-(defmacro after (features &rest body)
-  "Arrange that if, and only if, all `FEATURES' are loaded, `BODY' is evaluated.
-Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled."
+(defmacro with-load! (feature &rest body)
+  "`require' + `with-load'.
+Basically, first load `FEATURE', then evaluate `BODY'."
   (declare (indent defun))
-  `(eval-after-load-all ,features ((lambda () (quote (progn ,@body))))))
-
-(defmacro after! (features &rest body)
-  "Load `FEATURES' now, and arrange that `BODY' is evaluated when they are.
-Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled."
-  (declare (indent defun))
-  `(progn
-     (mapc 'require (list ,@features))
-     (eval-after-load-all ,features ((lambda () (quote (progn ,@body)))))))
+  `(progn (require ,feature)
+          (with-eval-after-load ,feature
+            ,@body)))
 
 (defmacro with-hook (hook &rest body)
   "Add to the value of `HOOK', all of the actions in `BODY'."
@@ -45,7 +28,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   `(add-hook ,hook (lambda () (progn ,@body))))
 
 ;;;; Packages and Libraries
-(after ('emacs)
+(with-load 'emacs
   (require 'package)
 
   (set 'package-user-dir (concat user-emacs-directory "elpa/"))
@@ -69,11 +52,11 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
       (load custom-file)))
 
 ;;;; Miscellaneous Directives
-(after ('emacs)
+(with-load 'emacs
   (put 'narrow-to-region 'disabled nil))
 
 ;;;; Mode Detection
-(after ('emacs)
+(with-load 'emacs
   (autoload 'K3-mode "K3-mode")
   (add-to-list 'auto-mode-alist '("\\.k3" . K3-mode))
   (add-to-list 'auto-mode-alist '("\\.ldg" . ledger-mode))
@@ -82,7 +65,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'auto-mode-alist '("\\.zsh" . sh-mode)))
 
 ;;;; Appearance
-(after ('emacs)
+(with-load 'emacs
   (set 'inhibit-splash-screen t)
 
   (blink-cursor-mode -1)
@@ -109,7 +92,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (defalias 'yes-or-no-p 'y-or-n-p))
 
 ;;;; Interface
-(after ('emacs)
+(with-load 'emacs
   (global-visual-line-mode)
 
   (set-default 'fill-column 100)
@@ -127,7 +110,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'sentence-end-double-space nil))
 
 ;;;; Files
-(after ('emacs)
+(with-load 'emacs
   ; Backups
   (set 'backup-by-copying t)
   (set 'backup-directory-alist `(("." . ,(concat user-emacs-directory "tmp/backups/"))))
@@ -140,10 +123,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "tmp/auto-saves/") t))))
 
 ;;;; Evil/Keymaps
-(after ('evil-autoloads)
+(with-load 'evil-autoloads
   (evil-mode t))
 
-(after ('evil)
+(with-load 'evil
 
   ;; Cursor Movement
   (define-key evil-normal-state-map "n" 'evil-backward-char)
@@ -214,14 +197,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key evil-emacs-state-map "\C-w" evil-window-map))
 
 ;; Evil-Args
-(after! ('evil-args)
+(with-load! 'evil-args
 
   (add-to-list 'evil-args-openers "<")
   (add-to-list 'evil-args-closers ">")
 
   (add-to-list 'evil-args-delimiters ";")
 
-  (after ('evil)
+  (with-load 'evil
     (define-key evil-inner-text-objects-map "," 'evil-inner-arg)
     (define-key evil-outer-text-objects-map "," 'evil-outer-arg)
 
@@ -230,17 +213,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key evil-motion-state-map "]," 'evil-forward-arg)
     (define-key evil-motion-state-map "[," 'evil-backward-arg)))
 
-(after! ('evil-exchange)
+(with-load! 'evil-exchange
   (set 'evil-exchange-key "sx")
   (set 'evil-exchange-cancel-key "sX")
   (evil-exchange-install))
 
-(after! ('evil-exchange-args)
+(with-load! 'evil-exchange-args
   (define-key evil-normal-state-map "sw" 'evil-exchange-forward-arg)
   (define-key evil-normal-state-map "sW" 'evil-exchange-backward-arg))
 
 ;; Evil-Leader
-(after ('evil-leader-autoloads)
+(with-load 'evil-leader-autoloads
   (global-evil-leader-mode t)
   (evil-leader/set-leader "<SPC>")
 
@@ -249,10 +232,10 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (evil-leader/set-key "bo" 'evil-buffer))
 
 ;; Evil-Surround
-(after ('evil-surround-autoloads)
+(with-load 'evil-surround-autoloads
   (global-evil-surround-mode t)
 
-  (after ('evil)
+  (with-load 'evil
     (define-key evil-normal-state-map "js" 'evil-surround-region)
     (define-key evil-normal-state-map "jS" 'evil-surround-region)
     (define-key evil-visual-state-map "js" 'evil-surround-region)
@@ -261,50 +244,50 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;;;; Extensions
 
 ;; Comments
-(after! ('comment-dwim-toggle)
-  (after ('evil-leader)
+(with-load! 'comment-dwim-toggle
+  (with-load 'evil-leader
     (evil-leader/set-key "c" 'comment-dwim-toggle)))
 
 ;; Company
-(after ('company-autoloads)
+(with-load 'company-autoloads
   (global-company-mode t)
   (diminish 'company-mode))
 
-(after ('company)
+(with-load 'company
   (set 'company-dabbrev-downcase nil)
   (set 'company-dabbrev-ignore-case nil)
   (set 'company-dabbrev-code-ignore-case nil)
 
-  (after ('evil)
+  (with-load 'evil
     (define-key company-active-map "\C-e" 'company-select-next)
     (define-key company-active-map "\C-i" 'company-select-previous)))
 
 ;; Compilation
-(after ('compile)
+(with-load 'compile
   (set 'compilation-scroll-output t)
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key "rr" 'recompile)
     (evil-leader/set-key "rk" 'kill-compilation))
 
-  (after ('ansi-color)
+  (with-load 'ansi-color
     (defun colorize-compilation-buffer ()
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max))))
     (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)))
 
-(after ('compilation-manager)
-  (after ('evil-leader)
+(with-load 'compilation-manager
+  (with-load 'evil-leader
     (evil-leader/set-key "rp" 'compilation-manager-run-profile)
     (evil-leader/set-key "rn" 'compilation-manager-name-last-profile)))
 
 ;; Diminish
-(after! ('diminish-autoloads)
+(with-load! 'diminish-autoloads
   (diminish 'visual-line-mode)
   (diminish 'undo-tree-mode))
 
 ;; Dired
-(after ('dired)
+(with-load 'dired
   (set 'dired-dwim-target t)
   (set 'dired-listing-switches "-alhD --group-directories-first")
 
@@ -314,52 +297,52 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (define-key dired-mode-map "i" 'dired-previous-line))
 
 ;; EDiff
-(after ('ediff)
+(with-load 'ediff
   (set 'ediff-window-setup-function 'ediff-setup-windows-plain)
   (set 'ediff-split-window-function 'split-window-horizontally))
 
 ;; Eldoc
-(after ('eldoc)
+(with-load 'eldoc
   (diminish 'eldoc-mode))
 
 ;; EShell
-(after ('eshell)
+(with-load 'eshell
   (set 'eshell-scroll-show-maximum-output nil)
 
   (with-hook 'eshell-mode-hook
     (evil-define-key 'insert eshell-mode-map (kbd "<return>") 'eshell-queue-input)))
 
 ;; ETags
-(after ('etags)
-  (after ('evil-leader)
+(with-load 'etags
+  (with-load 'evil-leader
     (evil-leader/set-key "tb" 'pop-tag-mark)
     (evil-leader/set-key "tf" 'find-tag)))
 
 ;; Expand-Region
-(after ('expand-region-autoloads)
-  (after ('evil)
+(with-load 'expand-region-autoloads
+  (with-load 'evil
     (define-key evil-visual-state-map "." 'er/expand-region)))
 
 ;; Ffap
-(after! ('ffap))
+(with-load! 'ffap)
 
 ;; Flycheck
-(after ('flycheck-autoloads)
+(with-load 'flycheck-autoloads
   (global-flycheck-mode t)
 
   (add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key "fe" 'flycheck-next-error)
     (evil-leader/set-key "fi" 'flycheck-previous-error)
     (evil-leader/set-key "fl" 'flycheck-list-errors)
     (evil-leader/set-key "fc" 'flycheck-buffer)))
 
 ;; Help
-(after! ('help-fns+))
+(with-load! 'help-fns+)
 
 ;; Ido*
-(after! ('ido)
+(with-load! 'ido
   (ido-mode t)
   (ido-everywhere t)
 
@@ -367,15 +350,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (set 'ido-cannot-complete-command 'ido-next-match)
   (set 'ido-max-prospects 6)
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key "pb" 'ido-switch-buffer)
     (evil-leader/set-key "pf" 'ido-find-file)
     (evil-leader/set-key "pk" 'ido-kill-buffer))
 
-  (after ('ido-ubiquitous-autoloads)
+  (with-load 'ido-ubiquitous-autoloads
     (ido-ubiquitous-mode t))
 
-  (after! ('ido-vertical-mode)
+  (with-load! 'ido-vertical-mode
     (ido-vertical-mode t))
 
   (with-hook 'ido-setup-hook
@@ -387,15 +370,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key ido-completion-map (kbd "<backtab>") 'ido-prev-match)))
 
 ;; IMenu
-(after ('imenu)
+(with-load 'imenu
   (set 'imenu-space-replacement "-")
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key "pm" 'imenu)))
 
 ;; Magit
-(after ('magit-autoloads)
-  (after ('evil)
+(with-load 'magit-autoloads
+  (with-load 'evil
 
     (add-to-list 'evil-emacs-state-modes 'magit-process-mode 'emacs)
     (add-to-list 'evil-emacs-state-modes 'magit-branch-manager-mode 'emacs)
@@ -419,24 +402,25 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'emacs magit-diff-mode-map "\S-e" 'magit-goto-next-section)
     (evil-define-key 'emacs magit-diff-mode-map "\S-i" 'magit-goto-previous-section))
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gb" 'magit-blame-mode)))
 
-(after ('magit)
+(with-load 'magit
   (diminish 'magit-auto-revert-mode))
 
 ;; Multiple-Cursors
-(after ('multiple-cursors-autoloads)
-  (after ('evil-leader)
+(with-load 'multiple-cursors-autoloads
+  (with-load 'evil-leader
     (evil-leader/set-key "mt" 'mc/mark-all-like-this-dwim)))
 
 ;; Smart-Parens
-(after ('smartparens-autoloads)
+(with-load 'smartparens-autoloads
   (smartparens-global-strict-mode)
+  (set 'post-self-insert-hook nil)
   (smartparens-global-mode))
 
-(after ('smartparens)
+(with-load 'smartparens
   (diminish 'smartparens-mode)
 
   (sp-pair "'" "'" :unless '(sp-point-after-word-p))
@@ -450,7 +434,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
 
-  (after ('evil)
+  (with-load 'evil
     (set 'sp-fast-map (make-sparse-keymap))
     (define-key evil-normal-state-map "sk" sp-fast-map)
 
@@ -471,15 +455,15 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key sp-fast-map "s" 'sp-split-sexp)))
 
 ;; SMex
-(after! ('smex)
+(with-load! 'smex
   (smex-initialize)
   (global-set-key "\M-x" 'smex)
   (global-set-key "\M-X" 'smex-major-mode-commands)
   (global-set-key "\C-c\C-c\M-x" 'execute-extended-command))
 
 ;; Undo
-(after ('undo-tree)
-  (after ('evil)
+(with-load 'undo-tree
+  (with-load 'evil
     (define-key evil-normal-state-map "u" 'undo-tree-undo)
     (define-key evil-normal-state-map "U" 'undo-tree-redo)
 
@@ -490,24 +474,24 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (define-key undo-tree-visualizer-mode-map "i" 'undo-tree-visualize-undo)
     (define-key undo-tree-visualizer-mode-map "o" 'undo-tree-visualize-switch-branch-right))
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key "u" 'undo-tree-visualize)))
 
 ;;; Volatile Highlights
-(after! ('volatile-highlights)
+(with-load! 'volatile-highlights
   (volatile-highlights-mode t)
   (diminish 'volatile-highlights-mode))
 
 ;;; YASnippet
-(after ('yasnippet-autoloads)
+(with-load 'yasnippet-autoloads
   (set 'yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
   (yas-global-mode))
 
-(after ('yasnippet)
+(with-load 'yasnippet
   (diminish 'yas-minor-mode)
   (set-default 'yas-prompt-functions '(yas-ido-prompt))
 
-  (after ('evil)
+  (with-load 'evil
     (define-key evil-insert-state-map "\C-o" nil))
 
   ; This is one of the most aggressive keybinds in existence.
@@ -519,14 +503,14 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 ;;;; Major Modes
 
 ;; General Programming Mode configuration.
-(after ('prog-mode)
-  (after ('fic-mode)
+(with-load 'prog-mode
+  (with-load 'fic-mode
     (diminish 'fic-mode)
     (with-hook 'prog-mode-hook
       (turn-on-fic-mode))))
 
 ;; TeX/LaTeX/AucTeX/RefTeX
-(after ('latex)
+(with-load 'latex
   (set 'font-latex-fontify-sectioning 'color)
 
   (set 'LaTeX-indent-level 2)
@@ -545,31 +529,31 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   (add-to-list 'TeX-view-program-list '("Zathura" ("zathura %o" (mode-io-correlate " --synctex-forward %n:1:%b"))))
   (setcdr (assoc 'output-pdf TeX-view-program-selection) '("Zathura"))
 
-  (after! ('TeX-indent-item-continuation)
+  (with-load! 'TeX-indent-item-continuation
    (upsert-alist "enumerate" '(LaTeX-indent-item) LaTeX-indent-environment-list)
    (upsert-alist "description" '(LaTeX-indent-item) LaTeX-indent-environment-list)
    (upsert-alist "itemize" '(LaTeX-indent-item) LaTeX-indent-environment-list))
 
-  (after! ('auctex-latexmk)
+  (with-load! 'auctex-latexmk
     (auctex-latexmk-setup))
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key-for-mode 'latex-mode "lv" 'TeX-view)
     (evil-leader/set-key-for-mode 'latex-mode "li" 'reftex-toc)
-    (after ('TeX-texify)
+    (with-load 'TeX-texify
       (evil-leader/set-key-for-mode 'latex-mode "ll" 'TeX-texify)))
 
-  (after ('flycheck)
+  (with-load 'flycheck
     (set 'flycheck-chktexrc (expand-file-name "~/.chktexrc")))
 
-  (after ('reftex)
+  (with-load 'reftex
     (set 'reftex-plug-into-AUCTeX t))
 
-  (after ('reftex-toc)
+  (with-load 'reftex-toc
     (define-key reftex-toc-map "e" 'reftex-toc-next)
     (define-key reftex-toc-map "i" 'reftex-toc-previous))
 
-  (after! ('TeX-texify)
+  (with-load! 'TeX-texify
     (set 'TeX-texify-Show nil))
 
   (with-hook 'LaTeX-mode-hook
@@ -577,17 +561,17 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (turn-on-reftex)))
 
 ;; C/C++ Modes
-(after ('cc-mode)
+(with-load 'cc-mode
   (set 'c-basic-offset 2)
   (c-set-offset 'access-label '/)
-  (after! ('prepaint)
+  (with-load! 'prepaint
     (prepaint-global-mode t)
     (with-hook 'c-mode-common-hook
       (face-remap-add-relative 'prepaint-face 'font-lock-variable-name-face))))
 
 ;; Emacs-Lisp
-(after ('emacs)
-  (after ('paredit-autoloads)
+(with-load 'emacs
+  (with-load 'paredit-autoloads
     (with-hook 'emacs-lisp-mode-hook
       (paredit-mode t)))
 
@@ -596,7 +580,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
     (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc)
 
-    (font-lock-add-keywords nil '(("(\\(\\<after!?\\>\\)" 1 'font-lock-keyword-face)))
+    (font-lock-add-keywords nil '(("(\\(\\<with-load!?\\>\\)" 1 'font-lock-keyword-face)))
     (font-lock-add-keywords nil '(("(\\(\\<with-hook\\>\\)" 1 'font-lock-keyword-face)))
 
 
@@ -604,7 +588,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (add-to-list 'imenu-generic-expression '("Sections" "^;;;; \\(.+\\)$" 1) t)))
 
 ;; Haskell
-(after ('haskell-mode)
+(with-load 'haskell-mode
   (with-hook 'haskell-mode-hook
     (turn-on-haskell-decl-scan)
     (turn-on-haskell-doc)
@@ -615,12 +599,12 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
     (face-remap-add-relative 'font-lock-doc-face 'font-lock-comment-face))
 
-  (after ('flycheck)
+  (with-load 'flycheck
     (with-hook 'flycheck-mode-hook
       #'flycheck-haskell-setup)))
 
 ;; Ledger
-(after ('ledger-mode-autoloads)
+(with-load 'ledger-mode-autoloads
   (set 'ledger-clear-whole-transactions t)
   (set 'ledger-post-amount-alignment-column 80)
   (set 'ledger-reconcile-default-commodity "USD")
@@ -633,24 +617,24 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
   ; Not really specific to ledger, but close enough.
   (set 'pcomplete-termination-string "")
 
-  (after ('evil)
+  (with-load 'evil
     (evil-set-initial-state 'ledger-report-mode 'emacs))
 
-  (after ('evil-leader)
+  (with-load 'evil-leader
     (evil-leader/set-key-for-mode 'ledger-mode "lq" 'ledger-post-align-xact)
     (evil-leader/set-key-for-mode 'ledger-mode "lr" 'ledger-report))
 
-  (after ('flycheck)
+  (with-load 'flycheck
     (require 'flycheck-ledger)
     (set 'flycheck-ledger-pedantic t)))
 
 ;; Org-Mode
-(after ('org-autoloads)
-  (after ('evil-leader)
+(with-load 'org-autoloads
+  (with-load 'evil-leader
     (evil-leader/set-key "oa" 'org-agenda)
     (evil-leader/set-key "oc" 'org-capture)))
 
-(after ('org)
+(with-load 'org
   (set 'org-directory "~/org/")
   (set 'org-agenda-files '("~/org/staging.org" "~/org/agenda"))
   (set 'org-drawers '("LOG" "CLOCK" "PROPERTIES" "RESULTS"))
@@ -708,13 +692,13 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
    '((calc . t)
      (sh . t)))
 
-  (after ('ob-sh)
+  (with-load 'ob-sh
     (if (executable-find "zsh")
         (set 'org-babel-sh-command "zsh")))
 
   (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
 
-  (after ('evil)
+  (with-load 'evil
     (evil-define-key 'normal org-mode-map "\M-n" 'org-metaleft)
     (evil-define-key 'normal org-mode-map "\M-e" 'org-metadown)
     (evil-define-key 'normal org-mode-map "\M-i" 'org-metaup)
@@ -738,7 +722,7 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
     (evil-define-key 'emacs org-agenda-mode-map "e" 'org-agenda-next-item)
     (evil-define-key 'emacs org-agenda-mode-map "i" 'org-agenda-previous-item)
 
-    (after! ('org-open-heading)
+    (with-load! 'org-open-heading
       (evil-define-key 'normal org-mode-map "\M-y" 'org-open-heading-below-and-insert)
       (evil-define-key 'normal org-mode-map "\M-Y" 'org-open-heading-above-and-insert)))
 
