@@ -50,16 +50,9 @@ Additionally, `BODY' is wrapped in a lambda so that it is properly byte-compiled
 
   (set 'package-user-dir (concat user-emacs-directory "elpa/"))
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-  (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
   (package-initialize)
-
-  (after! ('package-filter)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-    (add-to-list 'package-archive-enable-alist '("melpa" . 'evil-surround))
-    (add-to-list 'package-archive-enable-alist '("melpa" . 'ido-vertical-mode))
-    (add-to-list 'package-archive-enable-alist '("melpa" . 'smartparens))
-    (add-to-list 'package-archive-enable-alist '("melpa" . 'volatile-highlights))
-    (add-to-list 'package-archive-enable-alist '("melpa" . 'yaml-mode)))
 
   (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
   (add-to-list 'load-path user-lisp-directory)
