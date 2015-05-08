@@ -47,3 +47,7 @@ export EC2_CERT=~/.ec2/cert-x509-$(hostname)-$(whoami).pem
 
 # Allow GTK applications to make use of X11 dead keys, including they multi-key.
 export GTK_IM_MODULE="xim"
+
+# Compensate for non-existent configuration settings for QT5 applications.
+export QT_QPA_PLATFORMTHEME="qt5ct"
+systemctl --user import-environment QT_QPA_PLATFORMTHEME
