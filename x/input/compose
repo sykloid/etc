@@ -1,0 +1,39 @@
+# XCompose Specification.
+
+include "%L"
+
+# Greek Alphabet
+
+<Multi_key> <g> <a> : "α" U003B1 # GREEK SMALL LETTER ALPHA
+<Multi_key> <g> <b> : "β" U003B2 # GREEK SMALL LETTER BETA
+<Multi_key> <g> <c> : "γ" U003B3 # GREEK SMALL LETTER GAMMA
+<Multi_key> <g> <d> : "δ" U003B4 # GREEK SMALL LETTER DELTA
+<Multi_key> <g> <e> : "ε" U003B5 # GREEK SMALL LETTER EPSILON
+<Multi_key> <g> <f> : "φ" U003C6 # GREEK SMALL LETTER PHI
+<Multi_key> <g> <h> : "η" U003B7 # GREEK SMALL LETTER ETA
+<Multi_key> <g> <i> : "ι" U003B9 # GREEK SMALL LETTER IOTA
+<Multi_key> <g> <k> : "κ" U003BA # GREEK SMALL LETTER KAPPA
+<Multi_key> <g> <l> : "λ" U003BB # GREEK SMALL LETTER LAMBDA
+<Multi_key> <g> <m> : "μ" U003BC # GREEK SMALL LETTER MU
+<Multi_key> <g> <n> : "ν" U003BD # GREEK SMALL LETTER NU
+<Multi_key> <g> <p> : "π" U003C0 # GREEK SMALL LETTER PI
+<Multi_key> <g> <q> : "θ" U003B8 # GREEK SMALL LETTER THETA
+<Multi_key> <g> <r> : "ρ" U003C1 # GREEK SMALL LETTER RHO
+<Multi_key> <g> <s> : "σ" U003C3 # GREEK SMALL LETTER SIGMA
+<Multi_key> <g> <t> : "τ" U003C4 # GREEK SMALL LETTER TAU
+<Multi_key> <g> <u> : "υ" U003c5 # GREEK SMALL LETTER UPSILON
+<Multi_key> <g> <w> : "ω" U003C9 # GREEK SMALL LETTER OMEGA
+<Multi_key> <g> <x> : "ξ" U003BE # GREEK SMALL LETTER XI
+<Multi_key> <g> <y> : "ψ" U003C8 # GREEK SMALL LETTER PSI
+<Multi_key> <g> <z> : "ζ" U003B6 # GREEK SMALL LETTER ZETA
+
+<Multi_key> <g> <C> : "Γ" U00393 # GREEK CAPITAL LETTER GAMMA
+<Multi_key> <g> <D> : "Δ" U00394 # GREEK CAPITAL LETTER DELTA
+<Multi_key> <g> <F> : "Φ" U003A6 # GREEK CAPITAL LETTER PHI
+<Multi_key> <g> <L> : "Λ" U0039B # GREEK CAPITAL LETTER LAMBDA
+<Multi_key> <g> <P> : "Π" U003A0 # GREEK CAPITAL LETTER PI
+<Multi_key> <g> <Q> : "Θ" U00398 # GREEK CAPITAL LETTER THETA
+<Multi_key> <g> <S> : "Σ" U003A3 # GREEK CAPITAL LETTER SIGMA
+<Multi_key> <g> <W> : "Ω" U003A9 # GREEK CAPITAL LETTER OMEGA
+<Multi_key> <g> <X> : "Ξ" U0039E # GREEK CAPITAL LETTER XI
+<Multi_key> <g> <Y> : "Ψ" U0039E # GREEK CAPITAL LETTER PSI
