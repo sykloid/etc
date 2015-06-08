@@ -10,7 +10,7 @@
 # TODO: Degrade gracefully through approximation?
 
 # We define three associative arrays, for effects, foreground colors and background colors.
-typeset -Ag FX FG BG
+typeset -AHg FX FG BG
 
 FX=(
     reset     "[00m"
