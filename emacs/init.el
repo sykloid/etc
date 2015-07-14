@@ -19,13 +19,15 @@
 Basically, first load `FEATURE', then evaluate `BODY'."
   (declare (indent defun))
   `(progn (require ,feature)
-          (with-eval-after-load ,feature
+          (with-load ,feature
             ,@body)))
 
 (defmacro with-hook (hook &rest body)
   "Add to the value of `HOOK', all of the actions in `BODY'."
   (declare (indent 1))
   `(add-hook ,hook (lambda () (progn ,@body))))
+
+(defalias 'setc 'customize-set-variable)
 
 ;;;; Global Constants
 (defconst instance-name
