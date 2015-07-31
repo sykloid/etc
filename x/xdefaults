@@ -44,17 +44,17 @@ urxvt.shading: 70
 
 ! Set some nice fonts.
 urxvt.font: \
-    xft:Fantasque Sans Mono:style=Regular:pixelsize=15:autohint=true, \
+    xft:Pragmata Pro:style=Regular:pixelsize=14:autohint=true, \
     xft:DejaVu Sans Mono:style=Regular:pixelsize=15:autohint=true, \
     xft:unifont:style=Medium:pixelsize=15:autohint=true
 urxvt.boldFont: \
-    xft:Fantasque Sans Mono:style=Bold:pixelsize=15:autohint=true, \
+    xft:Pragmata Pro:style=Bold:pixelsize=14:autohint=true, \
     xft:DejaVu Sans Mono:style=Bold:pixelsize=15:autohint=true
 urxvt.italicFont:
-    xft:Fantasque Sans Mono:style=Italic:pixelsize=15:autohint=true, \
+    xft:Pragmata Pro:style=Italic:pixelsize=14:autohint=true, \
     xft:DejaVu Sans Mono:style=Italic:pixelsize=15:autohint=true
 urxvt.boldItalicFont: \
-    xft:Fantasque Sans Mono:style=Bold:style=Italic:pixelsize=15:autohint=true, \
+    xft:Pragmata Pro:style=Bold:style=Italic:pixelsize=14:autohint=true, \
     xft:DejaVu Sans Mono:style=Bold:style=Italic:pixelsize=15:autohint=true
 
 ! Custom scrolling behaviour
