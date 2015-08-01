@@ -10,7 +10,7 @@ alias ...=../..
 # Some application shortcuts.
 alias g="grep -EiRn --color=tty"
 alias m="mpv"
-alias o="okular"
+alias o="qpdfview"
 
 # The many forms of zmv.
 alias zmv="zmv -wM"
