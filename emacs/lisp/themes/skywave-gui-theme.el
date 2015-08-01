@@ -39,6 +39,10 @@
 
  '(error ((t (:foreground "#FF6EB4"))))
 
+ ;; Helm
+ '(helm-source-header ((t (:background "#315BB5" :box t :bold t))))
+ '(helm-selection ((t (:foreground "#222222" :background "#E8E8E8"))))
+
  ;; LaTeX
  '(font-latex-verbatim-face ((t (:foreground "#FFFFFF"))))
 
