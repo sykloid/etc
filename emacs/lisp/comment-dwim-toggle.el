@@ -5,6 +5,7 @@
 
 ;;; This function provides a convenient method to context dependently comment/uncomment.
 
+;;;###autoload
 (defun comment-dwim-toggle (&optional arg)
   "Context dependently toggle comment/uncomment.
 If a region is active, comment/uncomment it. Otherwise,

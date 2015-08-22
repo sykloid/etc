@@ -4,6 +4,7 @@
 (require 'autoload)
 (require 'package)
 
+;;;###autoload
 ;; The built-in `autoload-rubric' function has a placeholder for the name of the feature to be
 ;; provided, but the built-in `autoload-ensure-default-file' doesn't use it.
 (defun autoload-ensure-default-file (file)
@@ -13,6 +14,7 @@
     (write-region (autoload-rubric file nil (file-name-base file)) nil file))
   file)
 
+;;;###autoload
 ;; As if that wasn't enough, `package.el' has its own version which ignores `autoload.el'.
 (defalias 'package-autoload-ensure-default-file 'autoload-ensure-default-file)
 
