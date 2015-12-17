@@ -50,3 +50,13 @@ include "%L"
 <Multi_key> <Left>  <equal> : "⇐" U027F8 # LONG LEFTWARDS DOUBLE ARROW
 <Multi_key> <Right> <equal> : "⇒" U021D2 # RIGHTWARDS DOUBLE ARROW
 
+<Multi_key> <s> <0>                 : "∅" U02205 # EMPTY SET
+<Multi_key> <s> <e>       <e>       : "∈" U02208 # ELEMENT OF
+<Multi_key> <s> <e>       <slash>   : "∉" U02209 # NOT AN ELEMENT OF
+<Multi_key> <s> <less>    <less>    : "⊂" U02282 # SUBSET OF
+<Multi_key> <s> <less>    <slash>   : "⊄" U02284 # NOT A SUBSET OF
+<Multi_key> <s> <less>    <equal>   : "⊆" U02286 # SUBSET OF OR EQUAL TO
+<Multi_key> <s> <greater> <greater> : "⊃" U02283 # SUPERSET OF
+<Multi_key> <s> <ampersand>         : "∩" U02229 # INTERSECTION
+<Multi_key> <s> <bar>               : "∪" U0222A # UNION
+
