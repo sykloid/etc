@@ -60,3 +60,24 @@ include "%L"
 <Multi_key> <s> <ampersand>         : "∩" U02229 # INTERSECTION
 <Multi_key> <s> <bar>               : "∪" U0222A # UNION
 
+<Multi_key> <^> <0> : "⁰" U02070 # SUPERSCRIPT ZERO
+<Multi_key> <^> <1> : "¹" U000B9 # SUPERSCRIPT ONE
+<Multi_key> <^> <2> : "²" U000B2 # SUPERSCRIPT TWO
+<Multi_key> <^> <3> : "³" U000B3 # SUPERSCRIPT THREE
+<Multi_key> <^> <4> : "⁴" U02074 # SUPERSCRIPT FOUR
+<Multi_key> <^> <5> : "⁵" U02075 # SUPERSCRIPT FIVE
+<Multi_key> <^> <6> : "⁶" U02076 # SUPERSCRIPT SIX
+<Multi_key> <^> <7> : "⁷" U02077 # SUPERSCRIPT SEVEN
+<Multi_key> <^> <8> : "⁸" U02078 # SUPERSCRIPT EIGHT
+<Multi_key> <^> <9> : "⁹" U02079 # SUPERSCRIPT NINE
+
+<Multi_key> <_> <0> : "₀" U02080 # SUBSCRIPT ZERO
+<Multi_key> <_> <1> : "₁" U02081 # SUBSCRIPT ONE
+<Multi_key> <_> <2> : "₂" U02082 # SUBSCRIPT TWO
+<Multi_key> <_> <3> : "₃" U02083 # SUBSCRIPT THREE
+<Multi_key> <_> <4> : "₄" U02084 # SUBSCRIPT FOUR
+<Multi_key> <_> <5> : "₅" U02085 # SUBSCRIPT FIVE
+<Multi_key> <_> <6> : "₆" U02086 # SUBSCRIPT SIX
+<Multi_key> <_> <7> : "₇" U02087 # SUBSCRIPT SEVEN
+<Multi_key> <_> <8> : "₈" U02088 # SUBSCRIPT EIGHT
+<Multi_key> <_> <9> : "₉" U02089 # SUBSCRIPT NINE
