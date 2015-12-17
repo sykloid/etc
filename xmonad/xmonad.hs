@@ -117,7 +117,7 @@ myTiledLayout :: Tall a
 myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
     where
         masterCapacity = 1 -- Number of master windows by default.
-        resizeDelta    = 3/100 -- Percent to increase the size by each time.
+        resizeDelta    = 1/100 -- Percent to increase the size by each time.
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
