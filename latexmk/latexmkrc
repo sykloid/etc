@@ -3,5 +3,5 @@
 $latex = 'latex --shell-escape';
 $pdflatex = 'pdflatex -shell-escape -interaction=nonstopmode -file-line-error -synctex=1';
 
-$pdf_previewer = 'zathura';
+$pdf_previewer = 'qpdfview';
 $pdf_mode = 1;
