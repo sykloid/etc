@@ -103,6 +103,9 @@ myXMobarLogger handle = workspaceNamesPP defaultPP {
 myTerminal :: String
 myTerminal = "urxvtc"
 
+myEditor :: String
+myEditor = "emacsclient -c"
+
 -- Workspaces
 -------------
 
@@ -135,8 +138,9 @@ myModMask = mod4Mask -- The Windows Key, aka "Super"
 myKeys xconfig@(XConfig {XMonad.modMask = m}) = M.fromList $
 
     [
-        -- The Terminal
+        -- Applications
         ((m, xK_c), spawn $ XMonad.terminal xconfig), -- Start a new terminal.
+        ((m, xK_v), spawn myEditor), -- Start a new terminal.
 
         -- Window Navigation
         ((m, xK_t), focusDown), -- Focus next window.
