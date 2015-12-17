@@ -37,3 +37,8 @@ include "%L"
 <Multi_key> <g> <W> : "Ω" U003A9 # GREEK CAPITAL LETTER OMEGA
 <Multi_key> <g> <X> : "Ξ" U0039E # GREEK CAPITAL LETTER XI
 <Multi_key> <g> <Y> : "Ψ" U0039E # GREEK CAPITAL LETTER PSI
+<Multi_key> <l> <f> <a>     : "∀" U02200 # FOR ALL
+<Multi_key> <l> <t> <e>     : "∃" U02203 # THERE EXISTS
+<Multi_key> <l> <ampersand> : "∧" U02227 # LOGICAL AND
+<Multi_key> <l> <bar>       : "∨" U02228 # LOGICAL OR
+<Multi_key> <l> <slash>     : "¬" U000AC # NOT SIGN
