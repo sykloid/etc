@@ -42,3 +42,11 @@ include "%L"
 <Multi_key> <l> <ampersand> : "∧" U02227 # LOGICAL AND
 <Multi_key> <l> <bar>       : "∨" U02228 # LOGICAL OR
 <Multi_key> <l> <slash>     : "¬" U000AC # NOT SIGN
+<Multi_key> <Left>  <minus> : "←" U02190 # LEFTWARDS ARROW
+<Multi_key> <Down>  <minus> : "↓" U02193 # DOWNWARDS ARROW
+<Multi_key> <Up>    <minus> : "↑" U02191 # UPWARDS ARROW
+<Multi_key> <Right> <minus> : "→" U02192 # RIGHTWARDS ARROW
+
+<Multi_key> <Left>  <equal> : "⇐" U027F8 # LONG LEFTWARDS DOUBLE ARROW
+<Multi_key> <Right> <equal> : "⇒" U021D2 # RIGHTWARDS DOUBLE ARROW
+
