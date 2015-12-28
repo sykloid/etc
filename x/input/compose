@@ -1,7 +1,5 @@
 # XCompose Specification.
 
-include "%L"
-
 # Greek Alphabet
 
 <Multi_key> <g> <a> : "α" U003B1 # GREEK SMALL LETTER ALPHA
@@ -37,11 +35,21 @@ include "%L"
 <Multi_key> <g> <W> : "Ω" U003A9 # GREEK CAPITAL LETTER OMEGA
 <Multi_key> <g> <X> : "Ξ" U0039E # GREEK CAPITAL LETTER XI
 <Multi_key> <g> <Y> : "Ψ" U0039E # GREEK CAPITAL LETTER PSI
+
+<Multi_key> <g> <A> : "ᾱ" U01FB1 # GREEK SMALL LETTER ALPHA WITH MACRON
+
 <Multi_key> <l> <f> <a>     : "∀" U02200 # FOR ALL
 <Multi_key> <l> <t> <e>     : "∃" U02203 # THERE EXISTS
 <Multi_key> <l> <ampersand> : "∧" U02227 # LOGICAL AND
 <Multi_key> <l> <bar>       : "∨" U02228 # LOGICAL OR
 <Multi_key> <l> <slash>     : "¬" U000AC # NOT SIGN
+
+<Multi_key> <bracketleft>  <bracketleft>  : "⟦" U027E6 # MATHEMATICAL LEFT WHITE SQUARE BRACKET
+<Multi_key> <bracketright> <bracketright> : "⟧" U027E7 # MATHEMATICAL RIGHT WHITE SQUARE BRACKET
+
+<Multi_key> <d> <j> : "⟗"
+<Multi_key> <.> <.> <.> : "…" U02026 # HORIZONTAL ELLIPSIS
+
 <Multi_key> <Left>  <minus> : "←" U02190 # LEFTWARDS ARROW
 <Multi_key> <Down>  <minus> : "↓" U02193 # DOWNWARDS ARROW
 <Multi_key> <Up>    <minus> : "↑" U02191 # UPWARDS ARROW
@@ -81,3 +89,7 @@ include "%L"
 <Multi_key> <_> <7> : "₇" U02087 # SUBSCRIPT SEVEN
 <Multi_key> <_> <8> : "₈" U02088 # SUBSCRIPT EIGHT
 <Multi_key> <_> <9> : "₉" U02089 # SUBSCRIPT NINE
+
+<Multi_key> <colon> <colon> : "∷" U02237 # PROPORTION
+
+<Multi_key> <bar> <minus> : "⊢" U022A2 # RIGHT TACK
