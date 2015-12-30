@@ -18,3 +18,7 @@
   (package-refresh-contents)
   (package-install 'use-package)
   (require 'use-package))
+
+(defmacro setc (variable value)
+  `(customize-set-variable ',variable ,value))
+
