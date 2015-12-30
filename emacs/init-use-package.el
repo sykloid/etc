@@ -119,3 +119,10 @@
   (define-prefix-command 'evil-utility-map)
 
   (define-key evil-operator-state-map "h" evil-inner-text-objects-map))
+
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode t)
+  (evil-leader/set-leader "SPC"))
+
