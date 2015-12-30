@@ -22,3 +22,9 @@
 (defmacro setc (variable value)
   `(customize-set-variable ',variable ,value))
 
+(use-package winner
+  :init (winner-mode t))
+
+(use-package undo-tree
+  :diminish undo-tree-mode)
+
