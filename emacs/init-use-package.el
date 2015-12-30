@@ -126,3 +126,20 @@
   (global-evil-leader-mode t)
   (evil-leader/set-leader "SPC"))
 
+(use-package magit
+  :ensure t
+
+  :init
+  (defhydra magit-hydra (:idle 1.0)
+    "
+Git Control
+-----------
+{_b_} Blame
+{_s_} Status
+{_q_} Quit
+"
+    ("b" magit-blame :color blue)
+    ("s" magit-status :color blue)
+    ("q" nil))
+
+  (evil-leader/set-key "g" 'magit-hydra/body))
