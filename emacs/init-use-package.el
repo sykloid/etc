@@ -28,6 +28,11 @@
 (use-package undo-tree
   :diminish undo-tree-mode)
 
+(use-package hydra
+  :ensure t
+  :config
+  (hydra-add-font-lock))
+
 (use-package evil
   :ensure t
   :bind (:map evil-normal-state-map
