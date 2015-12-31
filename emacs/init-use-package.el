@@ -142,4 +142,13 @@ Git Control
     ("s" magit-status :color blue)
     ("q" nil))
 
-  (evil-leader/set-key "g" 'magit-hydra/body))
+  (evil-leader/set-key "g" 'magit-hydra/body)
+
+  :config
+  (bind-keys :map magit-mode-map
+             ("n" . evil-backward-char)
+             ("e" . evil-next-line)
+             ("i" . evil-previous-line)
+             ("o" . evil-forward-char)
+
+             ("M-i" . magit-section-up)))
