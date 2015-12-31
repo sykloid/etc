@@ -128,7 +128,7 @@
 
 (use-package magit
   :ensure t
-
+  :commands (magit-status magit-blame)
   :init
   (defhydra magit-hydra (:idle 1.0)
     "
