@@ -3,6 +3,9 @@
 
 ;; This is rewrite #4.
 
+;; Interpreter Configuration
+(setq gc-cons-threshold 100000000)
+
 ;; Package System Initialization -- Must be done ahead of time.
 (require 'package)
 
