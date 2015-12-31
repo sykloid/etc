@@ -25,6 +25,10 @@
 (defmacro setc (variable value)
   `(customize-set-variable ',variable ,value))
 
+;; Appearance
+(set-frame-font "Pragmata Pro-10")
+(setc default-frame-alist '((font . "Pragmata Pro-10")))
+
 (use-package winner
   :init (winner-mode t))
 
