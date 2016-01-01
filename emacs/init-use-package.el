@@ -143,6 +143,8 @@
 
   :config
   (setc evil-move-beyond-eol t)
+  (setc evil-split-window-below t)
+  (setc evil-vsplit-window-right t)
   (setc evil-want-fine-undo nil)
 
   (define-prefix-command 'evil-utility-map)
