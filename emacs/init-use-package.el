@@ -6,6 +6,15 @@
 ;; Interpreter Configuration
 (setq gc-cons-threshold 100000000)
 
+;; Paths
+(defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
+(add-to-list 'load-path user-lisp-directory)
+
+(setq custom-theme-directory (concat user-lisp-directory "themes/"))
+
+(setq custom-file (concat user-emacs-directory "customizations.el"))
+(load custom-file 'no-error)
+
 ;; Package System Initialization -- Must be done ahead of time.
 (require 'package)
 
