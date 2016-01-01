@@ -47,6 +47,10 @@
                   (load-theme 'skywave-gui))))
   (load-theme 'skywave-gui))
 
+;; Miscellaneous
+(setc ad-redefinition-action 'accept)
+
+;; Package Initialization
 (use-package winner
   :init (winner-mode t))
 
