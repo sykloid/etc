@@ -38,6 +38,8 @@
 (set-frame-font "Pragmata Pro-10")
 (setc default-frame-alist '((font . "Pragmata Pro-10")))
 
+(setc inhibit-splash-screen t)
+
 (use-package winner
   :init (winner-mode t))
 
