@@ -70,6 +70,9 @@
               ("i" . evil-previous-visual-line)
               ("o" . evil-forward-char)
 
+              ("N" . beginning-of-line-toggle)
+              ("O" . end-of-line)
+
               ("h" . evil-insert-state)
               ("H" . evil-insert-line)
               ("a" . evil-append)
@@ -140,6 +143,13 @@
   (defun evil-mark-last-yank ()
     (interactive)
     (evil-visual-make-selection (evil-get-marker ?[) (evil-get-marker ?])))
+
+  (defun beginning-of-line-toggle ()
+    (interactive)
+    (let ((current (point)))
+      (back-to-indentation)
+      (when (= current (point))
+        (beginning-of-line))))
 
   :config
   (setc evil-move-beyond-eol t)
