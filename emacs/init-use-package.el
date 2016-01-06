@@ -261,6 +261,16 @@ Git Control
 
   (bind-keys :map evil-utility-map
              ("k" . hydra-smartparens/body)))
+(use-package ledger-mode
+  :ensure t
+  :mode "\\.ldg"
+  :config
+  (setc ledger-clear-whole-transactions t)
+  (setc ledger-use-iso-dates t)
+  (setc ledger-post-account-alignment-column 2)
+  (setc ledger-post-amount-alignment-column 80)
+  (setc ledger-reconcile-default-commodity "USD"))
+
 (use-package rust-mode
   :ensure t
   :mode "\\.rs")
