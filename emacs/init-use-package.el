@@ -183,7 +183,7 @@
   :ensure t
   :commands (magit-status magit-blame)
   :init
-  (defhydra hydra-magit (:idle 1.0)
+  (defhydra hydra-magit (:color blue :hint nil :idle 1.0)
     "
 Git Control
 -----------
@@ -191,8 +191,8 @@ Git Control
 {_s_} Status
 {_q_} Quit
 "
-    ("b" magit-blame :color blue)
-    ("s" magit-status :color blue)
+    ("b" magit-blame)
+    ("s" magit-status)
     ("q" nil))
 
   (evil-leader/set-key "g" 'hydra-magit/body)
