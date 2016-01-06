@@ -217,3 +217,47 @@ Git Control
   :init
   (global-company-mode))
 
+(use-package smartparens
+  :ensure t
+  :diminish smartparens-mode
+  :init
+  (smartparens-global-strict-mode)
+
+  :config
+  (defhydra hydra-smartparens (:color amaranth :idle 1.0 :hint nil)
+    "
+           SExp Navigation/Manipulation
+───────────────────────────────────────────────────
+ {_n_} Previous | {_r_} Raise  | {_sn_} Slurp From Left
+ {_e_} Down     | {_k_} Kill   | {_so_} Slurp From Right
+ {_i_} Up       |           ^^ | {_bn_} Barf To Left
+ {_o_} Next     |           ^^ | {_bo_} Barf To Right
+───────────────────────────────────────────────────
+ {_u_} Undo     | {_U_} Redo
+───────────────────────────────────────────────────
+ {_q_} Quit     | {_a_} Append | {_h_} Insert
+"
+    ("n" sp-backward-sexp)
+    ("i" sp-up-sexp)
+    ("e" sp-down-sexp)
+    ("o" sp-forward-sexp)
+
+    ("r" sp-raise-sexp)
+    ("k" sp-kill-hybrid-sexp)
+
+    ("sn" sp-backward-slurp-sexp)
+    ("so" sp-forward-slurp-sexp)
+
+    ("bn" sp-backward-barf-sexp)
+    ("bo" sp-forward-barf-sexp)
+
+    ("u" undo-tree-undo)
+    ("U" undo-tree-redo)
+
+    ("a" evil-append :color blue)
+    ("h" evil-insert :color blue)
+
+    ("q" nil))
+
+  (bind-keys :map evil-utility-map
+             ("k" . hydra-smartparens/body)))
