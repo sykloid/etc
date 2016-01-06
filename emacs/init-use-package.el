@@ -261,3 +261,7 @@ Git Control
 
   (bind-keys :map evil-utility-map
              ("k" . hydra-smartparens/body)))
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs")
+
