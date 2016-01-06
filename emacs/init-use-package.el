@@ -261,6 +261,15 @@ Git Control
 
   (bind-keys :map evil-utility-map
              ("k" . hydra-smartparens/body)))
+;; Modes
+
+(use-package haskell-mode
+  :ensure t
+  :mode "\\.hs"
+  :config
+  (with-hook haskell-mode-hook
+    (haskell-indentation-mode)))
+
 (use-package ledger-mode
   :ensure t
   :mode "\\.ldg"
