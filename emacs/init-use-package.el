@@ -205,6 +205,11 @@ Git Control
              ("o" . evil-forward-char)
 
              ("M-i" . magit-section-up)))
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
 (use-package company
   :ensure t
   :bind (:map evil-insert-state-map
