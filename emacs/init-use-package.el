@@ -167,6 +167,18 @@
   (global-evil-leader-mode t)
   (evil-leader/set-leader "SPC"))
 
+(use-package evil-surround
+  :ensure t
+  :bind (:map evil-normal-state-map
+              ("js" . evil-surround-region)
+              ("jS" . evil-Surround-region))
+
+  :bind (:map evil-visual-state-map
+              ("js" . evil-surround-region)
+              ("jS" . evil-Surround-region))
+  :init
+  (global-evil-surround-mode))
+
 (use-package magit
   :ensure t
   :commands (magit-status magit-blame)
