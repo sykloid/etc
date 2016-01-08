@@ -261,6 +261,9 @@ Git Control
 
   (bind-keys :map evil-utility-map
              ("k" . hydra-smartparens/body)))
+
+(use-package help-fns+ :ensure t)
+
 ;; Modes
 
 (use-package haskell-mode
