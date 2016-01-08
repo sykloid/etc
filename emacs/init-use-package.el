@@ -21,6 +21,7 @@
 ;; I gave up on melpa-stable, it's anything but.
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -282,6 +283,21 @@ Git Control
   (setc ledger-post-account-alignment-column 2)
   (setc ledger-post-amount-alignment-column 80)
   (setc ledger-reconcile-default-commodity "USD"))
+
+(use-package org
+  :ensure org-plus-contrib
+  :mode "\\.org"
+  :init
+  (defhydra hydra-org (:color blue :hint nil :idle 1.0)
+    "
+Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
+"
+    ("a" org-agenda)
+    ("c" org-capture)
+    ("j" org-clock-goto)
+    ("q" nil))
+
+  (evil-leader/set-key "o" 'hydra-org/body))
 
 (use-package rust-mode
   :ensure t
