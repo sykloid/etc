@@ -186,11 +186,7 @@
   :init
   (defhydra hydra-magit (:color blue :hint nil :idle 1.0)
     "
-Git Control
------------
-{_b_} Blame
-{_s_} Status
-{_q_} Quit
+ Git Control: {_b_} Blame | {_s_} Status | {_q_} Quit
 "
     ("b" magit-blame)
     ("s" magit-status)
@@ -227,7 +223,7 @@ Git Control
   :config
   (defhydra hydra-smartparens (:color amaranth :idle 1.0 :hint nil)
     "
-           SExp Navigation/Manipulation
+ SExp Navigation/Manipulation
 ───────────────────────────────────────────────────
  {_n_} Previous | {_r_} Raise  | {_sn_} Slurp From Left
  {_e_} Down     | {_k_} Kill   | {_so_} Slurp From Right
