@@ -351,3 +351,12 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   :ensure t
   :mode "\\.rs")
 
+(use-package racer
+  :ensure t
+  :init
+  (with-hook rust-mode-hook
+    (racer-mode))
+
+  :config
+  (setq racer-cmd "/home/sykora/.cargo/bin/racer")
+  (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src"))
