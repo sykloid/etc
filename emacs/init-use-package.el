@@ -202,6 +202,25 @@
              ("o" . evil-forward-char)
 
              ("M-i" . magit-section-up)))
+
+(use-package counsel
+  :ensure t
+  :diminish t
+  :init
+  (ivy-mode)
+  (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
+    "
+ Listings: {_b_} Buffers | {_f_} Files | {_q_} Quit
+"
+    ("b" switch-to-buffer)
+    ("f" find-file)
+    ("q" nil))
+
+  (evil-leader/set-key "l" 'hydra-list/body)
+
+  :config
+  (setc ivy-wrap t))
+
 (use-package flycheck
   :ensure t
   :init
