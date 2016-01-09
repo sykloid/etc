@@ -280,6 +280,34 @@
 
 (use-package help-fns+ :ensure t)
 
+(use-package projectile
+  :ensure t
+  :init
+  (defhydra hydra-projectile (:color teal :hint nil :idle 1.0)
+    "
+ Projectile
+─────────────────────────────────────
+ {_s_} Switch to Project | {_a_} Search
+ {_g_} Version Control   | {_b_} Buffers
+ {_d_} Change Directory  | {_f_} Files
+─────────────────────────────────────
+ {_q_} Quit
+"
+    ("s" projectile-switch-project :color red)
+    ("g" projectile-vc)
+    ("d" (cd (projectile-project-root)))
+
+    ("b" projectile-switch-to-buffer)
+    ("f" projectile-find-file-dwim)
+    ("a" counsel-git-grep)
+
+    ("q" nil))
+
+  (evil-leader/set-key "p" 'hydra-projectile/body)
+
+  :config
+  (setc projectile-completion-system 'ivy))
+
 ;; Modes
 
 (use-package haskell-mode
