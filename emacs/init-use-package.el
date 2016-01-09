@@ -35,6 +35,11 @@
 (defmacro setc (variable value)
   `(customize-set-variable ',variable ,value))
 
+(defmacro with-hook (hook &rest body)
+  "When `HOOK' is called, execute `BODY'."
+  (declare (indent 1))
+  `(add-hook ',hook (lambda () (progn ,@body)) t))
+
 ;; Appearance
 (set-frame-font "Pragmata Pro-10")
 (setc default-frame-alist '((font . "Pragmata Pro-10")))
