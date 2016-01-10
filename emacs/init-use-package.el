@@ -63,11 +63,6 @@
 (use-package undo-tree
   :diminish undo-tree-mode)
 
-(use-package hydra
-  :ensure t
-  :config
-  (hydra-add-font-lock))
-
 (use-package evil
   :ensure t
   :bind (:map evil-normal-state-map
@@ -184,6 +179,23 @@
               ("jS" . evil-Surround-region))
   :init
   (global-evil-surround-mode))
+
+(use-package hydra
+  :ensure t
+  :init
+  (defhydra hydra-zoom (:color amaranth :hint nil :idle 1.0)
+    "
+Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
+"
+    ("e" text-scale-decrease)
+    ("i" text-scale-increase)
+    ("r" (text-scale-increase 0))
+    ("q" nil))
+
+  (evil-leader/set-key "z" 'hydra-zoom/body)
+
+  :config
+  (hydra-add-font-lock))
 
 (use-package magit
   :ensure t
