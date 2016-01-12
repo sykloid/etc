@@ -53,10 +53,17 @@
                   (load-theme 'skywave-gui))))
   (load-theme 'skywave-gui))
 
+;; Behaviour
+(setc scroll-step 1)
+
 ;; Miscellaneous
 (setc ad-redefinition-action 'accept)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
+;; Package Initialization
 (use-package evil
   :ensure t
   :bind (:map evil-normal-state-map
