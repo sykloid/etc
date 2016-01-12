@@ -56,12 +56,6 @@
 ;; Miscellaneous
 (setc ad-redefinition-action 'accept)
 
-;; Package Initialization
-(use-package winner
-  :init (winner-mode t))
-
-(use-package undo-tree
-  :diminish undo-tree-mode)
 
 (use-package evil
   :ensure t
@@ -129,10 +123,7 @@
 
               ("q" . evil-window-delete)
               ("d" . delete-other-windows)
-              ("D" . delete-other-windows-vertically)
-
-              ("u" . winner-undo)
-              ("U" . winner-redo))
+              ("D" . delete-other-windows-vertically))
 
   :bind (:map evil-utility-map
               ("v" . evil-visual-restore)
@@ -179,6 +170,12 @@
               ("jS" . evil-Surround-region))
   :init
   (global-evil-surround-mode))
+
+(use-package winner
+  :init (winner-mode t)
+  :bind (:map evil-window-map
+	      ("u" . winner-undo)
+	      ("U" . winner-redo)))
 
 (use-package hydra
   :ensure t
