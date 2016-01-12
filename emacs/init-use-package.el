@@ -257,7 +257,12 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package flycheck
   :ensure t
   :init
-  (global-flycheck-mode))
+  (global-flycheck-mode)
+
+  :config
+  (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
+
+  (setc flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 (use-package company
   :ensure t
