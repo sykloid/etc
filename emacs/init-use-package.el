@@ -171,6 +171,23 @@
   :init
   (global-evil-surround-mode))
 
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :bind (:map evil-normal-state-map
+	      ("u" . undo-tree-undo)
+	      ("U" . undo-tree-redo))
+
+  :init
+  (evil-leader/set-key "u" 'undo-tree-visualize)
+
+  (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs)
+
+  (bind-keys :map undo-tree-visualizer-mode-map
+	     ("n" . undo-tree-visualize-switch-branch-left)
+	     ("e" . undo-tree-visualize-redo)
+	     ("i" . undo-tree-visualize-undo)
+	     ("o" . undo-tree-visualize-switch-branch-right)))
+
 (use-package winner
   :init (winner-mode t)
   :bind (:map evil-window-map
