@@ -232,7 +232,9 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
              ("i" . evil-previous-line)
              ("o" . evil-forward-char)
 
-             ("M-i" . magit-section-up)))
+	     ("V" . set-mark-command)
+
+	     ("M-i" . magit-section-up)))
 
 (use-package counsel
   :ensure t
