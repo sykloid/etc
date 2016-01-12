@@ -309,7 +309,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     ("q" nil))
 
   (bind-keys :map evil-utility-map
-             ("k" . hydra-smartparens/body)))
+             ("k" . hydra-smartparens/body))
+
+  (sp-pair "'" "'" :unless '(sp-point-after-word-p))
+
 
 (use-package help-fns+ :ensure t)
 
