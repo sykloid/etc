@@ -392,7 +392,18 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
     ("j" org-clock-goto)
     ("q" nil))
 
-  (evil-leader/set-key "o" 'hydra-org/body))
+  (evil-leader/set-key "o" 'hydra-org/body)
+
+  :config
+  (setc org-directory "~/org")
+  (setc org-agenda-files '("~/org/agenda"))
+
+  (setc org-agenda-span 14)
+  (setc org-agenda-start-on-weekday nil)
+
+  ;; Source Code
+  (setc org-src-fontify-natively t)
+  (setc org-src-preserve-indentation t))
 
 (use-package rust-mode
   :ensure t
