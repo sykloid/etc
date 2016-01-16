@@ -378,6 +378,8 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :mode "\\.hs'"
   :config
   (with-hook haskell-mode-hook
+    (haskell-decl-scan-mode)
+    (haskell-doc-mode)
     (haskell-indentation-mode)))
 
 (use-package ledger-mode
