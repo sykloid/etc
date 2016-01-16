@@ -375,14 +375,14 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package haskell-mode
   :ensure t
-  :mode "\\.hs"
+  :mode "\\.hs'"
   :config
   (with-hook haskell-mode-hook
     (haskell-indentation-mode)))
 
 (use-package ledger-mode
   :ensure t
-  :mode "\\.ldg"
+  :mode "\\.ldg'"
   :config
   (setc ledger-clear-whole-transactions t)
   (setc ledger-use-iso-dates t)
@@ -392,7 +392,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package org
   :ensure org-plus-contrib
-  :mode "\\.org"
+  :mode "\\.org'"
   :init
   (defhydra hydra-org (:color blue :hint nil :idle 1.0)
     "
@@ -418,7 +418,7 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
 (use-package rust-mode
   :ensure t
-  :mode "\\.rs")
+  :mode "\\.rs'")
 
 (use-package racer
   :ensure t
