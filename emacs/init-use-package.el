@@ -270,7 +270,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   :config
   (setc ivy-wrap t)
-  (define-key ivy-mode-map (kbd "ESC") 'minibuffer-keyboard-quit))
+  (define-key ivy-minibuffer-map (kbd "ESC") 'minibuffer-keyboard-quit))
 
 (use-package flycheck
   :ensure t
