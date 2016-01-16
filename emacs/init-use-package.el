@@ -246,6 +246,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package counsel
   :ensure t
   :diminish t
+  :bind (("M-x" . counsel-M-x))
   :init
   (ivy-mode)
   (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
