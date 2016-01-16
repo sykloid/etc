@@ -406,15 +406,20 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (evil-leader/set-key "o" 'hydra-org/body)
 
   :config
-  (setc org-directory "~/org")
-  (setc org-agenda-files '("~/org/agenda"))
+  (setc org-directory "~/org/")
+  (setc org-agenda-files org-directory)
 
   (setc org-agenda-span 14)
   (setc org-agenda-start-on-weekday nil)
 
   ;; Source Code
   (setc org-src-fontify-natively t)
-  (setc org-src-preserve-indentation t))
+  (setc org-src-preserve-indentation t)
+
+  ;; Capture Templates
+  (setc org-capture-templates
+	`(("t" "Task" entry (file (concat org-directory "agenda.org"))
+	   "* TODO %?" :kill-buffer t :prepend t))))
 
 (use-package rust-mode
   :ensure t
