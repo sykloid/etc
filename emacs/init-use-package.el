@@ -250,13 +250,22 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (ivy-mode)
   (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
     "
- Listings: {_b_} Buffers | {_f_} Files | {_q_} Quit
+ Buffers and Files
+───────────────────────────────────
+ {_l_} List Buffers | {_f_} List Files
+ {_k_} Kill Buffer
+ {_o_} Other Buffer
+───────────────────────────────────
+ {_q_} Quit
 "
-    ("b" switch-to-buffer)
-    ("f" find-file)
+    ("b" bury-buffer)
+    ("f" counsel-find-file)
+    ("k" kill-this-buffer)
+    ("l" switch-to-buffer)
+    ("o" evil-buffer)
     ("q" nil))
 
-  (evil-leader/set-key "l" 'hydra-list/body)
+  (evil-leader/set-key "b" 'hydra-list/body)
 
   :config
   (setc ivy-wrap t))
