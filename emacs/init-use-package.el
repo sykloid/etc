@@ -268,7 +268,8 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (evil-leader/set-key "b" 'hydra-list/body)
 
   :config
-  (setc ivy-wrap t))
+  (setc ivy-wrap t)
+  (define-key ivy-mode-map (kbd "ESC") 'minibuffer-keyboard-quit))
 
 (use-package flycheck
   :ensure t
