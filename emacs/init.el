@@ -473,3 +473,24 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   :config
   (setq racer-cmd "/home/sykora/.cargo/bin/racer")
   (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src"))
+
+(use-package tex-site
+  :ensure auctex
+  :mode ("\\.tex'" . LaTeX-mode)
+  :init
+  (with-hook LaTeX-mode-hook
+    (auto-fill-mode)
+    (turn-on-reftex))
+  :config
+  (defhydra hydra-latex (:color blue :hint nil :idle 1.0)
+    "
+ LaTeX: {_c_} Compile | {_i_} Index | {_v_} View | {_q_} Quit
+"
+    ("c" TeX-latexmk)
+    ("v" TeX-view)
+    ("i" reftex-toc)
+    ("q" nil))
+
+  (evil-leader/set-key-for-mode 'latex-mode "m" 'hydra-latex/body)
+
+  (setc font-latex-fontify-sectioning 'color))
