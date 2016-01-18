@@ -6,6 +6,9 @@ chatnets = {
     freenode = {
         type = "IRC";
     };
+    mozilla = {
+        type = "IRC";
+    };
 };
 
 # Servers
@@ -14,6 +17,12 @@ servers = (
         address = "chat.freenode.net";
         chatnet = "freenode";
         port = "6666";
+        autoconnect = "yes";
+    }
+    {
+        address = "irc.mozilla.org";
+        chatnet = "mozilla";
+        port = "6697";
         autoconnect = "yes";
     }
 );
