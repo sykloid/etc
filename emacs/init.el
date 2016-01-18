@@ -301,6 +301,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :init
   (global-company-mode))
 
+(use-package imenu
+  :config
+  (setc imenu-space-replacement "-"))
+
 (use-package smartparens
   :ensure t
   :diminish smartparens-mode
@@ -384,6 +388,12 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (setc projectile-completion-system 'ivy))
 
 ;; Modes
+(use-package lisp-mode
+  :mode ("\\.el'" . emacs-lisp-mode)
+  :config
+  (with-hook emacs-lisp-mode-hook
+    (add-to-list 'imenu-generic-expression
+		 '("Used Packages" "^(use-package \\([a-zA-Z0-9\-]*\\)" 1))))
 
 (use-package haskell-mode
   :ensure t
