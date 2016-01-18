@@ -255,11 +255,11 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
     "
  Buffers and Files
-──────────────────────────────────────────────────────────
- {_l_} List Buffers | {_f_} List Files | {_d_} List Directories
- {_k_} Kill Buffer
- {_o_} Other Buffer
-──────────────────────────────────────────────────────────
+─────────────────────────────────────────
+ {_l_} List Buffers | {_f_} List Files
+ {_k_} Kill Buffer  | {_d_} List Directories
+ {_o_} Other Buffer | {_m_} List Menu
+─────────────────────────────────────────
  {_q_} Quit
 "
     ("b" bury-buffer)
@@ -267,6 +267,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     ("f" counsel-find-file)
     ("k" kill-this-buffer)
     ("l" switch-to-buffer)
+    ("m" imenu)
     ("o" evil-buffer)
     ("q" nil))
 
