@@ -274,7 +274,13 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (evil-leader/set-key "b" 'hydra-list/body)
 
   :config
-  (setc ivy-wrap t))
+  (setc ivy-wrap t)
+
+  (bind-keys :map ivy-minibuffer-map
+	     ("C-e" . ivy-next-line)
+	     ("C-i" . ivy-previous-line)
+
+	     ("<tab>" . ivy-partial-or-done)))
 
 (use-package flycheck
   :ensure t
