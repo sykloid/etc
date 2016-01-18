@@ -100,6 +100,9 @@
               ("i" . evil-previous-visual-line)
               ("o" . evil-forward-char)
 
+              ("N" . beginning-of-line-toggle)
+              ("O" . end-of-line)
+
               ("t" . evil-search-next)
               ("T" . evil-search-previous))
 
