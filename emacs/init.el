@@ -53,6 +53,8 @@
                   (load-theme 'skywave-gui))))
   (load-theme 'skywave-gui))
 
+(set-fill-column 100)
+
 ;; Behaviour
 (setc scroll-step 1)
 
