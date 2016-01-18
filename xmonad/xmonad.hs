@@ -81,7 +81,9 @@ myTabTheme :: Theme
 myTabTheme = defaultTheme {
     fontName = "xft:Envy Code R:pixelsize=12",
     inactiveColor = "#333333",
+    inactiveBorderColor = "#333333",
     activeColor = "#FFCC00",
+    activeBorderColor = "#FFCC00",
     activeTextColor = "#000000",
     inactiveTextColor = "#BDBDBD"
 
@@ -241,6 +243,6 @@ main = do
         -- Hooks
         handleEventHook = fullscreenEventHook,
         layoutHook    = myLayoutHook,
-        logHook       = myXMobarLogger xmobarPipe >> updatePointer (Relative 0.98 0.95),
+        logHook       = myXMobarLogger xmobarPipe >> updatePointer (0.98, 0.95) (0, 0),
         manageHook    = myManageHook
     }
