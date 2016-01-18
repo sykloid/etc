@@ -412,7 +412,7 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
   :config
   (setc org-directory "~/org/")
-  (setc org-agenda-files org-directory)
+  (setc org-agenda-files '("~/org/agenda.org"))
 
   (setc org-agenda-span 14)
   (setc org-agenda-start-on-weekday nil)
@@ -420,6 +420,10 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   ;; Source Code
   (setc org-src-fontify-natively t)
   (setc org-src-preserve-indentation t)
+
+  ;; Tags
+  (setc org-agenda-tags-column -100)
+  (setc org-tags-column -100)
 
   ;; Capture Templates
   (setc org-capture-templates
