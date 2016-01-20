@@ -484,17 +484,16 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
 (use-package rust-mode
   :ensure t
-  :mode "\\.rs'")
-
-(use-package racer
-  :ensure t
+  :mode ("\\.rs\\'" . rust-mode)
   :init
-  (with-hook rust-mode-hook
-    (racer-mode))
+  (use-package racer
+    :ensure t
+    :config
+    (with-hook rust-mode-hook
+      (racer-mode))
 
-  :config
-  (setq racer-cmd "/home/sykora/.cargo/bin/racer")
-  (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src"))
+    (setq racer-cmd "/home/sykora/.cargo/bin/racer")
+    (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src")))
 
 (use-package tex-site
   :ensure auctex
