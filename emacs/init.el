@@ -495,14 +495,24 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
     (setq racer-cmd "/home/sykora/.cargo/bin/racer")
     (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src")))
 
-(use-package tex-site
+(use-package tex-mode
   :ensure auctex
   :mode ("\\.tex'" . LaTeX-mode)
-  :init
+  :config
   (with-hook LaTeX-mode-hook
     (auto-fill-mode)
     (turn-on-reftex))
-  :config
+
+  (use-package auctex-latexmk
+    :ensure t
+    :init
+    (auctex-latexmk-setup)
+
+    :config
+    (defun TeX-latexmk ()
+      (interactive)
+      (TeX-command "LatexMk" 'TeX-master-file -1)))
+
   (defhydra hydra-latex (:color blue :hint nil :idle 1.0)
     "
  LaTeX: {_c_} Compile | {_i_} Index | {_v_} View | {_q_} Quit
