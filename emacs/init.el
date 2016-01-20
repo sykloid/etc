@@ -298,11 +298,11 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   :config
   (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
-
   (setc flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 (use-package company
   :ensure t
+  :diminish company-mode
   :bind (:map evil-insert-state-map
               ("TAB" . company-indent-or-complete-common))
   :init
@@ -404,7 +404,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package haskell-mode
   :ensure t
-  :mode "\\.hs'"
+  :mode ("\\.hs'" . haskell-mode)
   :config
   (with-hook haskell-mode-hook
     (haskell-decl-scan-mode)
@@ -413,7 +413,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package ledger-mode
   :ensure t
-  :mode "\\.ldg'"
+  :mode ("\\.ldg\\'" . ledger-mode)
   :config
   (setc ledger-clear-whole-transactions t)
   (setc ledger-use-iso-dates t)
@@ -423,7 +423,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package org
   :ensure org-plus-contrib
-  :mode "\\.org'"
+  :mode ("\\.org\\'" . org-mode)
   :init
   (defhydra hydra-org (:color blue :hint nil :idle 1.0)
     "
