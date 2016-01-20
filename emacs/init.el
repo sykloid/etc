@@ -53,10 +53,13 @@
                   (load-theme 'skywave-gui))))
   (load-theme 'skywave-gui))
 
-(set-fill-column 100)
-
 ;; Behaviour
 (setc scroll-step 1)
+
+;; Editing
+(set-fill-column 100)
+(setc indent-tabs-mode nil)
+(setc show-trailing-whitespace t)
 
 ;; Miscellaneous
 (setc ad-redefinition-action 'accept)
