@@ -402,6 +402,8 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     (add-to-list 'imenu-generic-expression
 		 '("Used Packages" "^\s*(use-package \\([a-zA-Z0-9\-]*\\)" 1))
 
+    (font-lock-add-keywords nil '(("(\\(\\<with-hook\\>\\)" 1 'font-lock-keyword-face)))
+    (font-lock-add-keywords nil '(("(\\(\\<set[cq]\\)" 1 'font-lock-keyword-face)))))
 
 (use-package haskell-mode
   :ensure t
