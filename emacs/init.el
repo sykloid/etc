@@ -406,6 +406,9 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :ensure t
   :mode ("\\.hs'" . haskell-mode)
   :config
+  (use-package haskell-doc
+    :diminish haskell-doc-mode)
+
   (with-hook haskell-mode-hook
     (haskell-decl-scan-mode)
     (haskell-doc-mode)
