@@ -400,7 +400,8 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :config
   (with-hook emacs-lisp-mode-hook
     (add-to-list 'imenu-generic-expression
-		 '("Used Packages" "^(use-package \\([a-zA-Z0-9\-]*\\)" 1))))
+		 '("Used Packages" "^\s*(use-package \\([a-zA-Z0-9\-]*\\)" 1))
+
 
 (use-package haskell-mode
   :ensure t
