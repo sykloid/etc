@@ -497,7 +497,7 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
 (use-package tex-mode
   :ensure auctex
-  :mode ("\\.tex'" . LaTeX-mode)
+  :mode ("\\.tex\\'" . LaTeX-mode)
   :config
   (with-hook LaTeX-mode-hook
     (auto-fill-mode)
@@ -524,4 +524,9 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
   (evil-leader/set-key-for-mode 'latex-mode "m" 'hydra-latex/body)
 
-  (setc font-latex-fontify-sectioning 'color))
+  (setc font-latex-fontify-sectioning 'color)
+
+  (add-to-list 'TeX-expand-list `("%i" (lambda () instance-name)))
+  (add-to-list 'TeX-view-program-list '("QPDFView"
+    ("qpdfview --unique --instance %i %o" (mode-io-correlate "#src:%b:%n:1"))))
+  (setcdr (assoc 'output-pdf TeX-view-program-selection) '("QPDFView")))
