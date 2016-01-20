@@ -429,6 +429,30 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :ensure org-plus-contrib
   :mode ("\\.org\\'" . org-mode)
   :init
+  (use-package org-agenda
+    :commands (org-agenda)
+    :config
+    (with-hook org-agenda-mode-hook
+      (hl-line-mode))
+
+    (setc org-agenda-dim-blocked-tasks t)
+    (setc org-agenda-span 14)
+    (setc org-agenda-start-on-weekday nil)
+    (setc org-agenda-tags-column -100)
+
+    (evil-set-initial-state 'org-agenda-mode 'emacs)
+
+    (bind-keys :map org-agenda-mode-map
+	       ("e" . org-agenda-next-item)
+	       ("i" . org-agenda-previous-item)))
+
+  (use-package org-capture
+    :commands (org-capture)
+    :config
+    (setc org-capture-templates
+	  `(("t" "Task" entry (file (concat org-directory "agenda.org"))
+	     "* TODO %?" :kill-buffer t :prepend t))))
+
   (defhydra hydra-org (:color blue :hint nil :idle 1.0)
     "
 Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
@@ -445,12 +469,6 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (setc org-directory "~/org/")
   (setc org-agenda-files '("~/org/agenda.org"))
 
-  ;; Agenda
-  (setc org-agenda-span 14)
-  (setc org-agenda-start-on-weekday nil)
-
-  (with-hook org-agenda-mode-hook
-    (hl-line-mode))
 
   ;; Appearance
   (setq org-ellipsis "…")
@@ -459,14 +477,7 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (setc org-src-fontify-natively t)
   (setc org-src-preserve-indentation t)
 
-  ;; Tags
-  (setc org-agenda-tags-column -100)
   (setc org-tags-column -100)
-
-  ;; Capture Templates
-  (setc org-capture-templates
-	`(("t" "Task" entry (file (concat org-directory "agenda.org"))
-	   "* TODO %?" :kill-buffer t :prepend t)))
 
   (with-hook org-mode-hook
     (auto-fill-mode)))
