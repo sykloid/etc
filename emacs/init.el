@@ -393,6 +393,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   :config
   (setc projectile-completion-system 'ivy))
+(use-package expand-region
+  :ensure t
+  :bind (:map evil-visual-state-map
+	      ("." . er/expand-region)))
 
 ;; Modes
 (use-package lisp-mode
