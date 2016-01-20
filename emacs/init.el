@@ -411,6 +411,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     (haskell-doc-mode)
     (haskell-indentation-mode)))
 
+(use-package K3-mode
+  :load-path user-lisp-directory
+  :mode ("\\.k3" . K3-mode))
+
 (use-package ledger-mode
   :ensure t
   :mode ("\\.ldg\\'" . ledger-mode)
