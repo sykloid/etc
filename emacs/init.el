@@ -379,7 +379,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 ─────────────────────────────────────
  {_q_} Quit
 "
-    ("s" projectile-switch-project :color red)
+    ("s" projectile-switch-project)
     ("g" projectile-vc)
     ("d" (cd (projectile-project-root)))
 
@@ -392,7 +392,9 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (evil-leader/set-key "p" 'hydra-projectile/body)
 
   :config
-  (setc projectile-completion-system 'ivy))
+  (setc projectile-completion-system 'ivy)
+  (setc projectile-switch-project-action 'projectile-find-file-dwim))
+
 (use-package expand-region
   :ensure t
   :bind (:map evil-visual-state-map
