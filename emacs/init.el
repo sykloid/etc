@@ -250,13 +250,23 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   (setc magit-popup-show-common-commands nil))
 
-
-(use-package counsel
-  :ensure t
-  :diminish t
-  :bind (("M-x" . counsel-M-x))
+(use-package ivy
+  :diminish ivy-mode
+  :ensure counsel
   :init
   (ivy-mode)
+
+  :config
+  (setc ivy-wrap t)
+  (bind-keys :map ivy-minibuffer-map
+	     ("C-e" . ivy-next-line)
+	     ("C-i" . ivy-previous-line)
+
+	     ("<tab>" . ivy-partial-or-done)))
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x))
+  :init
   (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
     "
  Buffers and Files
@@ -276,16 +286,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     ("o" evil-buffer)
     ("q" nil))
 
-  (evil-leader/set-key "b" 'hydra-list/body)
-
-  :config
-  (setc ivy-wrap t)
-
-  (bind-keys :map ivy-minibuffer-map
-	     ("C-e" . ivy-next-line)
-	     ("C-i" . ivy-previous-line)
-
-	     ("<tab>" . ivy-partial-or-done)))
+  (evil-leader/set-key "b" 'hydra-list/body))
 
 (use-package flycheck
   :ensure t
