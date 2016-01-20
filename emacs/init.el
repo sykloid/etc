@@ -246,7 +246,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 	     ("V" . set-mark-command)
 
-	     ("M-i" . magit-section-up)))
+	     ("M-i" . magit-section-up))
+
+  (setc magit-popup-show-common-commands nil))
+
 
 (use-package counsel
   :ensure t
