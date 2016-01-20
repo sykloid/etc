@@ -483,6 +483,15 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   ;; Appearance
   (setq org-ellipsis "…")
 
+  (setc org-emphasis-alist
+	'(("*" org-bold)
+	  ("/" org-italic)
+	  ("_" org-underline)
+	  ("`" org-verbatim verbatim)
+	  ("~" org-code verbatim)
+	  ("+" (:strike-through t))
+	  ("$" org-math)))
+
   ;; Source Code
   (setc org-src-fontify-natively t)
   (setc org-src-preserve-indentation t)
