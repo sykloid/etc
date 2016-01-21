@@ -74,6 +74,10 @@
 ;; Package Initialization
 (use-package evil
   :ensure t
+
+  :bind (:map evil-insert-state-map
+              ("RET" . evil-ret-and-indent))
+
   :bind (:map evil-normal-state-map
               ("n" . evil-backward-char)
               ("e" . evil-next-visual-line)
