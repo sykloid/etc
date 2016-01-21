@@ -307,7 +307,6 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   :config
   (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
-  (setc flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
 
 (use-package company
   :ensure t
@@ -560,3 +559,6 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (add-to-list 'TeX-view-program-list '("QPDFView"
     ("qpdfview --unique --instance %i %o" (mode-io-correlate "#src:%b:%n:1"))))
   (setcdr (assoc 'output-pdf TeX-view-program-selection) '("QPDFView")))
+;; Local Variables:
+;; flycheck-disabled-checkers: (emacs-lisp emacs-lisp-checkdoc)
+;; End:
