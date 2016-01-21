@@ -63,7 +63,7 @@
 (setc tab-width 2)
 
 (with-hook prog-mode-hook
-  (setc show-trailing-whitespace t))
+  (setq show-trailing-whitespace t))
 
 ;; Miscellaneous
 (setc ad-redefinition-action 'accept)
