@@ -59,7 +59,9 @@
 ;; Editing
 (set-fill-column 100)
 (setc indent-tabs-mode nil)
+(setc sentence-end-double-space nil)
 (setc show-trailing-whitespace t)
+(setc tab-width 2)
 
 ;; Miscellaneous
 (setc ad-redefinition-action 'accept)
@@ -67,6 +69,7 @@
 
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 ;; Package Initialization
 (use-package evil
