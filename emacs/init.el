@@ -60,8 +60,10 @@
 (set-fill-column 100)
 (setc indent-tabs-mode nil)
 (setc sentence-end-double-space nil)
-(setc show-trailing-whitespace t)
 (setc tab-width 2)
+
+(with-hook prog-mode-hook
+  (setc show-trailing-whitespace t))
 
 ;; Miscellaneous
 (setc ad-redefinition-action 'accept)
@@ -305,7 +307,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   :config
   (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
-  (setc flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+  (setc flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
 
 (use-package company
   :ensure t
