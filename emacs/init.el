@@ -420,6 +420,19 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :bind (:map evil-visual-state-map
 	      ("." . er/expand-region)))
 
+(use-package comment-dwim-toggle
+  :load-path user-lisp-directory
+  :init
+  (evil-leader/set-key "c" 'comment-dwim-toggle)
+
+  (defun org-comment-dwim-toggle ()
+    (interactive)
+    (or (org-babel-do-in-edit-buffer
+         (comment-dwim-toggle))
+        (comment-dwim-toggle)))
+
+  (evil-leader/set-key-for-mode 'org-mode "c" 'org-comment-dwim-toggle))
+
 ;; Modes
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
