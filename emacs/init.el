@@ -305,8 +305,20 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :init
   (global-flycheck-mode)
 
+  (defhydra hydra-flycheck (:color blue :idle 1.0 :hint nil)
+    "
+ Flycheck: {_e_} Next Error | {_i_} Previous Error | {_l_} List Errors | {_b_} Recheck Buffer | {_q_} Quit
+ "
+    ("e" flycheck-next-error)
+    ("i" flycheck-previous-error)
+    ("l" flycheck-list-errors)
+    ("b" flycheck-buffer)
+    ("q" nil))
+
   :config
   (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
+
+  (evil-leader/set-key "f" 'hydra-flycheck/body))
 
 (use-package company
   :ensure t
