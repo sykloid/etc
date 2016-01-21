@@ -584,6 +584,11 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (add-to-list 'TeX-view-program-list '("QPDFView"
     ("qpdfview --unique --instance %i %o" (mode-io-correlate "#src:%b:%n:1"))))
   (setcdr (assoc 'output-pdf TeX-view-program-selection) '("QPDFView")))
+
+(use-package yaml-mode
+  :ensure t
+  :mode ("\\.ya?ml\\'" . yaml-mode))
+
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp emacs-lisp-checkdoc)
 ;; End:
