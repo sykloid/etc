@@ -433,6 +433,19 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   (evil-leader/set-key-for-mode 'org-mode "c" 'org-comment-dwim-toggle))
 
+(use-package eshell
+  :config
+  (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-queue-input)
+
+  (use-package em-hist
+    :config
+    (defun eshell-add-input-to-history (input)
+      "Add `INPUT' to history. If already present, move to front."
+      (if (funcall eshell-input-filter input)
+          (ring-remove+insert+extend eshell-history-ring (replace-regexp-in-string "[ \t\n]*\\'" "" input)))
+      (setq eshell-save-history-index eshell-history-index)
+      (setq eshell-history-index nil))))
+
 ;; Modes
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
