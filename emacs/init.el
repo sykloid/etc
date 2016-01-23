@@ -153,6 +153,9 @@
               ("v" . evil-visual-restore)
               ("m" . evil-mark-last-yank))
 
+  :bind (:map evil-emacs-state-map
+              ("C-w" . evil-window-map))
+
   :init
   (evil-mode t)
 
