@@ -449,6 +449,12 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
       (setq eshell-save-history-index eshell-history-index)
       (setq eshell-history-index nil))))
 
+(use-package narrow-or-widen-dwim
+  :load-path user-lisp-directory
+  :commands (narrow-or-widen-dwim)
+  :init
+  (evil-leader/set-key "n" 'narrow-or-widen-dwim))
+
 ;; Modes
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
