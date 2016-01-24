@@ -53,6 +53,8 @@
                   (load-theme 'skywave-gui))))
   (load-theme 'skywave-gui))
 
+(column-number-mode)
+
 ;; Behaviour
 (setc scroll-step 1)
 
