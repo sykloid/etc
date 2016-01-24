@@ -422,6 +422,35 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :config
   (setc compilation-scroll-output t))
 
+(use-package compilation-manager
+  :load-path (concat user-lisp-directory "compilation-manager/")
+  :init
+  (defhydra hydra-compile (:idle 1.0 :color blue :hint nil)
+      "
+ Compilation Control
+─────────────────────────────────────────────────────────────────
+ {_c_} Compile   | {_p_} Compile Profile | {_s_} Toggle Skip Threshold
+ {_r_} Recompile | {_n_} Name Profile    |
+ {_k_} Kill      |
+ {_b_} Raise     |
+─────────────────────────────────────────────────────────────────
+ {_q_} Quit
+"
+      ("c" compile)
+      ("r" recompile)
+      ("k" kill-compilation)
+      ("b" (if (get-buffer "*compilation*")
+               (switch-to-buffer "*compilation*")
+             (message "No active compilation session.")))
+
+      ("p" compilation-manager-run-profile)
+      ("n" compilation-manager-name-last-profile)
+
+      ("s" compilation-set-skip-threshold)
+      ("q" nil))
+
+  (evil-leader/set-key "r" 'hydra-compile/body))
+
 (use-package expand-region
   :ensure t
   :bind (:map evil-visual-state-map
