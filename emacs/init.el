@@ -55,6 +55,16 @@
 
 (column-number-mode)
 
+;; Backups and Auto-Saves
+(setc backup-by-copying t)
+(setc backup-directory-alist `(("." . ,(concat user-emacs-directory "backups/"))))
+(setc delete-old-versions t)
+(setc kept-new-versions 6)
+(setc kept-old-versions 2)
+(setc version-control t)
+
+(setc auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "auto-saves"))))
+
 ;; Behaviour
 (setc scroll-step 1)
 
