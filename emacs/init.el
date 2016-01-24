@@ -326,8 +326,6 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package company
   :ensure t
   :diminish company-mode
-  :bind (:map evil-insert-state-map
-              ("TAB" . company-indent-or-complete-common))
   :init
   (global-company-mode))
 
