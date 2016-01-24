@@ -418,6 +418,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   (setc projectile-completion-system 'ivy)
   (setc projectile-switch-project-action 'projectile-find-file-dwim))
 
+(use-package compile
+  :config
+  (setc compilation-scroll-output t))
+
 (use-package expand-region
   :ensure t
   :bind (:map evil-visual-state-map
