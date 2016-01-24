@@ -575,6 +575,9 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   :ensure auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
   :config
+
+  (put 'LaTeX-narrow-to-environment 'disabled nil)
+
   (with-hook LaTeX-mode-hook
     (auto-fill-mode)
     (turn-on-reftex))
