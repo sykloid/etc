@@ -539,6 +539,7 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
   ;; Appearance
   (setq org-ellipsis "…")
+  (setq org-adapt-indentation nil)
 
   (setc org-emphasis-alist
 	'(("*" org-bold)
