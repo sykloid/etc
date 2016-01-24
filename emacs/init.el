@@ -57,7 +57,7 @@
 (setc scroll-step 1)
 
 ;; Editing
-(set-fill-column 100)
+(setc fill-column 100)
 (setc indent-tabs-mode nil)
 (setc sentence-end-double-space nil)
 (setc tab-width 2)
