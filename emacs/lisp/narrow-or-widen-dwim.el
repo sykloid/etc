@@ -14,6 +14,7 @@
   (interactive "P")
   (declare (interactive-only))
   (cond ((and (buffer-narrowed-p) (not p)) (widen))
+        ((org-src-edit-buffer-p) (org-edit-src-exit))
         ((region-active-p)
          (narrow-to-region (region-beginning) (region-end)))
         ((derived-mode-p 'org-mode)
