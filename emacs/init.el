@@ -601,14 +601,6 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (setq org-ellipsis "…")
   (setq org-adapt-indentation nil)
 
-  (setc org-emphasis-alist
-	'(("*" org-bold)
-	  ("/" org-italic)
-	  ("_" org-underline)
-	  ("`" org-verbatim verbatim)
-	  ("~" org-code verbatim)
-	  ("+" (:strike-through t))
-	  ("$" org-math)))
 
   ;; Source Code
   (setc org-src-fontify-natively t)
