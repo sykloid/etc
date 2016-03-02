@@ -511,6 +511,11 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
               ("x" . evil-exchange)
               ("X" . evil-exchange-cancel)))
 
+(use-package evil-args
+  :ensure t
+  :bind (:map evil-inner-text-objects-map ("," . evil-inner-arg))
+  :bind (:map evil-outer-text-objects-map ("," . evil-outer-arg)))
+
 ;; Modes
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
