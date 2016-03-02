@@ -420,14 +420,14 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
     ("b" projectile-switch-to-buffer)
     ("f" projectile-find-file-dwim)
-    ("a" counsel-git-grep)
+    ("a" helm-projectile-ag)
 
     ("q" nil))
 
   (evil-leader/set-key "p" 'hydra-projectile/body)
 
   :config
-  (setc projectile-completion-system 'ivy)
+  (setc projectile-completion-system 'helm)
   (setc projectile-switch-project-action 'projectile-find-file-dwim))
 
 (use-package compile
