@@ -285,22 +285,9 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
   (setc magit-popup-show-common-commands nil))
 
-(use-package ivy
-  :diminish ivy-mode
-  :ensure counsel
-  :init
-  (ivy-mode)
-
-  :config
-  (setc ivy-wrap t)
-  (bind-keys :map ivy-minibuffer-map
-	     ("C-e" . ivy-next-line)
-	     ("C-i" . ivy-previous-line)
-
-	     ("<tab>" . ivy-partial-or-done)))
-
-(use-package counsel
-  :bind (("M-x" . counsel-M-x))
+(use-package helm
+  :ensure t
+  :bind (("M-x" . helm-M-x))
   :init
   (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
     "
@@ -314,14 +301,21 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 "
     ("b" bury-buffer)
     ("d" cd)
-    ("f" counsel-find-file)
+    ("f" helm-find-files)
     ("k" kill-this-buffer)
-    ("l" switch-to-buffer)
-    ("m" imenu)
+    ("l" helm-buffers-list)
+    ("m" helm-imenu)
     ("o" evil-buffer)
     ("q" nil))
 
-  (evil-leader/set-key "b" 'hydra-list/body))
+  (evil-leader/set-key "b" 'hydra-list/body)
+  :config
+  (setc helm-split-window-in-side-p t)
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*helm" (* not-newline) "*" eos)
+                 (display-buffer-in-side-window)
+                 (inhibit-same-window . t)
+                 (window-height . 0.4))))
 
 (use-package flycheck
   :ensure t
