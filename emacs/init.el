@@ -601,6 +601,10 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (setq org-ellipsis "…")
   (setq org-adapt-indentation nil)
 
+  ;; Babel
+  (setc org-babel-load-languages '((emacs-lisp . t)
+                                   (restclient . t)
+                                   (shell . t)))
 
   ;; Source Code
   (setc org-src-fontify-natively t)
