@@ -500,6 +500,11 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :init
   (evil-leader/set-key "n" 'narrow-or-widen-dwim))
 
+(use-package fic-mode
+  :ensure t
+  :init
+  (turn-on-fic-mode))
+
 ;; Modes
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
