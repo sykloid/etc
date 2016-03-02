@@ -505,6 +505,12 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
   :init
   (turn-on-fic-mode))
 
+(use-package evil-exchange
+  :ensure t
+  :bind (:map evil-utility-map
+              ("x" . evil-exchange)
+              ("X" . evil-exchange-cancel)))
+
 ;; Modes
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
