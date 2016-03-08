@@ -403,16 +403,21 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package projectile
   :ensure t
   :init
+  (use-package helm-ag)
+  (use-package helm-projectile)
+
   (defhydra hydra-projectile (:color teal :hint nil :idle 1.0)
     "
  Projectile
 ─────────────────────────────────────
+ {_p_} Do What I Mean
  {_s_} Switch to Project | {_a_} Search
  {_g_} Version Control   | {_b_} Buffers
  {_d_} Change Directory  | {_f_} Files
 ─────────────────────────────────────
  {_q_} Quit
 "
+    ("p" helm-projectile)
     ("s" projectile-switch-project)
     ("g" projectile-vc)
     ("d" (cd (projectile-project-root)))
