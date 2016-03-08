@@ -592,6 +592,14 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
   (evil-leader/set-key "o" 'hydra-org/body)
 
   :config
+  ;; Keys
+  (evil-define-key 'insert org-mode-map "\M-n" 'org-metaleft)
+  (evil-define-key 'insert org-mode-map "\M-e" 'org-metadown)
+  (evil-define-key 'insert org-mode-map "\M-i" 'org-metaup)
+  (evil-define-key 'insert org-mode-map "\M-o" 'org-metaright)
+
+  (evil-define-key 'insert org-mode-map "\M-RET" 'org-metareturn)
+
   ;; Paths
   (setc org-directory "~/org/")
   (setc org-agenda-files '("~/org/agenda.org"))
