@@ -600,6 +600,12 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
   (evil-define-key 'insert org-mode-map "\M-RET" 'org-metareturn)
 
+  (use-package org-open-heading
+    :load-path user-lisp-directory
+    :init
+    (evil-define-key 'normal org-mode-map "\M-y" 'org-open-heading-below-and-insert)
+    (evil-define-key 'normal org-mode-map "\M-Y" 'org-open-heading-above-and-insert))
+
   ;; Paths
   (setc org-directory "~/org/")
   (setc org-agenda-files '("~/org/agenda.org"))
