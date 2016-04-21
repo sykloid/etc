@@ -400,6 +400,10 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package help-fns+ :ensure t)
 
+(use-package browse-url
+  :init
+  (setc browse-url-browser-function 'browse-url-chromium))
+
 (use-package projectile
   :ensure t
   :init
