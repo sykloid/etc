@@ -31,7 +31,7 @@ export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs
 
 # Important applications.
 export EDITOR=emacs
-export BROWSER=firefox
+export BROWSER=chromium
 
 # History Settings
 export SAVEHIST=2000
