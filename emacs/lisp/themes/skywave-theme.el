@@ -56,9 +56,11 @@
 
  ;; Diff
  `(diff-added
-   ((,skywave-tty . (:foreground "color-43"))))
+   ((,skywave-gui . (:foreground "Aquamarine2"))
+    (,skywave-tty . (:foreground "color-43"))))
  `(diff-removed
-   ((,skywave-tty . (:foreground "color-204"))))
+   ((,skywave-gui . (:foreground "PaleVioletRed2"))
+    (,skywave-tty . (:foreground "color-204"))))
 
  ;; Magit
  `(magit-diff-added
@@ -67,14 +69,18 @@
    ((t . (:inherit diff-removed))))
 
  `(magit-diff-added-highlight
-   ((t . (:inherit magit-diff-added
-          :background "color-235"))))
+   ((default . (:inherit magit-diff-added))
+    (,skywave-gui . (:background "#333333"))
+    (,skywave-tty . (:background "color-235"))))
+
  `(magit-diff-removed-highlight
-   ((t . (:inherit magit-diff-removed
-          :background "color-235"))))
+   ((default . (:inherit magit-diff-removed))
+    (,skywave-gui . (:background "#333333"))
+    (,skywave-tty . (:background "color-235"))))
 
  `(magit-diff-context-highlight
-   ((t . (:background "color-235"))))
+   ((,skywave-gui . (:background "#333333"))
+    (,skywave-tty . (:background "color-235"))))
  )
 
 (provide-theme 'skywave)
