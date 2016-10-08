@@ -52,6 +52,11 @@
     (,skywave-tty . (:foreground "color-121"))))
 
  `(highlight
+   ((,skywave-gui . (:background "#444444")))
+   ((,skywave-tty . (:background "color-233"))))
+
+ `(region
+   ((,skywave-gui . (:background "#444444")))
    ((,skywave-tty . (:background "color-233"))))
 
  ;; Diff
