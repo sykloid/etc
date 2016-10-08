@@ -663,6 +663,7 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
     ("i" reftex-toc)
     ("q" nil))
 
+  (setc latex-item-indent 0)
 
   (setc font-latex-fontify-sectioning 'color)
 
