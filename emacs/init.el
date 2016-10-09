@@ -510,6 +510,11 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package lisp-mode
   :mode ("\\.el'" . emacs-lisp-mode)
   :config
+  (use-package lisp-plist-indent-function
+    :load-path user-lisp-directory
+    :config
+    (setc lisp-indent-function 'lisp-plist-indent-function))
+
   (with-hook emacs-lisp-mode-hook
     (add-to-list 'imenu-generic-expression
 		 '("Used Packages" "^\s*(use-package \\([a-zA-Z0-9\-]*\\)" 1))
