@@ -490,7 +490,8 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package fic-mode
   :ensure t
   :init
-  (turn-on-fic-mode))
+  (with-hook prog-mode-hook
+    (fic-mode)))
 
 (use-package evil-exchange
   :ensure t
