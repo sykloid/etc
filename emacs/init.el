@@ -611,6 +611,9 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
     (setq racer-cmd "/home/sykora/.cargo/bin/racer")
     (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src")))
 
+(use-package sh-script
+  :mode ("\\.zsh\\'" . sh-mode))
+
 (use-package tex-mode
   :ensure auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
