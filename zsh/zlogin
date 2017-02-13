@@ -1,7 +1,3 @@
 # zlogin: Actions to be taken on login.
 
-if type envoy > /dev/null; then
-  envoy -u
-  source <(envoy -p)
-  systemctl --user import-environment SSH_AUTH_SOCK
-fi
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
