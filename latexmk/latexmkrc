@@ -5,3 +5,5 @@ $pdflatex = 'xelatex -shell-escape -interaction=nonstopmode -file-line-error -sy
 
 $pdf_previewer = 'qpdfview';
 $pdf_mode = 1;
+
+$clean_ext = 'sta'
