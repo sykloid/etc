@@ -126,9 +126,10 @@ myTiledLayout = Tall masterCapacity resizeDelta defaultRatio
         defaultRatio   = 1/2 -- Default screen ratio of master : others.
 
 -- avoidStruts makes room for the status bars.
-myLayoutHook = windowNavigation $ avoidStruts $ maximize $ minimize $ boringWindows $ myTiledLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
+myLayoutHook = windowNavigation $ avoidStruts $ maximize $ minimize $ boringWindows $ myTiledLayout ||| myDocumentLayout ||| Mirror myTiledLayout ||| tabbedLayout ||| Full
     where
         tabbedLayout = named "Tabbed" $ tabbed shrinkText myTabTheme
+        myDocumentLayout = named "Document" $ Tall 1 (1/100) (6/10)
 
 -- Keys
 -------
