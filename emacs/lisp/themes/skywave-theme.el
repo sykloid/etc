@@ -59,6 +59,24 @@
    ((,skywave-gui . (:background "#444444")))
    ((,skywave-tty . (:background "color-233"))))
 
+ `(error
+   ((,skywave-gui . (:foreground "#F4429E"))
+    (,skywave-tty . (:foreground "color-162"))))
+
+ `(warning
+   ((,skywave-gui . (:foreground "#F2AA63"))
+    (,skywave-tty . (:foreground "color-214"))))
+
+ ;; Compilation
+ `(compilation-info
+   ((,skywave-gui . (:foreground "#63D5F2"))))
+
+ `(compilation-line-number
+   ((,skywave-gui . (:foreground "#1ACCAB"))))
+
+ `(compilation-column-number
+   ((,skywave-gui . (:foreground "#1ACCAB"))))
+
  ;; Diff
  `(diff-added
    ((,skywave-gui . (:foreground "Aquamarine2"))
