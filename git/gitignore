@@ -1,5 +1,6 @@
 # Emacs
 .dir-locals.el
+.#*
 
 # Vim
 *.swp
