@@ -104,6 +104,14 @@
  `(magit-diff-context-highlight
    ((,skywave-gui . (:background "#333333"))
     (,skywave-tty . (:background "color-235"))))
+
+ ;; Org
+ '(org-bold ((t (:foreground "#EA7EAF" :weight ultra-bold))))
+ '(org-italic ((t (:foreground "#7EEABF" :slant italic))))
+ '(org-underline ((t (:underline t))))
+ '(org-verbatim ((t (:foreground "#F0E9A1"))))
+ '(org-code ((t (:foreground "#69ACC8"))))
+ '(org-strike-through ((t (:strike-through t))))
  )
 
 (provide-theme 'skywave)
