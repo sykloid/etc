@@ -3,7 +3,7 @@
 
 # Looking around, and moving about.
 alias ls="ls --color=tty"
-alias l="ls -lhB --color=tty"
+alias l="ls -lhB -N --color=tty"
 
 alias ...=../..
 
