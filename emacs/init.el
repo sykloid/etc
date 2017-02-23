@@ -285,10 +285,24 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     ("d" cd)
     ("f" helm-find-files)
     ("k" kill-this-buffer)
+    ("K" delete-file-and-buffer)
     ("l" helm-buffers-list)
     ("m" helm-imenu)
     ("o" evil-buffer)
     ("q" nil))
+
+  (defun delete-file-and-buffer ()
+    "Kill the current buffer and deletes the file it is visiting."
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when (yes-or-no-p (format "Kill this buffer and delete %s? " filename))
+          (when filename
+            (if (vc-backend filename)
+                (vc-delete-file filename)
+              (progn
+                (delete-file filename)
+                (message "Deleted file %s" filename)
+                (kill-buffer)))))))
 
   :config
   (setc helm-split-window-in-side-p t)
