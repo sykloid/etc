@@ -446,7 +446,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package comment-dwim-toggle
   :load-path user-lisp-directory
-  :general (:states 'normal :prefix general-leader
+  :general (:states '(normal visual) :prefix general-leader
             "c" 'comment-dwim-toggle)
   :general (:states 'normal :prefix general-leader :keymaps 'org-mode-map
             "c" 'org-comment-dwim-toggle)
