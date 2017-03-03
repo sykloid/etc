@@ -112,6 +112,20 @@
  '(org-verbatim ((t (:foreground "#F0E9A1"))))
  '(org-code ((t (:foreground "#69ACC8"))))
  '(org-strike-through ((t (:strike-through t))))
- )
+
+ '(outline-1 ((t (:foreground "#FAC78C"))))
+ '(outline-2 ((t (:foreground "#6EB8F5"))))
+ '(outline-3 ((t (:foreground "#C45271"))))
+ '(outline-4 ((t (:foreground "#4ED998"))))
+
+ '(org-date ((t (:foreground "#22D9E3" :underline nil))))
+ '(org-link ((t (:foreground "#22D9E3" :underline t))))
+ '(org-todo ((t (:foreground "#FFFFFF" :underline t :bold t))))
+ '(org-done ((t (:foreground "#777777"))))
+
+ '(org-upcoming-deadline ((t (:foreground "#F5F3B8"))))
+ '(org-warning ((t (:foreground "#E5C5F0"))))
+
+ '(org-agenda-structure ((t (:foreground "#8EE5EE")))))
 
 (provide-theme 'skywave)
