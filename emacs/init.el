@@ -484,7 +484,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package evil-exchange
   :ensure t
-  :general (:keymaps 'evil-utility
+  :general (:keymaps 'evil-utility-map
             "x" 'evil-exchange
             "X" 'evil-exchange-cancel))
 
