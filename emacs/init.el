@@ -590,6 +590,35 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
               "M-y" 'org-open-heading-below-and-insert
               "M-Y" 'org-open-heading-above-and-insert))
 
+  ;; Appearance
+  (defface org-bold
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (defface org-italic
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (defface org-underline
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (defface org-strike-through
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (setc org-emphasis-alist
+        '(("*" org-bold)
+          ("/" org-italic)
+          ("_" org-underline)
+          ("=" org-verbatim verbatim)
+          ("~" org-code verbatim)
+          ("+" org-strike-through)))
+
   ;; Paths
   (setc org-directory "~/org/")
   (setc org-agenda-files '("~/org/agenda.org"))
