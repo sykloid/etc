@@ -630,14 +630,15 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
   ;; Babel
   (setc org-babel-load-languages '((emacs-lisp . t)
-                                   (restclient . t)
                                    (shell . t)))
 
   ;; Source Code
   (setc org-src-fontify-natively t)
   (setc org-src-preserve-indentation t)
 
+  ;; Tagging
   (setc org-tags-column -100)
+  (setc org-tags-sort-function 'string<)
 
   (with-hook org-mode-hook
     (auto-fill-mode)))
