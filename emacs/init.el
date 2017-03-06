@@ -279,6 +279,7 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
  {_l_} List Buffers | {_f_} List Files
  {_k_} Kill Buffer  | {_d_} List Directories
  {_o_} Other Buffer | {_m_} List Menu
+ {_K_} Kill File and Buffer
 ─────────────────────────────────────────
  {_q_} Quit
 "
