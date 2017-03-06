@@ -438,6 +438,14 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 (use-package compile
   :config
   (setc compilation-scroll-output t))
+(add-hook 'compilation-start-hook
+          (lambda (proc)
+            (when (eq (process-filter proc) 'compilation-filter)
+              (set-process-filter
+               proc
+               (lambda (proc string)
+                 (funcall 'compilation-filter proc
+                          (xterm-color-filter string))))))))
 
 (use-package expand-region
   :ensure t
@@ -494,6 +502,8 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
             "," 'evil-inner-arg)
   :general (:keymaps 'evil-outer-text-objects-map
             "," 'evil-outer-arg))
+
+(use-package xterm-color)
 
 ;; Modes
 (use-package lisp-mode
