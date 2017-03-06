@@ -396,7 +396,6 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
     (sp-local-pair "`" "`" :actions nil)
     (sp-local-pair "`" "'" :when '(sp-in-string-p))))
 
-(use-package help-fns+ :ensure t)
 
 (use-package browse-url
   :init
