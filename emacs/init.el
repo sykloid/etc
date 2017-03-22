@@ -437,7 +437,11 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
 
 (use-package compile
   :config
-  (setc compilation-scroll-output t))
+  (use-package compilation-recenter-end
+    :load-path user-lisp-directory
+    :config
+    (compilation-recenter-end-enable))
+  (setc compilation-scroll-output t)
 (add-hook 'compilation-start-hook
           (lambda (proc)
             (when (eq (process-filter proc) 'compilation-filter)
