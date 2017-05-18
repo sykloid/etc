@@ -8,3 +8,6 @@ zstyle ':completion:*' max-errors 2 # Be lenient to 2 errors.
 zstyle ':completion:*' completer _expand _complete _correct _approximate # Completion modifiers.
 zstyle ':completion:*' use-cache true # Use a completion cache.
 zstyle ':completion:*' ignore-parents pwd # Ignore the current directory in completions.
+
+# Per-application rules.
+zstyle ':completion:*:*:qpdfview:*' file-patterns '*.(djvu|pdf|ps) *(-/)'
