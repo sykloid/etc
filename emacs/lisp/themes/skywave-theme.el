@@ -27,7 +27,7 @@
    ((,skywave-gui . (:foreground "#C45271"))
     (,skywave-tty . (:foreground "color-168"))))
  `(font-lock-doc-face
-   ((,skywave-gui . (:foreground "#E0B88D"))
+   ((,skywave-gui . (:foreground "#FFA8BD"))
     (,skywave-tty . (:foreground "color-180"))))
  `(font-lock-function-name-face
    ((,skywave-gui . (:foreground "#F5F3B8"))
