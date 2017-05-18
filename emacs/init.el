@@ -727,7 +727,10 @@ Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
 
   (setc font-latex-fontify-sectioning 'color)
 
-  (add-to-list 'TeX-expand-list `("%i" (lambda () instance-name)))
+  (defun sanitized-projectile-project-name ()
+    (replace-regexp-in-string "-" "_" (projectile-project-name)))
+
+  (add-to-list 'TeX-expand-list `("%i" sanitized-projectile-project-name))
   (add-to-list 'TeX-view-program-list '("QPDFView"
     ("qpdfview --unique --instance %i %o" (mode-io-correlate "#src:%b:%n:1"))))
   (setcdr (assoc 'output-pdf TeX-view-program-selection) '("QPDFView")))
