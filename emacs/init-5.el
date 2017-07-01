@@ -12,6 +12,15 @@
 (setq package-enable-at-startup nil)
 (eval-and-compile (package-initialize))
 
+;; ** Use-Package Bootstrap
+;; `use-package' itself is only needed during byte-compilation.
+(eval-when-compile
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t))
+
 ;; ** Utility Forms
 ;; *** Set Forms
 ;; The customization system is great for option discovery, but lousy for programmatic configuration.
