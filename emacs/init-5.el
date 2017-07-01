@@ -88,3 +88,17 @@
 (setg indent-tabs-mode nil)
 (setg sentence-end-double-space nil)
 (setg tab-width 2)
+
+;; * Minor Mode Initialization
+(use-package general
+  :defines general-prefix
+           general-non-normal-prefix
+           general-all-states
+           general-command-states
+           general-literal-states
+  :config
+  (defvar general-prefix "SPC")
+  (defvar general-non-normal-prefix "M-SPC")
+  (defvar general-all-states '(emacs insert motion normal visual))
+  (defvar general-command-states '(motion normal visual))
+  (defvar general-literal-states '(emacs insert)))
