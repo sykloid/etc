@@ -82,3 +82,9 @@
 (setg kept-new-versions 6)
 (setg kept-old-versions 2)
 (setg version-control t)
+
+;; ** Editor
+(setg fill-column 100)
+(setg indent-tabs-mode nil)
+(setg sentence-end-double-space nil)
+(setg tab-width 2)
