@@ -40,3 +40,8 @@
                    (symbol-name (cl-gensym (concat hook separator)))
                  (car (last components)))))
     `(add-hook (intern ,hook) (defalias (intern ,name) (lambda ,arg-spec ,@body)) t)))
+
+;; ** Path Initialization
+(defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
+(setg custom-theme-directory (concat user-lisp-directory "themes/"))
+(setg custom-file (concat user-emacs-directory "customizations.el"))
