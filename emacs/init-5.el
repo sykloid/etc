@@ -57,3 +57,9 @@
 (setg menu-bar-mode nil)
 (setg scroll-bar-mode nil)
 (setg tool-bar-mode nil)
+
+;; ** Fonts
+;; TODO: Implement font fall-back.
+(let ((font-name "Iosevka-11"))
+  (when (and (display-graphic-p) (find-font (font-spec :name font-name)))
+    (set-frame-font font-name)))
