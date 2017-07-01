@@ -102,3 +102,46 @@
   (defvar general-all-states '(emacs insert motion normal visual))
   (defvar general-command-states '(motion normal visual))
   (defvar general-literal-states '(emacs insert)))
+
+(use-package evil
+  :init
+  (evil-mode t)
+
+  :config
+  (setg evil-move-beyond-eol t)
+  (setg evil-split-window-below t)
+  (setg evil-vsplit-window-right t)
+
+  :general (:states general-command-states
+            "n" 'evil-backward-char
+            "e" 'evil-next-visual-line
+            "i" 'evil-previous-visual-line
+            "o" 'evil-forward-char)
+
+  :general (:states 'normal
+            "h" 'evil-insert-state
+            "H" 'evil-insert-line
+            "y" 'evil-open-below
+            "Y" 'evil-open-above
+
+            "Q" 'evil-record-macro)
+
+  :general (:states 'insert
+            "RET" 'evil-ret-and-indent)
+
+  ;; Unbinding doesn't work with `:states'.
+  :general (:keymaps 'evil-normal-state-map
+            "q" nil)
+
+  :general (:keymaps 'evil-window-map
+            "n" 'evil-window-left
+            "e" 'evil-window-down
+            "i" 'evil-window-up
+            "o" 'evil-window-right
+
+            "q" 'evil-window-delete)
+
+  :general (:states general-all-states
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            "w" 'evil-window-map))
