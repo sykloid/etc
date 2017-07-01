@@ -74,3 +74,11 @@
 (let ((font-name "Iosevka-11"))
   (when (and (display-graphic-p) (find-font (font-spec :name font-name)))
     (set-frame-font font-name)))
+
+;; * Core Behaviors
+;; ** Backups
+(setg backup-by-copying t)
+(setg delete-old-versions t)
+(setg kept-new-versions 6)
+(setg kept-old-versions 2)
+(setg version-control t)
