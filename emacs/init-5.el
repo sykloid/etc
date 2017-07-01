@@ -45,3 +45,15 @@
 (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
 (setg custom-file (concat user-emacs-directory "customizations.el"))
+
+;; * Appearance
+;; ** User Interface
+;; Some of these settings may also be set at the window-system level (e.g. XDefaults). Setting them
+;; there will force them to be set before the frame starts, preventing an ephemeral "flickering" of
+;; various UI artefacts. Regardless, they should also be set here for portability (XDefaults won't
+;; apply to e.g. OSX).
+(setg column-number-mode t)
+(setg inhibit-startup-message t)
+(setg menu-bar-mode nil)
+(setg scroll-bar-mode nil)
+(setg tool-bar-mode nil)
