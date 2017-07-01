@@ -55,6 +55,8 @@
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
 (setg custom-file (concat user-emacs-directory "customizations.el"))
 
+(use-package no-littering)
+
 ;; * Appearance
 ;; ** User Interface
 ;; Some of these settings may also be set at the window-system level (e.g. XDefaults). Setting them
