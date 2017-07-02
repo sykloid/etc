@@ -168,6 +168,7 @@
 
 (use-package outline
   :commands outline-hide-body
+  :diminish outline-minor-mode
 
   :config
   ;; Use an actual ellipsis character.
