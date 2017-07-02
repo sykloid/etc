@@ -147,6 +147,7 @@
             "w" 'evil-window-map))
 
 (use-package outline
+  :commands outline-hide-body
 
   :config
   ;; Use an actual ellipsis character.
@@ -154,4 +155,18 @@
    standard-display-table
    'selective-display
    (string-to-vector "…")))
+
+(use-package outshine
+  :init
+  (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
+    (outshine-hook-function)
+    (font-lock-flush)
+    (outline-hide-body))
+
+  :config
+  (defun wrap-in-save-excursion (fn args)
+    (save-excursion (funcall fn args)))
+
+  (advice-add #'outline-cycle :around 'wrap-in-save-excursion))
+
 (provide 'init)
