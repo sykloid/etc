@@ -194,4 +194,24 @@
 
   (advice-add #'outline-cycle :around 'wrap-in-save-excursion))
 
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :general (:states 'normal
+            "u" 'undo-tree-undo
+            "U" 'undo-tree-redo)
+
+  :general (:keymaps 'undo-tree-visualizer-mode-map
+            "n" 'undo-tree-visualize-switch-branch-left
+            "e" 'undo-tree-visualize-redo
+            "i" 'undo-tree-visualize-undo
+            "o" 'undo-tree-visualize-switch-branch-right)
+
+  :general (:states general-all-states
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            "u" 'undo-tree-visualize)
+
+  :init
+  (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs))
+
 (provide 'init)
