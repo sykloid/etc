@@ -54,7 +54,19 @@
 ;; ** Path Initialization
 (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
+
+;; ** Custom Initialization
 (setg custom-file (concat user-emacs-directory "customizations.el"))
+
+(defvar custom-safe-variables
+  '(custom-safe-themes))
+
+(defun custom-set-only-safe (args)
+  (cl-remove-if-not (lambda (elt) (member (car elt) custom-safe-variables)) args))
+
+(advice-add #'custom-set-variables :filter-args 'custom-set-only-safe)
+(load custom-file)
+(advice-remove #'custom-set-variables 'custom-set-only-safe)
 
 (use-package no-littering)
 
