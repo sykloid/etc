@@ -88,6 +88,10 @@
   (when (and (display-graphic-p) (find-font (font-spec :name font-name)))
     (set-frame-font font-name)))
 
+;; ** Theme
+(with-demoted-errors "%S"
+  (load-theme 'skywave))
+
 ;; * Core Behaviors
 ;; ** Backups
 (setg backup-by-copying t)
