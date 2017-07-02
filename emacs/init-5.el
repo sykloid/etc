@@ -90,6 +90,8 @@
 (setg sentence-end-double-space nil)
 (setg tab-width 2)
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; * Minor Mode Initialization
 (use-package general
   :defines general-prefix
