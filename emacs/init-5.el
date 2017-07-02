@@ -1,3 +1,4 @@
+;; -*- eval: (outline-minor-mode) -*-
 ;; An Emacs Initialization
 ;; P.C. Shyamshankar
 ;; This is rewrite #5
