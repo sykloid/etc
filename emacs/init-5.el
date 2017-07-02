@@ -52,7 +52,8 @@
     `(add-hook (intern ,hook) (defalias (intern ,name) (lambda ,arg-spec ,@body)) t)))
 
 ;; ** Path Initialization
-(defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
+(eval-and-compile
+  (defvar user-lisp-directory (concat user-emacs-directory "lisp/")))
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
 
 ;; ** Custom Initialization
