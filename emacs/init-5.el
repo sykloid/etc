@@ -77,6 +77,7 @@
 ;; various UI artefacts. Regardless, they should also be set here for portability (XDefaults won't
 ;; apply to e.g. OSX).
 (setg column-number-mode t)
+(setg fringe-mode 0)
 (setg inhibit-startup-message t)
 (setg menu-bar-mode nil)
 (setg scroll-bar-mode nil)
