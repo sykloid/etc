@@ -157,6 +157,9 @@
    (string-to-vector "…")))
 
 (use-package outshine
+  :general (:states 'normal
+            "<tab>" (general-predicate-dispatch (key-binding (kbd "<tab>"))
+                      (and outline-minor-mode (outline-on-heading-p)) 'outline-cycle))
   :init
   (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
     (outshine-hook-function)
