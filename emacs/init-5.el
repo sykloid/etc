@@ -85,7 +85,7 @@
 
 ;; ** Fonts
 ;; TODO: Implement font fall-back.
-(let ((font-name "Iosevka-11"))
+(let ((font-name "Iosevka-10"))
   (when (and (display-graphic-p) (find-font (font-spec :name font-name)))
     (set-frame-font font-name)))
 
