@@ -145,3 +145,5 @@
             :prefix general-prefix
             :non-normal-prefix general-non-normal-prefix
             "w" 'evil-window-map))
+
+(provide 'init)
