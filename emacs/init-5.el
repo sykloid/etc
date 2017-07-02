@@ -146,4 +146,12 @@
             :non-normal-prefix general-non-normal-prefix
             "w" 'evil-window-map))
 
+(use-package outline
+
+  :config
+  ;; Use an actual ellipsis character.
+  (set-display-table-slot
+   standard-display-table
+   'selective-display
+   (string-to-vector "…")))
 (provide 'init)
