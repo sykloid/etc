@@ -177,6 +177,10 @@
             "<tab>" 'helm-select-action)
 
   :init
+  ;; Hide the cursor in the helm completion window.
+  (add-hook+ helm-after-initialize-hook/:hide-helm-cursor ()
+    (with-helm-buffer (setl cursor-in-non-selected-windows nil)))
+
   ;; Helm display configuration: show helm across the entirety of the window, regardless of splits.
   (setg helm-split-window-in-side-p t)
   (add-to-list
