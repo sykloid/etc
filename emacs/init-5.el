@@ -190,6 +190,15 @@
      (inhibit-same-window . t)
      (window-height . 0.4))))
 
+(use-package hydra
+  :general (:states general-all-states
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            "h" 'help-hydra/body)
+  :init
+  (defhydra help-hydra (:color blue :idle 1.0)
+    ("a" helm-apropos)))
+
 (use-package outline
   :commands outline-hide-body
   :diminish outline-minor-mode
