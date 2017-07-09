@@ -167,6 +167,25 @@
             :non-normal-prefix general-non-normal-prefix
             "w" 'evil-window-map))
 
+(use-package helm
+  :general (:states general-all-states
+            "M-x" 'helm-M-x)
+
+  :general (:keymaps 'helm-map
+            "C-e" 'helm-next-line
+            "C-i" 'helm-previous-line
+            "<tab>" 'helm-select-action)
+
+  :init
+  ;; Helm display configuration: show helm across the entirety of the window, regardless of splits.
+  (setg helm-split-window-in-side-p t)
+  (add-to-list
+   'display-buffer-alist
+   `(,(rx bos "*helm" (* not-newline) "*" eos)
+     (display-buffer-in-side-window)
+     (inhibit-same-window . t)
+     (window-height . 0.4))))
+
 (use-package outline
   :commands outline-hide-body
   :diminish outline-minor-mode
