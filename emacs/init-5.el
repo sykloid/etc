@@ -190,6 +190,21 @@
      (inhibit-same-window . t)
      (window-height . 0.4))))
 
+(use-package helm-elisp
+  :ensure nil
+  :config
+  (defun custom-group-p (sym)
+    (or (and (get sym 'custom-loads) (not (get sym 'custom-autoload)))
+        (get sym 'custom-group)))
+
+  (defun helm-def-source--emacs-groups (&optional default)
+    (helm-build-in-buffer-source "Groups"
+      :init `(lambda () (helm-apropos-init #'custom-group-p ,default))
+      :fuzzy-match helm-apropos-fuzzy-match
+      :action '(("Customize Group" . (lambda (candidate) (customize-group (helm-symbolify candidate)))))))
+
+  (add-to-list 'helm-apropos-function-list 'helm-def-source--emacs-groups t))
+
 (use-package hydra
   :general (:states general-all-states
             :prefix general-prefix
