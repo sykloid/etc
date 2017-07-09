@@ -214,4 +214,12 @@
   :init
   (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs))
 
+(use-package winner
+  :ensure nil
+  :general (:keymaps 'evil-window-map
+            "u" 'winner-undo
+            "U" 'winner-redo)
+  :init
+  (winner-mode))
+
 (provide 'init)
