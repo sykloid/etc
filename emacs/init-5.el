@@ -139,7 +139,10 @@
             "n" 'evil-backward-char
             "e" 'evil-next-visual-line
             "i" 'evil-previous-visual-line
-            "o" 'evil-forward-char)
+            "o" 'evil-forward-char
+
+            "t" 'evil-search-next
+            "T" 'evil-search-previous)
 
   :general (:states 'normal
             "h" 'evil-insert-state
