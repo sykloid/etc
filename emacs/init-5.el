@@ -113,12 +113,14 @@
 ;; * Minor Mode Initialization
 (use-package general
   :defines general-prefix
+           general-mode-prefix
            general-non-normal-prefix
            general-all-states
            general-command-states
            general-literal-states
   :config
   (defvar general-prefix "SPC")
+  (defvar general-mode-prefix (concat general-prefix " " "m"))
   (defvar general-non-normal-prefix "M-SPC")
   (defvar general-all-states '(emacs insert motion normal visual))
   (defvar general-command-states '(motion normal visual))
