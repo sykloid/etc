@@ -9,10 +9,11 @@
 ;; The customization system is great for option discovery, but lousy for programmatic configuration.
 ;; Nevertheless, it has become the de-facto standard for specifying user-facing options, particuarly
 ;; using custom set logic. It's impossible to escape.
-(defalias 'setl 'setq "Set a variable (buffer) locally.")
-(defmacro setg (variable value)
-  "Set `VARIABLE' to `VALUE' globally, respecting `custom-set' if necessary."
-  `(customize-set-variable ',variable ,value))
+(eval-and-compile
+  (defalias 'setl 'setq "Set a variable (buffer) locally.")
+  (defmacro setg (variable value)
+    "Set `VARIABLE' to `VALUE' globally, respecting `custom-set' if necessary."
+    `(customize-set-variable ',variable ,value)))
 
 ;; *** Hook Forms
 ;; This macro solves multiple problems:
