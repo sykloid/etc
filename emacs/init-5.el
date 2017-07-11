@@ -141,6 +141,9 @@
             "i" 'evil-previous-visual-line
             "o" 'evil-forward-char
 
+            "N" 'evil-toggle-beginning-of-line
+            "O" 'end-of-line
+
             "t" 'evil-search-next
             "T" 'evil-search-previous
 
@@ -149,6 +152,8 @@
             "M" 'evil-paste-before)
 
   :general (:states 'normal
+            "a" 'evil-append
+            "A" 'evil-append-line
             "h" 'evil-insert-state
             "H" 'evil-insert-line
             "y" 'evil-open-below
@@ -174,7 +179,15 @@
   :general (:states general-all-states
             :prefix general-prefix
             :non-normal-prefix general-non-normal-prefix
-            "w" 'evil-window-map))
+            "w" 'evil-window-map)
+
+  :init
+  (defun evil-toggle-beginning-of-line ()
+    (interactive)
+    (let ((current (point)))
+      (back-to-indentation)
+      (when (= current (point))
+        (beginning-of-line)))))
 
 (use-package helm
   :general (:states general-all-states
