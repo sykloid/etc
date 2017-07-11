@@ -4,24 +4,6 @@
 ;; This is rewrite #5
 
 ;; * Meta Initialization
-;; ** Package System
-(eval-and-compile (require 'package))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
-(setq package-enable-at-startup nil)
-(eval-and-compile (package-initialize))
-
-;; ** Use-Package Bootstrap
-;; `use-package' itself is only needed during byte-compilation.
-(eval-when-compile
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (require 'use-package)
-  (setq use-package-always-ensure t))
-
 ;; ** Utility Forms
 ;; *** Set Forms
 ;; The customization system is great for option discovery, but lousy for programmatic configuration.
@@ -29,7 +11,7 @@
 ;; using custom set logic. It's impossible to escape.
 (defalias 'setl 'setq "Set a variable (buffer) locally.")
 (defmacro setg (variable value)
-  "Set a variable globally."
+  "Set `VARIABLE' to `VALUE' globally, respecting `custom-set' if necessary."
   `(customize-set-variable ',variable ,value))
 
 ;; *** Hook Forms
@@ -50,6 +32,24 @@
                    (symbol-name (cl-gensym (concat hook separator)))
                  (car (last components)))))
     `(add-hook (intern ,hook) (defalias (intern ,name) (lambda ,arg-spec ,@body)) t)))
+
+;; ** Package System
+(eval-and-compile (require 'package))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+
+(setl package-enable-at-startup nil)
+(eval-and-compile (package-initialize))
+
+;; ** Use-Package Bootstrap
+;; `use-package' itself is only needed during byte-compilation.
+(eval-when-compile
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setl use-package-always-ensure t))
 
 ;; ** Path Initialization
 (eval-and-compile
