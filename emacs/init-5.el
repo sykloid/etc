@@ -195,8 +195,8 @@
             "M-x" 'helm-M-x)
 
   :general (:keymaps 'helm-map
-            "C-e" 'helm-next-line
-            "C-i" 'helm-previous-line
+            "M-e" 'helm-next-line
+            "M-i" 'helm-previous-line
             "<tab>" 'helm-select-action)
 
   :init
