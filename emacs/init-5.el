@@ -142,7 +142,11 @@
             "o" 'evil-forward-char
 
             "t" 'evil-search-next
-            "T" 'evil-search-previous)
+            "T" 'evil-search-previous
+
+            "k" 'evil-yank
+            "m" 'evil-paste-after
+            "M" 'evil-paste-before)
 
   :general (:states 'normal
             "h" 'evil-insert-state
