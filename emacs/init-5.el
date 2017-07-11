@@ -214,6 +214,7 @@
      (window-height . 0.4))))
 
 (use-package helm-elisp
+  :defer t
   :ensure nil
   :config
   (defun custom-group-p (sym)
