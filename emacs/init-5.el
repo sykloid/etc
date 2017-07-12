@@ -289,8 +289,8 @@
     (outshine-hook-function)
     (font-lock-flush)
     (outline-hide-body)
-    (add-to-list 'imenu-generic-expression
-                 '("Sections" "^;; [*]+ \\(.*\\)" 1)))
+    (reveal-mode)
+    (add-to-list 'imenu-generic-expression '("Sections" "^;; [*]+ \\(.*\\)" 1)))
 
   :config
   (defun wrap-in-save-excursion (fn args)
