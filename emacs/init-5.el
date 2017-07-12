@@ -192,6 +192,26 @@
       (when (= current (point))
         (beginning-of-line)))))
 
+(use-package comment-dwim-toggle
+  :ensure nil
+  :load-path user-lisp-directory
+  :general (:states '(normal visual)
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            "c" 'comment-dwim-toggle)
+
+  :general (:states '(normal visual)
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            :keymaps 'org-mode-map
+            "c" 'org-comment-dwim-toggle)
+
+  :init
+  (defun org-comment-dwim-toggle ()
+    (interactive)
+    (or (org-babel-do-in-edit-buffer (comment-dwim-toggle))
+        (comment-dwim-toggle))))
+
 (use-package helm
   :general (:states general-all-states
             "M-x" 'helm-M-x)
