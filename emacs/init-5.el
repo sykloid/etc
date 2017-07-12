@@ -148,7 +148,9 @@
             "t" 'evil-search-next
             "T" 'evil-search-previous
 
-            "k" 'evil-yank
+            "k" 'evil-yank)
+
+  :general (:states '(normal visual)
             "m" 'evil-paste-after
             "M" 'evil-paste-before)
 
