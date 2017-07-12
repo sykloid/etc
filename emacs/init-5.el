@@ -212,6 +212,8 @@
     (or (org-babel-do-in-edit-buffer (comment-dwim-toggle))
         (comment-dwim-toggle))))
 
+(use-package hydra)
+
 (use-package helm
   :general (:states general-all-states
             "M-x" 'helm-M-x)
@@ -236,8 +238,15 @@
      (window-height . 0.4))))
 
 (use-package helm-elisp
-  :defer t
-  :ensure nil
+  :ensure helm
+  :general (:states general-all-states
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            "h" 'help-hydra/body)
+  :init
+  (defhydra help-hydra (:color blue :idle 1.0)
+    ("a" helm-apropos))
+
   :config
   (defun custom-group-p (sym)
     (or (and (get sym 'custom-loads) (not (get sym 'custom-autoload)))
@@ -252,18 +261,9 @@
   (add-to-list 'helm-apropos-function-list 'helm-def-source--emacs-groups t))
 
 (use-package helm-imenu
-  :ensure nil
+  :ensure helm
   :config
   (add-to-list 'helm-imenu-type-faces '("^Sections$" . outline-1)))
-
-(use-package hydra
-  :general (:states general-all-states
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            "h" 'help-hydra/body)
-  :init
-  (defhydra help-hydra (:color blue :idle 1.0)
-    ("a" helm-apropos)))
 
 (use-package outline
   :commands outline-hide-body
