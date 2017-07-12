@@ -326,4 +326,13 @@
   :init
   (winner-mode))
 
+;; * Major Modes
+;; ** Haskell
+(use-package haskell-mode
+  :mode ("\\.hs'" . haskell-mode)
+  :config
+  (add-hook+ haskell-mode-hook/:haskell-minor-modes ()
+    (haskell-decl-scan-mode)
+    (haskell-indentation-mode)))
+
 (provide 'init)
