@@ -112,6 +112,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; * Minor Mode Initialization
+;; ** General Keybinding
 (use-package general
   :defines general-prefix
            general-mode-prefix
@@ -127,6 +128,7 @@
   (defvar general-command-states '(motion normal visual))
   (defvar general-literal-states '(emacs insert)))
 
+;; ** Evil
 (use-package evil
   :init
   (evil-mode t)
@@ -335,4 +337,5 @@
     (haskell-decl-scan-mode)
     (haskell-indentation-mode)))
 
+;; * Exeunt
 (provide 'init)
