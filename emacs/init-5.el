@@ -231,6 +231,11 @@
 
   (add-to-list 'helm-apropos-function-list 'helm-def-source--emacs-groups t))
 
+(use-package helm-imenu
+  :ensure nil
+  :config
+  (add-to-list 'helm-imenu-type-faces '("^Sections$" . outline-1)))
+
 (use-package hydra
   :general (:states general-all-states
             :prefix general-prefix
@@ -243,6 +248,9 @@
 (use-package outline
   :commands outline-hide-body
   :diminish outline-minor-mode
+  :general (:states 'normal
+            :prefix general-mode-prefix
+            "i" 'helm-semantic-or-imenu)
 
   :config
   ;; Use an actual ellipsis character.
@@ -256,10 +264,13 @@
             "<tab>" (general-predicate-dispatch (key-binding (kbd "<tab>"))
                       (and outline-minor-mode (outline-on-heading-p)) 'outline-cycle))
   :init
+  (setg outshine-imenu-show-headlines-p nil)
   (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
     (outshine-hook-function)
     (font-lock-flush)
-    (outline-hide-body))
+    (outline-hide-body)
+    (add-to-list 'imenu-generic-expression
+                 '("Sections" "^;; [*]+ \\(.*\\)" 1)))
 
   :config
   (defun wrap-in-save-excursion (fn args)
