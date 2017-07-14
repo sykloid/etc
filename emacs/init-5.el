@@ -342,5 +342,23 @@
     (haskell-decl-scan-mode)
     (haskell-indentation-mode)))
 
+;; ** Org
+(use-package org
+  :ensure org-plus-contrib
+  :mode ("\\.org'" . org-mode)
+  :general (:states 'general-all-states
+            :keymaps 'org-mode-map
+            "M-n" 'org-metaleft
+            "M-e" 'org-metadown
+            "M-i" 'org-metaup
+            "M-o" 'org-metaright
+
+            "M-N" 'org-shiftmetaleft
+            "M-E" 'org-shiftmetadown
+            "M-I" 'org-shiftmetaup
+            "M-O" 'org-shiftmetaright
+
+            "M-RET" 'org-metareturn))
+
 ;; * Exeunt
 (provide 'init)
