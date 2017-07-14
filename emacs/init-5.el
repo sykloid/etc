@@ -226,6 +226,8 @@
   :general (:keymaps 'helm-map
             "M-e" 'helm-next-line
             "M-i" 'helm-previous-line
+            "M-E" 'helm-next-source
+            "M-I" 'helm-previous-source
             "<tab>" 'helm-select-action)
 
   :init
