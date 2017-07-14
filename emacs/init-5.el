@@ -333,6 +333,29 @@
   :init
   (winner-mode))
 
+;; ** Magit
+(use-package magit
+  :general (:keymaps 'magit-mode-map
+            "n" 'evil-backward-char
+            "e" 'evil-next-line
+            "i" 'evil-previous-line
+            "o" 'evil-forward-char
+
+            "V" 'set-mark-command
+
+            "M-n" 'magit-section-up))
+
+;; ** VC
+(use-package vc
+  :ensure nil
+  :general (:states 'normal
+            :prefix general-prefix
+            :non-normal-prefix general-non-normal-prefix
+            "v" 'vc-hydra/body)
+  :init
+  (defhydra vc-hydra (:color blue)
+    ("s" magit-status)))
+
 ;; * Major Modes
 ;; ** Haskell
 (use-package haskell-mode
