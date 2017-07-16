@@ -327,7 +327,9 @@
 
             "V" 'set-mark-command
 
-            "M-n" 'magit-section-up))
+            "M-n" 'magit-section-up)
+  :init
+  (evil-set-initial-state 'magit-status 'emacs))
 
 ;; ** VC
 (use-package vc
