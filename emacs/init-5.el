@@ -59,8 +59,9 @@
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
 
 ;; ** Host-Specific Initialization
-(with-demoted-errors "%S"
-  (load-library (format "init-%s" (system-name))))
+(load-library "init-host")
+(with-demoted-errors "%S" (load-library (format "init-%s" (system-name))))
+
 ;; ** Custom Initialization
 (setg custom-file (concat user-emacs-directory "customizations.el"))
 
