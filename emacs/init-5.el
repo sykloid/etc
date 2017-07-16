@@ -54,7 +54,8 @@
 
 ;; ** Path Initialization
 (eval-and-compile
-  (defvar user-lisp-directory (concat user-emacs-directory "lisp/")))
+  (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
+  (add-to-list 'load-path user-lisp-directory))
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
 
 ;; ** Host-Specific Initialization
