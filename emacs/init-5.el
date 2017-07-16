@@ -122,16 +122,25 @@
   :defines general-prefix
            general-mode-prefix
            general-non-normal-prefix
-           general-all-states
-           general-command-states
-           general-literal-states
+           general-prefix-map
   :config
   (defvar general-prefix "SPC")
-  (defvar general-mode-prefix (concat general-prefix " " "m"))
   (defvar general-non-normal-prefix "M-SPC")
-  (defvar general-all-states '(emacs insert motion normal visual))
-  (defvar general-command-states '(motion normal visual))
-  (defvar general-literal-states '(emacs insert)))
+
+  (general-create-definer
+   with-prefix
+   :states '(emacs insert motion normal visual)
+   :prefix general-prefix
+   :non-normal-prefix general-non-normal-prefix
+   :prefix-command 'general-prefix-map)
+
+  (defvar general-mode-sub-prefix "m")
+
+  (general-create-definer
+   with-mode-prefix
+   :states '(emacs insert motion normal visual)
+   :prefix (concat general-prefix " " general-mode-sub-prefix)
+   :non-normal-prefix (concat general-non-normal-prefix " " general-mode-sub-prefix)))
 
 ;; ** Evil
 (use-package evil
@@ -143,7 +152,7 @@
   (setg evil-split-window-below t)
   (setg evil-vsplit-window-right t)
 
-  :general (:states general-command-states
+  :general (:states '(motion normal visual)
             "n" 'evil-backward-char
             "e" 'evil-next-visual-line
             "i" 'evil-previous-visual-line
@@ -186,10 +195,7 @@
 
             "q" 'evil-window-delete)
 
-  :general (:states general-all-states
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            "w" 'evil-window-map)
+  :general (with-prefix "w" 'evil-window-map)
 
   :init
   (defun evil-toggle-beginning-of-line ()
@@ -202,28 +208,12 @@
 (use-package comment-dwim-toggle
   :ensure nil
   :load-path user-lisp-directory
-  :general (:states '(normal visual)
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            "c" 'comment-dwim-toggle)
-
-  :general (:states '(normal visual)
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            :keymaps 'org-mode-map
-            "c" 'org-comment-dwim-toggle)
-
-  :init
-  (defun org-comment-dwim-toggle ()
-    (interactive)
-    (or (org-babel-do-in-edit-buffer (comment-dwim-toggle))
-        (comment-dwim-toggle))))
+  :general (with-prefix "c" 'comment-dwim-toggle))
 
 (use-package hydra)
 
 (use-package helm
-  :general (:states general-all-states
-            "M-x" 'helm-M-x)
+  :general ("M-x" 'helm-M-x)
 
   :general (:keymaps 'helm-map
             "M-e" 'helm-next-line
@@ -248,10 +238,7 @@
 
 (use-package helm-elisp
   :ensure helm
-  :general (:states general-all-states
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            "h" 'help-hydra/body)
+  :general (with-prefix "h" 'help-hydra/body)
   :init
   (defhydra help-hydra (:color blue :idle 1.0)
     ("a" helm-apropos))
@@ -277,9 +264,7 @@
 (use-package outline
   :commands outline-hide-body
   :diminish outline-minor-mode
-  :general (:states 'normal
-            :prefix general-mode-prefix
-            "i" 'helm-semantic-or-imenu)
+  :general (with-mode-prefix "i" 'helm-semantic-or-imenu)
 
   :config
   ;; Use an actual ellipsis character.
@@ -319,10 +304,7 @@
             "i" 'undo-tree-visualize-undo
             "o" 'undo-tree-visualize-switch-branch-right)
 
-  :general (:states general-all-states
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            "u" 'undo-tree-visualize)
+  :general (with-prefix "u" 'undo-tree-visualize)
 
   :init
   (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs))
@@ -350,10 +332,7 @@
 ;; ** VC
 (use-package vc
   :ensure nil
-  :general (:states 'normal
-            :prefix general-prefix
-            :non-normal-prefix general-non-normal-prefix
-            "v" 'vc-hydra/body)
+  :general (with-prefix "v" 'vc-hydra/body)
   :init
   (defhydra vc-hydra (:color blue)
     ("s" magit-status)))
@@ -371,8 +350,7 @@
 (use-package org
   :ensure org-plus-contrib
   :mode ("\\.org'" . org-mode)
-  :general (:states 'general-all-states
-            :keymaps 'org-mode-map
+  :general (:keymaps 'org-mode-map
             "M-n" 'org-metaleft
             "M-e" 'org-metadown
             "M-i" 'org-metaup
