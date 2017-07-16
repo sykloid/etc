@@ -338,6 +338,29 @@
     ("s" magit-status)))
 
 ;; * Major Modes
+;; ** Ebib
+(use-package ebib
+  :general (:keymaps 'ebib-index-mode-map
+            "e" 'ebib-next-entry
+            "i" 'ebib-prev-entry
+            general-prefix general-prefix-map)
+
+  :general (:keymaps 'ebib-entry-mode-map
+            "e" 'ebib-next-field
+            "i" 'ebib-prev-field
+            general-prefix general-prefix-map)
+
+  :config
+  (setg ebib-bib-search-dirs host-ebib-bib-search-dirs)
+  (setg ebib-file-search-dirs host-ebib-file-search-dirs)
+  (setg ebib-preload-bib-files host-ebib-preload-bib-files)
+  (setg ebib-file-associations host-ebib-file-associations)
+
+  (setg ebib-layout 'index-only)
+
+  (evil-set-initial-state 'ebib-entry-mode 'emacs)
+  (evil-set-initial-state 'ebib-index-mode 'emacs))
+
 ;; ** Haskell
 (use-package haskell-mode
   :mode ("\\.hs'" . haskell-mode)
