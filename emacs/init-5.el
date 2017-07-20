@@ -381,18 +381,36 @@
 (use-package org
   :ensure org-plus-contrib
   :mode ("\\.org'" . org-mode)
-  :general (:keymaps 'org-mode-map
-            "M-n" 'org-metaleft
-            "M-e" 'org-metadown
-            "M-i" 'org-metaup
-            "M-o" 'org-metaright
+  :general
+  (:keymaps 'org-mode-map
+   "M-n" 'org-metaleft
+   "M-e" 'org-metadown
+   "M-i" 'org-metaup
+   "M-o" 'org-metaright
 
-            "M-N" 'org-shiftmetaleft
-            "M-E" 'org-shiftmetadown
-            "M-I" 'org-shiftmetaup
-            "M-O" 'org-shiftmetaright
+   "M-N" 'org-shiftmetaleft
+   "M-E" 'org-shiftmetadown
+   "M-I" 'org-shiftmetaup
+   "M-O" 'org-shiftmetaright
 
-            "M-RET" 'org-metareturn))
+   "M-RET" 'org-metareturn)
+
+  :general (with-prefix "o" 'org-hydra/body)
+  :init
+  (defhydra org-hydra (:color blue)
+    ("c" org-capture)))
+
+(use-package org-agenda
+  :ensure org-plus-contrib
+  :config
+  (setg org-agenda-files host-org-agenda-directory))
+
+(use-package org-capture
+  :ensure org-plus-contrib
+  :config
+  (setg org-capture-templates
+        `(("t" "Triage" entry (file host-org-capture-triage-path)
+           "* TODO %^{Title}" :kill-buffer t :prepend t :immediate-finish t))))
 
 ;; * Exeunt
 (provide 'init)
