@@ -48,7 +48,7 @@
 <Multi_key> <bracketright> <bracketright> : "⟧" U027E7 # MATHEMATICAL RIGHT WHITE SQUARE BRACKET
 
 <Multi_key> <d> <j> : "⟗"
-<Multi_key> <.> <.> <.> : "…" U02026 # HORIZONTAL ELLIPSIS
+<Multi_key> <period> <period> <period> : "…" U02026 # HORIZONTAL ELLIPSIS
 
 <Multi_key> <Left>  <minus> : "←" U02190 # LEFTWARDS ARROW
 <Multi_key> <Down>  <minus> : "↓" U02193 # DOWNWARDS ARROW
