@@ -119,10 +119,16 @@
 ;; * Minor Mode Initialization
 ;; ** General Keybinding
 (use-package general
-  :defines general-prefix
-           general-mode-prefix
-           general-non-normal-prefix
-           general-prefix-map
+  :defines
+  general-prefix
+  general-mode-prefix
+  general-non-normal-prefix
+  general-prefix-map
+
+  :functions
+  with-prefix
+  with-mode-prefix
+
   :config
   (defvar general-prefix "SPC")
   (defvar general-non-normal-prefix "M-SPC")
