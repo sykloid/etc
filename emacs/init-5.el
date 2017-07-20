@@ -158,48 +158,52 @@
   (setg evil-split-window-below t)
   (setg evil-vsplit-window-right t)
 
-  :general (:states '(motion normal visual)
-            "n" 'evil-backward-char
-            "e" 'evil-next-visual-line
-            "i" 'evil-previous-visual-line
-            "o" 'evil-forward-char
+  :general
+  (:states '(motion normal visual)
+   "n" 'evil-backward-char
+   "e" 'evil-next-visual-line
+   "i" 'evil-previous-visual-line
+   "o" 'evil-forward-char
 
-            "N" 'evil-toggle-beginning-of-line
-            "O" 'end-of-line
+   "N" 'evil-toggle-beginning-of-line
+   "O" 'end-of-line
 
-            "t" 'evil-search-next
-            "T" 'evil-search-previous
+   "t" 'evil-search-next
+   "T" 'evil-search-previous
 
-            "k" 'evil-yank)
+   "k" 'evil-yank)
 
-  :general (:states '(normal visual)
-            "m" 'evil-paste-after
-            "M" 'evil-paste-before)
+  :general
+  (:states '(normal visual)
+   "m" 'evil-paste-after
+   "M" 'evil-paste-before)
 
-  :general (:states 'normal
-            "a" 'evil-append
-            "A" 'evil-append-line
-            "h" 'evil-insert-state
-            "H" 'evil-insert-line
-            "y" 'evil-open-below
-            "Y" 'evil-open-above
+  :general
+  (:states 'normal
+   "a" 'evil-append
+   "A" 'evil-append-line
+   "h" 'evil-insert-state
+   "H" 'evil-insert-line
+   "y" 'evil-open-below
+   "Y" 'evil-open-above
 
-            "Q" 'evil-record-macro)
+   "Q" 'evil-record-macro)
 
-  :general (:states 'insert
-            "RET" 'evil-ret-and-indent)
+  :general
+  (:states 'insert
+   "RET" 'evil-ret-and-indent)
 
   ;; Unbinding doesn't work with `:states'.
-  :general (:keymaps 'evil-normal-state-map
-            "q" nil)
+  :general (:keymaps 'evil-normal-state-map "q" nil)
 
-  :general (:keymaps 'evil-window-map
-            "n" 'evil-window-left
-            "e" 'evil-window-down
-            "i" 'evil-window-up
-            "o" 'evil-window-right
+  :general
+  (:keymaps 'evil-window-map
+   "n" 'evil-window-left
+   "e" 'evil-window-down
+   "i" 'evil-window-up
+   "o" 'evil-window-right
 
-            "q" 'evil-window-delete)
+   "q" 'evil-window-delete)
 
   :general (with-prefix "w" 'evil-window-map)
 
@@ -221,12 +225,13 @@
 (use-package helm
   :general ("M-x" 'helm-M-x)
 
-  :general (:keymaps 'helm-map
-            "M-e" 'helm-next-line
-            "M-i" 'helm-previous-line
-            "M-E" 'helm-next-source
-            "M-I" 'helm-previous-source
-            "TAB" 'helm-select-action)
+  :general
+  (:keymaps 'helm-map
+   "M-e" 'helm-next-line
+   "M-i" 'helm-previous-line
+   "M-E" 'helm-next-source
+   "M-I" 'helm-previous-source
+   "TAB" 'helm-select-action)
 
   :init
   ;; Hide the cursor in the helm completion window.
@@ -300,15 +305,17 @@
 
 (use-package undo-tree
   :diminish undo-tree-mode
-  :general (:states 'normal
-            "u" 'undo-tree-undo
-            "U" 'undo-tree-redo)
+  :general
+  (:states 'normal
+   "u" 'undo-tree-undo
+   "U" 'undo-tree-redo)
 
-  :general (:keymaps 'undo-tree-visualizer-mode-map
-            "n" 'undo-tree-visualize-switch-branch-left
-            "e" 'undo-tree-visualize-redo
-            "i" 'undo-tree-visualize-undo
-            "o" 'undo-tree-visualize-switch-branch-right)
+  :general
+  (:keymaps 'undo-tree-visualizer-mode-map
+   "n" 'undo-tree-visualize-switch-branch-left
+   "e" 'undo-tree-visualize-redo
+   "i" 'undo-tree-visualize-undo
+   "o" 'undo-tree-visualize-switch-branch-right)
 
   :general (with-prefix "u" 'undo-tree-visualize)
 
@@ -317,23 +324,25 @@
 
 (use-package winner
   :ensure nil
-  :general (:keymaps 'evil-window-map
-            "u" 'winner-undo
-            "U" 'winner-redo)
+  :general
+  (:keymaps 'evil-window-map
+   "u" 'winner-undo
+   "U" 'winner-redo)
   :init
   (winner-mode))
 
 ;; ** Magit
 (use-package magit
-  :general (:keymaps 'magit-mode-map
-            "n" 'evil-backward-char
-            "e" 'evil-next-line
-            "i" 'evil-previous-line
-            "o" 'evil-forward-char
+  :general
+  (:keymaps 'magit-mode-map
+   "n" 'evil-backward-char
+   "e" 'evil-next-line
+   "i" 'evil-previous-line
+   "o" 'evil-forward-char
 
-            "V" 'set-mark-command
+   "V" 'set-mark-command
 
-            "M-n" 'magit-section-up)
+   "M-n" 'magit-section-up)
   :init
   (evil-set-initial-state 'magit-status 'emacs))
 
@@ -348,15 +357,17 @@
 ;; * Major Modes
 ;; ** Ebib
 (use-package ebib
-  :general (:keymaps 'ebib-index-mode-map
-            "e" 'ebib-next-entry
-            "i" 'ebib-prev-entry
-            general-prefix general-prefix-map)
+  :general
+  (:keymaps 'ebib-index-mode-map
+   "e" 'ebib-next-entry
+   "i" 'ebib-prev-entry
+   general-prefix general-prefix-map)
 
-  :general (:keymaps 'ebib-entry-mode-map
-            "e" 'ebib-next-field
-            "i" 'ebib-prev-field
-            general-prefix general-prefix-map)
+  :general
+  (:keymaps 'ebib-entry-mode-map
+   "e" 'ebib-next-field
+   "i" 'ebib-prev-field
+   general-prefix general-prefix-map)
 
   :config
   (setg ebib-bib-search-dirs host-ebib-bib-search-dirs)
