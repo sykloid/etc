@@ -226,7 +226,7 @@
             "M-i" 'helm-previous-line
             "M-E" 'helm-next-source
             "M-I" 'helm-previous-source
-            "<tab>" 'helm-select-action)
+            "TAB" 'helm-select-action)
 
   :init
   ;; Hide the cursor in the helm completion window.
@@ -281,8 +281,8 @@
 
 (use-package outshine
   :general (:states 'normal
-            "<tab>" (general-predicate-dispatch (key-binding (kbd "<tab>"))
-                      (and outline-minor-mode (outline-on-heading-p)) 'outline-cycle))
+            "TAB" (general-predicate-dispatch (key-binding (kbd "TAB"))
+                    (and outline-minor-mode (outline-on-heading-p)) 'outline-cycle))
   :init
   (setg outshine-imenu-show-headlines-p nil)
   (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
