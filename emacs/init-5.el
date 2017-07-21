@@ -392,6 +392,18 @@
     (haskell-decl-scan-mode)
     (haskell-indentation-mode)))
 
+;; ** OCaml
+(use-package tuareg
+  :mode ("\\.mli?'" . tuareg-mode))
+
+(use-package merlin
+  :general
+  (with-mode-prefix "t" #'merlin-type-enclosing)
+
+  :init
+  (add-hook+ tuareg-mode-hook/:initialize-merlin ()
+    (merlin-mode)))
+
 ;; ** Org
 (use-package org
   :ensure org-plus-contrib
