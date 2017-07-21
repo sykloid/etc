@@ -105,6 +105,10 @@
    ((,skywave-gui . (:background "#333333"))
     (,skywave-tty . (:background "color-235"))))
 
+ ;; OCaml
+ `(merlin-type-face
+   ((,skywave-gui . (:foreground "#C3FF87" :background "#A3A3A3"))))
+
  ;; Org
  '(org-bold ((t (:foreground "#EA7EAF" :weight ultra-bold))))
  '(org-italic ((t (:foreground "#7EEABF" :slant italic))))
