@@ -111,6 +111,7 @@
 ;; ** Editor
 (setg fill-column 100)
 (setg indent-tabs-mode nil)
+(setg scroll-step 1)
 (setg sentence-end-double-space nil)
 (setg tab-width 2)
 
