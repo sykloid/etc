@@ -286,9 +286,12 @@
    (string-to-vector "…")))
 
 (use-package outshine
-  :general (:states 'normal
-            "TAB" (general-predicate-dispatch (key-binding (kbd "TAB"))
-                    (and outline-minor-mode (outline-on-heading-p)) 'outline-cycle))
+  :general
+  (:states 'normal
+   "TAB" (general-predicate-dispatch (key-binding (kbd "TAB"))
+           (and outline-minor-mode (outline-on-heading-p)) #'outline-cycle)
+   "<backtab>" (general-predicate-dispatch (key-binding (kbd "<backtab>"))
+                 outline-minor-mode #'outshine-cycle-buffer))
   :init
   (setg outshine-imenu-show-headlines-p nil)
   (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
