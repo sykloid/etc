@@ -227,6 +227,10 @@
   :general ("M-x" 'helm-M-x)
 
   :general
+  (with-prefix
+   "b" 'buffer-hydra/body)
+
+  :general
   (:keymaps 'helm-map
    "M-e" 'helm-next-line
    "M-i" 'helm-previous-line
@@ -246,7 +250,42 @@
    `(,(rx bos "*helm" (* not-newline) "*" eos)
      (display-buffer-in-side-window)
      (inhibit-same-window . t)
-     (window-height . 0.4))))
+     (window-height . 0.4)))
+
+  (defun kill-buffer-and-file ()
+    "Kill the current buffer and deletes the file it is visiting."
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+        (if (vc-backend filename)
+            (vc-delete-file filename)
+          (progn
+            (delete-file filename)
+            (message "Deleted file %s" filename)
+            (kill-buffer))))))
+
+  (defun rename-buffer-and-file (new-location)
+    "Rename the current buffer, and the file it is visiting."
+    (interactive "FNew location: ")
+    (let ((name (buffer-name))
+          (file-name (buffer-file-name)))
+      (if (not file-name)
+          (message "%s isn't visiting a file!" name)
+        (if (get-buffer new-location)
+            (message "A buffer named '%s' already exists!" new-location)
+          (rename-file file-name new-location 1)
+          (rename-buffer new-location)
+          (set-visited-file-name new-location)
+          (set-buffer-modified-p nil)))))
+
+  (defhydra buffer-hydra (:color blue)
+    ("b" helm-buffers-list)
+    ("f" helm-find-files)
+    ("k" kill-this-buffer)
+    ("K" kill-buffer-and-file)
+    ("o" evil-buffer)
+    ("R" rename-buffer-and-file)
+    ("q" nil)))
 
 (use-package helm-elisp
   :ensure helm
