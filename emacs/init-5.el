@@ -115,7 +115,9 @@
 (setg sentence-end-double-space nil)
 (setg tab-width 2)
 
+;; ** Miscellaneous
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setg ad-redefinition-action 'accept)
 
 ;; * Minor Mode Initialization
 ;; ** General Keybinding
