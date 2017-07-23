@@ -345,6 +345,14 @@
 
   (advice-add #'outline-cycle :around 'wrap-in-save-excursion))
 
+(use-package projectile)
+
+(use-package helm-projectile
+  :general
+  (with-prefix
+   "p" '(nil :which-key "Project Commands")
+   "pp" 'helm-projectile))
+
 (use-package undo-tree
   :diminish undo-tree-mode
   :general
