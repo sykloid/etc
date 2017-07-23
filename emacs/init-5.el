@@ -223,14 +223,17 @@
   :load-path user-lisp-directory
   :general (with-prefix "c" 'comment-dwim-toggle))
 
-(use-package hydra)
-
 (use-package helm
   :general ("M-x" 'helm-M-x)
 
   :general
   (with-prefix
-   "b" 'buffer-hydra/body)
+   "bb" 'helm-buffers-list
+   "bf" 'helm-find-files
+   "bk" 'kill-this-buffer
+   "bK" 'kill-this-buffer-and-file
+   "bo" 'evil-buffer
+   "bR" 'rename-this-buffer-and-file)
 
   :general
   (:keymaps 'helm-map
@@ -254,7 +257,7 @@
      (inhibit-same-window . t)
      (window-height . 0.4)))
 
-  (defun kill-buffer-and-file ()
+  (defun kill-this-buffer-and-file ()
     "Kill the current buffer and deletes the file it is visiting."
     (interactive)
     (let ((filename (buffer-file-name)))
@@ -266,7 +269,7 @@
             (message "Deleted file %s" filename)
             (kill-buffer))))))
 
-  (defun rename-buffer-and-file (new-location)
+  (defun rename-this-buffer-and-file (new-location)
     "Rename the current buffer, and the file it is visiting."
     (interactive "FNew location: ")
     (let ((name (buffer-name))
@@ -278,24 +281,11 @@
           (rename-file file-name new-location 1)
           (rename-buffer new-location)
           (set-visited-file-name new-location)
-          (set-buffer-modified-p nil)))))
-
-  (defhydra buffer-hydra (:color blue)
-    ("b" helm-buffers-list)
-    ("f" helm-find-files)
-    ("k" kill-this-buffer)
-    ("K" kill-buffer-and-file)
-    ("o" evil-buffer)
-    ("R" rename-buffer-and-file)
-    ("q" nil)))
+          (set-buffer-modified-p nil))))))
 
 (use-package helm-elisp
   :ensure helm
-  :general (with-prefix "h" 'help-hydra/body)
-  :init
-  (defhydra help-hydra (:color blue :idle 1.0)
-    ("a" helm-apropos))
-
+  :general (with-prefix "ha" 'helm-apropos)
   :config
   (defun custom-group-p (sym)
     (or (and (get sym 'custom-loads) (not (get sym 'custom-autoload)))
@@ -394,11 +384,8 @@
 ;; ** VC
 (use-package vc
   :ensure nil
-  :general (with-prefix "v" 'vc-hydra/body)
-  :init
-  (defhydra vc-hydra (:color blue)
-    ("s" magit-status)))
-
+  ;; TODO: Make this binding more generic, using vc-dir for non-git backends.
+  :general (with-prefix "vs" 'magit-status))
 ;; * Major Modes
 ;; ** Ebib
 (use-package ebib
@@ -463,10 +450,7 @@
 
    "M-RET" 'org-metareturn)
 
-  :general (with-prefix "o" 'org-hydra/body)
-  :init
-  (defhydra org-hydra (:color blue)
-    ("c" org-capture)))
+  :general (with-prefix "o" 'org-capture))
 
 (use-package org-agenda
   :ensure org-plus-contrib
