@@ -151,6 +151,12 @@
    :prefix (concat general-prefix " " general-mode-sub-prefix)
    :non-normal-prefix (concat general-non-normal-prefix " " general-mode-sub-prefix)))
 
+(use-package which-key
+  :init
+  (setg which-key-allow-evil-operators t)
+  (setg which-key-show-operator-state-maps t)
+  (which-key-mode))
+
 ;; ** Evil
 (use-package evil
   :init
