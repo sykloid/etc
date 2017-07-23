@@ -234,6 +234,7 @@
 
   :general
   (with-prefix
+   "b" '(nil :which-key "Buffer Commands")
    "bb" 'helm-buffers-list
    "bf" 'helm-find-files
    "bk" 'kill-this-buffer
