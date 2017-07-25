@@ -457,8 +457,14 @@
   (with-mode-prefix "t" #'merlin-type-enclosing)
 
   :init
+  (setg merlin-error-after-save nil)
   (add-hook+ tuareg-mode-hook/:initialize-merlin ()
-    (merlin-mode)))
+    (merlin-mode))
+
+  :config
+  (use-package flycheck-ocaml
+    :init
+    (flycheck-ocaml-setup)))
 
 ;; ** Org
 (use-package org
