@@ -311,6 +311,19 @@
   :config
   (add-to-list 'helm-imenu-type-faces '("^Sections$" . outline-1)))
 
+(use-package flycheck
+  :general
+  (with-prefix
+   "f" '(nil :which-key "Flycheck Commands")
+   "fb" 'flycheck-buffer
+   "fe" 'flycheck-next-error
+   "fi" 'flycheck-previous-error
+   "fl" 'flycheck-list-errors)
+
+  :init
+  (add-hook+ prog-mode-hook/:enable-flycheck ()
+    (global-flycheck-mode)))
+
 (use-package outline
   :commands outline-hide-body
   :diminish outline-minor-mode
