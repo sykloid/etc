@@ -1,521 +1,471 @@
-;; Emacs Initialization
-;; P.C.Shyamshankar 'sykora' <sykora@lucentbeing.com>
+;; -*- eval: (outline-minor-mode); flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
+;; An Emacs Initialization
+;; P.C. Shyamshankar
+;; This is rewrite #5
 
-;; This is rewrite #4.
+;; * Meta Initialization
+;; ** Utility Forms
+;; *** Set Forms
+;; The customization system is great for option discovery, but lousy for programmatic configuration.
+;; Nevertheless, it has become the de-facto standard for specifying user-facing options, particuarly
+;; using custom set logic. It's impossible to escape.
+(eval-and-compile
+  (defalias 'setl 'setq "Set a variable (buffer) locally.")
+  (defmacro setg (variable value)
+    "Set `VARIABLE' to `VALUE' globally, respecting `custom-set' if necessary."
+    `(customize-set-variable ',variable ,value)))
 
-;; Setup
+;; *** Hook Forms
+;; This macro solves multiple problems:
+;;   1. It removes the need to remember `add-hook' syntax.
+;;   2. It permits (but does not require) naming a hook entry, for removal afterwards. If a name is
+;;      not given, one will be generated based on the hook being added to.
+;;   3. It allows adding to hooks of functions which take arguments.
+(defmacro add-hook+ (hook-spec arg-spec &rest body)
+  "Multi-purpose hook handler."
+  (declare (indent 2))
+  (let* ((separator "/:")
+         (components (split-string (symbol-name hook-spec) separator))
+         (hook (if (= 1 (length components))
+                   (car components)
+                 (mapconcat #'identity (butlast components) separator)))
+         (name (if (= 1 (length components))
+                   (symbol-name (cl-gensym (concat hook separator)))
+                 (car (last components)))))
+    `(add-hook (intern ,hook) (defalias (intern ,name) (lambda ,arg-spec ,@body)) t)))
 
-;; Package System Initialization -- Must be done ahead of time.
-(require 'package)
-
-;; I gave up on melpa-stable, it's anything but.
+;; ** Package System
+(eval-and-compile (require 'package))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 
-(setq package-enable-at-startup nil)
-(package-initialize)
+(setl package-enable-at-startup nil)
+(eval-and-compile (package-initialize))
 
-;; Bootstrap use-package itself, if absent.
-(unless (require 'use-package nil 'silent)
-  (package-refresh-contents)
-  (package-install 'use-package)
-  (require 'use-package))
+;; ** Use-Package Bootstrap
+;; `use-package' itself is only needed during byte-compilation.
+(eval-when-compile
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setl use-package-always-ensure t))
 
-;; Per-package path setup. Should also be done early.
+;; ** Path Initialization
+(eval-and-compile
+  (defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
+  (add-to-list 'load-path user-lisp-directory))
+(setg custom-theme-directory (concat user-lisp-directory "themes/"))
+
+;; ** Host-Specific Initialization
+(load-library "init-host")
+(with-demoted-errors "%S" (load-library (format "init-%s" (system-name))))
+
+;; ** Custom Initialization
+(setg custom-file (concat user-emacs-directory "customizations.el"))
+
+(defvar custom-safe-variables
+  '(custom-safe-themes))
+
+(defun custom-set-only-safe (args)
+  (cl-remove-if-not (lambda (elt) (member (car elt) custom-safe-variables)) args))
+
+(advice-add #'custom-set-variables :filter-args 'custom-set-only-safe)
+(load custom-file)
+(advice-remove #'custom-set-variables 'custom-set-only-safe)
+
 (use-package no-littering)
 
-;; Need a more stable solution to the custom-file problem.
-;; (setq custom-file (concat user-emacs-directory "customizations.el"))
-;; (load custom-file 'no-error)
+;; * Appearance
+;; ** User Interface
+;; Some of these settings may also be set at the window-system level (e.g. XDefaults). Setting them
+;; there will force them to be set before the frame starts, preventing an ephemeral "flickering" of
+;; various UI artefacts. Regardless, they should also be set here for portability (XDefaults won't
+;; apply to e.g. OSX).
+(setg column-number-mode t)
+(setg fringe-mode 0)
+(setg inhibit-startup-message t)
+(setg menu-bar-mode nil)
+(setg scroll-bar-mode nil)
+(setg tool-bar-mode nil)
 
-;; Paths
-(defvar user-lisp-directory (concat user-emacs-directory "lisp/"))
-(add-to-list 'load-path user-lisp-directory)
+;; ** Fonts
+;; TODO: Implement font fall-back.
+(let ((font-name "Iosevka-10"))
+  (when (and (display-graphic-p) (find-font (font-spec :name font-name)))
+    (set-frame-font font-name)))
 
-(setq custom-theme-directory (concat user-lisp-directory "themes/"))
+;; ** Theme
+(with-demoted-errors "%S"
+  (load-theme 'skywave))
 
-(defconst instance-name
-  (if (daemonp)
-      (daemonp)
-    (format "emacs_%d" (emacs-pid)))
-  "Unique name of the current emacs instance.
-Defaults to `server-name' if present, generated by PID otherwise.")
+;; * Core Behaviors
+;; ** Backups
+(setg backup-by-copying t)
+(setg delete-old-versions t)
+(setg kept-new-versions 6)
+(setg kept-old-versions 2)
+(setg version-control t)
 
-(defmacro setc (variable value)
-  `(customize-set-variable ',variable ,value))
+;; ** Editor
+(setg fill-column 100)
+(setg indent-tabs-mode nil)
+(setg scroll-step 1)
+(setg sentence-end-double-space nil)
+(setg tab-width 2)
 
-(defmacro with-hook (hook &rest body)
-  "When `HOOK' is called, execute `BODY'."
-  (declare (indent 1))
-  `(add-hook ',hook (lambda () (progn ,@body)) t))
-
-;; Appearance
-(set-frame-font "Iosevka-10")
-(setc default-frame-alist '((font . "Iosevka-10")))
-
-(setc inhibit-splash-screen t)
-(menu-bar-mode -1)
-
-(load-theme 'skywave t)
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (with-selected-frame frame
-              (load-theme 'skywave))))
-
-(column-number-mode)
-
-(setc backup-by-copying t)
-(setc delete-old-versions t)
-(setc kept-new-versions 6)
-(setc kept-old-versions 2)
-(setc version-control t)
-
-;; Behaviour
-(setc scroll-step 1)
-
-;; Editing
-(setc fill-column 100)
-(setc indent-tabs-mode nil)
-(setc sentence-end-double-space nil)
-(setc tab-width 2)
-
-(with-hook prog-mode-hook
-  (setq show-trailing-whitespace t))
-
-;; Miscellaneous
-(setc ad-redefinition-action 'accept)
+;; ** Miscellaneous
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setg ad-redefinition-action 'accept)
 
-(put 'narrow-to-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-
-;; Package Initialization
+;; * Minor Mode Initialization
+;; ** General Keybinding
 (use-package general
-  :ensure t
+  :defines
+  general-prefix
+  general-mode-prefix
+  general-non-normal-prefix
+  general-prefix-map
+
+  :functions
+  with-prefix
+  with-mode-prefix
+
   :config
-  (defvar general-leader "SPC"))
+  (defvar general-prefix "SPC")
+  (defvar general-non-normal-prefix "M-SPC")
 
+  (general-create-definer
+   with-prefix
+   :states '(emacs insert motion normal visual)
+   :prefix general-prefix
+   :non-normal-prefix general-non-normal-prefix
+   :prefix-command 'general-prefix-map)
+
+  (defvar general-mode-sub-prefix "m")
+
+  (general-create-definer
+   with-mode-prefix
+   :states '(emacs insert motion normal visual)
+   :prefix (concat general-prefix " " general-mode-sub-prefix)
+   :non-normal-prefix (concat general-non-normal-prefix " " general-mode-sub-prefix)))
+
+(use-package which-key
+  :diminish 'which-key-mode
+  :init
+  (setg which-key-allow-evil-operators t)
+  (setg which-key-show-operator-state-maps t)
+  (which-key-mode))
+
+;; ** Evil
 (use-package evil
-  :ensure t
-
-  :general (:states 'insert "RET" 'evil-ret-and-indent)
-
-  :general (:states '(normal motion visual)
-            "n" 'evil-backward-char
-            "e" 'evil-next-visual-line
-            "i" 'evil-previous-visual-line
-            "o" 'evil-forward-char
-
-            "N" 'beginning-of-line-toggle
-            "O" 'end-of-line
-
-            "t" 'evil-search-next
-            "T" 'evil-search-previous)
-
-  :general (:states '(normal visual)
-            "k" 'evil-yank
-            "m" 'evil-paste-after
-            "M" 'evil-paste-before)
-
-  :general (:states 'normal
-            "h" 'evil-insert-state
-            "H" 'evil-insert-line
-            "a" 'evil-append
-            "A" 'evil-append-line
-            "y" 'evil-open-below
-            "Y" 'evil-open-above
-
-            "Q" 'evil-record-macro
-
-            "s" 'evil-utility-map)
-
-  :general (:states 'visual
-            "y" 'evil-visual-exchange-corners)
-
-  :general (:keymaps 'evil-window-map
-            "n" 'evil-window-left
-            "e" 'evil-window-down
-            "i" 'evil-window-up
-            "o" 'evil-window-right
-
-            "C-n" 'evil-window-left
-            "C-e" 'evil-window-down
-            "C-i" 'evil-window-up
-            "C-o" 'evil-window-right
-
-            "q" 'evil-window-delete
-            "d" 'delete-other-windows
-            "D" 'delete-other-windows-vertically)
-
-  :general (:keymaps 'evil-utility-map
-            "v" 'evil-visual-restore
-            "m" 'evil-mark-last-yank)
-
-  :general (:keymaps '(evil-operator-state-map evil-visual-state-map)
-            "h" '(:keymap evil-inner-text-objects-map))
-
-  :general (:states 'emacs
-            "C-w" 'evil-window-map)
-
   :init
   (evil-mode t)
 
-  (defun evil-mark-last-yank ()
-    (interactive)
-    (evil-visual-make-selection (evil-get-marker ?[) (evil-get-marker ?])))
+  :config
+  (setg evil-move-beyond-eol t)
+  (setg evil-split-window-below t)
+  (setg evil-vsplit-window-right t)
 
-  (defun beginning-of-line-toggle ()
+  :general
+  (:states '(motion normal visual)
+   "n" 'evil-backward-char
+   "e" 'evil-next-visual-line
+   "i" 'evil-previous-visual-line
+   "o" 'evil-forward-char
+
+   "N" 'evil-toggle-beginning-of-line
+   "O" 'end-of-line
+
+   "t" 'evil-search-next
+   "T" 'evil-search-previous
+
+   "k" 'evil-yank)
+
+  :general
+  (:states '(normal visual)
+   "m" 'evil-paste-after
+   "M" 'evil-paste-before)
+
+  :general
+  (:states 'normal
+   "a" 'evil-append
+   "A" 'evil-append-line
+   "h" 'evil-insert-state
+   "H" 'evil-insert-line
+   "y" 'evil-open-below
+   "Y" 'evil-open-above
+
+   "Q" 'evil-record-macro)
+
+  :general
+  (:states 'insert
+   "RET" 'evil-ret-and-indent)
+
+  ;; Unbinding doesn't work with `:states'.
+  :general (:keymaps 'evil-normal-state-map "q" nil)
+
+  :general
+  (:keymaps 'evil-window-map
+   "n" 'evil-window-left
+   "e" 'evil-window-down
+   "i" 'evil-window-up
+   "o" 'evil-window-right
+
+   "q" 'evil-window-delete)
+
+  :general (with-prefix "w" 'evil-window-map)
+
+  :init
+  (defun evil-toggle-beginning-of-line ()
     (interactive)
     (let ((current (point)))
       (back-to-indentation)
       (when (= current (point))
-        (beginning-of-line))))
+        (beginning-of-line)))))
+
+(use-package comment-dwim-toggle
+  :ensure nil
+  :load-path user-lisp-directory
+  :general (with-prefix "c" 'comment-dwim-toggle))
+
+(use-package helm
+  :general ("M-x" 'helm-M-x)
+
+  :general
+  (with-prefix
+   "b" '(nil :which-key "Buffer Commands")
+   "bb" 'helm-buffers-list
+   "bf" 'helm-find-files
+   "bk" 'kill-this-buffer
+   "bK" 'kill-this-buffer-and-file
+   "bo" 'evil-buffer
+   "bR" 'rename-this-buffer-and-file)
+
+  :general
+  (:keymaps 'helm-map
+   "M-e" 'helm-next-line
+   "M-i" 'helm-previous-line
+   "M-E" 'helm-next-source
+   "M-I" 'helm-previous-source
+   "TAB" 'helm-select-action)
+
+  :init
+  ;; Hide the cursor in the helm completion window.
+  (add-hook+ helm-after-initialize-hook/:hide-helm-cursor ()
+    (with-helm-buffer (setl cursor-in-non-selected-windows nil)))
+
+  ;; Helm display configuration: show helm across the entirety of the window, regardless of splits.
+  (setg helm-split-window-in-side-p t)
+  (add-to-list
+   'display-buffer-alist
+   `(,(rx bos "*helm" (* not-newline) "*" eos)
+     (display-buffer-in-side-window)
+     (inhibit-same-window . t)
+     (window-height . 0.4)))
+
+  (defun kill-this-buffer-and-file ()
+    "Kill the current buffer and deletes the file it is visiting."
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+        (if (vc-backend filename)
+            (vc-delete-file filename)
+          (progn
+            (delete-file filename)
+            (message "Deleted file %s" filename)
+            (kill-buffer))))))
+
+  (defun rename-this-buffer-and-file (new-location)
+    "Rename the current buffer, and the file it is visiting."
+    (interactive "FNew location: ")
+    (let ((name (buffer-name))
+          (file-name (buffer-file-name)))
+      (if (not file-name)
+          (message "%s isn't visiting a file!" name)
+        (if (get-buffer new-location)
+            (message "A buffer named '%s' already exists!" new-location)
+          (rename-file file-name new-location 1)
+          (rename-buffer new-location)
+          (set-visited-file-name new-location)
+          (set-buffer-modified-p nil))))))
+
+(use-package helm-elisp
+  :ensure helm
+  :general (with-prefix "ha" 'helm-apropos)
+  :config
+  (defun custom-group-p (sym)
+    (or (and (get sym 'custom-loads) (not (get sym 'custom-autoload)))
+        (get sym 'custom-group)))
+
+  (defun helm-def-source--emacs-groups (&optional default)
+    (helm-build-in-buffer-source "Groups"
+      :init `(lambda () (helm-apropos-init #'custom-group-p ,default))
+      :fuzzy-match helm-apropos-fuzzy-match
+      :action '(("Customize Group" . (lambda (candidate) (customize-group (helm-symbolify candidate)))))))
+
+  (add-to-list 'helm-apropos-function-list 'helm-def-source--emacs-groups t))
+
+(use-package helm-imenu
+  :ensure helm
+  :config
+  (add-to-list 'helm-imenu-type-faces '("^Sections$" . outline-1)))
+
+(use-package flycheck
+  :general
+  (with-prefix
+   "f" '(nil :which-key "Flycheck Commands")
+   "fb" 'flycheck-buffer
+   "fe" 'flycheck-next-error
+   "fi" 'flycheck-previous-error
+   "fl" 'flycheck-list-errors)
+
+  :init
+  (add-hook+ prog-mode-hook/:enable-flycheck ()
+    (global-flycheck-mode)))
+
+(use-package outline
+  :commands outline-hide-body
+  :diminish outline-minor-mode
+  :general
+  (with-mode-prefix :keymaps 'outline-minor-mode-map
+    "i" 'helm-semantic-or-imenu)
 
   :config
-  (setc evil-move-beyond-eol t)
-  (setc evil-split-window-below t)
-  (setc evil-vsplit-window-right t)
-  (setc evil-want-fine-undo nil)
+  ;; Use an actual ellipsis character.
+  (set-display-table-slot
+   standard-display-table
+   'selective-display
+   (string-to-vector "…")))
 
-  (define-key evil-normal-state-map (kbd "q") nil)
-
-  (define-prefix-command 'evil-utility-map))
-
-(use-package evil-surround
-  :ensure t
-  :general (:states '(normal visual)
-            "js" 'evil-surround-region
-            "jS" 'evil-Surround-region)
+(use-package outshine
+  :general
+  (:states 'normal
+   "TAB" (general-predicate-dispatch (key-binding (kbd "TAB"))
+           (and outline-minor-mode (outline-on-heading-p)) #'outline-cycle)
+   "<backtab>" (general-predicate-dispatch (key-binding (kbd "<backtab>"))
+                 outline-minor-mode #'outshine-cycle-buffer))
   :init
-  (global-evil-surround-mode))
+  (setg outshine-imenu-show-headlines-p nil)
+  (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
+    (outshine-hook-function)
+    (font-lock-flush)
+    (outline-hide-body)
+    (reveal-mode)
+    (add-to-list 'imenu-generic-expression '("Sections" "^;; [*]+ \\(.*\\)" 1)))
+
+  :config
+  (defun wrap-in-save-excursion (fn args)
+    (save-excursion (funcall fn args)))
+
+  (advice-add #'outline-cycle :around 'wrap-in-save-excursion))
+
+(use-package projectile)
+
+(use-package helm-projectile
+  :general
+  (with-prefix
+   "p" '(nil :which-key "Project Commands")
+   "pp" 'helm-projectile))
 
 (use-package undo-tree
   :diminish undo-tree-mode
-  :general (:states 'normal
-            "u" 'undo-tree-undo
-            "U" 'undo-tree-redo)
+  :general
+  (:states 'normal
+   "u" 'undo-tree-undo
+   "U" 'undo-tree-redo)
 
-  :general (:keymaps 'undo-tree-visualizer-mode-map
-            "n" 'undo-tree-visualize-switch-branch-left
-            "e" 'undo-tree-visualize-redo
-            "i" 'undo-tree-visualize-undo
-            "o" 'undo-tree-visualize-switch-branch-right)
+  :general
+  (:keymaps 'undo-tree-visualizer-mode-map
+   "n" 'undo-tree-visualize-switch-branch-left
+   "e" 'undo-tree-visualize-redo
+   "i" 'undo-tree-visualize-undo
+   "o" 'undo-tree-visualize-switch-branch-right)
 
-  :general (:states 'normal :prefix general-leader
-            "u" 'undo-tree-visualize)
+  :general (with-prefix "u" 'undo-tree-visualize)
 
   :init
   (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs))
 
 (use-package winner
-  :init (winner-mode t)
-  :general (:keymaps 'evil-window-map
-            "u" 'winner-undo
-            "U" 'winner-redo))
-
-(use-package hydra
-  :ensure t
-  :general (:states 'normal :prefix general-leader
-            "z" 'hydra-zoom/body)
+  :ensure nil
+  :general
+  (:keymaps 'evil-window-map
+   "u" 'winner-undo
+   "U" 'winner-redo)
   :init
-  (defhydra hydra-zoom (:color amaranth :hint nil :idle 1.0)
-    "
-Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
-"
-    ("e" text-scale-decrease)
-    ("i" text-scale-increase)
-    ("r" (text-scale-increase 0))
-    ("q" nil))
+  (winner-mode))
 
-  :config
-  (hydra-add-font-lock))
-
+;; ** Magit
 (use-package magit
-  :ensure t
-  :commands (magit-status magit-blame)
-  :general (:states 'normal :prefix general-leader
-            "g" 'hydra-magit/body)
+  :general
+  (:keymaps 'magit-mode-map
+   "n" 'evil-backward-char
+   "e" 'evil-next-line
+   "i" 'evil-previous-line
+   "o" 'evil-forward-char
 
-  :general (:keymaps 'magit-mode-map
-            "n" 'evil-backward-char
-            "e" 'evil-next-line
-            "i" 'evil-previous-line
-            "o" 'evil-forward-char
+   "V" 'set-mark-command
 
-            "V" 'set-mark-command
-
-            "M-i" 'magit-section-up)
-
+   "M-n" 'magit-section-up)
   :init
-  (defhydra hydra-magit (:color blue :hint nil :idle 1.0)
-    "
- Git Control: {_b_} Blame | {_s_} Status | {_q_} Quit
-"
-    ("b" magit-blame)
-    ("s" magit-status)
-    ("q" nil))
+  (evil-set-initial-state 'magit-status 'emacs))
+
+;; ** VC
+(use-package vc
+  :ensure nil
+  ;; TODO: Make this binding more generic, using vc-dir for non-git backends.
+  :general (with-prefix "vs" 'magit-status))
+
+;; * Major Modes
+;; ** Ebib
+(use-package ebib
+  :general
+  (:keymaps 'ebib-index-mode-map
+   "e" 'ebib-next-entry
+   "i" 'ebib-prev-entry
+   general-prefix general-prefix-map)
+
+  :general
+  (:keymaps 'ebib-entry-mode-map
+   "e" 'ebib-next-field
+   "i" 'ebib-prev-field
+   general-prefix general-prefix-map)
 
   :config
-  (setc magit-popup-show-common-commands nil))
+  (setg ebib-bib-search-dirs host-ebib-bib-search-dirs)
+  (setg ebib-file-search-dirs host-ebib-file-search-dirs)
+  (setg ebib-preload-bib-files host-ebib-preload-bib-files)
+  (setg ebib-file-associations host-ebib-file-associations)
 
-(use-package helm
-  :ensure t
-  :general (:keymaps 'global
-            "M-x" 'helm-M-x)
+  (setg ebib-layout 'index-only)
 
-  :general (:states 'normal :prefix general-leader
-            "b" 'hydra-list/body)
-  :init
-  (defhydra hydra-list (:color blue :idle 1.0 :hint nil)
-    "
- Buffers and Files
-─────────────────────────────────────────
- {_l_} List Buffers | {_f_} List Files
- {_k_} Kill Buffer  | {_d_} List Directories
- {_o_} Other Buffer | {_m_} List Menu
- {_K_} Kill File and Buffer
-─────────────────────────────────────────
- {_q_} Quit
-"
-    ("b" bury-buffer)
-    ("d" cd)
-    ("f" helm-find-files)
-    ("k" kill-this-buffer)
-    ("K" delete-file-and-buffer)
-    ("l" helm-buffers-list)
-    ("m" helm-imenu)
-    ("o" evil-buffer)
-    ("q" nil))
+  (evil-set-initial-state 'ebib-entry-mode 'emacs)
+  (evil-set-initial-state 'ebib-index-mode 'emacs))
 
-  (defun delete-file-and-buffer ()
-    "Kill the current buffer and deletes the file it is visiting."
-    (interactive)
-    (let ((filename (buffer-file-name)))
-      (when (yes-or-no-p (format "Kill this buffer and delete %s? " filename))
-          (when filename
-            (if (vc-backend filename)
-                (vc-delete-file filename)
-              (progn
-                (delete-file filename)
-                (message "Deleted file %s" filename)
-                (kill-buffer)))))))
-
+;; ** Haskell
+(use-package haskell-mode
+  :mode ("\\.hs'" . haskell-mode)
   :config
-  (setc helm-split-window-in-side-p t)
-  (add-to-list 'display-buffer-alist
-               `(,(rx bos "*helm" (* not-newline) "*" eos)
-                 (display-buffer-in-side-window)
-                 (inhibit-same-window . t)
-                 (window-height . 0.4))))
+  (add-hook+ haskell-mode-hook/:haskell-minor-modes ()
+    (haskell-decl-scan-mode)
+    (haskell-indentation-mode)))
 
-(use-package flycheck
-  :ensure t
-
-  :general (:states 'normal :prefix general-leader
-            "f" 'hydra-flycheck/body)
-  :init
-  (global-flycheck-mode)
-
-  (defhydra hydra-flycheck (:color blue :idle 1.0 :hint nil)
-    "
- Flycheck: {_e_} Next Error | {_i_} Previous Error | {_l_} List Errors | {_b_} Recheck Buffer | {_q_} Quit
- "
-    ("e" flycheck-next-error)
-    ("i" flycheck-previous-error)
-    ("l" flycheck-list-errors)
-    ("b" flycheck-buffer)
-    ("q" nil))
-
-  :config
-  (evil-set-initial-state 'flycheck-error-list-mode 'emacs))
-
-(use-package company
-  :ensure t
-  :diminish company-mode
-  :init
-  (global-company-mode))
-
-(use-package imenu
-  :config
-  (setc imenu-space-replacement "-"))
-
-(use-package smartparens
-  :ensure t
-  :diminish smartparens-mode
-  :general (:keymaps 'evil-utility-map
-            "k" 'hydra-smartparens/body)
-  :init
-  (smartparens-global-strict-mode)
-
-  :config
-  (defhydra hydra-smartparens (:color amaranth :idle 1.0 :hint nil)
-    "
- SExp Navigation/Manipulation
-───────────────────────────────────────────────────
- {_n_} Previous | {_r_} Raise  | {_sn_} Slurp From Left
- {_e_} Down     | {_k_} Kill   | {_so_} Slurp From Right
- {_i_} Up       |           ^^ | {_bn_} Barf To Left
- {_o_} Next     |           ^^ | {_bo_} Barf To Right
-───────────────────────────────────────────────────
- {_u_} Undo     | {_U_} Redo
-───────────────────────────────────────────────────
- {_q_} Quit     | {_a_} Append | {_h_} Insert
-"
-    ("n" sp-backward-sexp)
-    ("i" sp-up-sexp)
-    ("e" sp-down-sexp)
-    ("o" sp-forward-sexp)
-
-    ("r" sp-raise-sexp)
-    ("k" sp-kill-hybrid-sexp)
-
-    ("sn" sp-backward-slurp-sexp)
-    ("so" sp-forward-slurp-sexp)
-
-    ("bn" sp-backward-barf-sexp)
-    ("bo" sp-forward-barf-sexp)
-
-    ("u" undo-tree-undo)
-    ("U" undo-tree-redo)
-
-    ("a" evil-append :color blue)
-    ("h" evil-insert :color blue)
-
-    ("q" nil))
-
-  (sp-pair "'" "'" :unless '(sp-point-after-word-p))
-
-  (sp-with-modes '(emacs-lisp-mode lisp-interaction-mode)
-    (sp-local-pair "'" nil :actions nil)
-    (sp-local-pair "`" "`" :actions nil)
-    (sp-local-pair "`" "'" :when '(sp-in-string-p))))
-
-
-(use-package browse-url
-  :init
-  (setc browse-url-browser-function 'browse-url-chromium))
-
-(use-package projectile
-  :ensure t
-  :general (:states 'normal :prefix general-leader
-            "p" 'hydra-projectile/body)
-  :init
-  (use-package helm-ag)
-  (use-package helm-projectile)
-
-  (defhydra hydra-projectile (:color teal :hint nil :idle 1.0)
-    "
- Projectile
-─────────────────────────────────────
- {_p_} Do What I Mean
- {_s_} Switch to Project | {_a_} Search
- {_g_} Version Control   | {_b_} Buffers
- {_d_} Change Directory  | {_f_} Files
-─────────────────────────────────────
- {_q_} Quit
-"
-    ("p" helm-projectile)
-    ("s" projectile-switch-project)
-    ("g" projectile-vc)
-    ("d" (cd (projectile-project-root)))
-
-    ("b" projectile-switch-to-buffer)
-    ("f" projectile-find-file-dwim)
-    ("a" helm-projectile-ag)
-
-    ("q" nil))
-
-  :config
-  (setc projectile-completion-system 'helm)
-  (setc projectile-switch-project-action 'projectile-find-file-dwim))
-
-(use-package compile
-  :config
-  (use-package compilation-recenter-end
-    :load-path user-lisp-directory
-    :config
-    (compilation-recenter-end-enable))
-  (setc compilation-scroll-output t)
-(add-hook 'compilation-start-hook
-          (lambda (proc)
-            (when (eq (process-filter proc) 'compilation-filter)
-              (set-process-filter
-               proc
-               (lambda (proc string)
-                 (funcall 'compilation-filter proc
-                          (xterm-color-filter string))))))))
-
-(use-package expand-region
-  :ensure t
-  :general (:states 'visual
-            "." 'er/expand-region))
-
-(use-package comment-dwim-toggle
-  :load-path user-lisp-directory
-  :general (:states '(normal visual) :prefix general-leader
-            "c" 'comment-dwim-toggle)
-  :general (:states 'normal :prefix general-leader :keymaps 'org-mode-map
-            "c" 'org-comment-dwim-toggle)
-  :init
-  (defun org-comment-dwim-toggle ()
-    (interactive)
-    (or (org-babel-do-in-edit-buffer
-         (comment-dwim-toggle))
-        (comment-dwim-toggle))))
-
-(use-package eshell
-  :general (:states 'insert :keymaps 'eshell-mode-map
-            "RET" 'eshell-queue-input)
-  :config
-  (use-package em-hist
-    :config
-    (defun eshell-add-input-to-history (input)
-      "Add `INPUT' to history. If already present, move to front."
-      (if (funcall eshell-input-filter input)
-          (ring-remove+insert+extend eshell-history-ring (replace-regexp-in-string "[ \t\n]*\\'" "" input)))
-      (setq eshell-save-history-index eshell-history-index)
-      (setq eshell-history-index nil))))
-
-(use-package narrow-or-widen-dwim
-  :load-path user-lisp-directory
-  :commands (narrow-or-widen-dwim)
-  :general (:states 'normal :prefix general-leader
-            "n" 'narrow-or-widen-dwim))
-
-(use-package fic-mode
-  :ensure t
-  :init
-  (with-hook prog-mode-hook
-    (fic-mode)))
-
-(use-package evil-exchange
-  :ensure t
-  :general (:keymaps 'evil-utility-map
-            "x" 'evil-exchange
-            "X" 'evil-exchange-cancel))
-
-(use-package evil-args
-  :ensure t
-  :general (:keymaps 'evil-inner-text-objects-map
-            "," 'evil-inner-arg)
-  :general (:keymaps 'evil-outer-text-objects-map
-            "," 'evil-outer-arg))
-
-(use-package xterm-color)
-
-;; Modes
+;; ** Lisp
 (use-package lisp-mode
+  :ensure nil
   :mode ("\\.el'" . emacs-lisp-mode)
-  :general (:states 'normal :prefix general-leader
-            "e" 'hydra-eval/body)
-  :config
-  (use-package lisp-plist-indent-function
-    :load-path user-lisp-directory
-    :config
-    (setc lisp-indent-function 'lisp-plist-indent-function))
 
+  :general
+  (with-mode-prefix :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
+   "e" '(nil :which-key "Evaluation")
+   "ex" 'eval-last-sexp
+   "eX" 'eval-and-replace-last-sexp
+   "ef" 'eval-defun
+   "eb" 'eval-buffer)
+
+  :config
   (defun eval-and-replace-last-sexp ()
     (interactive)
     (condition-case nil
@@ -523,222 +473,61 @@ Zoom: {_e_} Out | {_i_} In | {_r_} Reset | {_q_} Quit
           (let ((result (eval (preceding-sexp))))
             (backward-kill-sexp)
             (prin1 result (current-buffer))))
-        (prin1 (eval (read (current-kill 0)))
-               (current-buffer))
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
       (error (message "Invalid SExp")
-             (insert (current-kill 0)))))
+             (insert (current-kill 0))))))
 
-  (with-hook emacs-lisp-mode-hook
-    (add-to-list 'imenu-generic-expression
-                 '("Used Packages" "^\s*(use-package \\([a-zA-Z0-9\-]*\\)" 1))
-    (add-to-list 'imenu-generic-expression
-                 '("Sections" "^;; \\(.*\\)" 1))
+;; ** OCaml
+(use-package tuareg
+  :mode ("\\.mli?'" . tuareg-mode))
 
-    (font-lock-add-keywords nil '(("(\\(\\<with-hook\\>\\)" 1 'font-lock-keyword-face)))
-    (font-lock-add-keywords nil '(("(\\(\\<set[cq]\\>\\)" 1 'font-lock-keyword-face))))
+(use-package merlin
+  :general
+  (with-mode-prefix :keymaps 'tuareg-mode-map
+    "t" #'merlin-type-enclosing)
 
-  (defhydra hydra-eval (:color blue)
-    ("x" eval-last-sexp "L")
-    ("X" eval-and-replace-last-sexp "R")
-    ("f" eval-defun)
-    ("b" eval-buffer)))
+  :init
+  (setg merlin-error-after-save nil)
+  (add-hook+ tuareg-mode-hook/:initialize-merlin ()
+    (merlin-mode))
 
-(use-package haskell-mode
-  :ensure t
-  :mode ("\\.hs'" . haskell-mode)
   :config
-  (use-package haskell-doc
-    :diminish haskell-doc-mode)
+  (use-package flycheck-ocaml
+    :init
+    (flycheck-ocaml-setup)))
 
-  (with-hook haskell-mode-hook
-    (haskell-decl-scan-mode)
-    (haskell-doc-mode)
-    (haskell-indentation-mode)))
-
-(use-package K3-mode
-  :load-path user-lisp-directory
-  :mode ("\\.k3" . K3-mode))
-
-(use-package ledger-mode
-  :ensure t
-  :mode ("\\.ldg\\'" . ledger-mode)
-  :config
-  (setc ledger-clear-whole-transactions t)
-  (setc ledger-use-iso-dates t)
-  (setc ledger-post-account-alignment-column 2)
-  (setc ledger-post-amount-alignment-column 80)
-  (setc ledger-reconcile-default-commodity "USD"))
-
+;; ** Org
 (use-package org
   :ensure org-plus-contrib
-  :mode ("\\.org\\'" . org-mode)
-  :general (:states 'insert :keymaps 'org-mode-map
-            "M-n" 'org-metaleft
-            "M-e" 'org-metadown
-            "M-i" 'org-metaup
-            "M-o" 'org-metaright
+  :mode ("\\.org'" . org-mode)
+  :general
+  (:keymaps 'org-mode-map
+   "M-n" 'org-metaleft
+   "M-e" 'org-metadown
+   "M-i" 'org-metaup
+   "M-o" 'org-metaright
 
-            "M-RET" 'org-metareturn)
-  :general (:keymaps 'org-agenda-mode-map
-            "e" 'org-agenda-next-item
-            "i" 'org-agenda-previous-item)
-  :general (:states 'normal :prefix general-leader
-            "o" 'hydra-org/body)
-  :init
-  (use-package org-agenda
-    :commands (org-agenda)
-    :config
-    (with-hook org-agenda-mode-hook
-      (hl-line-mode))
+   "M-N" 'org-shiftmetaleft
+   "M-E" 'org-shiftmetadown
+   "M-I" 'org-shiftmetaup
+   "M-O" 'org-shiftmetaright
 
-    (setc org-agenda-dim-blocked-tasks t)
-    (setc org-agenda-span 14)
-    (setc org-agenda-start-on-weekday nil)
-    (setc org-agenda-tags-column -100)
+   "M-RET" 'org-metareturn)
 
-    (evil-set-initial-state 'org-agenda-mode 'emacs))
+  :general (with-prefix "o" 'org-capture))
 
-  (use-package org-capture
-    :commands (org-capture)
-    :config
-    (setc org-capture-templates
-	  `(("t" "Task" entry (file (concat org-directory "agenda.org"))
-	     "* TODO %?" :kill-buffer t :prepend t))))
-
-  (defhydra hydra-org (:color blue :hint nil :idle 1.0)
-    "
-Org: {_a_} Agenda | {_c_} Capture | {_j_} Jump to Clock | {_q_} Quit
-"
-    ("a" org-agenda)
-    ("c" org-capture)
-    ("j" org-clock-goto)
-    ("q" nil))
-
+(use-package org-agenda
+  :ensure org-plus-contrib
   :config
+  (setg org-agenda-files host-org-agenda-directory))
 
-  (use-package org-open-heading
-    :load-path user-lisp-directory
-    :general (:states 'normal :keymaps 'org-mode-map
-              "M-y" 'org-open-heading-below-and-insert
-              "M-Y" 'org-open-heading-above-and-insert))
-
-  ;; Appearance
-  (defface org-bold
-    (org-compatible-face nil '((t . (:weight bold))))
-    "Face for bold emphasis."
-    :group 'org-faces)
-
-  (defface org-italic
-    (org-compatible-face nil '((t . (:weight bold))))
-    "Face for bold emphasis."
-    :group 'org-faces)
-
-  (defface org-underline
-    (org-compatible-face nil '((t . (:weight bold))))
-    "Face for bold emphasis."
-    :group 'org-faces)
-
-  (defface org-strike-through
-    (org-compatible-face nil '((t . (:weight bold))))
-    "Face for bold emphasis."
-    :group 'org-faces)
-
-  (setc org-emphasis-alist
-        '(("*" org-bold)
-          ("/" org-italic)
-          ("_" org-underline)
-          ("=" org-verbatim verbatim)
-          ("~" org-code verbatim)
-          ("+" org-strike-through)))
-
-  ;; Paths
-  (setc org-directory "~/org/")
-  (setc org-agenda-files '("~/org/agenda.org"))
-
-
-  ;; Appearance
-  (setq org-ellipsis "…")
-  (setq org-adapt-indentation nil)
-
-  ;; Babel
-  (setc org-babel-load-languages '((emacs-lisp . t)
-                                   (shell . t)))
-
-  ;; Source Code
-  (setc org-src-fontify-natively t)
-  (setc org-src-preserve-indentation t)
-
-  ;; Tagging
-  (setc org-tags-column -100)
-  (setc org-tags-sort-function 'string<)
-
-  (with-hook org-mode-hook
-    (auto-fill-mode)))
-
-(use-package rust-mode
-  :ensure t
-  :mode ("\\.rs\\'" . rust-mode)
-  :init
-  (use-package racer
-    :ensure t
-    :config
-    (with-hook rust-mode-hook
-      (racer-mode))
-
-    (setq racer-cmd "/home/sykora/.cargo/bin/racer")
-    (setq racer-rust-src-path "/home/sykora/src/scratch/rust/rust/src")))
-
-(use-package sh-script
-  :mode ("\\.zsh\\'" . sh-mode))
-
-(use-package tex-mode
-  :ensure auctex
-  :mode ("\\.tex\\'" . LaTeX-mode)
-  :general (:states 'normal :keymaps 'LaTeX-mode-map :prefix general-leader
-            "m" 'hydra-latex/body)
+(use-package org-capture
+  :ensure org-plus-contrib
   :config
+  (setg org-capture-templates
+        `(("t" "Triage" entry (file host-org-capture-triage-path)
+           "* TODO %^{Title}" :kill-buffer t :prepend t :immediate-finish t))))
 
-  (put 'LaTeX-narrow-to-environment 'disabled nil)
-
-  (with-hook LaTeX-mode-hook
-    (auto-fill-mode)
-    (turn-on-reftex))
-
-  (use-package auctex-latexmk
-    :ensure t
-    :init
-    (auctex-latexmk-setup)
-
-    :config
-    (defun TeX-latexmk ()
-      (interactive)
-      (TeX-command "LatexMk" 'TeX-master-file -1)))
-
-  (defhydra hydra-latex (:color blue :hint nil :idle 1.0)
-    "
- LaTeX: {_c_} Compile | {_i_} Index | {_v_} View | {_q_} Quit
-"
-    ("c" TeX-latexmk)
-    ("v" TeX-view)
-    ("i" reftex-toc)
-    ("q" nil))
-
-  (setc latex-item-indent 0)
-
-  (setc font-latex-fontify-sectioning 'color)
-
-  (defun sanitized-projectile-project-name ()
-    (replace-regexp-in-string "-" "_" (projectile-project-name)))
-
-  (add-to-list 'TeX-expand-list `("%i" sanitized-projectile-project-name))
-  (add-to-list 'TeX-view-program-list '("QPDFView"
-    ("qpdfview --unique --instance %i %o" (mode-io-correlate "#src:%b:%n:1"))))
-  (setcdr (assoc 'output-pdf TeX-view-program-selection) '("QPDFView")))
-
-(use-package yaml-mode
-  :ensure t
-  :mode ("\\.ya?ml\\'" . yaml-mode))
-
-;; Local Variables:
-;; flycheck-disabled-checkers: (emacs-lisp emacs-lisp-checkdoc)
-;; End:
+;; * Exeunt
+(provide 'init)
