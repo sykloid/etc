@@ -91,10 +91,9 @@
 (setg tool-bar-mode nil)
 
 ;; ** Fonts
-;; TODO: Implement font fall-back.
-(let ((font-name "Iosevka-10"))
-  (when (and (display-graphic-p) (find-font (font-spec :name font-name)))
-    (set-frame-font font-name)))
+;; TODO: Handle font fallback.
+(let ((preferred-font "Iosevka-10"))
+  (setg default-frame-alist (list (font . preferred-font))))
 
 ;; ** Theme
 (with-demoted-errors "%S"
