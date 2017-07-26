@@ -135,6 +135,10 @@
  '(org-upcoming-deadline ((t (:foreground "#F5F3B8"))))
  '(org-warning ((t (:foreground "#E5C5F0"))))
 
- '(org-agenda-structure ((t (:foreground "#8EE5EE")))))
+ '(org-agenda-structure ((t (:foreground "#8EE5EE"))))
+
+ '(helm-source-header ((t (:foreground "#FFFFFF" :background "#1A60C9" :weight ultra-bold))))
+ '(helm-selection ((t (:background "#444444"))))
+ '(helm-candidate-number ((t (:background "#1A60C9")))))
 
 (provide-theme 'skywave)
