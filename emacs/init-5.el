@@ -152,6 +152,7 @@
    :non-normal-prefix (concat general-non-normal-prefix " " general-mode-sub-prefix)))
 
 (use-package which-key
+  :diminish 'which-key-mode
   :init
   (setg which-key-allow-evil-operators t)
   (setg which-key-show-operator-state-maps t)
@@ -416,6 +417,7 @@
   :ensure nil
   ;; TODO: Make this binding more generic, using vc-dir for non-git backends.
   :general (with-prefix "vs" 'magit-status))
+
 ;; * Major Modes
 ;; ** Ebib
 (use-package ebib
