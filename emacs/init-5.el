@@ -327,7 +327,9 @@
 (use-package outline
   :commands outline-hide-body
   :diminish outline-minor-mode
-  :general (with-mode-prefix "i" 'helm-semantic-or-imenu)
+  :general
+  (with-mode-prefix :keymaps 'outline-minor-mode-map
+    "i" 'helm-semantic-or-imenu)
 
   :config
   ;; Use an actual ellipsis character.
@@ -454,7 +456,8 @@
 
 (use-package merlin
   :general
-  (with-mode-prefix "t" #'merlin-type-enclosing)
+  (with-mode-prefix :keymaps 'tuareg-mode-map
+    "t" #'merlin-type-enclosing)
 
   :init
   (setg merlin-error-after-save nil)
