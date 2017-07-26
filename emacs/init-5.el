@@ -450,6 +450,32 @@
     (haskell-decl-scan-mode)
     (haskell-indentation-mode)))
 
+;; ** Lisp
+(use-package lisp-mode
+  :ensure nil
+  :mode ("\\.el'" . emacs-lisp-mode)
+
+  :general
+  (with-mode-prefix :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
+   "e" '(nil :which-key "Evaluation")
+   "ex" 'eval-last-sexp
+   "eX" 'eval-and-replace-last-sexp
+   "ef" 'eval-defun
+   "eb" 'eval-buffer)
+
+  :config
+  (defun eval-and-replace-last-sexp ()
+    (interactive)
+    (condition-case nil
+        (progn
+          (let ((result (eval (preceding-sexp))))
+            (backward-kill-sexp)
+            (prin1 result (current-buffer))))
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+      (error (message "Invalid SExp")
+             (insert (current-kill 0))))))
+
 ;; ** OCaml
 (use-package tuareg
   :mode ("\\.mli?'" . tuareg-mode))
