@@ -122,8 +122,13 @@
  '(outline-3 ((t (:foreground "#C45271"))))
  '(outline-4 ((t (:foreground "#4ED998"))))
 
- '(org-date ((t (:foreground "#22D9E3" :underline nil))))
- '(org-link ((t (:foreground "#22D9E3" :underline t))))
+ '(org-level-1 ((t . (:inherit outline-1))))
+ '(org-level-2 ((t . (:inherit outline-2))))
+ '(org-level-3 ((t . (:inherit outline-3))))
+ '(org-level-4 ((t . (:inherit outline-4))))
+
+ '(org-date ((t (:foreground "#0DA591" :underline nil))))
+ '(org-link ((t (:foreground "#0DA591" :underline t))))
  '(org-todo ((t (:foreground "#FFFFFF" :underline t :bold t))))
  '(org-done ((t (:foreground "#777777"))))
 
