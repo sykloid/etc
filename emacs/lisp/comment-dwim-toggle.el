@@ -12,9 +12,13 @@ If a region is active, comment/uncomment it. Otherwise,
 comment/uncomment the current line."
   (interactive "*P")
   (comment-normalize-vars)
-  (if (not (region-active-p))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-    (comment-dwim arg)))
+  (cond
+   ((not (region-active-p))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+   ((org-in-src-block-p t)
+    (org-babel-do-in-edit-buffer (comment-dwim-toggle)))
+   (t (comment-dwim arg))))
+
 
 (provide 'comment-dwim-toggle)
 ;;; comment-dwim-toggle.el ends here
