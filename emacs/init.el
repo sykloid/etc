@@ -212,6 +212,7 @@
    "i" 'evil-window-up
    "o" 'evil-window-right
 
+   "d" 'delete-other-windows
    "q" 'evil-window-delete)
 
   :general (with-prefix "w" 'evil-window-map)
