@@ -523,6 +523,9 @@
 
 (use-package org-agenda
   :ensure org-plus-contrib
+  :general
+  (with-prefix
+   "oa" 'org-agenda)
   :config
   (setg org-agenda-files host-org-agenda-directory))
 
