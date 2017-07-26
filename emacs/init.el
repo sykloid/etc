@@ -72,7 +72,7 @@
   (cl-remove-if-not (lambda (elt) (member (car elt) custom-safe-variables)) args))
 
 (advice-add #'custom-set-variables :filter-args 'custom-set-only-safe)
-(load custom-file)
+(load custom-file 'noerror)
 (advice-remove #'custom-set-variables 'custom-set-only-safe)
 
 (use-package no-littering)
