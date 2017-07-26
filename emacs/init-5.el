@@ -1,4 +1,4 @@
-;; -*- eval: (outline-minor-mode) -*-
+;; -*- eval: (outline-minor-mode); flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
 ;; An Emacs Initialization
 ;; P.C. Shyamshankar
 ;; This is rewrite #5
