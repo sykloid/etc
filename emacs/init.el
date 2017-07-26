@@ -514,7 +514,10 @@
 
    "M-RET" 'org-metareturn)
 
-  :general (with-prefix "o" 'org-capture))
+  :general
+  (with-prefix
+   "o" '(nil :which-key "Org")
+   "oc" 'org-capture))
 
 (use-package org-agenda
   :ensure org-plus-contrib
