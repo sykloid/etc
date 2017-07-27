@@ -529,6 +529,12 @@
   :general
   (with-prefix
    "oa" 'org-agenda)
+
+  :general
+  (:keymaps 'org-agenda-mode-map
+   "e" 'org-agenda-next-item
+   "i" 'org-agenda-previous-item)
+
   :init
   (use-package hl-line
     :init
