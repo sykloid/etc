@@ -409,7 +409,10 @@
 
    "V" 'set-mark-command
 
-   "M-n" 'magit-section-up)
+   "M-n" 'magit-section-up
+
+   general-prefix general-prefix-map)
+
   :init
   (evil-set-initial-state 'magit-status 'emacs))
 
