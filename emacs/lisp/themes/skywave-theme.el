@@ -55,6 +55,10 @@
    ((,skywave-gui . (:background "#444444")))
    ((,skywave-tty . (:background "color-233"))))
 
+ `(hl-line
+   ((,skywave-gui . (:background "#444444")))
+   ((,skywave-tty . (:background "color-233"))))
+
  `(region
    ((,skywave-gui . (:background "#444444")))
    ((,skywave-tty . (:background "color-233"))))
