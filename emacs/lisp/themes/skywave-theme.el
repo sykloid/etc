@@ -139,6 +139,9 @@
 
  '(helm-source-header ((t (:foreground "#FFFFFF" :background "#1A60C9" :weight ultra-bold))))
  '(helm-selection ((t (:background "#444444"))))
- '(helm-candidate-number ((t (:background "#1A60C9")))))
+ '(helm-candidate-number ((t (:background "#1A60C9"))))
+
+ '(helm-grep-file ((t (:foreground "#FFFFFF"))))
+ '(helm-grep-lineno ((t (:foreground "#E8C576")))))
 
 (provide-theme 'skywave)
