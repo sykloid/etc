@@ -524,6 +524,9 @@
    "o" '(nil :which-key "Org")
    "oc" 'org-capture)
 
+  :config
+  (setg org-adapt-indent nil))
+
 (use-package org-agenda
   :ensure org-plus-contrib
   :general
