@@ -199,6 +199,10 @@
    "Q" 'evil-record-macro)
 
   :general
+  (:states '(operator visual)
+   "h" '(:keymap evil-inner-text-objects-map))
+
+  :general
   (:states 'insert
    "RET" 'evil-ret-and-indent)
 
@@ -224,6 +228,14 @@
       (back-to-indentation)
       (when (= current (point))
         (beginning-of-line)))))
+
+(use-package evil-surround
+  :ensure t
+  :general (:states '(normal visual)
+            "js" 'evil-surround-region
+            "jS" 'evil-Surround-region)
+  :init
+  (global-evil-surround-mode))
 
 (use-package comment-dwim-toggle
   :ensure nil
