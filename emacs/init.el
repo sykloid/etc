@@ -555,7 +555,7 @@
   (use-package hl-line
     :init
     (add-hook+ org-agenda-mode-hook/:enable-hl-line-mode ()
-      (hl-line-mode))))
+      (hl-line-mode)))
 
   :config
   (setg org-agenda-files host-org-agenda-directory))
