@@ -93,7 +93,7 @@
 ;; ** Fonts
 ;; TODO: Handle font fallback.
 (let ((preferred-font "Iosevka-10"))
-  (setg default-frame-alist (list (font . preferred-font))))
+  (setg default-frame-alist `((font . ,preferred-font))))
 
 ;; ** Theme
 (with-demoted-errors "%S"
