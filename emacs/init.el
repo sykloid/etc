@@ -374,8 +374,9 @@
   (advice-add #'outline-cycle :around 'wrap-in-save-excursion))
 
 (use-package projectile
+  :general
   (with-prefix
-   "p" '(nil :which-key "Project Commands"))
+   "p" '(nil :which-key "Project Commands")))
 
 (use-package helm-projectile
   :general
