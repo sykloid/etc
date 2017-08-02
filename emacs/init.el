@@ -538,7 +538,7 @@
    "oc" 'org-capture)
 
   :config
-  (setg org-adapt-indent nil))
+  (setg org-adapt-indentation nil))
 
 (use-package org-agenda
   :ensure org-plus-contrib
