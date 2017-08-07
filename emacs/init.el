@@ -59,7 +59,7 @@
 (setg custom-theme-directory (concat user-lisp-directory "themes/"))
 
 ;; ** Host-Specific Initialization
-(load-library "init-host")
+(require 'init-host)
 (with-demoted-errors "%S" (load-library (format "init-%s" (system-name))))
 
 ;; ** Custom Initialization
