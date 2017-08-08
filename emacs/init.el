@@ -532,11 +532,6 @@
 
    "M-RET" 'org-metareturn)
 
-  :general
-  (with-prefix
-   "o" '(nil :which-key "Org")
-   "oc" 'org-capture)
-
   :config
   (setg org-adapt-indentation nil))
 
@@ -562,6 +557,9 @@
 
 (use-package org-capture
   :ensure org-plus-contrib
+  :general
+  (with-prefix
+   "oc" 'org-capture)
   :config
   (setg org-capture-templates
         `(("t" "Triage" entry (file host-org-capture-triage-path)
