@@ -442,6 +442,7 @@
   (:keymaps 'ebib-index-mode-map
    "e" 'ebib-next-entry
    "i" 'ebib-prev-entry
+   "M-RET" 'ebib-edit-entry
    general-prefix general-prefix-map)
 
   :general
