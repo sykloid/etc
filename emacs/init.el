@@ -533,7 +533,9 @@
    "M-RET" 'org-metareturn)
 
   :config
-  (setg org-adapt-indentation nil))
+  (setg org-adapt-indentation nil)
+  (setg org-tags-column -100)
+  (setg org-tags-sort-function 'string<))
 
 (use-package org-agenda
   :ensure org-plus-contrib
@@ -553,7 +555,8 @@
       (hl-line-mode)))
 
   :config
-  (setg org-agenda-files host-org-agenda-directory))
+  (setg org-agenda-files host-org-agenda-directory)
+  (setg org-agenda-tags-column -100))
 
 (use-package org-capture
   :ensure org-plus-contrib
