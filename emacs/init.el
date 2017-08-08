@@ -563,7 +563,7 @@
   :config
   (setg org-capture-templates
         `(("t" "Triage" entry (file host-org-capture-triage-path)
-           "* TODO %^{Title}" :kill-buffer t :prepend t :immediate-finish t))))
+           "* TODO %?" :kill-buffer t :prepend t))))
 
 ;; * Exeunt
 (provide 'init)
