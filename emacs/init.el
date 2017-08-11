@@ -536,7 +536,10 @@
   :config
   (setg org-adapt-indentation nil)
   (setg org-tags-column -100)
-  (setg org-tags-sort-function 'string<))
+  (setg org-tags-sort-function 'string<)
+
+  (add-hook+ org-mode-hook/:enable-auto-fill-mode ()
+    (auto-fill-mode)))
 
 (use-package org-agenda
   :ensure org-plus-contrib
