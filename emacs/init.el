@@ -253,6 +253,7 @@
    "bk" 'kill-this-buffer
    "bK" 'kill-this-buffer-and-file
    "bo" 'evil-buffer
+   "bg" 'revert-buffer
    "bR" 'rename-this-buffer-and-file)
 
   :general
