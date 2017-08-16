@@ -490,7 +490,7 @@
     (interactive)
     (condition-case nil
         (progn
-          (let ((result (eval (preceding-sexp))))
+          (let ((result (eval (elisp--preceding-sexp))))
             (backward-kill-sexp)
             (prin1 result (current-buffer))))
       (prin1 (eval (read (current-kill 0)))
