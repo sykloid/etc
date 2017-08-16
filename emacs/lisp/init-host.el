@@ -12,3 +12,4 @@
 (defvar host-org-directory (expand-file-name "~/"))
 (defvar host-org-agenda-directory (expand-file-name "~/"))
 (defvar host-org-capture-triage-path (expand-file-name "~/triage.org"))
+(provide 'init-host)
