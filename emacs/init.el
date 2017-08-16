@@ -457,6 +457,7 @@
   (setg ebib-file-search-dirs host-ebib-file-search-dirs)
   (setg ebib-preload-bib-files host-ebib-preload-bib-files)
   (setg ebib-file-associations host-ebib-file-associations)
+  (setg ebib-keywords-file "keywords.txt")
 
   (setg ebib-layout 'index-only)
 
