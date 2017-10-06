@@ -130,10 +130,12 @@
   :functions
   with-prefix
   with-mode-prefix
+  with-utility
 
   :config
   (defvar general-prefix "SPC")
   (defvar general-non-normal-prefix "M-SPC")
+  (defvar general-utility-prefix "s")
 
   (general-create-definer
    with-prefix
@@ -148,7 +150,12 @@
    with-mode-prefix
    :states '(emacs insert motion normal visual)
    :prefix (concat general-prefix " " general-mode-sub-prefix)
-   :non-normal-prefix (concat general-non-normal-prefix " " general-mode-sub-prefix)))
+   :non-normal-prefix (concat general-non-normal-prefix " " general-mode-sub-prefix))
+
+  (general-create-definer
+   with-utility
+   :states '(normal visual)
+   :prefix general-utility-prefix))
 
 (use-package which-key
   :diminish 'which-key-mode
@@ -228,6 +235,12 @@
       (back-to-indentation)
       (when (= current (point))
         (beginning-of-line)))))
+
+(use-package evil-exchange
+  :general
+  (with-utility
+   "x" 'evil-exchange
+   "X" 'evil-exchange-cancel))
 
 (use-package evil-surround
   :ensure t
