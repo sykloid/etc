@@ -611,7 +611,7 @@
       (hl-line-mode)))
 
   :config
-  (setg org-agenda-files host-org-agenda-directory)
+  (setg org-agenda-files (list host-org-agenda-directory))
   (setg org-agenda-tags-column -100))
 
 (use-package org-capture
