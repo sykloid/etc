@@ -583,7 +583,7 @@
    "M-I" 'org-shiftmetaup
    "M-O" 'org-shiftmetaright
 
-   "M-RET" 'org-metareturn)
+   "M-RET" 'org-meta-return)
 
   :config
   (setg org-adapt-indentation nil)
