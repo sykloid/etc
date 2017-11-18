@@ -425,6 +425,43 @@
   :init
   (winner-mode))
 
+;; ** Compilation/Blueprints
+(use-package compile
+  :ensure nil
+  :init
+  (setg compilation-scroll-output t)
+  (setg compilation-environment '("TERM=xterm-256color"))
+
+  (add-hook+ compilation-start-hook/:enable-xterm-color-filter (proc)
+    (when (eq (process-filter proc) 'compilation-filter)
+      (set-process-filter proc (lambda (proc string)
+                                 (funcall 'compilation-filter proc (xterm-color-filter string))))))
+
+  (add-hook+ compilation-filter-hook/:remove-spurious-xterm-codes ()
+    (when (< compilation-filter-start (point))
+      (let ((buffer-read-only nil))
+        (save-excursion
+          (while (re-search-backward " (B" compilation-filter-start t)
+            (replace-match " ")))))))
+
+(use-package blueprints
+  :ensure nil
+  :load-path user-lisp-directory
+  :general
+  (with-prefix
+   "r" '(nil :which-key "Blueprint Commands")
+   "rc" 'blueprint-invoke
+   "rr" 'blueprint-reinvoke
+   "rs" 'blueprint-save-compilation
+   "rS" 'blueprint-switch-current-context))
+
+(use-package helm-blueprints
+  :ensure nil
+  :load-path user-lisp-directory
+  :general
+  (with-prefix
+   "r/" 'helm-blueprint))
+
 ;; ** Magit
 (use-package magit
   :general
