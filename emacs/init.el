@@ -539,6 +539,15 @@
    "i" 'reftex-toc-previous
    "o" 'reftex-toc-goto-line-and-hide))
 
+;; ** Ledger
+(use-package ledger-mode
+  :mode ("\\*.ldg'" . ledger-mode)
+  :config
+  (setg ledger-binary-path "hledger")
+  (setg ledger-default-date-format ledger-iso-date-format)
+  (setg ledger-post-amount-alignment-column 80)
+  (setg ledger-post-account-alignment-column 2))
+
 ;; ** Lisp
 (use-package lisp-mode
   :ensure nil
