@@ -6,7 +6,7 @@
     email = sykora@lucentbeing.com
 
 [core]
-    editor = vim
+    editor = emacsclient -nw
     excludesfile = ~/etc/git/gitignore
 
 [color]
