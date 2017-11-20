@@ -522,6 +522,23 @@
     (haskell-decl-scan-mode)
     (haskell-indentation-mode)))
 
+;; ** LaTeX
+(use-package tex-mode
+  :ensure auctex
+  :config
+  (setg font-latex-fontify-sectioning 'color)
+  (reftex-mode))
+
+(use-package reftex
+  :general
+  (with-mode-prefix :keymaps 'tex-mode-map
+   "i" 'reftex-toc)
+  :general
+  (:keymaps 'reftex-toc-mode-map
+   "e" 'reftex-toc-next
+   "i" 'reftex-toc-previous
+   "o" 'reftex-toc-goto-line-and-hide))
+
 ;; ** Lisp
 (use-package lisp-mode
   :ensure nil
