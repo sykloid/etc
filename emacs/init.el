@@ -426,8 +426,11 @@
   (winner-mode))
 
 ;; ** Compilation/Blueprints
+(use-package xterm-color)
+
 (use-package compile
   :ensure nil
+  :functions xterm-color-filter
   :init
   (setg compilation-scroll-output t)
   (setg compilation-environment '("TERM=xterm-256color"))
