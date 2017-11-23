@@ -519,7 +519,7 @@
 
 ;; ** Haskell
 (use-package haskell-mode
-  :mode ("\\.hs'" . haskell-mode)
+  :mode ("\\.hs\\'" . haskell-mode)
   :config
   (add-hook+ haskell-mode-hook/:haskell-minor-modes ()
     (haskell-decl-scan-mode)
@@ -544,7 +544,7 @@
 
 ;; ** Ledger
 (use-package ledger-mode
-  :mode ("\\*.ldg'" . ledger-mode)
+  :mode ("\\.ldg\\'" . ledger-mode)
   :config
   (setg ledger-binary-path "hledger")
   (setg ledger-default-date-format ledger-iso-date-format)
@@ -554,7 +554,7 @@
 ;; ** Lisp
 (use-package lisp-mode
   :ensure nil
-  :mode ("\\.el'" . emacs-lisp-mode)
+  :mode ("\\.el\\'" . emacs-lisp-mode)
 
   :general
   (with-mode-prefix :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
@@ -579,7 +579,7 @@
 
 ;; ** OCaml
 (use-package tuareg
-  :mode ("\\.mli?'" . tuareg-mode))
+  :mode ("\\.mli?\\'" . tuareg-mode))
 
 (use-package merlin
   :general
@@ -599,7 +599,7 @@
 ;; ** Org
 (use-package org
   :ensure org-plus-contrib
-  :mode ("\\.org'" . org-mode)
+  :mode ("\\.org\\'" . org-mode)
   :general
   (:keymaps 'org-mode-map
    "M-n" 'org-metaleft
