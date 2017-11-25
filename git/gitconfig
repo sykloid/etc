@@ -13,6 +13,7 @@
   ui = auto
 
 [alias]
+  serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 	timeline = log --abbrev-commit --stat --graph --all \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n\"
 	longline = log --abbrev-commit --stat --graph --all \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n%b\"
 
