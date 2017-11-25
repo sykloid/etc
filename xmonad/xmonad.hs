@@ -41,7 +41,7 @@ myBorderWidth = 0 -- No borders around windows, I think I can manage.
 -- XMonad.Prompt Appearance
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig {
-    font = "xft:Pragmata Pro:pixelsize=14",
+    font = "xft:Iosevka Term:pixelsize=20",
     fgHLight = "#FFCC00",
     bgHLight = "#000000",
     bgColor = "#000000",
@@ -54,7 +54,7 @@ myXPConfig = defaultXPConfig {
 -- XMonad.GridSelect Configuration.
 myGSConfig :: HasColorizer a => GSConfig a
 myGSConfig = defaultGSConfig {
-        gs_font = "xft:Pragmata Pro:pixelsize=14",
+        gs_font = "xft:Iosevka Term:pixelsize=20",
         gs_cellheight = 40,
         gs_cellwidth = 512,
         gs_navigate = myGSNavigation
@@ -79,7 +79,7 @@ myGSConfig = defaultGSConfig {
 -- XMonad.Layout.Tabbed appearance
 myTabTheme :: Theme
 myTabTheme = defaultTheme {
-    fontName = "xft:Envy Code R:pixelsize=12",
+    fontName = "xft:Iosevka Term:pixelsize=20",
     inactiveColor = "#333333",
     inactiveBorderColor = "#333333",
     activeColor = "#FFCC00",
