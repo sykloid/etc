@@ -242,7 +242,7 @@ main = do
         mouseBindings = myMouseBindings,
 
         -- Hooks
-        handleEventHook = fullscreenEventHook,
+        handleEventHook = docksEventHook,
         layoutHook    = myLayoutHook,
         logHook       = myXMobarLogger xmobarPipe >> updatePointer (0.98, 0.95) (0, 0),
         manageHook    = myManageHook
