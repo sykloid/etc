@@ -92,7 +92,7 @@
 
 ;; ** Fonts
 ;; TODO: Handle font fallback.
-(let ((preferred-font "Iosevka-10"))
+(let ((preferred-font "Iosevka Term-15"))
   (setg default-frame-alist `((font . ,preferred-font))))
 
 ;; ** Theme
@@ -482,6 +482,11 @@
 
   :init
   (evil-set-initial-state 'magit-status 'emacs))
+
+(use-package with-editor
+  :init
+  (add-hook+ with-editor-mode-hook/:initial-evil-state ()
+    (evil-normal-state)))
 
 ;; ** VC
 (use-package vc
