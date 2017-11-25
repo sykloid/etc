@@ -44,17 +44,17 @@ urxvt.shading: 70
 
 ! Set some nice fonts.
 urxvt.font: \
-    xft:Iosevka:style=Regular:pixelsize=13:autohint=true, \
+    xft:Iosevka Term:style=Regular:pixelsize=20:autohint=true, \
     xft:DejaVu Sans Mono:style=Regular:pixelsize=15:autohint=true, \
     xft:unifont:style=Medium:pixelsize=15:autohint=true
 urxvt.boldFont: \
-    xft:Iosevka:style=Bold:pixelsize=13:autohint=true, \
+    xft:Iosevka Term:style=Bold:pixelsize=20:autohint=true, \
     xft:DejaVu Sans Mono:style=Bold:pixelsize=15:autohint=true
 urxvt.italicFont:
-    xft:Iosevka:style=Italic:pixelsize=13:autohint=true, \
+    xft:Iosevka Term:style=Italic:pixelsize=20:autohint=true, \
     xft:DejaVu Sans Mono:style=Italic:pixelsize=15:autohint=true
 urxvt.boldItalicFont: \
-    xft:Iosevka:style=Bold:style=Italic:pixelsize=13:autohint=true, \
+    xft:Iosevka Term:style=Bold:style=Italic:pixelsize=20:autohint=true, \
     xft:DejaVu Sans Mono:style=Bold:style=Italic:pixelsize=15:autohint=true
 
 ! Custom scrolling behaviour
@@ -104,3 +104,4 @@ emacs.cursorBlink: off
 emacs.menuBar: off
 emacs.toolBar: 0
 emacs.verticalScrollBars: off
+emacs.font: IosevkaTerm-16
