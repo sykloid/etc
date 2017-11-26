@@ -1,11 +1,16 @@
 ;;; skywave-theme.el -- Custom Emacs Theme
 ;;; P.C. Shyamshankar "sykora"  <sykora@lucentbeing.com>
 
+
+;;; Commentary:
+
 ;;; This is an evolution of my vim colorscheme, which is available in the vim section of my
 ;;; configuration repository. I used to have separate `-tty' and `-gui' versions, but then I
 ;;; discovered more arguments to`defface'.
 
 ;;; Overrides for non-builtin faces are provided as needed.
+
+;;; Code:
 
 (deftheme skywave "The Skywave Emacs Theme")
 
@@ -149,3 +154,4 @@
  '(helm-grep-lineno ((t (:foreground "#E8C576")))))
 
 (provide-theme 'skywave)
+;;; skywave-theme.el ends here
