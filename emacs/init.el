@@ -88,6 +88,7 @@
 (setg inhibit-startup-message t)
 (setg menu-bar-mode nil)
 (setg scroll-bar-mode nil)
+(setg show-trailing-whitespace t)
 (setg tool-bar-mode nil)
 
 ;; ** Fonts
