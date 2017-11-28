@@ -1,7 +1,6 @@
 ;;; skywave-theme.el -- Custom Emacs Theme
 ;;; P.C. Shyamshankar "sykora"  <sykora@lucentbeing.com>
 
-
 ;;; Commentary:
 
 ;;; This is an evolution of my vim colorscheme, which is available in the vim section of my
@@ -93,6 +92,16 @@
  `(diff-removed
    ((,skywave-gui . (:foreground "PaleVioletRed2"))
     (,skywave-tty . (:foreground "color-204"))))
+
+ ;; Ledger
+ `(ledger-font-payee-uncleared-face
+   ((t (:foreground "IndianRed1"))))
+ `(ledger-font-posting-account-face
+   ((t (:foreground "Wheat"))))
+ `(ledger-font-posting-amount-face
+   ((t (:foreground "Pale Green"))))
+ `(ledger-font-posting-date-face
+   ((t (:foreground "Light Sea Green"))))
 
  ;; Magit
  `(magit-diff-added
