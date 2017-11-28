@@ -535,7 +535,9 @@
   :ensure auctex
   :config
   (setg font-latex-fontify-sectioning 'color)
-  (reftex-mode))
+  (reftex-mode)
+  (setg TeX-view-program-list '(("qpdfview" "qpdfview %o")))
+  (setg TeX-view-program-selection '((output-pdf "qpdfview"))))
 
 (use-package reftex
   :general
