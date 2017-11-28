@@ -627,7 +627,35 @@
   (setg org-tags-sort-function 'string<)
 
   (add-hook+ org-mode-hook/:enable-auto-fill-mode ()
-    (auto-fill-mode)))
+    (auto-fill-mode))
+
+  (defface org-bold
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (defface org-italic
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (defface org-underline
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (defface org-strike-through
+    (org-compatible-face nil '((t . (:weight bold))))
+    "Face for bold emphasis."
+    :group 'org-faces)
+
+  (setg org-emphasis-alist
+        '(("*" org-bold)
+          ("/" org-italic)
+          ("_" org-underline)
+          ("=" org-verbatim verbatim)
+          ("~" org-code verbatim)
+          ("+" org-strike-through))))
 
 (use-package org-agenda
   :ensure org-plus-contrib
