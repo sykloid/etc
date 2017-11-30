@@ -542,8 +542,9 @@
 
 (use-package reftex
   :general
-  (with-mode-prefix :keymaps 'tex-mode-map
-   "i" 'reftex-toc)
+  (with-mode-prefix :keymaps 'LaTeX-mode-map
+   "i" 'reftex-toc
+   "v" 'TeX-view)
   :general
   (:keymaps 'reftex-toc-mode-map
    "e" 'reftex-toc-next
