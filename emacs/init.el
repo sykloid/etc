@@ -237,6 +237,11 @@
       (when (= current (point))
         (beginning-of-line)))))
 
+(use-package evil-args
+  :general
+  (:keymaps 'evil-inner-text-objects-map "," 'evil-inner-arg)
+  (:keymaps 'evil-outer-text-objects-map "," 'evil-outer-arg))
+
 (use-package evil-exchange
   :general
   (with-utility
