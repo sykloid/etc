@@ -268,6 +268,7 @@
   (with-prefix
    "b" '(nil :which-key "Buffer Commands")
    "bb" 'helm-buffers-list
+   "bB" 'bury-buffer
    "bf" 'helm-find-files
    "bk" 'kill-this-buffer
    "bK" 'kill-this-buffer-and-file
