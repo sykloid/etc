@@ -44,6 +44,9 @@
 <Multi_key> <l> <bar>       : "∨" U02228 # LOGICAL OR
 <Multi_key> <l> <slash>     : "¬" U000AC # NOT SIGN
 
+<Multi_key> <y> <s>         : "§" U000A7 # SECTION SIGN
+<Multi_key> <y> <p>         : "¶" U000B6 # PARAGRAPH SIGN
+
 <Multi_key> <bracketleft>  <bracketleft>  : "⟦" U027E6 # MATHEMATICAL LEFT WHITE SQUARE BRACKET
 <Multi_key> <bracketright> <bracketright> : "⟧" U027E7 # MATHEMATICAL RIGHT WHITE SQUARE BRACKET
 
