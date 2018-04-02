@@ -28,6 +28,7 @@ cabal.sandbox.config
 .cabal-sandbox
 .stack-work
 *.hi
+dist-newstyle
 
 # Java
 *.class
