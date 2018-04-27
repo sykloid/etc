@@ -226,7 +226,7 @@ myManageHook = manageDocks
 -- Run it.
 main :: IO ()
 main = do
-    xmobarPipe <- spawnPipe "xmobar -x 1 ~/etc/xmonad/xmobar.config"
+    xmobarPipe <- spawnPipe "xmobar ~/etc/xmonad/xmobar.config"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
 
         -- Basics
