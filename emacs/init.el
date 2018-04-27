@@ -167,15 +167,16 @@
 
 ;; ** Evil
 (use-package evil
-  :init
-  (evil-mode t)
-
-  :config
-  (setg evil-move-beyond-eol t)
-  (setg evil-split-window-below t)
-  (setg evil-vsplit-window-right t)
-
   :general
+  (:states 'normal
+   "a" 'evil-append
+   "A" 'evil-append-line
+   "h" 'evil-insert-state
+   "H" 'evil-insert-line
+   "y" 'evil-open-below
+   "Y" 'evil-open-above
+
+   "Q" 'evil-record-macro)
   (:states '(motion normal visual)
    "n" 'evil-backward-char
    "e" 'evil-next-visual-line
@@ -190,34 +191,19 @@
 
    "k" 'evil-yank)
 
-  :general
   (:states '(normal visual)
    "m" 'evil-paste-after
    "M" 'evil-paste-before)
 
-  :general
-  (:states 'normal
-   "a" 'evil-append
-   "A" 'evil-append-line
-   "h" 'evil-insert-state
-   "H" 'evil-insert-line
-   "y" 'evil-open-below
-   "Y" 'evil-open-above
-
-   "Q" 'evil-record-macro)
-
-  :general
   (:states '(operator visual)
    "h" '(:keymap evil-inner-text-objects-map))
 
-  :general
   (:states 'insert
    "RET" 'evil-ret-and-indent)
 
-  ;; Unbinding doesn't work with `:states'.
-  :general (:keymaps 'evil-normal-state-map "q" nil)
+  ; Unbinding doesn't work with `:states'.
+  (:keymaps 'evil-normal-state-map "q" nil)
 
-  :general
   (:keymaps 'evil-window-map
    "n" 'evil-window-left
    "e" 'evil-window-down
@@ -227,15 +213,24 @@
    "d" 'delete-other-windows
    "q" 'evil-window-delete)
 
-  :general (with-prefix "w" 'evil-window-map)
+  (with-prefix "w" 'evil-window-map)
+
+  (with-utility "" nil)
 
   :init
+  (evil-mode t)
+
+  :config
   (defun evil-toggle-beginning-of-line ()
     (interactive)
     (let ((current (point)))
       (back-to-indentation)
       (when (= current (point))
-        (beginning-of-line)))))
+        (beginning-of-line))))
+
+  (setg evil-move-beyond-eol t)
+  (setg evil-split-window-below t)
+  (setg evil-vsplit-window-right t))
 
 (use-package evil-args
   :general
@@ -264,7 +259,6 @@
 (use-package helm
   :general ("M-x" 'helm-M-x)
 
-  :general
   (with-prefix
    "b" '(nil :which-key "Buffer Commands")
    "bb" 'helm-buffers-list
@@ -276,7 +270,6 @@
    "bg" 'revert-buffer
    "bR" 'rename-this-buffer-and-file)
 
-  :general
   (:keymaps 'helm-map
    "M-e" 'helm-next-line
    "M-i" 'helm-previous-line
@@ -411,14 +404,13 @@
    "u" 'undo-tree-undo
    "U" 'undo-tree-redo)
 
-  :general
   (:keymaps 'undo-tree-visualizer-mode-map
    "n" 'undo-tree-visualize-switch-branch-left
    "e" 'undo-tree-visualize-redo
    "i" 'undo-tree-visualize-undo
    "o" 'undo-tree-visualize-switch-branch-right)
 
-  :general (with-prefix "u" 'undo-tree-visualize)
+  (with-prefix "u" 'undo-tree-visualize)
 
   :init
   (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs))
@@ -459,7 +451,6 @@
   :load-path user-lisp-directory
   :general
   (with-prefix
-   "r" '(nil :which-key "Blueprint Commands")
    "rc" 'blueprint-invoke
    "rr" 'blueprint-reinvoke
    "rs" 'blueprint-save-compilation
@@ -670,8 +661,6 @@
   :general
   (with-prefix
    "oa" 'org-agenda)
-
-  :general
   (:keymaps 'org-agenda-mode-map
    "e" 'org-agenda-next-item
    "i" 'org-agenda-previous-item)
