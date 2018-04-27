@@ -516,6 +516,7 @@
   (:keymaps 'ebib-index-mode-map
    "e" 'ebib-next-entry
    "i" 'ebib-prev-entry
+   "X" 'ebib-copy-current-key
    "M-RET" 'ebib-edit-entry
    general-prefix general-prefix-map)
 
@@ -535,7 +536,11 @@
   (setg ebib-layout 'index-only)
 
   (evil-set-initial-state 'ebib-entry-mode 'emacs)
-  (evil-set-initial-state 'ebib-index-mode 'emacs))
+  (evil-set-initial-state 'ebib-index-mode 'emacs)
+
+  (defun ebib-copy-current-key ()
+    (interactive)
+    (kill-new (ebib--db-get-current-entry-key ebib--cur-db))))
 
 ;; ** Haskell
 (use-package haskell-mode
