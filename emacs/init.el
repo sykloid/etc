@@ -397,6 +397,15 @@
   (with-prefix
    "pp" 'helm-projectile))
 
+(use-package helm-rg
+  :load-path user-lisp-directory
+  :general
+  (with-prefix
+   "p/" 'helm-projectile-rg)
+
+  :config
+  (setg helm-rg-smart-case t))
+
 (use-package undo-tree
   :diminish undo-tree-mode
   :general
