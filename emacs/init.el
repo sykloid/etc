@@ -109,7 +109,7 @@
 (setg version-control t)
 
 ;; ** Editor
-(setg fill-column 100)
+(setg fill-column 80)
 (setg indent-tabs-mode nil)
 (setg scroll-step 1)
 (setg sentence-end-double-space nil)
@@ -631,7 +631,7 @@
 
   :config
   (setg org-adapt-indentation nil)
-  (setg org-tags-column -100)
+  (setg org-tags-column -78)
   (setg org-tags-sort-function 'string<)
 
   (add-hook+ org-mode-hook/:enable-auto-fill-mode ()
@@ -684,7 +684,7 @@
 
   :config
   (setg org-agenda-files (list host-org-agenda-directory))
-  (setg org-agenda-tags-column -100))
+  (setg org-agenda-tags-column -78))
 
 (use-package org-capture
   :ensure org-plus-contrib
