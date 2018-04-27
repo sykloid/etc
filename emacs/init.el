@@ -439,9 +439,17 @@
 (use-package compile
   :ensure nil
   :functions xterm-color-filter
+  :general
+  (with-prefix
+   "r" '(nil :which-key "Compilation/Blueprints")
+    "rb" 'raise-compilation)
   :init
   (setg compilation-scroll-output t)
   (setg compilation-environment '("TERM=xterm-256color"))
+
+  (defun raise-compilation ()
+    (interactive)
+    (switch-to-buffer "*compilation*"))
 
   (add-hook+ compilation-start-hook/:enable-xterm-color-filter (proc)
     (when (eq (process-filter proc) 'compilation-filter)
