@@ -461,6 +461,8 @@
   (with-prefix
    "r" '(nil :which-key "Compilation/Blueprints")
     "rb" 'raise-compilation)
+  (:keymaps 'compilation-mode-map
+   "SPC" nil)
   :init
   (setg compilation-scroll-output t)
   (setg compilation-environment '("TERM=xterm-256color"))
@@ -648,6 +650,7 @@
   :mode ("\\.org\\'" . org-mode)
   :general
   (:keymaps 'org-mode-map
+   "SPC" nil
    "M-n" 'org-metaleft
    "M-e" 'org-metadown
    "M-i" 'org-metaup
