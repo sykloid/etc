@@ -2,30 +2,19 @@
 # P.C. Shyamshankar <sykora@lucentbeing.com>
 
 # Various Paths
-typeset -U path
-path=(.cabal-sandbox/bin ~/bin ~/lib/python{2.6,3.1}/bin ~/.gem/ruby/2.1.0/bin ~/.cabal/bin $path /usr/bin/vendor_perl /usr/local/bin)
-export PATH
+typeset -xU PATH path=(~/bin ~/.cabal/bin ~/.opam/system/bin $path)
 
-typeset -U fpath
-fpath=($Z/functions $fpath)
-export FPATH
+typeset -xU FPATH fpath=($Z/functions $fpath)
 
 # Find out how many colors the terminal is capable of putting out.
 # Color-related settings _must_ use this if they don't want to blow up on less
 # endowed terminals.
 C=$(tput colors)
 
-# Python per-user site-packages.
-export PYTHONUSERBASE=~
-
-# Python Virtualenvwrapper initialization
-export WORKON_HOME=~/.virtualenvs
-
 # Java Options
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel'
 
 # OCaml Options
-export PATH=~/.opam/system/bin:$PATH
 export OCAML_TOPLEVEL_PATH=~/.opam/system/lib/toplevel
 export CAML_LD_LIBRARY_PATH=~/.opam/system/lib/stublibs:/usr/lib/ocaml/stublibs
 
@@ -50,4 +39,5 @@ export GTK_IM_MODULE="xim"
 
 # Compensate for non-existent configuration settings for QT5 applications.
 export QT_QPA_PLATFORMTHEME="qt5ct"
-systemctl --user import-environment QT_QPA_PLATFORMTHEME
+
+typeset -x SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
