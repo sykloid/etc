@@ -23,7 +23,7 @@ source $Z/zle.zsh
 source $Z/prompt.zsh
 
 # Set up some colors for directory listings.
-if (( C == 256 )); then
+if (( C >= 256 )); then
     source $Z/ls_colors_256.zsh
 fi
 
