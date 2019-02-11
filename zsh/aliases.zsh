@@ -8,6 +8,7 @@ alias l="ls -lhB -N --color=tty"
 alias ...=../..
 
 # Some application shortcuts.
+alias e="emacsclient -nw -c"
 alias g="grep -EiRn --color=tty"
 alias m="mpv"
 alias o="qpdfview"
