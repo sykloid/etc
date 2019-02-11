@@ -295,7 +295,8 @@
   (add-hook+ helm-after-initialize-hook/:hide-helm-cursor ()
     (with-helm-buffer (setl cursor-in-non-selected-windows nil)))
 
-  ;; Helm display configuration: show helm across the entirety of the window, regardless of splits.
+  ;; Helm display configuration: show helm across the entirety of the
+  ;; window, regardless of splits.
   (setg helm-split-window-in-side-p t)
   (add-to-list
    'display-buffer-alist
@@ -342,9 +343,12 @@
     (helm-build-in-buffer-source "Groups"
       :init `(lambda () (helm-apropos-init #'custom-group-p ,default))
       :fuzzy-match helm-apropos-fuzzy-match
-      :action '(("Customize Group" . (lambda (candidate) (customize-group (helm-symbolify candidate)))))))
+      :action '(("Customize Group" .
+                 (lambda (candidate)
+                   (customize-group (helm-symbolify candidate)))))))
 
-  (add-to-list 'helm-apropos-function-list 'helm-def-source--emacs-groups t))
+  (add-to-list 'helm-apropos-function-list
+               'helm-def-source--emacs-groups t))
 
 (use-package helm-imenu
   :ensure helm
@@ -382,17 +386,18 @@
   :general
   (:states 'normal
    "TAB" (general-predicate-dispatch (key-binding (kbd "TAB"))
-           (and outline-minor-mode (outline-on-heading-p)) #'outline-cycle)
+           (and outline-minor-mode (outline-on-heading-p))
+           #'outline-cycle)
    "<backtab>" (general-predicate-dispatch (key-binding (kbd "<backtab>"))
                  outline-minor-mode #'outshine-cycle-buffer))
   :init
   (setg outshine-imenu-show-headlines-p nil)
   (add-hook+ outline-minor-mode-hook/:outshine-initialization ()
-    (outshine-hook-function)
     (font-lock-flush)
     (outline-hide-body)
     (reveal-mode)
-    (add-to-list 'imenu-generic-expression '("Sections" "^;; [*]+ \\(.*\\)" 1)))
+    (add-to-list 'imenu-generic-expression
+                 '("Sections" "^;; [*]+ \\(.*\\)" 1)))
 
   :config
   (defun wrap-in-save-excursion (fn args)
@@ -718,7 +723,10 @@
   :config
   (setg org-capture-templates
         `(("t" "Triage" entry (file host-org-capture-triage-path)
-           "* TODO %?" :kill-buffer t :prepend t))))
+           "* TODO %?" :kill-buffer t :prepend t)
+          ("j" "Journal" entry (file+olp+datetree "/home/sykloid/org/journal.org")
+           "* %?\nTimestamp: %U\n  %i"))))
 
 ;; * Exeunt
 (provide 'init)
+;; init.el ends here.
