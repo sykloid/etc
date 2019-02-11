@@ -408,12 +408,18 @@
 (use-package projectile
   :general
   (with-prefix
-   "p" '(nil :which-key "Project Commands")))
+   "p" '(nil :which-key "Project Commands"))
+  :init
+  (projectile-mode))
 
 (use-package helm-projectile
   :general
   (with-prefix
-   "pp" 'helm-projectile))
+   "pp" 'helm-projectile)
+  (:keymaps 'helm-projectile-find-file-map
+   "M-e" nil)
+  (:keymaps 'helm-projectile-projects-map
+   "M-e" nil))
 
 (use-package helm-rg
   :load-path user-lisp-directory
