@@ -75,7 +75,10 @@
 (load custom-file 'noerror)
 (advice-remove #'custom-set-variables 'custom-set-only-safe)
 
-(use-package no-littering)
+(use-package no-littering
+  :config
+  (setg auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 ;; * Appearance
 ;; ** User Interface
