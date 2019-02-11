@@ -537,6 +537,7 @@
    "e" 'ebib-next-entry
    "i" 'ebib-prev-entry
    "X" 'ebib-copy-current-key
+   "vu" 'ebib-download-and-associate
    "M-RET" 'ebib-edit-entry
    general-prefix general-prefix-map)
 
