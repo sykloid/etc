@@ -1,6 +1,10 @@
+# Git
+*.rej
+
 # Emacs
 .dir-locals.el
 .#*
+.projectile
 
 # Vim
 *.swp
@@ -17,8 +21,12 @@
 
 # CTags
 tags
+ctags
 TAGS
 tags-ja
+
+# CQuery
+.cquery_cached_index
 
 .tags
 
@@ -29,6 +37,8 @@ cabal.sandbox.config
 .stack-work
 *.hi
 dist-newstyle
+.ghc.environment.*
+cabal.project.local
 
 # Java
 *.class
