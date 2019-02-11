@@ -189,7 +189,7 @@
    "o" 'evil-forward-char
 
    "N" 'evil-toggle-beginning-of-line
-   "O" 'end-of-line
+   "O" 'evil-toggle-end-of-line
 
    "t" 'evil-search-next
    "T" 'evil-search-previous
@@ -232,6 +232,14 @@
       (back-to-indentation)
       (when (= current (point))
         (beginning-of-line))))
+
+  (defun evil-toggle-end-of-line ()
+    (interactive)
+    (end-of-line)
+    (let ((current (point)))
+      (end-of-line)
+      (when (= current (point))
+        (move-end-of-line))))
 
   (setg evil-move-beyond-eol t)
   (setg evil-split-window-below t)
