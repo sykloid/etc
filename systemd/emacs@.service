@@ -8,4 +8,5 @@ ExecStop=/usr/bin/emacsclient -s %i --eval "(kill-emacs 0)"
 KillMode=none
 
 [Install]
+After=gpg-agent.service
 WantedBy=default.target
