@@ -38,7 +38,5 @@ xmonad:
 	ln -s `pwd`/xmonad ~/.xmonad
 
 zsh:
-	rm -rf ~/.zsh ~/.zshrc ~/.zlogin
-	ln -s `pwd`/zsh ~/.zsh
-	ln -s `pwd`/zsh/zshrc ~/.zshrc
-	ln -s `pwd`/zsh/zlogin ~/.zlogin
+	rm ~/.zshenv ~/.zlogin ~/.zprofile ~/.zshrc ~/.zlogout
+	ln -s `pwd`/zsh/zprofile ~/.zprofile
