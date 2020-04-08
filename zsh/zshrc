@@ -1,0 +1,141 @@
+# -*- mode: sh; eval: (sh-set-shell "zsh") -*-
+# zshrc: Interactive configuration for the Z-Shell
+# P.C. Shyamshankar 'sykloid' <shyam@sykloid.org>
+
+# This file is loaded in all interactive shells. If the shell is also a login
+# shell, this file is loaded *after* zprofile.
+
+# * Shell Options
+setopt AUTO_PUSHD PUSHD_IGNORE_DUPS
+setopt APPEND_HISTORY HIST_VERIFY EXTENDED_HISTORY INC_APPEND_HISTORY
+setopt HIST_IGNORE_SPACE HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+setopt AUTO_LIST COMPLETE_IN_WORD
+setopt NO_BEEP PROMPT_SUBST LOCAL_OPTIONS INTERACTIVE_COMMENTS MULTIBYTE
+unsetopt FLOW_CONTROL
+
+# * Aliases
+alias l="ls -lhB -N"
+alias e=$EDITOR
+
+# * Reporting
+REPORTTIME=5
+REPORTMEMORY=1024
+TIMEFMT="%J: %E elapsed (%U user + %S system = %P CPU); %Mk Maximum RSS"
+
+# * Prompt
+autoload -Uz vcs_info
+
+function () {
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' stagedstr "%F{#5FFF00}"
+  zstyle ':vcs_info:*' unstagedstr "%F{#D7005F}"
+  zstyle ':vcs_info:*' formats ":%F{#FFD787}%c%u%b"
+  zstyle ':vcs_info:git:*:-all-' command =git
+
+  local p="%F{#767676}"
+  local n="%F{#87D787}%n${p}"
+  local m="%F{#87D7FF}%m${p}"
+  local d="%F{#8787FF}%~${p}"
+  local x="%F{#FF5F5F}%?${p}"
+  local h="%F{#FFD700}%!${p}"
+  local r="%F{#8A8A8A}%#${p}"
+  local v="\${vcs_info_msg_0_}${p}"
+
+  export PS1="${p}(${n}:${m})-(${d}${v})"$'\n'"(${x}:${r})-%f "
+}
+
+# ** Functions
+function precmd () {
+  vcs_info
+}
+
+# * Key Bindings
+bindkey "" beginning-of-line
+bindkey "" end-of-line
+bindkey "" kill-line
+bindkey "" kill-whole-line
+bindkey "" push-line
+
+bindkey "" backward-delete-char
+bindkey "[3~" delete-word
+bindkey "" backward-delete-word
+bindkey "[3;5~" delete-word
+
+bindkey "" backward-word
+bindkey "" forward-word
+
+bindkey "" clear-screen
+bindkey "" history-incremental-search-backward
+bindkey "" history-incremental-search-forward
+bindkey "" quoted-insert
+bindkey "" execute-named-command
+
+# TODO: Add backward/forward-delete-path-component
+
+# * LS_COLORS
+typeset -TUg LS_COLORS ls_colors
+
+ls_colors=(
+  # Standard Descriptors.
+  'no=00'                 # Normal
+  'fi=00'                 # Files
+  'di=01;38;05;63'        # Directories
+  'ln=04;38;05;44'        # Links
+  'pi=38;05;88'           # Named Pipes
+  'so=38;05;252'          # Sockets
+  'bd=38;05;237'          # Block Devices
+  'cd=38;05;243'          # Character Devices
+  'or=01;38;05;196'       # ???
+  'mi=01;05;38;05;196'    # Missing Files
+  'ex=03;38;05;46'        # Executables
+
+  # Files, by extension.
+
+  # Documents
+
+  '*.pdf=38;05;208'
+
+  # Images
+  '*.bmp=38;05;51'
+  '*.gif=38;05;51'
+  '*.jpg=38;05;51'
+  '*.png=38;05;51'
+  '*.svg=38;05;51'
+  '*.tif=38;05;51'
+  '*.xbm=38;05;51'
+  '*.xpm=38;05;51'
+
+  # Audio
+  '*.mp3=38;05;141'
+  '*.ogg=38;05;141'
+  '*.wav=38;05;141'
+  '*.wma=38;05;141'
+
+  # Video
+  '*.avi=38;05;61'
+  '*.mkv=38;05;61'
+  '*.divx=38;05;61'
+  '*.mp4=38;05;61'
+  '*.xvid=38;05;61'
+
+  # Archives
+  '*.7z=38;05;162'
+  '*.Z=38;05;162'
+  '*.ace=38;05;162'
+  '*.arj=38;05;162'
+  '*.bz2=38;05;162'
+  '*.bz=38;05;162'
+  '*.cpio=38;05;162'
+  '*.deb=38;05;162'
+  '*.gz=38;05;162'
+  '*.lzh=38;05;162'
+  '*.rpm=38;05;162'
+  '*.tar=38;05;162'
+  '*.taz=38;05;162'
+  '*.tgz=38;05;162'
+  '*.tz=38;05;162'
+  '*.z=38;05;162'
+  '*.zip=38;05;162'
+)
+
+export LS_COLORS
