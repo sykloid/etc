@@ -139,3 +139,12 @@ ls_colors=(
 )
 
 export LS_COLORS
+
+# * Completion
+autoload -Uz compinit && compinit
+
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' max-errors
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' ignore-parents pwd
