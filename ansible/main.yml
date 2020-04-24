@@ -1,0 +1,20 @@
+- hosts: all
+  vars:
+    source: "{{ playbook_dir | dirname }}"
+    target: "{{ ansible_env.HOME }}"
+  tasks:
+    - name: Ensure target exists
+      file:
+        state: directory
+        path: "{{ target }}"
+    - name: Deploy Z-Shell Configuration
+      tags: zsh
+      block:
+        - name: Deploy .zprofile
+          copy:
+            src: "{{ source }}/zsh/zprofile"
+            dest: "{{ target }}/.zprofile"
+        - name: Deploy .zshrc
+          copy:
+            src: "{{ source }}/zsh/zshrc"
+            dest: "{{ target }}/.zshrc"
