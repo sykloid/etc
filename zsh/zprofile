@@ -20,19 +20,19 @@
 # variable. That must be done on a per deployment basis -- either in a
 # Dockerfile, a nix shell hook, or in the case of a bare-metal environment, one
 # of the only files which is read before this one -- zshenv.
-if [[ -v AIRLIFT ]]; then
-  export PATH=$AIRLIFT/bin:$PATH
-  export LD_LIBRARY_PATH=$AIRLIFT/lib:$LD_LIBRARY_PATH
-  export MANPATH=$AIRLIFT/share/man:$MANPATH
-
-  export EDITOR=emacs
-
-  export MANPAGER='bat --style=plain --language=man'
-  export MANWIDTH=80
-else
-  print "\$AIRLIFT is not set; some tools may not be present."
-  export EDITOR=vi
+if [[ ! -v AIRLIFT ]]; then
+  print "\${AIRLIFT} is not set; exiting…"
+  return
 fi
 
-export PATH=$HOME/.local/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+export PATH=${AIRLIFT}/bin:${PATH}
+export LD_LIBRARY_PATH=${AIRLIFT}/lib:${LD_LIBRARY_PATH}
+export MANPATH=${AIRLIFT}/share/man:${MANPATH}
+
+export EDITOR=emacs
+
+export MANPAGER='bat --style=plain --language=man'
+export MANWIDTH=80
+
+export PATH=${HOME}/.local/bin:${PATH}
+export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}
