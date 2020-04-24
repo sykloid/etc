@@ -6,7 +6,7 @@
 # shell, this file is loaded *after* zprofile.
 
 # * Shell Options
-setopt AUTO_PUSHD PUSHD_IGNORE_DUPS
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS
 setopt APPEND_HISTORY HIST_VERIFY EXTENDED_HISTORY INC_APPEND_HISTORY
 setopt HIST_IGNORE_SPACE HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
 setopt AUTO_LIST COMPLETE_IN_WORD
@@ -14,6 +14,7 @@ setopt NO_BEEP PROMPT_SUBST LOCAL_OPTIONS INTERACTIVE_COMMENTS MULTIBYTE
 unsetopt FLOW_CONTROL
 
 # * Aliases
+alias ls="ls --color=auto"
 alias l="ls -lhB -N"
 alias e=$EDITOR
 
