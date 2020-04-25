@@ -5,6 +5,11 @@ RUN nix build -f /tmp/airlift.nix -o /opt/nix/var/nix/profiles/airlift
 RUN nix copy --no-check-sigs -f /tmp/airlift.nix --to local?root=/opt
 
 FROM ubuntu:20.04
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 COPY --from=BASE /opt/nix /nix
 USER root
 ENV AIRLIFT=/nix/var/nix/profiles/airlift
@@ -12,4 +17,3 @@ WORKDIR /root
 COPY . etc
 RUN $AIRLIFT/bin/ansible-playbook -i localhost, --connection=local etc/ansible/main.yml
 CMD $AIRLIFT/bin/zsh -l
-
