@@ -12,4 +12,14 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; * Use-Package
+(require 'use-package)
+
+;; * Minor Modes
+(use-package outshine
+  :init
+  (set-display-table-slot standard-display-table
+                          'selective-display
+                          (string-to-vector "…")))
+
 ;; init.el ends here

@@ -11,6 +11,8 @@ with import pkgs {}; buildEnv {
         general
         magit
         org-plus-contrib
+        outshine
+        use-package
       ])
     )
     git
