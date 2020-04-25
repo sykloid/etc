@@ -18,3 +18,13 @@
           copy:
             src: "{{ source }}/zsh/zshrc"
             dest: "{{ target }}/.zshrc"
+    - name: Deploy Emacs Configuration
+      tags: emacs
+      block:
+        - name: Create Emacs Directory
+          file:
+            path: "{{ target }}/.emacs.d"
+            state: directory
+        - copy:
+            src: "{{ source }}/emacs/init.el"
+            dest: "{{ target }}/.emacs.d/init.el"
