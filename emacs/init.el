@@ -103,4 +103,18 @@
                           'selective-display
                           (string-to-vector "…")))
 
+(use-package magit
+  :init
+  (evil-set-initial-state 'magit-status 'emacs)
+  :general
+  (with-prefix
+   "vs" 'magit-status)
+  (:keymaps '(magit-diff-mode-map magit-status-mode-map)
+   "n" 'backward-char
+   "e" 'magit-next-line
+   "i" 'magit-previous-line
+   "o" 'forward-char
+
+   "V" 'set-mark-command))
+
 ;;; init.el ends here
