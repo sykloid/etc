@@ -1,10 +1,10 @@
-;; init.el --- Emacs Configuration
-;; P.C. Shyamshankar 'sykloid' <shyam@sykloid.org>
+;;; init.el --- Emacs Configuration -*- eval: (outshine-mode) -*-
+;;; P.C. Shyamshankar 'sykloid' <shyam@sykloid.org>
 
-;; Commentary:
+;;; Commentary:
 ;; This is the 6th rewrite of this configuration.
 
-;; Code:
+;;; Code:
 ;; * Package System Initialization
 ;; One of the novelties of this rewrite is the movement of all package
 ;; installation to ~airlift~.
@@ -22,4 +22,4 @@
                           'selective-display
                           (string-to-vector "…")))
 
-;; init.el ends here
+;;; init.el ends here
