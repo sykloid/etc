@@ -6,11 +6,11 @@
 
 ;;; Code:
 ;; * Package System Initialization
-;; One of the novelties of this rewrite is the movement of all package
-;; installation to ~airlift~.
+;; We choose not to use emacs' built-in package manager, instead all package
+;; management is done through ~nix~.
+(require 'package)
 (setq package-archives nil)
 (setq package-enable-at-startup nil)
-(package-initialize)
 
 ;; * Use-Package
 (require 'use-package)
