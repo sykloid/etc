@@ -12,6 +12,7 @@
 (require 'package)
 (setq package-archives nil)
 (setq package-enable-at-startup nil)
+(package-initialize)
 
 ;; * Decorations
 (menu-bar-mode -1)
