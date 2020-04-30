@@ -1,4 +1,5 @@
-;;; init.el --- Emacs Configuration -*- eval: (outshine-mode) -*-
+;;; -*- lexical-binding: t -*-
+;;; init.el --- Emacs Configuration
 ;;; P.C. Shyamshankar 'sykloid' <shyam@sykloid.org>
 
 ;;; Commentary:
@@ -117,4 +118,7 @@
 
    "V" 'set-mark-command))
 
+;;; Local Variables:
+;;; eval: (outshine-mode)
+;;; End:
 ;;; init.el ends here
