@@ -1,4 +1,4 @@
-{ pkgs ? (fetchTarball channel:nixos-19.09) }:
+{ pkgs ? (builtins.fetchTarball https://github.com/NixOS/nixpkgs/tarball/fce7562cf46727fdaf801b232116bc9ce0512049) }:
 
 with import pkgs {}; buildEnv {
   name = "airlift";
