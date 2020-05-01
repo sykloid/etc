@@ -107,7 +107,10 @@
     "w" 'evil-window-map))
 
 ;; * Minor Modes
+(use-package company
   :init
+  (global-company-mode 1))
+
 (use-package helm
   :init
   (general-setq helm-split-window-in-side-p t)

@@ -7,6 +7,7 @@ with import pkgs {}; buildEnv {
     bat
     ((emacsPackagesFor emacs26-nox).emacsWithPackages
       (epkgs: with epkgs; [
+        company
         evil
         general
 	helm
