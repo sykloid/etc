@@ -108,6 +108,40 @@
 
 ;; * Minor Modes
   :init
+(use-package helm
+  :init
+  (general-setq helm-split-window-in-side-p t)
+  (add-to-list
+   'display-buffer-alist
+   `(,(rx bos "*helm" (* not-newline) "*" eos)
+     (display-buffer-in-side-window)
+     (inhibit-same-window . t)
+     (window-height . 0.4)))
+
+  (defun helm-find-files-del-dwim ()
+    (interactive)
+    (if (looking-back "/" 1)
+        (call-interactively 'helm-find-files-up-one-level)
+      (delete-backward-char 1)))
+
+  :general
+  ("M-x" 'helm-M-x)
+
+  (:keymaps 'helm-map
+   "TAB" 'helm-execute-persistent-action
+   "C-j" 'helm-select-action
+   "M-e" 'helm-next-line
+   "M-i" 'helm-previous-line
+   "M-E" 'helm-previous-source
+   "M-I" 'helm-next-source)
+
+  (:keymaps 'helm-find-files-map
+   "DEL" 'helm-find-files-del-dwim
+   "M-e" 'helm-next-line
+   "M-i" 'helm-previous-line)
+
+  (with-prefix
+    "bf" 'helm-find-files))
 
 (use-package magit
   :init

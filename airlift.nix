@@ -9,6 +9,7 @@ with import pkgs {}; buildEnv {
       (epkgs: with epkgs; [
         evil
         general
+	helm
         magit
         org-plus-contrib
         outshine
