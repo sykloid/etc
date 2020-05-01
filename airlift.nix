@@ -13,6 +13,7 @@ with import pkgs {}; buildEnv {
         org-plus-contrib
         outshine
         use-package
+	which-key
       ])
     )
     git

@@ -107,18 +107,15 @@
     "w" 'evil-window-map))
 
 ;; * Minor Modes
-(use-package outshine
   :init
-  (set-display-table-slot standard-display-table
-                          'selective-display
-                          (string-to-vector "…")))
 
 (use-package magit
   :init
   (evil-set-initial-state 'magit-status 'emacs)
   :general
   (with-prefix
-   "vs" 'magit-status)
+    "vs" 'magit-status)
+
   (:keymaps '(magit-diff-mode-map magit-status-mode-map)
    "n" 'backward-char
    "e" 'magit-next-line
@@ -127,6 +124,22 @@
 
    "V" 'set-mark-command))
 
+(use-package outshine
+  :init
+  (set-display-table-slot standard-display-table
+                          'selective-display
+                          (string-to-vector "…")))
+
+(use-package which-key
+  :diminish 'which-key-mode
+  :init
+  (which-key-mode 1)
+
+  :config
+  (general-setq which-key-allow-evil-operators t)
+  (general-setq which-key-show-operator-state-maps t))
+
+;; * Exeunt
 ;;; Local Variables:
 ;;; eval: (outshine-mode)
 ;;; End:
