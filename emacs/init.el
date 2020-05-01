@@ -68,8 +68,13 @@
    "h" 'evil-insert-state
    "H" 'evil-insert-line
    "y" 'evil-open-below
-   "Y" 'evil-open-above
-   "Q" 'evil-record-macro)
+   "Y" 'evil-open-above)
+
+  (:states '(normal motion)
+   "Q" 'evil-record-macro
+
+   "t" 'evil-search-next
+   "T" 'evil-search-previous)
 
   (:states '(motion normal visual)
    "n" 'evil-backward-char
