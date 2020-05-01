@@ -101,7 +101,10 @@
    "o" 'evil-window-right
 
    "d" 'delete-other-windows
-   "q" 'evil-window-delete))
+   "q" 'evil-window-delete)
+
+  (with-prefix
+    "w" 'evil-window-map))
 
 ;; * Minor Modes
 (use-package outshine
