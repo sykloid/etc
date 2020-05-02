@@ -115,7 +115,12 @@
 (use-package company
   :diminish company-mode
   :init
-  (global-company-mode 1))
+  (global-company-mode 1)
+
+  :general
+  (:keymaps 'company-mode-map
+   "M-e" 'company-select-next
+   "M-i" 'company-select-previous))
 
 (use-package helm
   :init
