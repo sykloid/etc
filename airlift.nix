@@ -8,14 +8,15 @@ with import pkgs {}; buildEnv {
     ((emacsPackagesFor emacs26-nox).emacsWithPackages
       (epkgs: with epkgs; [
         company
+        diminish
         evil
         general
-	helm
+        helm
         magit
         org-plus-contrib
         outshine
         use-package
-	which-key
+        which-key
       ])
     )
     git

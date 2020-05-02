@@ -108,6 +108,7 @@
 
 ;; * Minor Modes
 (use-package company
+  :diminish company-mode
   :init
   (global-company-mode 1))
 
@@ -162,13 +163,14 @@
    "V" 'set-mark-command))
 
 (use-package outshine
+  :diminish outshine-mode outline-minor-mode
   :init
   (set-display-table-slot standard-display-table
                           'selective-display
                           (string-to-vector "…")))
 
 (use-package which-key
-  :diminish 'which-key-mode
+  :diminish which-key-mode
   :init
   (which-key-mode 1)
 
