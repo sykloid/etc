@@ -125,12 +125,6 @@
 (use-package helm
   :init
   (general-setq helm-split-window-in-side-p t)
-  (add-to-list
-   'display-buffer-alist
-   `(,(rx bos "*helm" (* not-newline) "*" eos)
-     (display-buffer-in-side-window)
-     (inhibit-same-window . t)
-     (window-height . 0.4)))
 
   (defun helm-find-files-del-dwim ()
     (interactive)
