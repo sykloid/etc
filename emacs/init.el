@@ -17,6 +17,11 @@
 ;; * Decorations
 (menu-bar-mode -1)
 
+;; * Editor
+(setq-default indent-tabs-mode nil)
+(setq-default sentence-end-double-space nil)
+(setq-default tab-width 2)
+
 ;; * Use-Package
 (require 'use-package)
 
