@@ -53,6 +53,12 @@
       "S-TAB" (general-predicate-dispatch nil
                 outshine-mode 'outshine-cycle-buffer))))
 
+;; * No Littering
+(use-package no-littering
+  :config
+  (setg auto-save-file-name-transforms
+                `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
 ;; * Appearance, Decorations, and Editor-Wide Configuration
 (use-package emacs
   :config

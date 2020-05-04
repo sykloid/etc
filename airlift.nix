@@ -13,6 +13,7 @@ with import pkgs {}; buildEnv {
         general
         helm
         magit
+        no-littering
         org-plus-contrib
         outshine
         use-package
