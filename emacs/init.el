@@ -62,6 +62,10 @@
 ;; * Appearance, Decorations, and Editor-Wide Configuration
 (use-package emacs
   :config
+  (defalias 'yes-or-no-p 'y-or-no-p)
+
+  (setg custom-file (concat user-emacs-directory "custom.el"))
+
   (setg column-number-mode t)
   (setg fringe-mode 0)
   (setg indent-tabs-mode nil)
@@ -70,7 +74,13 @@
   (setg sentence-end-double-space nil)
   (setg scroll-bar-mode nil)
   (setg tab-width 2)
-  (setg tool-bar-mode nil))
+  (setg tool-bar-mode nil)
+
+  (setg backup-by-copying t)
+  (setg delete-old-versions t)
+  (setg kept-new-versions 6)
+  (setg kept-old-versions 2)
+  (setg version-control t))
 
 ;; * Evil
 (use-package evil
