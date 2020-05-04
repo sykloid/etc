@@ -152,6 +152,10 @@
   (setg helm-split-window-in-side-p t)
 
   (defun helm-find-files-del-dwim ()
+    "Do the right thing when pressing backspace during `helm-find-files'.
+
+If looking back at a directory, delete the last path component.
+Otherwise, delete a single character."
     (interactive)
     (if (looking-back "/" 1)
         (call-interactively 'helm-find-files-up-one-level)
