@@ -14,14 +14,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-;; * Decorations
-(menu-bar-mode -1)
-
-;; * Editor
-(setq-default indent-tabs-mode nil)
-(setq-default sentence-end-double-space nil)
-(setq-default tab-width 2)
-
 ;; * Use-Package
 (require 'use-package)
 
@@ -32,10 +24,14 @@
   general-utility-prefix
 
   :functions
+  setg
+
   with-prefix
   with-utility
 
   :config
+  (defalias 'setg 'general-setq)
+
   (defvar general-prefix "SPC")
   (general-create-definer
     with-prefix
@@ -57,15 +53,28 @@
       "S-TAB" (general-predicate-dispatch nil
                 outshine-mode 'outshine-cycle-buffer))))
 
+;; * Appearance, Decorations, and Editor-Wide Configuration
+(use-package emacs
+  :config
+  (setg column-number-mode t)
+  (setg fringe-mode 0)
+  (setg indent-tabs-mode nil)
+  (setg inhibit-startup-message t)
+  (setg menu-bar-mode nil)
+  (setg sentence-end-double-space nil)
+  (setg scroll-bar-mode nil)
+  (setg tab-width 2)
+  (setg tool-bar-mode nil))
+
 ;; * Evil
 (use-package evil
   :init
   (evil-mode 1)
 
   :config
-  (general-setq evil-move-beyond-eol t)
-  (general-setq evil-split-window-below t)
-  (general-setq evil-vsplit-window-right t)
+  (setg evil-move-beyond-eol t)
+  (setg evil-split-window-below t)
+  (setg evil-vsplit-window-right t)
   :general
   (:states 'normal
    "a" 'evil-append
@@ -124,7 +133,7 @@
 
 (use-package helm
   :init
-  (general-setq helm-split-window-in-side-p t)
+  (setg helm-split-window-in-side-p t)
 
   (defun helm-find-files-del-dwim ()
     (interactive)
@@ -179,8 +188,8 @@
   (which-key-mode 1)
 
   :config
-  (general-setq which-key-allow-evil-operators t)
-  (general-setq which-key-show-operator-state-maps t))
+  (setg which-key-allow-evil-operators t)
+  (setg which-key-show-operator-state-maps t))
 
 ;; * Exeunt
 ;;; Local Variables:
