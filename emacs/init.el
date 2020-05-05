@@ -14,6 +14,8 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+(load-theme 'skywave t)
+
 ;; * Use-Package
 (require 'use-package)
 

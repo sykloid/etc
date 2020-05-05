@@ -28,3 +28,6 @@
         - copy:
             src: "{{ source }}/emacs/init.el"
             dest: "{{ target }}/.emacs.d/init.el"
+        - copy:
+            src: "{{ source }}/emacs/skywave-theme.el"
+            dest: "{{ target }}/.emacs.d/skywave-theme.el"
