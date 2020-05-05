@@ -66,7 +66,7 @@
 ;; * Appearance, Decorations, and Editor-Wide Configuration
 (use-package emacs
   :config
-  (defalias 'yes-or-no-p 'y-or-no-p)
+  (defalias 'yes-or-no-p 'y-or-n-p)
 
   (setg custom-file (concat user-emacs-directory "custom.el"))
 
