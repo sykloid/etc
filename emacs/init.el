@@ -27,12 +27,14 @@
 
   :functions
   setg
+  setgd
 
   with-prefix
   with-utility
 
   :config
   (defalias 'setg 'general-setq)
+  (defalias 'setgd 'general-setq-default)
 
   (defvar general-prefix "SPC")
   (general-create-definer
@@ -70,19 +72,21 @@
 
   (setg column-number-mode t)
   (setg fringe-mode 0)
-  (setg indent-tabs-mode nil)
+  (setgd indent-tabs-mode nil)
   (setg inhibit-startup-message t)
   (setg menu-bar-mode nil)
   (setg sentence-end-double-space nil)
-  (setg scroll-bar-mode nil)
-  (setg tab-width 2)
+  (setgd tab-width 2)
   (setg tool-bar-mode nil)
 
   (setg backup-by-copying t)
   (setg delete-old-versions t)
   (setg kept-new-versions 6)
   (setg kept-old-versions 2)
-  (setg version-control t))
+  (setg version-control t)
+
+  (use-package eldoc :diminish eldoc-mode)
+  (use-package undo-tree :diminish undo-tree-mode))
 
 ;; * Evil
 (use-package evil
