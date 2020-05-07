@@ -119,7 +119,9 @@
    "o" 'evil-forward-char
 
    "N" 'evil-beginning-of-line
-   "O" 'evil-end-of-line)
+   "O" 'evil-end-of-line
+
+   "k" 'evil-yank)
 
   (:states '(normal visual)
    "m" 'evil-paste-after
