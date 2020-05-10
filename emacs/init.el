@@ -86,6 +86,7 @@
   (setg kept-old-versions 2)
   (setg version-control t)
 
+  (use-package autorevert :diminish auto-revert-mode)
   (use-package eldoc :diminish eldoc-mode)
   (use-package undo-tree :diminish undo-tree-mode))
 
