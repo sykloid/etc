@@ -71,6 +71,7 @@
   (setg custom-file (concat user-emacs-directory "custom.el"))
 
   (setg column-number-mode t)
+  (setg frame-background-mode 'dark)
   (setg fringe-mode 0)
   (setgd indent-tabs-mode nil)
   (setg inhibit-startup-message t)
