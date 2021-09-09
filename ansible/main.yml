@@ -31,3 +31,8 @@
         - copy:
             src: "{{ source }}/emacs/skywave-theme.el"
             dest: "{{ target }}/.emacs.d/skywave-theme.el"
+    - name: Deploy TMux Configuration
+      tags: tmux
+      copy:
+        src: "{{ source }}/tmux/tmux.conf"
+        dest: "{{ target }}/.tmux.conf"
