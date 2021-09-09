@@ -70,6 +70,12 @@
 
   (setg custom-file (concat user-emacs-directory "custom.el"))
 
+  (prefer-coding-system       'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setg default-buffer-file-coding-system 'utf-8)
+
   (setg column-number-mode t)
   (setg frame-background-mode 'dark)
   (setg fringe-mode 0)
