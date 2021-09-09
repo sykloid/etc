@@ -17,6 +17,7 @@
           nixUnstable
           ripgrep
           tmux
+          tree
           util-linux
           zsh
 
