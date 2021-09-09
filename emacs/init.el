@@ -195,6 +195,14 @@ Otherwise, delete a single character."
   (with-prefix
     "bf" 'helm-find-files))
 
+(use-package helm-projectile
+  :general
+  (with-prefix "pf" 'helm-projectile))
+
+(use-package helm-rg
+  :general
+  (with-prefix "p/" 'helm-projectile-rg))
+
 (use-package magit
   :init
   (evil-set-initial-state 'magit-status 'emacs)
