@@ -152,6 +152,14 @@
     "w" 'evil-window-map))
 
 ;; * Minor Modes
+(use-package evil-commentary
+  :init
+  (evil-commentary-mode)
+  :general
+  (with-prefix
+    "c" 'evil-commentary-line
+    "C" 'evil-commentary))
+
 (use-package company
   :diminish company-mode
   :init
