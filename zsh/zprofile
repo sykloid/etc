@@ -31,7 +31,9 @@ export MANPATH=${AIRLIFT}/share/man:${MANPATH}
 
 export EDITOR=emacs
 
-export MANPAGER='bat --style=plain --language=man'
+export LESS_TERMCAP_so=$(echo -e '\e[1;7m')
+export LESS_TERMCAP_se=$(echo -e '\e[0m')
+export MANPAGER="sh -c 'col -bx | bat --language=man -p'"
 export MANWIDTH=80
 
 export PATH=${HOME}/.local/bin:${PATH}
