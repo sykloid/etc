@@ -93,8 +93,7 @@
   (setg version-control t)
 
   (use-package autorevert :diminish auto-revert-mode)
-  (use-package eldoc :diminish eldoc-mode)
-  (use-package undo-tree :diminish undo-tree-mode))
+  (use-package eldoc :diminish eldoc-mode))
 
 ;; * Evil
 (use-package evil
