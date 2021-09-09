@@ -218,6 +218,12 @@ Otherwise, delete a single character."
 
    "V" 'set-mark-command))
 
+(use-package mwim
+  :general
+  (:states '(motion normal visual)
+   "N" 'mwim-beginning
+   "O" 'mwim-end))
+
 (use-package outshine
   :diminish outshine-mode outline-minor-mode
   :init
