@@ -104,6 +104,9 @@
   (setg evil-move-beyond-eol t)
   (setg evil-split-window-below t)
   (setg evil-vsplit-window-right t)
+
+  (setgd evil-shift-width 2)
+
   :general
   (:states 'normal
    "a" 'evil-append
