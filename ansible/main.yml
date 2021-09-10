@@ -25,10 +25,12 @@
           file:
             path: "{{ target }}/.emacs.d"
             state: directory
-        - copy:
+        - name: Deploy Emacs Initialization File
+          copy:
             src: "{{ source }}/emacs/init.el"
             dest: "{{ target }}/.emacs.d/init.el"
-        - copy:
+        - name: Deploy Emacs Color Theme
+          copy:
             src: "{{ source }}/emacs/skywave-theme.el"
             dest: "{{ target }}/.emacs.d/skywave-theme.el"
     - name: Deploy TMux Configuration
