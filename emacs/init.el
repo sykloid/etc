@@ -76,6 +76,8 @@
   (set-keyboard-coding-system 'utf-8)
   (setg default-buffer-file-coding-system 'utf-8)
 
+  (setg ad-redefinition-action 'accept)
+
   (setg column-number-mode t)
   (setg frame-background-mode 'dark)
   (setg fringe-mode 0)
