@@ -214,6 +214,7 @@ Otherwise, delete a single character."
 (use-package magit
   :init
   (evil-set-initial-state 'magit-status 'emacs)
+
   :general
   (with-prefix
     "vs" 'magit-status)
@@ -225,6 +226,10 @@ Otherwise, delete a single character."
    "o" 'forward-char
 
    "V" 'set-mark-command))
+
+(use-package magit-todos
+  :init
+  (magit-todos-mode))
 
 (use-package mwim
   :general

@@ -33,6 +33,7 @@
               helm-projectile
               helm-rg
               magit
+              magit-todos
               mwim
               no-littering
               outshine
