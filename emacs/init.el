@@ -216,6 +216,10 @@ Otherwise, delete a single character."
   :general
   (with-prefix "p/" 'helm-projectile-rg))
 
+(use-package hl-todo
+  :init
+  (global-hl-todo-mode))
+
 (use-package magit
   :init
   (evil-set-initial-state 'magit-status 'emacs)
