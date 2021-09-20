@@ -14,6 +14,7 @@
           just
           less
           man
+          ncurses
           nixUnstable
           ripgrep
           tmux

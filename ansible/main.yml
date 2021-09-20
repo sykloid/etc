@@ -18,6 +18,9 @@
           copy:
             src: "{{ source }}/zsh/zshrc"
             dest: "{{ target }}/.zshrc"
+    - name: Deploy TERMINFO definitions
+      tags: terminfo
+      command: "tic -x -o {{ target }}/.terminfo {{ source }}/terminfo/xterm-24bit.terminfo"
     - name: Deploy Emacs Configuration
       tags: emacs
       block:
