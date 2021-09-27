@@ -9,6 +9,7 @@
       paths = [
           ansible
           bat
+          docker-client
           fd
           git
           just
