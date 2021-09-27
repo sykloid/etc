@@ -5,4 +5,4 @@ provision:
   ansible-playbook -i localhost, --connection=local ansible/main.yml
 
 build:
-  docker build . --target stage-1 --tag sykloid/airlift:latest
+  docker build . --tag sykloid/airlift:latest
