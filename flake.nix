@@ -39,6 +39,7 @@
               no-littering
               outshine
               projectile
+              undo-fu
               use-package
               which-key
 

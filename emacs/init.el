@@ -109,6 +109,8 @@
 
   (setgd evil-shift-width 2)
 
+  (setg evil-undo-system 'undo-fu)
+
   :general
   (:states 'normal
    "a" 'evil-append
@@ -116,7 +118,10 @@
    "h" 'evil-insert-state
    "H" 'evil-insert-line
    "y" 'evil-open-below
-   "Y" 'evil-open-above)
+   "Y" 'evil-open-above
+
+   "u" 'evil-undo
+   "U" 'evil-redo)
 
   (:states '(normal motion)
    "Q" 'evil-record-macro
