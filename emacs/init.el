@@ -231,6 +231,7 @@ Otherwise, delete a single character."
 
   :general
   (with-prefix
+    "vb" 'magit-blame
     "vs" 'magit-status)
 
   (:keymaps '(magit-diff-mode-map magit-status-mode-map)
