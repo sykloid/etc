@@ -161,6 +161,15 @@
   (with-prefix
     "w" 'evil-window-map))
 
+;; * Major Modes
+(use-package compile
+  :init
+  (require 'ansi-color)
+  (defun colorize-compilation-buffer ()
+    (ansi-color-apply-on-region compilation-filter-start (point)))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+  (setg compilation-scroll-output t))
 ;; * Minor Modes
 (use-package evil-commentary
   :init
