@@ -26,6 +26,7 @@
           ((emacsPackagesFor emacs27-nox).emacsWithPackages
             (epkgs: with epkgs.melpaPackages; [
               evil-commentary
+              evil-surround
               company
               diminish
               evil

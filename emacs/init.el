@@ -161,6 +161,13 @@
   (with-prefix
     "w" 'evil-window-map))
 
+(use-package evil-surround
+  :init
+  (global-evil-surround-mode)
+  :general
+  (:states '(normal visual)
+   "js" 'evil-surround-region))
+
 ;; * Major Modes
 (use-package compile
   :init
