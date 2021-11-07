@@ -34,6 +34,4 @@ WORKDIR /home/sykloid
 
 CMD $AIRLIFT/bin/zsh -l
 
-FROM stage-1 AS stage-2
-
 RUN ${AIRLIFT}/bin/ansible-playbook -i localhost, --connection=local /airlift/ansible/main.yml
