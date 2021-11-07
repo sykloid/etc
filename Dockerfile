@@ -11,8 +11,6 @@ RUN nix build --profile /nix/var/nix/profiles/airlift
 FROM ubuntu:20.04 AS stage-1
 
 RUN useradd -m -U sykloid
-RUN mkdir -p ~/.config/nix && \
-    echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
 
 RUN apt update && apt -y install curl locales sudo
 

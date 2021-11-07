@@ -3,6 +3,12 @@
     source: "{{ playbook_dir | dirname }}"
     target: "{{ ansible_env.HOME }}"
   tasks:
+    - name: Deploy nix configuration
+      tags: nix
+      lineinfile:
+        path: "{{ target }}/.config/nix/nix.conf"
+        line: "experimental-features = nix-command flakes"
+        create: true
     - name: Ensure target exists
       file:
         state: directory
