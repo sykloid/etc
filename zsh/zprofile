@@ -26,7 +26,6 @@ if [[ ! -v AIRLIFT ]]; then
 fi
 
 export PATH=${AIRLIFT}/bin:${PATH}
-export LD_LIBRARY_PATH=${AIRLIFT}/lib:${LD_LIBRARY_PATH}
 export MANPATH=${AIRLIFT}/share/man:${MANPATH}
 
 export EDITOR=emacs
