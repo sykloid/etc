@@ -1,5 +1,0 @@
-# Load the Colemak keymap.
-setxkbmap us -variant colemak -option compose:ralt
-
-# Make sure the CapsLock key (now backspace) can repeat.
-xset r 66
