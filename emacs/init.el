@@ -177,15 +177,8 @@
   (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
   (setg compilation-scroll-output t))
-;; * Minor Modes
-(use-package evil-commentary
-  :init
-  (evil-commentary-mode)
-  :general
-  (with-prefix
-    "c" 'evil-commentary-line
-    "C" 'evil-commentary))
 
+;; * Minor Modes
 (use-package company
   :diminish company-mode
   :init
@@ -195,6 +188,18 @@
   (:keymaps 'company-mode-map
    "M-e" 'company-select-next
    "M-i" 'company-select-previous))
+
+(use-package direnv
+  :config
+  (direnv-mode))
+
+(use-package evil-commentary
+  :init
+  (evil-commentary-mode)
+  :general
+  (with-prefix
+    "c" 'evil-commentary-line
+    "C" 'evil-commentary))
 
 (use-package helm
   :init

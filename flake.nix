@@ -9,6 +9,7 @@
       paths = [
           ansible
           bat
+          direnv
           docker-client
           fd
           git
@@ -29,6 +30,7 @@
               evil-surround
               company
               diminish
+              direnv
               evil
               evil-surround
               general
