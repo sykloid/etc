@@ -208,6 +208,12 @@
     "c" 'evil-commentary-line
     "C" 'evil-commentary))
 
+(use-package flymake
+  :general
+  (with-prefix
+    "le" 'flymake-goto-next-error
+    "li" 'flymake-goto-prev-error))
+
 (use-package helm
   :init
   (setg helm-split-window-in-side-p t)
