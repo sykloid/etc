@@ -193,6 +193,13 @@
   :config
   (direnv-mode))
 
+(use-package eglot
+  :general
+  (with-prefix
+    "la" 'eglot-code-actions
+    "ln" 'eglot-rename
+    "lt" 'eglot-find-typeDefinition))
+
 (use-package evil-commentary
   :init
   (evil-commentary-mode)
