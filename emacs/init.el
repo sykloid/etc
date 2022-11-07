@@ -317,6 +317,12 @@ Otherwise, delete a single character."
   (setg which-key-allow-evil-operators t)
   (setg which-key-show-operator-state-maps t))
 
+(use-package winner
+  :init (winner-mode 1)
+  :general (:keymaps 'evil-window-map
+            "u" 'winner-undo
+            "U" 'winner-redo))
+
 ;; * Exeunt
 ;;; Local Variables:
 ;;; eval: (outshine-mode)
