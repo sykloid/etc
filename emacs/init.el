@@ -239,7 +239,8 @@ Otherwise, delete a single character."
    "M-i" 'helm-previous-line)
 
   (with-prefix
-    "bf" 'helm-find-files))
+    "bf" 'helm-find-files
+    "li" 'helm-imenu))
 
 (use-package helm-projectile
   :general
@@ -286,6 +287,26 @@ Otherwise, delete a single character."
   (set-display-table-slot standard-display-table
                           'selective-display
                           (string-to-vector "…")))
+
+(use-package xref
+  :init
+  (add-to-list 'evil-emacs-state-modes 'xref--xref-buffer-mode)
+  (add-hook 'xref--xref-buffer-mode-hook 'hl-line-mode)
+
+  :general
+  (with-prefix
+    "ld" 'xref-find-definition
+    "lD" 'xref-find-definitions-other-window
+    "lr" 'xref-find-references
+    "lo" 'xref-pop-marker-stack)
+
+  (:keymaps 'xref--xref-buffer-mode-map
+    "e" 'xref-next-line
+    "E" 'xref-next-group
+    "i" 'xref-prev-line
+    "I" 'xref-prev-group
+    "q" 'xref-quit-and-pop-marker-stack
+    "RET" 'xref-quit-and-goto-xref))
 
 (use-package which-key
   :diminish which-key-mode
