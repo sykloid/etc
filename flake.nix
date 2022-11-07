@@ -1,6 +1,6 @@
 {
   description = "Airlift";
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/master;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/22.05;
 
   outputs = { self, nixpkgs }: {
 
@@ -24,8 +24,9 @@
           util-linux
           zsh
 
-          ((emacsPackagesFor emacs27-nox).emacsWithPackages
+          ((emacsPackagesFor emacs-nox).emacsWithPackages
             (epkgs: with epkgs.melpaPackages; [
+              eglot
               evil-commentary
               evil-surround
               company
