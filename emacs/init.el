@@ -201,6 +201,16 @@
     "ln" 'eglot-rename
     "lt" 'eglot-find-typeDefinition))
 
+(use-package evil-args
+  :general
+  (:keymaps 'evil-inner-text-objects-map
+   "," 'evil-inner-arg)
+  (:keymaps 'evil-outer-text-objects-map
+   "," 'evil-outer-arg)
+  (:keymaps 'evil-motion-state-map
+   "]," 'evil-forward-arg
+   "[," 'evil-backward-arg))
+
 (use-package evil-commentary
   :init
   (evil-commentary-mode)

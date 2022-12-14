@@ -27,6 +27,7 @@
           ((emacsPackagesFor emacs-nox).emacsWithPackages
             (epkgs: with epkgs.melpaPackages; [
               eglot
+              evil-args
               evil-commentary
               evil-surround
               evil-exchange
