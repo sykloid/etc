@@ -27,6 +27,7 @@
 
  '(region ((t (:background "#444444"))))
 
+ '(highlight ((t (:foreground "#1E90FF" :background "#DFDFDF"))))
  '(isearch ((t (:foreground "#FE0012" :background "#DFDFDF"))))
  '(lazy-highlight ((t (:background "#777777")))))
 
