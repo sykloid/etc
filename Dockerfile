@@ -30,4 +30,5 @@ ENV TERM=screen-256color
 
 RUN ${AIRLIFT}/bin/ansible-playbook -i localhost, --connection=local /airlift/ansible/main.yml
 
+WORKDIR /home/sykloid
 CMD $AIRLIFT/bin/zsh -l
