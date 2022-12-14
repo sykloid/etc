@@ -111,6 +111,14 @@
 
   (setg evil-undo-system 'undo-fu)
 
+  :init
+  (defun evil-select-last-pasted ()
+    "Select the last pasted text."
+    (interactive)
+    (evil-goto-mark ?\[)
+    (evil-visual-char)
+    (evil-goto-mark ?\]))
+
   :general
   (:states 'normal
    "a" 'evil-append
@@ -160,7 +168,10 @@
    "q" 'evil-window-delete)
 
   (with-prefix
-    "w" 'evil-window-map))
+    "w" 'evil-window-map)
+
+  (with-utility
+    "v" 'evil-select-last-pasted))
 
 (use-package evil-surround
   :init
