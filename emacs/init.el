@@ -142,7 +142,8 @@
 
   (:states '(normal visual)
    "m" 'evil-paste-after
-   "M" 'evil-paste-before)
+   "M" 'evil-paste-before
+   "s" nil)
 
   (:states '(operator visual)
    "h" '(:keymap evil-inner-text-objects-map))
@@ -207,6 +208,12 @@
   (with-prefix
     "c" 'evil-commentary-line
     "C" 'evil-commentary))
+
+(use-package evil-exchange
+  :general
+  (with-utility
+    "x" 'evil-exchange
+    "X" 'evil-exchange-cancel))
 
 (use-package flymake
   :general

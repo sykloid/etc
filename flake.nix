@@ -29,6 +29,7 @@
               eglot
               evil-commentary
               evil-surround
+              evil-exchange
               company
               diminish
               direnv
