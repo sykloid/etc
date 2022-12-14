@@ -329,7 +329,7 @@ Otherwise, delete a single character."
 
   :general
   (with-prefix
-    "ld" 'xref-find-definition
+    "ld" 'xref-find-definitions
     "lD" 'xref-find-definitions-other-window
     "lr" 'xref-find-references
     "lo" 'xref-pop-marker-stack)
