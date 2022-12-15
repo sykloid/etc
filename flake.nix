@@ -31,6 +31,7 @@
               evil-commentary
               evil-surround
               evil-exchange
+              expand-region
               company
               diminish
               direnv
