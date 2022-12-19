@@ -94,6 +94,8 @@
   (setg kept-old-versions 2)
   (setg version-control t)
 
+  (setg show-trailing-whitespace t)
+
   (use-package autorevert :diminish auto-revert-mode)
   (use-package eldoc :diminish eldoc-mode))
 
