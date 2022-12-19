@@ -1,3 +1,0 @@
-[flake8]
-    max-line-length = 100
-    ignore = E221,E261,E272,E302
