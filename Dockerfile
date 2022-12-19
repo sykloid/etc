@@ -1,4 +1,5 @@
-FROM amd64/ubuntu:22.04
+ARG ARCH=amd64
+FROM $ARCH/ubuntu:22.04
 
 RUN apt-get update && apt-get install -y curl git locales sudo xz-utils && rm -rf /var/lib/apt/lists/*
 

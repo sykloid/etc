@@ -2,9 +2,8 @@
   description = "Airlift";
   inputs.nixpkgs.url = github:NixOS/nixpkgs/22.11;
 
-  outputs = { self, nixpkgs }: {
-
-    defaultPackage.x86_64-linux = with import nixpkgs { system = "x86_64-linux"; }; buildEnv {
+  outputs = { self, nixpkgs }:
+    let output = system: with import nixpkgs { system = system; }; buildEnv {
       name = "airlift";
       paths = [
           ansible
@@ -60,6 +59,8 @@
             ])
           )
       ];
+    }; in {
+      defaultPackage.aarch64-linux = output "aarch64-linux";
+      defaultPackage.x86_64-linux = output "x86_64-linux";
     };
-  };
 }
