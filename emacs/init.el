@@ -237,16 +237,6 @@
     "X" 'evil-exchange-cancel))
 
 (use-package expand-region
-  :config
-  (use-package evil-args)
-  (defun er/mark-inner-arg ()
-    (interactive)
-    (evil-args--forward-delimiter)
-    (set-mark (point))
-    (evil-args--backward-arg-no-skip 1))
-
-  (setg er/try-expand-list (append '(er/mark-inner-arg) er/try-expand-list))
-
   :general
   (:keymaps 'evil-visual-state-map
     "." 'er/expand-region))
