@@ -1,6 +1,6 @@
 {
   description = "Airlift";
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/22.05;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/22.11;
 
   outputs = { self, nixpkgs }: {
 
