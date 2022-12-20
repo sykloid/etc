@@ -47,3 +47,8 @@
       copy:
         src: "{{ source }}/tmux/tmux.conf"
         dest: "{{ target }}/.tmux.conf"
+    - name: Deploy Git Configuration
+      tags: git
+      copy:
+        src: "{{ source }}/git/gitconfig"
+        dest: "{{ target }}/.gitconfig"
