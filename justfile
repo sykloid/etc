@@ -9,12 +9,15 @@ help:
 provision:
   ansible-playbook -i localhost, --connection=local ansible/main.yml
 
+# Not sure this is ever going to be more general than it currently is,
+# but oh well...
+current_os := `docker info | sed -n -e 's/ OSType: \(.*\)/\1/p'`
+current_arch := `docker info | sed -n -e 's/ Architecture: \(.*\)/\1/p'`
+default := current_os + '/' + current_arch
+
 # Build a new airlift docker image.
-build-docker ARCH:
-  docker build --build-arg ARCH={{ ARCH }} . --tag sykloid/airlift:arm64
+build ARCH=default:
+    docker buildx build . --platform {{ ARCH }} --tag sykloid/airlift:latest --output type=docker
 
-build-amd64:
-    just build-docker amd64
-
-build-arm64:
-    just build-docker arm64v8
+push ARCHES:
+    docker buildx build --push . --platform {{ ARCHES }} --tag sykloid/airlift:latest

@@ -1,5 +1,4 @@
-ARG ARCH=amd64
-FROM $ARCH/ubuntu:22.04
+FROM ubuntu:22.04
 
 RUN apt-get update && apt-get install -y curl git locales sudo xz-utils && rm -rf /var/lib/apt/lists/*
 
@@ -15,7 +14,7 @@ RUN mkdir -m 0755 /nix && chown sykloid /nix
 
 USER sykloid
 
-RUN curl -L https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.6.0pre20211223_af553b2/install | sh
+RUN curl -L https://nixos.org/nix/install | sh
 
 RUN mkdir -p ~/.config/nix && echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
 
