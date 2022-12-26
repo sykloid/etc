@@ -38,13 +38,13 @@
           changed_when: False
 
         - name: Generate TERMINFO
-          command: "tic -x -o {{ terminfo_dir.path }}/terminfo {{ source }}/terminfo/xterm-24bit.terminfo"
+          command: "tic -x -o {{ terminfo_dir.path }} {{ source }}/terminfo/xterm-24bit.terminfo"
           changed_when: False
 
         - name: Deploy TERMINFO
           copy:
-            src: "{{ terminfo_dir.path }}/terminfo"
-            dest: "{{ target }}/.terminfo"
+            src: "{{ terminfo_dir.path }}/x"
+            dest: "{{ target }}/.terminfo/"
 
         - name: Remove temporary TERMINFO directory
           file:
