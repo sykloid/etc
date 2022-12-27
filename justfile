@@ -6,8 +6,8 @@ help:
   just --list
 
 # Provision the current home directory.
-provision:
-  ansible-playbook -i localhost, --connection=local ansible/main.yml
+provision TARGET="${HOME}" TAGS="":
+  ansible-playbook -i localhost, --connection=local -t {{ TAGS }} -e target={{ TARGET }} ansible/main.yml
 
 # Not sure this is ever going to be more general than it currently is,
 # but oh well...
