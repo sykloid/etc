@@ -37,18 +37,21 @@
               evil
               evil-surround
               general
-              helm
-              helm-projectile
-              helm-rg
               magit
               magit-todos
               mwim
               no-littering
               outshine
-              projectile
               undo-fu
               use-package
               which-key
+
+              consult
+              embark
+              marginalia
+              epkgs.vertico
+              epkgs.orderless
+              epkgs.embark-consult
 
               dockerfile-mode
               just-mode
