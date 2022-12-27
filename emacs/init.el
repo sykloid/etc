@@ -286,7 +286,8 @@
    "i" 'magit-previous-line
    "o" 'forward-char
 
-   "V" 'set-mark-command))
+   "V" 'set-mark-command
+   "SPC" 'general-prefix-map))
 
 (use-package magit-todos
   :init
