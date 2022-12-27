@@ -27,6 +27,10 @@
 
  '(region ((t (:background "#444444"))))
 
+ '(vertico-current ((t (:background "#333333"))))
+ '(vertico-group-title ((t (:background "#222222"))))
+ '(vertico-group-separator ((t (:background "#222222"))))
+
  '(highlight ((t (:foreground "#1E90FF" :background "#DFDFDF"))))
  '(isearch ((t (:foreground "#FE0012" :background "#DFDFDF"))))
  '(lazy-highlight ((t (:background "#777777")))))
