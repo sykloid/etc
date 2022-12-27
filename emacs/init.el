@@ -113,6 +113,8 @@
 
   (setg evil-undo-system 'undo-fu)
 
+  (add-to-list 'evil-emacs-state-modes 'minibuffer-mode)
+
   :init
   (defun evil-select-last-pasted ()
     "Select the last pasted text."
