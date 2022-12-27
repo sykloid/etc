@@ -174,6 +174,11 @@
   (with-prefix
     "w" 'evil-window-map)
 
+  (with-prefix
+    "bf" 'find-file
+    "bb" 'switch-to-buffer
+    "bk" 'kill-buffer)
+
   (with-utility
     "v" 'evil-select-last-pasted))
 
@@ -205,6 +210,11 @@
    "M-e" 'company-select-next
    "M-i" 'company-select-previous))
 
+(use-package consult
+  :general
+  (with-prefix
+    "/" 'consult-ripgrep))
+
 (use-package direnv
   :config
   (direnv-mode))
@@ -215,6 +225,12 @@
     "la" 'eglot-code-actions
     "ln" 'eglot-rename
     "lt" 'eglot-find-typeDefinition))
+
+(use-package embark
+  :after vertico
+  :general
+  (:keymaps 'vertico-map
+    "M-." 'embark-act))
 
 (use-package evil-args
   :general
@@ -251,48 +267,6 @@
     "le" 'flymake-goto-next-error
     "li" 'flymake-goto-prev-error))
 
-(use-package helm
-  :init
-  (setg helm-split-window-in-side-p t)
-
-  (defun helm-find-files-del-dwim ()
-    "Do the right thing when pressing backspace during `helm-find-files'.
-
-If looking back at a directory, delete the last path component.
-Otherwise, delete a single character."
-    (interactive)
-    (if (looking-back "/" 1)
-        (call-interactively 'helm-find-files-up-one-level)
-      (delete-backward-char 1)))
-
-  :general
-  ("M-x" 'helm-M-x)
-
-  (:keymaps 'helm-map
-   "TAB" 'helm-execute-persistent-action
-   "C-j" 'helm-select-action
-   "M-e" 'helm-next-line
-   "M-i" 'helm-previous-line
-   "M-E" 'helm-previous-source
-   "M-I" 'helm-next-source)
-
-  (:keymaps 'helm-find-files-map
-   "DEL" 'helm-find-files-del-dwim
-   "M-e" 'helm-next-line
-   "M-i" 'helm-previous-line)
-
-  (with-prefix
-    "bf" 'helm-find-files
-    "li" 'helm-imenu))
-
-(use-package helm-projectile
-  :general
-  (with-prefix "pf" 'helm-projectile))
-
-(use-package helm-rg
-  :general
-  (with-prefix "p/" 'helm-projectile-rg))
-
 (use-package hl-todo
   :init
   (global-hl-todo-mode))
@@ -318,11 +292,23 @@ Otherwise, delete a single character."
   :init
   (magit-todos-mode))
 
+(use-package marginalia
+  :after vertico
+  :init
+  (marginalia-mode)
+  :general
+  (:keymaps 'vertico-map
+    "M-," 'marginalia-cycle))
+
 (use-package mwim
   :general
   (:states '(motion normal visual)
    "N" 'mwim-beginning
    "O" 'mwim-end))
+
+(use-package orderless
+  :config
+  (setg completion-styles '(orderless basic)))
 
 (use-package outshine
   :diminish outshine-mode outline-minor-mode
@@ -331,10 +317,37 @@ Otherwise, delete a single character."
                           'selective-display
                           (string-to-vector "…")))
 
+(use-package vertico
+  :init
+  (vertico-mode)
+  (vertico-buffer-mode)
+
+  :config
+  (setg vertico-buffer-display-action
+  '(display-buffer-below-selected (window-height 13))))
+
+(use-package vertico-directory
+  :after vertico
+  :general
+  (:keymaps 'vertico-map
+    "M-e" 'vertico-next
+    "M-i" 'vertico-previous
+
+    "M-E" 'vertico-next-group
+    "M-I" 'vertico-previous-group
+
+    "RET" 'vertico-directory-enter
+    "DEL" 'vertico-directory-delete-char
+    "M-DEL" 'vertico-directory-delete-word)
+  :hook (rfn-shadow-update-overlay . vertico-directory-tidy))
+
 (use-package xref
   :init
   (add-to-list 'evil-emacs-state-modes 'xref--xref-buffer-mode)
   (add-hook 'xref--xref-buffer-mode-hook 'hl-line-mode)
+
+  (setg xref-show-xrefs-function #'consult-xref)
+  (setg xref-show-definitions-function #'consult-xref)
 
   :general
   (with-prefix
