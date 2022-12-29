@@ -177,7 +177,8 @@
   (with-prefix
     "bf" 'find-file
     "bb" 'switch-to-buffer
-    "bk" 'kill-buffer)
+    "bk" 'kill-buffer
+    "bp" 'project-find-file)
 
   (with-utility
     "v" 'evil-select-last-pasted))
@@ -194,6 +195,7 @@
   :init
   (require 'ansi-color)
   (defun colorize-compilation-buffer ()
+    "Apply ANSI color codes to the compilation buffer."
     (ansi-color-apply-on-region compilation-filter-start (point)))
   (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
@@ -213,7 +215,9 @@
 (use-package consult
   :general
   (with-prefix
-    "/" 'consult-ripgrep))
+    "/" 'consult-ripgrep
+    "i" 'consult-imenu
+    "I" 'consult-imenu-multi))
 
 (use-package direnv
   :config
@@ -303,6 +307,7 @@ targets."
 (use-package flymake
   :general
   (with-prefix
+    "ll" 'consult-flymake
     "le" 'flymake-goto-next-error
     "li" 'flymake-goto-prev-error))
 
