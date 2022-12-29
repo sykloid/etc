@@ -5,10 +5,6 @@ export DOCKER_BUILDKIT := "1"
 help:
   just --list
 
-# Provision the current home directory.
-provision TARGET="${HOME}" TAGS="":
-  ansible-playbook -i localhost, --connection=local -t {{ TAGS }} -e target={{ TARGET }} ansible/main.yml
-
 # Not sure this is ever going to be more general than it currently is,
 # but oh well...
 current_os := `docker info | sed -n -e 's/ OSType: \(.*\)/\1/p'`
@@ -21,3 +17,23 @@ build ARCH=default:
 
 push ARCHES:
     docker buildx build --push . --platform {{ ARCHES }} --tag sykloid/airlift:latest
+
+provision TARGET="${HOME}":
+    mkdir -p {{ TARGET }}
+
+    mkdir -p {{ TARGET }}/.config/nix
+    cp nix/nix.conf {{ TARGET }}/.config/nix/nix.conf
+
+    cp zsh/zprofile {{ TARGET }}/.zprofile
+    cp zsh/zshrc {{ TARGET }}/.zshrc
+
+    mkdir -p {{ TARGET }}/.terminfo
+    tic -x -o {{ TARGET }}/.terminfo terminfo/xterm-24bit.terminfo
+
+    mkdir -p {{ TARGET }}/.emacs.d
+    cp emacs/init.el {{ TARGET }}/.emacs.d/init.el
+    cp emacs/skywave-theme.el {{ TARGET }}/.emacs.d/skywave-theme.el
+
+    cp tmux/tmux.conf {{ TARGET }}/.tmux.conf
+
+    cp git/gitconfig {{ TARGET }}/.gitconfig

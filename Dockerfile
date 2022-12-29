@@ -28,7 +28,7 @@ ENV AIRLIFT=/nix/var/nix/profiles/airlift
 ENV PATH=${AIRLIFT}/bin:${PATH}
 ENV TERM=screen-256color
 
-RUN ${AIRLIFT}/bin/ansible-playbook -i localhost, --connection=local /airlift/ansible/main.yml
 
 WORKDIR /home/sykloid
+RUN just /airlift/provision
 CMD $AIRLIFT/bin/zsh -l
