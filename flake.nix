@@ -6,7 +6,6 @@
     let output = system: with import nixpkgs { system = system; }; buildEnv {
       name = "airlift";
       paths = [
-          ansible
           bat
           direnv
           docker-client

@@ -18,16 +18,19 @@ RUN curl -L https://nixos.org/nix/install | sh
 
 RUN mkdir -p ~/.config/nix && echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf
 
-ADD --chown=sykloid:sykloid . /airlift
+COPY flake.nix /airlift/flake.nix
+COPY flake.lock /airlift/flake.lock
+
 WORKDIR /airlift
 
 RUN rm -rf ~/.cache/nix
-RUN PATH=/home/sykloid/.nix-profile/bin:$PATH nix build --profile /nix/var/nix/profiles/airlift
+RUN PATH=/home/sykloid/.nix-profile/bin:$PATH nix build --no-link --profile /nix/var/nix/profiles/airlift
 
 ENV AIRLIFT=/nix/var/nix/profiles/airlift
 ENV PATH=${AIRLIFT}/bin:${PATH}
 ENV TERM=screen-256color
 
+ADD --chown=sykloid:sykloid . /airlift
 
 WORKDIR /home/sykloid
 RUN just /airlift/provision
