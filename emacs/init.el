@@ -177,8 +177,7 @@
   (with-prefix
     "bf" 'find-file
     "bb" 'switch-to-buffer
-    "bk" 'kill-buffer
-    "bp" 'project-find-file)
+    "bk" 'kill-buffer)
 
   (with-utility
     "v" 'evil-select-last-pasted))
@@ -216,8 +215,7 @@
   :general
   (with-prefix
     "/" 'consult-ripgrep
-    "i" 'consult-imenu
-    "I" 'consult-imenu-multi))
+    "i" 'consult-imenu))
 
 (use-package direnv
   :config
@@ -361,6 +359,12 @@ targets."
   (set-display-table-slot standard-display-table
                           'selective-display
                           (string-to-vector "…")))
+
+(use-package project
+  :general
+  (with-prefix
+    "pf" 'project-find-file
+    "pi" 'consult-imenu-multi))
 
 (use-package vertico
   :init
