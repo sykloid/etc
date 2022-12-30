@@ -364,6 +364,7 @@ targets."
   :general
   (with-prefix
     "pf" 'project-find-file
+    "pb" 'consult-project-buffer
     "pi" 'consult-imenu-multi))
 
 (use-package vertico
