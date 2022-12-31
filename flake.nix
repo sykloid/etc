@@ -41,6 +41,7 @@
               mwim
               no-littering
               outshine
+              epkgs.rainbow-mode
               undo-fu
               use-package
               which-key
