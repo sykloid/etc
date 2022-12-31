@@ -217,6 +217,21 @@
     "/" 'consult-ripgrep
     "i" 'consult-imenu))
 
+(use-package dired
+  :general
+  (:keymaps 'dired-mode-map
+    "n" 'dired-up-directory
+    "e" 'dired-next-line
+    "i" 'dired-previous-line
+    "o" 'dired-find-file
+    "SPC" 'general-prefix-map)
+
+  :init
+  (add-hook 'dired-mode-hook #'hl-line-mode)
+
+  :config
+  (setg dired-kill-when-opening-new-dired-buffer t))
+
 (use-package direnv
   :config
   (direnv-mode))
