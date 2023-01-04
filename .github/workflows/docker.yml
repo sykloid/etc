@@ -18,8 +18,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Push Airlift Images
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
-          platforms: linux/amd64,linux/aarch64
-          tags: latest
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: sykloid/airlift:latest
