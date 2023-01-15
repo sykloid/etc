@@ -338,7 +338,7 @@ targets."
     "vb" 'magit-blame
     "vs" 'magit-status)
 
-  (:keymaps '(magit-diff-mode-map magit-status-mode-map)
+  (:keymaps '(magit-diff-mode-map magit-log-mode-map magit-status-mode-map)
    "n" 'backward-char
    "e" 'magit-next-line
    "i" 'magit-previous-line
