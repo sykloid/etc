@@ -382,6 +382,9 @@ targets."
     "pb" 'consult-project-buffer
     "pi" 'consult-imenu-multi))
 
+(use-package rainbow-mode
+  :hook (emacs-lisp-mode))
+
 (use-package vertico
   :init
   (vertico-mode)
