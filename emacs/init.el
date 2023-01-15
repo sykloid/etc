@@ -325,6 +325,9 @@ targets."
     "le" 'flymake-goto-next-error
     "li" 'flymake-goto-prev-error))
 
+(use-package forge
+  :after magit)
+
 (use-package hl-todo
   :init
   (global-hl-todo-mode))

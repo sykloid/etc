@@ -38,6 +38,7 @@
               general
               magit
               magit-todos
+              forge
               mwim
               no-littering
               outshine
