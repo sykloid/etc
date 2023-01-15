@@ -17,6 +17,7 @@
 (load-theme 'skywave t)
 
 ;; * Use-Package
+(setq use-package-enable-imenu-support t)
 (require 'use-package)
 
 ;; * General
