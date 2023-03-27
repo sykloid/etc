@@ -35,5 +35,5 @@ export LESS_TERMCAP_se=$(echo -e '\e[0m')
 export MANPAGER="sh -c 'col -bx | bat --language=man -p'"
 export MANWIDTH=80
 
-export PATH=${HOME}/.local/bin:${PATH}
+export PATH=${HOME}/.cargo/bin:${HOME}/.pyenv/bin:${HOME}/.ghcup/bin:${HOME}/.local/bin:${PATH}
 export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}

@@ -1,6 +1,13 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y curl git locales sudo xz-utils && rm -rf /var/lib/apt/lists/*
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y curl git locales sudo xz-utils \
+    build-essential libssl-dev zlib1g-dev libbz2-dev \
+    libreadline-dev libsqlite3-dev curl llvm libncursesw5-dev \
+    tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
+    libffi-dev libffi7 libgmp-dev libgmp10 libncurses-dev \
+    libncurses5 libnuma1 libtinfo5 && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -U sykloid
 RUN echo "sykloid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -34,4 +41,19 @@ ADD --chown=sykloid:sykloid . /airlift
 
 WORKDIR /home/sykloid
 RUN just /airlift/provision
+
+# * ghcup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
+    BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
+    BOOTSTRAP_HASKELL_MINIMAL=1 \
+    BOOTSTRAP_HASKELL_INSTALL_NO_STACK=1 \
+    BOOTSTRAP_HASKELL_INSTALL_NO_STACK_HOOK=1 \
+    sh
+
+# * rustup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
+
+# * pyenv
+RUN curl https://pyenv.run | bash
+
 CMD $AIRLIFT/bin/zsh -l
