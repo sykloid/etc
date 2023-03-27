@@ -55,6 +55,7 @@
               epkgs.embark-consult
 
               dockerfile-mode
+              haskell-mode
               just-mode
               markdown-mode
               nix-mode
