@@ -26,6 +26,7 @@ provision TARGET="${HOME}":
 
     cp zsh/zprofile {{ TARGET }}/.zprofile
     cp zsh/zshrc {{ TARGET }}/.zshrc
+    mkdir -p ~/.zfunc
 
     mkdir -p {{ TARGET }}/.terminfo
     tic -x -o {{ TARGET }}/.terminfo terminfo/xterm-24bit.terminfo

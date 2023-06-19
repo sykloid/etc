@@ -42,7 +42,8 @@ ADD --chown=sykloid:sykloid . /airlift
 WORKDIR /home/sykloid
 RUN just /airlift/provision
 
-# * ghcup
+# * Toolchains
+# ** Haskell: ghcup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
     BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
     BOOTSTRAP_HASKELL_MINIMAL=1 \
@@ -50,10 +51,13 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
     BOOTSTRAP_HASKELL_INSTALL_NO_STACK_HOOK=1 \
     sh
 
-# * rustup
+# ** Rust: rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
+RUN rustup completions zsh rustup > /home/sykloid/.zfunc/_rustup
+RUN rustup completions zsh cargo > /home/sykloid/.zfunc/_cargo
 
-# * pyenv
-RUN curl https://pyenv.run | bash
+# ** Python: rye
+RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash
+RUN rye self completion -s zsh > ~/.zfunc/_rye
 
-CMD $AIRLIFT/bin/zsh -l
+CMD ${AIRLIFT}/bin/zsh -l

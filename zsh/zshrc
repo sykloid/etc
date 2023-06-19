@@ -89,3 +89,5 @@ zstyle ':completion:*' max-errors
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' ignore-parents pwd
+
+eval "$(rye self completion -s zsh)"
