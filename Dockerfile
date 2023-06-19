@@ -53,11 +53,11 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
 
 # ** Rust: rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
-RUN rustup completions zsh rustup > /home/sykloid/.zfunc/_rustup
-RUN rustup completions zsh cargo > /home/sykloid/.zfunc/_cargo
+RUN ~/.cargo/bin/rustup completions zsh rustup > /home/sykloid/.zfunc/_rustup
+RUN ~/.cargo/bin/rustup completions zsh cargo > /home/sykloid/.zfunc/_cargo
 
 # ** Python: rye
 RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash
-RUN rye self completion -s zsh > ~/.zfunc/_rye
+RUN ~/.rye/shims/rye self completion -s zsh > ~/.zfunc/_rye
 
 CMD ${AIRLIFT}/bin/zsh -l
