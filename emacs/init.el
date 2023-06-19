@@ -201,6 +201,15 @@
 
   (setg compilation-scroll-output t))
 
+(use-package elisp-mode
+  :ensure nil
+  :config
+  (defun emacs-lisp-set-outline-regexp ()
+    (setg outline-regexp ";; \\*+ "))
+  (general-add-hook 'emacs-lisp-mode-hook
+                    '(emacs-lisp-set-outline-regexp
+                      outline-minor-mode)))
+
 ;; * Minor Modes
 (use-package company
   :diminish company-mode
@@ -367,6 +376,21 @@ targets."
   (:states '(motion normal visual)
    "N" 'mwim-beginning
    "O" 'mwim-end))
+
+(use-package outline
+  :config
+  (set-display-table-slot standard-display-table
+                          'selective-display
+                          (string-to-vector "…")))
+
+(use-package outline-minor-faces
+  :after outline
+  :init
+  (general-add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
+(use-package backline
+  :after outline
+  :init (advice-add 'outline-flag-region :after 'backline-update))
 
 (use-package orderless
   :config
