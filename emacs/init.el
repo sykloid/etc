@@ -372,13 +372,6 @@ targets."
   :config
   (setg completion-styles '(orderless basic)))
 
-(use-package outshine
-  :diminish outshine-mode outline-minor-mode
-  :init
-  (set-display-table-slot standard-display-table
-                          'selective-display
-                          (string-to-vector "…")))
-
 (use-package project
   :general
   (with-prefix
@@ -453,6 +446,5 @@ targets."
 
 ;; * Exeunt
 ;;; Local Variables:
-;;; eval: (outshine-mode)
 ;;; End:
 ;;; init.el ends here
