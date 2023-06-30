@@ -41,7 +41,8 @@
               forge
               mwim
               no-littering
-              outshine
+              backline
+              outline-minor-faces
               epkgs.rainbow-mode
               undo-fu
               use-package
