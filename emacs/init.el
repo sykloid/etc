@@ -48,15 +48,7 @@
   (general-create-definer
     with-utility
     :states '(normal visual)
-    :prefix general-utility-prefix)
-
-  ;; TODO: Make this more modular.
-  (general-after-init
-    (general-define-key :states 'normal
-      "TAB" (general-predicate-dispatch nil
-              (and outshine-mode (looking-at outline-regexp)) 'outshine-cycle)
-      "S-TAB" (general-predicate-dispatch nil
-                outshine-mode 'outshine-cycle-buffer))))
+    :prefix general-utility-prefix))
 
 ;; * No Littering
 (use-package no-littering
