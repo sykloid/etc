@@ -1,6 +1,6 @@
 {
   description = "Airlift";
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/22.11;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
 
   outputs = { self, nixpkgs }:
     let output = system: with import nixpkgs { system = system; }; buildEnv {
@@ -22,38 +22,37 @@
           util-linux
           zsh
 
-          ((emacsPackagesFor emacs-nox).emacsWithPackages
+          ((emacsPackagesFor emacs29-nox).emacsWithPackages
             (epkgs: with epkgs.melpaPackages; [
-              eglot
-              evil-args
-              evil-commentary
-              evil-surround
-              evil-exchange
-              expand-region
+              backline
               company
               diminish
               direnv
+              epkgs.rainbow-mode
               evil
+              evil-args
+              evil-commentary
+              evil-exchange
               evil-surround
+              evil-surround
+              expand-region
+              forge
               general
               magit
               magit-todos
-              forge
               mwim
               no-littering
-              backline
               outline-minor-faces
-              epkgs.rainbow-mode
               undo-fu
               use-package
               which-key
 
               consult
               embark
-              marginalia
-              epkgs.vertico
-              epkgs.orderless
               epkgs.embark-consult
+              epkgs.orderless
+              epkgs.vertico
+              marginalia
 
               dockerfile-mode
               haskell-mode
