@@ -42,6 +42,8 @@ ADD --chown=sykloid:sykloid . /airlift
 WORKDIR /home/sykloid
 RUN just /airlift/provision
 
+RUN sudo chsh -s zsh sykloid
+
 # * Toolchains
 # ** Haskell: ghcup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
