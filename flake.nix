@@ -25,6 +25,7 @@
           ((emacsPackagesFor emacs29-nox).emacsWithPackages
             (epkgs: with epkgs.melpaPackages; [
               backline
+              bicycle
               company
               diminish
               direnv

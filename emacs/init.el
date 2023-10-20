@@ -53,8 +53,7 @@
 ;; * No Littering
 (use-package no-littering
   :config
-  (setg auto-save-file-name-transforms
-                `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+  (no-littering-theme-backups))
 
 ;; * Appearance, Decorations, and Editor-Wide Configuration
 (use-package emacs
@@ -197,7 +196,7 @@
   :ensure nil
   :config
   (defun emacs-lisp-set-outline-regexp ()
-    (setg outline-regexp ";; \\*+ "))
+    (setg outline-regexp "\s*;; \\*+ "))
   (general-add-hook 'emacs-lisp-mode-hook
                     '(emacs-lisp-set-outline-regexp
                       outline-minor-mode)))
@@ -383,6 +382,13 @@ targets."
 (use-package backline
   :after outline
   :init (advice-add 'outline-flag-region :after 'backline-update))
+
+(use-package bicycle
+  :after outline
+  :general
+  (:states '(normal)
+   "zc" 'bicycle-cycle
+   "zC" 'bicycle-cycle-global))
 
 (use-package orderless
   :config
