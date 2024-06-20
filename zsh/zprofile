@@ -8,35 +8,15 @@
 # The primary purpose of this file is to set environment variables for the
 # benefit of any application launched as a child of this shell.
 
-# Putting such definitions in zshrc would prevent subshells from overriding them
-# (they would be overridden again immediately); it is also not possible to put
-# interactive configuration in this file under a [[ -o interactive ]] guard,
-# since such configurations *are not* inherited by subshells.
-
-# Hence, we are forced to use two files -- this one, and zshrc.
-
-# Actually, three files: it is assumed that if the airlift software package has
-# been deployed to this system, its path is stored in the $AIRLIFT environment
-# variable. That must be done on a per deployment basis -- either in a
-# Dockerfile, a nix shell hook, or in the case of a bare-metal environment, one
-# of the only files which is read before this one -- zshenv.
-if [[ ! -v AIRLIFT ]]; then
-  print "\${AIRLIFT} is not set; exiting…"
-  return
-fi
-
-export PATH=${AIRLIFT}/bin:${PATH}
 export FPATH=${HOME}/.zfunc:${FPATH}
-export MANPATH=${AIRLIFT}/share/man:${MANPATH}
 
 export EDITOR=emacs
 
 export LESS_TERMCAP_so=$(echo -e '\e[1;7m')
 export LESS_TERMCAP_se=$(echo -e '\e[0m')
-export MANPAGER="sh -c 'col -bx | bat --language=man -p'"
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | bat -plman'"
 export MANWIDTH=80
 
 export PATH=${HOME}/.cargo/bin:${HOME}/.rye/bin:${HOME}/.ghcup/bin:${HOME}/.local/bin:${PATH}
 export LD_LIBRARY_PATH=${HOME}/.local/lib:${LD_LIBRARY_PATH}
-
-source ${HOME}/.rye/env
