@@ -24,7 +24,7 @@ alias e=$EDITOR
 
 # * Reporting
 REPORTTIME=5
-REPORTMEMORY=1024
+REPORTMEMORY=1048576
 TIMEFMT="%J: %E elapsed (%U user + %S system = %P CPU); %Mk Maximum RSS"
 
 # * Prompt
