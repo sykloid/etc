@@ -1,0 +1,41 @@
+default_mode "locked"
+default_layout "compact"
+
+keybinds {
+  locked clear-defaults=true {
+    bind "Ctrl Space" { SwitchToMode "Normal"; }
+  }
+
+  shared_except "locked" {
+    bind "Enter" "Esc" { SwitchToMode "Locked"; }
+  }
+
+  normal clear-defaults=true {
+    bind "Esc" { SwitchToMode "Locked"; }
+    bind "v" { NewPane "Right"; SwitchToMode "Locked"; }
+    bind "s" { NewPane "Down"; SwitchToMode "Locked"; }
+    bind "x" { CloseFocus; SwitchToMode "Locked"; }
+    bind "c" { NewTab; SwitchToMode "Locked"; }
+    bind "r" { SwitchToMode "Resize"; }
+    bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
+
+    bind "n" { MoveFocus "Left"; }
+    bind "e" { MoveFocus "Down"; }
+    bind "i" { MoveFocus "Up"; }
+    bind "o" { MoveFocus "Right"; }
+
+    bind "d" { Detach; }
+  }
+
+  entersearch {
+    bind "Enter" { SwitchToMode "Search"; }
+  }
+
+  search clear-defaults=true {
+    bind "i" { Search "Up"; }
+    bind "e" { Search "Down"; }
+    bind "c" { SearchToggleOption "CaseSensitivity"; }
+    bind "w" { SearchToggleOption "WholeWord"; }
+    bind "r" { SearchToggleOption "Wrap"; }
+  }
+}

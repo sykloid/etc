@@ -52,6 +52,14 @@ function () {
 # ** Functions
 function precmd () {
   vcs_info
+
+  # Print current directory to title.
+  print -Pn -- '\e]2;%~\a'
+}
+
+function preexec () {
+  # Print current command to title.
+  print -Pn -- "\e]2;${(q)1}\a"
 }
 
 # * Key Bindings
