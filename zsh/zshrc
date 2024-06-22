@@ -19,7 +19,7 @@ HISTSIZE=1048576
 
 # * Aliases
 alias ls="ls --color=auto"
-alias l="ls -lhB -N"
+alias l="ls -lhB"
 alias e=$EDITOR
 
 # * Reporting
