@@ -89,7 +89,16 @@
   (setg show-trailing-whitespace t)
 
   (use-package autorevert :diminish auto-revert-mode)
-  (use-package eldoc :diminish eldoc-mode))
+  (use-package eldoc :diminish eldoc-mode)
+
+  (defun terminal-title-update ()
+    (interactive)
+    (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007"))
+    (if buffer-file-name
+        (send-string-to-terminal (concat "\033]2; " (buffer-file-name) "\007"))
+      (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007"))))
+
+  (add-hook 'post-command-hook 'terminal-title-update))
 
 ;; * Evil
 (use-package evil
