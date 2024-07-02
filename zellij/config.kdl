@@ -17,14 +17,18 @@ keybinds {
     bind "x" { CloseFocus; SwitchToMode "Locked"; }
     bind "c" { NewTab; SwitchToMode "Locked"; }
     bind "r" { SwitchToMode "Resize"; }
+    bind "f" { Run "zellij" "run" "-f" "--" "zsh" { close_on_exit true; }; }
     bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
 
-    bind "n" { MoveFocus "Left"; }
-    bind "e" { MoveFocus "Down"; }
-    bind "i" { MoveFocus "Up"; }
-    bind "o" { MoveFocus "Right"; }
+    bind "n" { MoveFocus "Left"; SwitchToMode "Locked"; }
+    bind "e" { MoveFocus "Down"; SwitchToMode "Locked"; }
+    bind "i" { MoveFocus "Up"; SwitchToMode "Locked"; }
+    bind "o" { MoveFocus "Right"; SwitchToMode "Locked"; }
+
+    bind "z" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
 
     bind "d" { Detach; }
+    bind "[" { SwitchToMode "Scroll"; }
   }
 
   entersearch {
@@ -37,5 +41,26 @@ keybinds {
     bind "c" { SearchToggleOption "CaseSensitivity"; }
     bind "w" { SearchToggleOption "WholeWord"; }
     bind "r" { SearchToggleOption "Wrap"; }
+    bind "Esc" { SwitchToMode "Locked"; }
+    bind "q" { SwitchToMode "Locked"; }
+  }
+
+  resize clear-defaults=true {
+    bind "n" "Left" { Resize "Increase Left"; SwitchToMode "Locked"; }
+    bind "e" "Down" { Resize "Increase Down"; SwitchToMode "Locked"; }
+    bind "i" "Up" { Resize "Increase Up"; SwitchToMode "Locked"; }
+    bind "o" "Right" { Resize "Increase Right"; SwitchToMode "Locked"; }
+  }
+
+  scroll clear-defaults=true {
+    bind "q" { SwitchToMode "Locked"; }
+    bind "e" { ScrollDown; }
+    bind "i" { ScrollUp; }
+    bind "E" { PageScrollDown; }
+    bind "I" { PageScrollUp; }
+    bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
+    bind "H" { EditScrollback; SwitchToMode "Locked"; }
+
+    bind "Esc" { SwitchToMode "Locked"; }
   }
 }

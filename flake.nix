@@ -43,6 +43,7 @@
           tmux
           tree
           util-linux
+          zellij
           zsh
 
           rye
@@ -99,6 +100,7 @@
           ".emacs.d/skywave-theme.el".source = ./emacs/skywave-theme.el;
 
           ".tmux.conf".source = ./tmux/tmux.conf;
+          ".config/zellij/config.kdl".source = ./zellij/config.kdl;
 
           ".zprofile".source = ./zsh/zprofile;
           ".zshrc".source = ./zsh/zshrc;
