@@ -31,6 +31,7 @@
  '(vertico-group-title ((t (:background "#222222"))))
  '(vertico-group-separator ((t (:background "#222222"))))
 
+ '(header-line ((t (:background "#555555"))))
  '(highlight ((t (:background "#333333"))))
  '(isearch ((t (:foreground "#FE0012" :background "#DFDFDF"))))
  '(lazy-highlight ((t (:background "#777777")))))
