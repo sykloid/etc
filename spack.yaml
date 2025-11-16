@@ -1,0 +1,26 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  # add package specs to the `specs` list
+  specs:
+  - emacs@30.1 +json +treesitter gui=none
+  - ripgrep
+  view: true
+  concretizer:
+    unify: true
+  config:
+    install_tree:
+      padded_length: 128
+  packages: {}
+  container:
+    images:
+      os: ubuntu:24.04
+      spack: 1.1.0
+  mirrors:
+    github:
+      url: oci://ghcr.io/sykloid/spack
+      access_pair:
+        id_variable: SPACK_MIRROR_USERNAME
+        secret_variable: SPACK_MIRROR_PASSWORD
