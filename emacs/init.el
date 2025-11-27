@@ -1,128 +1,116 @@
-;;; -*- lexical-binding: t -*-
-;;; init.el --- Emacs Configuration
+;;; init.el --- Emacs Configuration -*- lexical-binding: t -*-
 ;;; P.C. Shyamshankar 'sykloid' <shyam@sykloid.org>
 
 ;;; Commentary:
-;; This is the 6th rewrite of this configuration.
+;;; This is the 7th rewrite of this configuration.
+
+;;; In this version, we begin moving away from using nix to install
+;;; emacs packages, leaning instead into native emacs tooling such as
+;;; elpaca.
 
 ;;; Code:
-;; * Package System Initialization
-;; We choose not to use emacs' built-in package manager, instead all package
-;; management is done through ~nix~.
-(require 'package)
-(setq package-archives nil)
-(setq package-enable-at-startup nil)
-(package-initialize)
 
-(load-theme 'skywave t)
+;;; * Package Management & Bootstrap
+(load-file (expand-file-name "elpaca-bootstrap.el" user-emacs-directory))
+(setq elpaca-lock-file (expand-file-name "elpaca.lock.el" user-emacs-directory))
 
-;; * Use-Package
 (setq use-package-enable-imenu-support t)
 (require 'use-package)
+(setq use-package-compute-statistics t)
+(setq use-package-always-ensure t)
+(elpaca elpaca-use-package (elpaca-use-package-mode))
 
-;; * General
-(use-package general
-  :defines
-  general-prefix
-  general-utility-prefix
-
-  :functions
-  setg
-  setgd
-
-  with-prefix
-  with-utility
-
-  :config
-  (defalias 'setg 'general-setq)
-  (defalias 'setgd 'general-setq-default)
-
-  (defvar general-prefix "SPC")
-  (general-create-definer
-    with-prefix
-    :states '(motion normal visual)
-    :prefix general-prefix
-    :prefix-command 'general-prefix-map)
-
-  (defvar general-utility-prefix "s")
-  (general-create-definer
-    with-utility
-    :states '(normal visual)
-    :prefix general-utility-prefix))
-
-;; * No Littering
-(use-package no-littering
-  :config
+;;; * Core Packages
+(use-package no-littering :ensure (:wait t)
+  :init
   (no-littering-theme-backups))
 
-;; * Appearance, Decorations, and Editor-Wide Configuration
-(use-package emacs
+(use-package general :ensure (:wait t)
+  :functions
+  setg
+  setd
+
+  :init
+  (defalias 'setd 'general-setq-default)
+  (defalias 'setg 'general-setq)
+
+  (defvar general-prefix-map (make-sparse-keymap))
+  (general-define-key
+   :states '(emacs insert normal motion visual)
+   :prefix-map 'general-prefix-map
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC")
+  (general-create-definer with-prefix :keymaps 'general-prefix-map)
+
+  (defvar utility-map (make-sparse-keymap))
+  (general-define-key
+   :states '(emacs normal motion visual)
+   :prefix-map 'utility-map
+   :prefix "s"
+   :non-normal-prefix "M-s")
+  (general-create-definer with-utility :keymaps 'utility-map))
+
+(use-package emacs :ensure nil
+  :general
+  ("M-n" 'backward-sentence
+   "M-e" 'forward-paragraph
+   "M-i" 'backward-paragraph
+   "M-o" 'forward-sentence)
+
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   (setg custom-file (concat user-emacs-directory "custom.el"))
+  (load custom-file t)
+  (load-theme 'skywave)
 
   (prefer-coding-system       'utf-8)
   (set-default-coding-systems 'utf-8)
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
-  (setg default-buffer-file-coding-system 'utf-8)
 
   (setg ad-redefinition-action 'accept)
 
+  (setd indent-tabs-mode nil)
+  (setd tab-width 2)
   (setg column-number-mode t)
   (setg frame-background-mode 'dark)
   (setg fringe-mode 0)
-  (setgd indent-tabs-mode nil)
   (setg inhibit-startup-message t)
   (setg menu-bar-mode nil)
   (setg sentence-end-double-space nil)
-  (setgd tab-width 2)
+  (setg show-trailing-whitespace t)
   (setg tool-bar-mode nil)
 
   (setg backup-by-copying t)
   (setg delete-old-versions t)
   (setg kept-new-versions 6)
   (setg kept-old-versions 2)
-  (setg version-control t)
+  (setg version-control t))
 
-  (setg show-trailing-whitespace t)
+(use-package transient)
 
-  (use-package autorevert :diminish auto-revert-mode)
-  (use-package eldoc :diminish eldoc-mode)
-
-  (defun terminal-title-update ()
-    (interactive)
-    (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007"))
-    (if buffer-file-name
-        (send-string-to-terminal (concat "\033]2; " (buffer-file-name) "\007"))
-      (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007"))))
-
-  (add-hook 'post-command-hook 'terminal-title-update))
-
-;; * Evil
+;;; * Keybinding and Movement
 (use-package evil
   :init
   (evil-mode 1)
 
-  :config
-  (setg evil-move-beyond-eol t)
-  (setg evil-split-window-below t)
-  (setg evil-vsplit-window-right t)
-
-  (setgd evil-shift-width 2)
-
-  (setg evil-undo-system 'undo-fu)
-
-  (add-to-list 'evil-emacs-state-modes 'minibuffer-mode)
-
-  :init
   (defun evil-select-last-pasted ()
     "Select the last pasted text."
     (interactive)
     (evil-goto-mark ?\[)
     (evil-visual-char)
     (evil-goto-mark ?\]))
+
+  :config
+  (setg evil-move-beyond-eol t)
+  (setg evil-split-window-below t)
+  (setg evil-vsplit-window-right t)
+
+  (setd evil-shift-width 2)
+  (setg evil-undo-system 'undo-fu)
+
+  (add-to-list 'evil-emacs-state-modes 'minibuffer-mode)
 
   :general
   (:states 'normal
@@ -155,8 +143,7 @@
 
   (:states '(normal visual)
    "m" 'evil-paste-after
-   "M" 'evil-paste-before
-   "s" nil)
+   "M" 'evil-paste-before)
 
   (:states '(operator visual)
    "h" '(:keymap evil-inner-text-objects-map))
@@ -183,78 +170,107 @@
   (with-utility
     "v" 'evil-select-last-pasted))
 
-(use-package evil-surround
-  :init
-  (global-evil-surround-mode)
-  :general
-  (:states '(normal visual)
-   "js" 'evil-surround-region))
-
-;; * Major Modes
-(use-package compile
-  :init
-  (require 'ansi-color)
-  (defun colorize-compilation-buffer ()
-    "Apply ANSI color codes to the compilation buffer."
-    (ansi-color-apply-on-region compilation-filter-start (point)))
-  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-
-  (setg compilation-scroll-output t))
-
-(use-package elisp-mode
-  :ensure nil
+(use-package undo-fu
   :config
-  (defun emacs-lisp-set-outline-regexp ()
-    (setg outline-regexp "\s*;; \\*+ "))
-  (general-add-hook 'emacs-lisp-mode-hook
-                    '(emacs-lisp-set-outline-regexp
-                      outline-minor-mode)))
+  (setg undo-fu-allow-undo-in-region t))
 
-;; * Minor Modes
-(use-package company
-  :diminish company-mode
+(use-package mwim
+  :general
+  (:states '(motion normal visual)
+   "N" 'mwim-beginning
+   "O" 'mwim-end))
+
+(use-package evil-commentary
   :init
-  (global-company-mode 1)
+  (evil-commentary-mode)
 
   :general
-  (:keymaps 'company-mode-map
-   "M-e" 'company-select-next
-   "M-i" 'company-select-previous))
+  (with-prefix
+    "c" 'evil-commentary-line
+    "C" 'evil-commentary))
 
+(use-package xref :ensure nil
+  :after evil
+  :init
+  (add-to-list 'evil-emacs-state-modes 'xref--xref-buffer-mode)
+  (add-hook 'xref--xref-buffer-mode-hook 'hl-line-mode)
+
+  (setg xref-show-xrefs-function #'consult-xref)
+  (setg xref-show-definitions-function #'consult-xref)
+
+  :general
+  (with-prefix
+    "ld" 'xref-find-definitions
+    "lD" 'xref-find-definitions-other-window
+    "lr" 'xref-find-references
+    "lo" 'xref-go-back
+    "ln" 'xref-go-forward)
+
+  (:keymaps 'xref--xref-buffer-mode-map
+    "e" 'xref-next-line
+    "E" 'xref-next-group
+    "i" 'xref-prev-line
+    "I" 'xref-prev-group
+    "q" 'xref-quit-and-pop-marker-stack
+    "RET" 'xref-quit-and-goto-xref))
+
+(use-package which-key)
+
+;;; * Completion
 (use-package consult
   :general
   (with-prefix
     "/" 'consult-ripgrep
-    "i" 'consult-imenu))
+    "i" 'consult-imenu
+    "o" 'consult-outline))
 
-(use-package dired
-  :general
-  (:keymaps 'dired-mode-map
-    "n" 'dired-up-directory
-    "e" 'dired-next-line
-    "i" 'dired-previous-line
-    "o" 'dired-find-file
-    "SPC" 'general-prefix-map)
-
+(use-package corfu
   :init
-  (add-hook 'dired-mode-hook #'hl-line-mode)
+  (global-corfu-mode 1)
 
-  :config
-  (setg dired-kill-when-opening-new-dired-buffer t))
-
-(use-package direnv
-  :config
-  (direnv-mode))
-
-(use-package eglot
   :general
-  (with-prefix
-    "la" 'eglot-code-actions
-    "ln" 'eglot-rename
-    "lt" 'eglot-find-typeDefinition))
+  (:keymaps 'corfu-map
+   "M-e" 'corfu-next
+   "M-i" 'corfu-previous)
+
+  :config
+  (setg corfu-auto t)
+  (setg corfu-auto-delay 0.2)
+  (setg corfu-quit-no-match 'separator))
+
+(use-package corfu-terminal
+  :ensure (:repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
+  :init
+  (corfu-terminal-mode 1))
+
+(use-package vertico
+  :init
+  (vertico-mode)
+  (vertico-buffer-mode)
+
+  :config
+  (setg vertico-buffer-display-action
+  '(display-buffer-below-selected (window-height 13)))
+
+  :general
+  (:keymaps 'vertico-map
+    "M-e" 'vertico-next
+    "M-i" 'vertico-previous
+
+    "M-E" 'vertico-next-group
+    "M-I" 'vertico-previous-group
+
+    "RET" 'vertico-directory-enter
+    "DEL" 'vertico-directory-delete-char
+    "M-DEL" 'vertico-directory-delete-word)
+  :hook (rfn-shadow-update-overlay . vertico-directory-tidy))
+
+(use-package orderless
+  :config
+  (setg completion-styles '(orderless basic)))
 
 (use-package embark
-  :after vertico
+  :after vertico which-key
   :init
   ;; From: https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt
   (defun embark-which-key-indicator ()
@@ -298,35 +314,20 @@ targets."
   (:keymaps 'vertico-map
     "M-." 'embark-act))
 
-(use-package evil-args
-  :general
-  (:keymaps 'evil-inner-text-objects-map
-   "," 'evil-inner-arg)
-  (:keymaps 'evil-outer-text-objects-map
-   "," 'evil-outer-arg)
-  (:keymaps 'evil-motion-state-map
-   "]," 'evil-forward-arg
-   "[," 'evil-backward-arg))
+(use-package embark-consult)
 
-(use-package evil-commentary
+(use-package marginalia
+  :after vertico
   :init
-  (evil-commentary-mode)
-  :general
-  (with-prefix
-    "c" 'evil-commentary-line
-    "C" 'evil-commentary))
+  (marginalia-mode)
 
-(use-package evil-exchange
   :general
-  (with-utility
-    "x" 'evil-exchange
-    "X" 'evil-exchange-cancel))
+  (:keymaps 'vertico-map
+    "M-," 'marginalia-cycle))
 
-(use-package expand-region
-  :general
-  (:keymaps 'evil-visual-state-map
-    "." 'er/expand-region))
+(use-package cape)
 
+;;; * Static Analysis
 (use-package flymake
   :general
   (with-prefix
@@ -334,13 +335,7 @@ targets."
     "le" 'flymake-goto-next-error
     "li" 'flymake-goto-prev-error))
 
-(use-package forge
-  :after magit)
-
-(use-package hl-todo
-  :init
-  (global-hl-todo-mode))
-
+;;; * Source Control and Project Management
 (use-package magit
   :init
   (evil-set-initial-state 'magit-status 'emacs)
@@ -356,28 +351,43 @@ targets."
    "i" 'magit-previous-line
    "o" 'forward-char
 
-   "V" 'set-mark-command
-   "SPC" 'general-prefix-map))
+   "V" 'set-mark-command)
+  (:keymaps '(magit-diff-mode-map magit-log-mode-map magit-status-mode-map)
+   :prefix "SPC" :prefix-map 'general-prefix-map))
 
-(use-package magit-todos
-  :init
-  (magit-todos-mode))
-
-(use-package marginalia
-  :after vertico
-  :init
-  (marginalia-mode)
+(use-package project :ensure nil
   :general
-  (:keymaps 'vertico-map
-    "M-," 'marginalia-cycle))
+  (with-prefix
+    "pf" 'project-find-file
+    "pb" 'consult-project-buffer
+    "pi" 'consult-imenu-multi))
 
-(use-package mwim
+(use-package breadcrumb
+  :init
+  (breadcrumb-mode))
+
+(use-package tempel
   :general
-  (:states '(motion normal visual)
-   "N" 'mwim-beginning
-   "O" 'mwim-end))
+  (:keymaps 'tempel-map :states '(insert)
+   "M-n" 'tempel-previous
+   "M-o" 'tempel-next
+   "TAB" 'tempel-next)
 
-(use-package outline
+  (:states '(insert)
+   "M-+" 'tempel-insert)
+
+  (with-utility
+    "t" 'tempel-insert))
+
+;;; * Miscellaneous Minor Modes
+(use-package backline
+  :after outline
+  :init (advice-add 'outline-flag-region :after 'backline-update))
+
+(use-package outline :ensure nil
+  :init
+  (outline-minor-mode)
+
   :config
   (set-display-table-slot standard-display-table
                           'selective-display
@@ -388,94 +398,106 @@ targets."
   :init
   (general-add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
-(use-package backline
-  :after outline
-  :init (advice-add 'outline-flag-region :after 'backline-update))
-
-(use-package bicycle
-  :after outline
-  :general
-  (:states '(normal)
-   "zc" 'bicycle-cycle
-   "zC" 'bicycle-cycle-global))
-
-(use-package orderless
-  :config
-  (setg completion-styles '(orderless basic)))
-
-(use-package project
-  :general
-  (with-prefix
-    "pf" 'project-find-file
-    "pb" 'consult-project-buffer
-    "pi" 'consult-imenu-multi))
-
-(use-package rainbow-mode
-  :hook (emacs-lisp-mode))
-
-(use-package vertico
-  :init
-  (vertico-mode)
-  (vertico-buffer-mode)
-
-  :config
-  (setg vertico-buffer-display-action
-  '(display-buffer-below-selected (window-height 13))))
-
-(use-package vertico-directory
-  :after vertico
-  :general
-  (:keymaps 'vertico-map
-    "M-e" 'vertico-next
-    "M-i" 'vertico-previous
-
-    "M-E" 'vertico-next-group
-    "M-I" 'vertico-previous-group
-
-    "RET" 'vertico-directory-enter
-    "DEL" 'vertico-directory-delete-char
-    "M-DEL" 'vertico-directory-delete-word)
-  :hook (rfn-shadow-update-overlay . vertico-directory-tidy))
-
-(use-package xref
-  :init
-  (add-to-list 'evil-emacs-state-modes 'xref--xref-buffer-mode)
-  (add-hook 'xref--xref-buffer-mode-hook 'hl-line-mode)
-
-  (setg xref-show-xrefs-function #'consult-xref)
-  (setg xref-show-definitions-function #'consult-xref)
-
-  :general
-  (with-prefix
-    "ld" 'xref-find-definitions
-    "lD" 'xref-find-definitions-other-window
-    "lr" 'xref-find-references
-    "lo" 'xref-pop-marker-stack)
-
-  (:keymaps 'xref--xref-buffer-mode-map
-    "e" 'xref-next-line
-    "E" 'xref-next-group
-    "i" 'xref-prev-line
-    "I" 'xref-prev-group
-    "q" 'xref-quit-and-pop-marker-stack
-    "RET" 'xref-quit-and-goto-xref))
-
-(use-package which-key
-  :diminish which-key-mode
-  :init
-  (which-key-mode 1)
-
-  :config
-  (setg which-key-allow-evil-operators t)
-  (setg which-key-show-operator-state-maps t))
-
-(use-package winner
+(use-package winner :ensure nil
   :init (winner-mode 1)
-  :general (:keymaps 'evil-window-map
-            "u" 'winner-undo
-            "U" 'winner-redo))
+  :general
+  (:keymaps 'evil-window-map
+   "u" 'winner-undo
+   "U" 'winner-redo))
+  
 
-;; * Exeunt
-;;; Local Variables:
-;;; End:
+;;; * File-Type Major Modes
+(use-package elisp-mode :ensure nil
+  :config
+  ;; From: https://github.com/Fuco1/.emacs.d/blob/af82072196564fa57726bdbabf97f1d35c43b7f7/site-lisp/redef.el#L20-L94
+  (defun fuco1/lisp-indent-function (indent-point state)
+    "This function is the normal value of the variable `lisp-indent-function'.
+The function `calculate-lisp-indent' calls this to determine
+if the arguments of a Lisp function call should be indented specially.
+
+INDENT-POINT is the position at which the line being indented begins.
+Point is located at the point to indent under (for default indentation);
+STATE is the `parse-partial-sexp' state for that position.
+
+If the current line is in a call to a Lisp function that has a non-nil
+property `lisp-indent-function' (or the deprecated `lisp-indent-hook'),
+it specifies how to indent.  The property value can be:
+
+* `defun', meaning indent `defun'-style
+  \(this is also the case if there is no property and the function
+  has a name that begins with \"def\", and three or more arguments);
+
+* an integer N, meaning indent the first N arguments specially
+  (like ordinary function arguments), and then indent any further
+  arguments like a body;
+
+* a function to call that returns the indentation (or nil).
+  `lisp-indent-function' calls this function with the same two arguments
+  that it itself received.
+
+This function returns either the indentation to use, or nil if the
+Lisp function does not specify a special indentation."
+    (let ((normal-indent (current-column))
+          (orig-point (point)))
+      (goto-char (1+ (elt state 1)))
+      (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
+      (cond
+        ;; car of form doesn't seem to be a symbol, or is a keyword
+        ((and (elt state 2)
+              (or (not (looking-at "\\sw\\|\\s_"))
+                  (looking-at ":")))
+         (if (not (> (save-excursion (forward-line 1) (point))
+                     calculate-lisp-indent-last-sexp))
+             (progn (goto-char calculate-lisp-indent-last-sexp)
+                    (beginning-of-line)
+                    (parse-partial-sexp (point)
+                                        calculate-lisp-indent-last-sexp 0 t)))
+         ;; Indent under the list or under the first sexp on the same
+         ;; line as calculate-lisp-indent-last-sexp.  Note that first
+         ;; thing on that line has to be complete sexp since we are
+         ;; inside the innermost containing sexp.
+         (backward-prefix-chars)
+         (current-column))
+        ((and (save-excursion
+                (goto-char indent-point)
+                (skip-syntax-forward " ")
+                (not (looking-at ":")))
+              (save-excursion
+                (goto-char orig-point)
+                (looking-at ":")))
+         (save-excursion
+           (goto-char (+ 2 (elt state 1)))
+           (current-column)))
+        (t
+         (let ((function (buffer-substring (point)
+                                           (progn (forward-sexp 1) (point))))
+               method)
+           (setq method (or (function-get (intern-soft function)
+                                          'lisp-indent-function)
+                            (get (intern-soft function) 'lisp-indent-hook)))
+           (cond ((or (eq method 'defun)
+                      (and (null method)
+                           (> (length function) 3)
+                           (string-match "\\`def" function)))
+                  (lisp-indent-defform state indent-point))
+                 ((integerp method)
+                  (lisp-indent-specform method state
+                                        indent-point normal-indent))
+                 (method
+                  (funcall method indent-point state))))))))
+
+  (general-add-hook 'emacs-lisp-mode-hook
+                    (lambda () (setq-local lisp-indent-function #'fuco1/lisp-indent-function)))
+
+  (defun emacs-lisp-set-outline-regexp ()
+    (setg outline-regexp "\s*;;; \\*+ "))
+
+  (general-add-hook 'emacs-lisp-mode-hook
+                    '(emacs-lisp-set-outline-regexp outline-minor-mode)))
+
+(use-package jsonnet-mode)
+(use-package nix-mode)
+(use-package yaml-mode)
+
+(provide 'init)
 ;;; init.el ends here
