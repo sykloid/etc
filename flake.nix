@@ -3,7 +3,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,79 +31,38 @@
       definition = {pkgs, config, ...}: {
         home.packages = with pkgs; [
           bat
-          direnv
-          docker-client
+          # direnv
           fd
           git
           just
-          less
           man
           ncurses
+          nushell
           ripgrep
-          tmux
           tree
-          util-linux
+          # util-linux
           zellij
           zsh
-
-          rye
         ];
 
         programs.emacs = {
           enable = true;
           package = pkgs.emacs-nox;
-          extraPackages = epkgs: with epkgs; [
-            backline
-            bicycle
-            breadcrumb
-            company
-            diminish
-            direnv
-            epkgs.rainbow-mode
-            evil
-            evil-args
-            evil-commentary
-            evil-exchange
-            evil-surround
-            evil-surround
-            expand-region
-            forge
-            general
-            magit
-            magit-todos
-            mwim
-            no-littering
-            outline-minor-faces
-            undo-fu
-            use-package
-            which-key
-
-            consult
-            embark
-            epkgs.embark-consult
-            epkgs.orderless
-            epkgs.vertico
-            marginalia
-
-            dockerfile-mode
-            haskell-mode
-            just-mode
-            markdown-mode
-            nix-mode
-            rust-mode
-            yaml-mode
-          ];
         };
 
         home.file = {
-          ".emacs.d/init.el".source = ./emacs/init.el;
-          ".emacs.d/skywave-theme.el".source = ./emacs/skywave-theme.el;
+          ".config/emacs/early-init.el".source = ./emacs/early-init.el;
+          ".config/emacs/init.el".source = ./emacs/init.el;
+          ".config/emacs/elpaca-bootstrap.el".source = ./emacs/elpaca-bootstrap.el;
+          ".config/emacs/skywave-theme.el".source = ./emacs/skywave-theme.el;
 
           ".tmux.conf".source = ./tmux/tmux.conf;
           ".config/zellij/config.kdl".source = ./zellij/config.kdl;
 
           ".zprofile".source = ./zsh/zprofile;
           ".zshrc".source = ./zsh/zshrc;
+
+          "Library/Application Support/nushell/config.nu".source = ./nushell/config.nu;
         };
 
         home.sessionVariables = { };
