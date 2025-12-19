@@ -328,7 +328,7 @@ targets."
 (use-package cape)
 
 ;;; * Static Analysis
-(use-package flymake
+(use-package flymake :ensure nil
   :general
   (with-prefix
     "ll" 'consult-flymake
