@@ -337,6 +337,7 @@ targets."
 
 ;;; * Source Control and Project Management
 (use-package magit
+  :mode ("COMMIT_EDITMSG" . git-commit-mode)
   :init
   (evil-set-initial-state 'magit-status 'emacs)
 
