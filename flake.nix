@@ -43,6 +43,7 @@
           # util-linux
           zellij
           zsh
+          jsonnet-language-server
         ];
 
         programs.emacs = {

@@ -496,7 +496,11 @@ Lisp function does not specify a special indentation."
   (general-add-hook 'emacs-lisp-mode-hook
                     '(emacs-lisp-set-outline-regexp outline-minor-mode)))
 
-(use-package jsonnet-mode)
+(use-package jsonnet-mode
+  :after eglot
+  :init
+  (add-to-list 'eglot-server-programs '(jsonnet-mode . ("jsonnet-language-server" "-t"))))
+
 (use-package nix-mode)
 (use-package yaml-mode)
 
