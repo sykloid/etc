@@ -207,12 +207,14 @@
   (setg xref-show-definitions-function #'consult-xref)
 
   :general
+  (:states '(normal)
+   "C-n" 'xref-go-forward
+   "C-o" 'xref-go-back)
+
   (with-prefix
     "ld" 'xref-find-definitions
     "lD" 'xref-find-definitions-other-window
-    "lr" 'xref-find-references
-    "lo" 'xref-go-back
-    "ln" 'xref-go-forward)
+    "lr" 'xref-find-references)
 
   (:keymaps 'xref--xref-buffer-mode-map
     "e" 'xref-next-line
@@ -343,7 +345,9 @@ targets."
   :general
   (with-prefix
     "la" 'eglot-code-actions
-    "lf" 'eglot-format-buffer))
+    "lf" 'eglot-format-buffer
+    "ln" 'eglot-rename
+    "lt" 'eglot-find-typeDefinition))
 
 (use-package flymake :ensure nil
   :general
