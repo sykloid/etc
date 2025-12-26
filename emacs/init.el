@@ -189,6 +189,14 @@
     "c" 'evil-commentary-line
     "C" 'evil-commentary))
 
+(use-package evil-surround
+  :init
+  (global-evil-surround-mode)
+
+  :general
+  (:states '(normal visual)
+   "js" 'evil-surround-region))
+
 (use-package xref :ensure nil
   :after evil
   :init
