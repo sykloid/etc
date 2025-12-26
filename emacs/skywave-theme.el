@@ -34,6 +34,10 @@
  '(header-line ((t (:background "#555555"))))
  '(highlight ((t (:background "#333333"))))
  '(isearch ((t (:foreground "#FE0012" :background "#DFDFDF"))))
- '(lazy-highlight ((t (:background "#777777")))))
+ '(lazy-highlight ((t (:background "#777777"))))
+
+ '(warning ((t (:foreground "#DB6130"))))
+ '(error ((t (:foreground "#D91664"))))
+ )
 
 (provide-theme 'skywave)
