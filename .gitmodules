@@ -1,3 +1,4 @@
 [submodule "spack/upstream"]
-	path = spack/upstream
-	url = https://github.com/spack/spack.git
+  path = spack/upstream
+  url = https://github.com/spack/spack.git
+  ignore = dirty
