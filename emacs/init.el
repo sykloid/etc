@@ -336,6 +336,15 @@ targets."
 (use-package cape)
 
 ;;; * Static Analysis
+(use-package eglot :ensure nil
+  :config
+  (add-to-list 'eglot-server-programs '(python-ts-mode . ("rass" "python")))
+
+  :general
+  (with-prefix
+    "la" 'eglot-code-actions
+    "lf" 'eglot-format-buffer))
+
 (use-package flymake :ensure nil
   :general
   (with-prefix
@@ -503,6 +512,10 @@ Lisp function does not specify a special indentation."
 
   (general-add-hook 'emacs-lisp-mode-hook
                     '(emacs-lisp-set-outline-regexp outline-minor-mode)))
+
+(use-package python :ensure nil
+  :init
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
 
 (use-package jsonnet-mode
   :after eglot
