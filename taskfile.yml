@@ -1,0 +1,12 @@
+version: "3"
+
+tasks:
+  switch:
+    vars:
+      FLAKE_PATH: "{{.TASKFILE_DIR}}"
+    cmd: >-
+      nix run home-manager/release-25.11 --
+      switch
+      --flake ~/Projects/etc#darwin
+      --impure
+      --show-trace
