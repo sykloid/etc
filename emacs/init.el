@@ -103,6 +103,11 @@
     (evil-goto-mark ?\]))
 
   :config
+  (unless (display-graphic-p)
+    (add-hook 'evil-normal-state-entry-hook (lambda () (send-string-to-terminal "\e[2 q")))
+    (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\e[5 q")))
+    (add-hook 'evil-visual-state-entry-hook (lambda () (send-string-to-terminal "\e[0 q"))))
+
   (setg evil-move-beyond-eol t)
   (setg evil-split-window-below t)
   (setg evil-vsplit-window-right t)
