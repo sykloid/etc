@@ -69,6 +69,7 @@
 
         home.sessionVariables = { };
 
+        news.display = "silent";
         programs.home-manager.enable = true;
       };
     in {
