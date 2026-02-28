@@ -250,7 +250,13 @@
     "q" 'xref-quit-and-pop-marker-stack
     "RET" 'xref-quit-and-goto-xref))
 
-(use-package which-key)
+(use-package which-key
+  :init
+  (which-key-mode)
+
+  :config
+  (setg which-key-allow-evil-operators t)
+  (setg which-key-show-operator-state-maps t))
 
 ;;; * Completion
 (use-package consult
