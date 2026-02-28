@@ -28,7 +28,14 @@
         imports = [ definition ];
       };
 
-      definition = {pkgs, config, ...}: {
+      definition = {pkgs, config, lib, ...}:
+      let
+        flakePath = builtins.getEnv "FLAKE_PATH";
+        link = path:
+          if flakePath != ""
+          then config.lib.file.mkOutOfStoreSymlink "${flakePath}/${path}"
+          else ./. + "/${path}";
+      in {
         home.packages = with pkgs; [
           bat
           # direnv
