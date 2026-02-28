@@ -44,6 +44,7 @@
           zellij
           zsh
           jsonnet-language-server
+          luau-lsp
         ];
 
         programs.emacs = {
