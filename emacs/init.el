@@ -522,16 +522,21 @@ Lisp function does not specify a special indentation."
   (general-add-hook 'emacs-lisp-mode-hook
                     '(emacs-lisp-set-outline-regexp outline-minor-mode)))
 
-(use-package python :ensure nil
-  :init
-  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
-
 (use-package jsonnet-mode
   :after eglot
   :init
   (add-to-list 'eglot-server-programs '(jsonnet-mode . ("jsonnet-language-server" "-t"))))
 
+(use-package lua-mode)
+
+(use-package markdown-mode)
+
 (use-package nix-mode)
+
+(use-package python :ensure nil
+  :init
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
+
 (use-package yaml-mode)
 
 (provide 'init)
