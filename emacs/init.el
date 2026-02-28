@@ -202,6 +202,27 @@
   (:states '(normal visual)
    "js" 'evil-surround-region))
 
+(use-package evil-args
+  :general
+  (:keymaps 'evil-inner-text-objects-map
+   "," 'evil-inner-arg)
+  (:keymaps 'evil-outer-text-objects-map
+   "," 'evil-outer-arg)
+  (:keymaps 'evil-motion-state-map
+   "]," 'evil-forward-arg
+   "[," 'evil-backward-arg))
+
+(use-package evil-exchange
+  :general
+  (with-utility
+    "x" 'evil-exchange
+    "X" 'evil-exchange-cancel))
+
+(use-package expand-region
+  :general
+  (:keymaps 'evil-visual-state-map
+    "." 'er/expand-region))
+
 (use-package xref :ensure nil
   :after evil
   :init
