@@ -40,6 +40,8 @@
           bat
           # direnv
           fd
+          gh
+          glab
           git
           just
           man
