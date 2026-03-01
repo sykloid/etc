@@ -72,6 +72,8 @@
           ".zshrc".source = ./zsh/zshrc;
 
           "Library/Application Support/nushell/config.nu".source = ./nushell/config.nu;
+
+          ".config/wezterm/wezterm.lua".source = link "wezterm/wezterm.lua";
         };
 
         home.sessionVariables = { };
