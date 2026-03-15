@@ -2,16 +2,12 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-local font_family = "Iosevka Custom Term"
-local font_size = 11
+local font = wezterm.font("Iosevka Custom Term", { weight = "Medium" })
 
 -- Font
-config.font = wezterm.font(font_family, { weight = "Medium" })
-config.font_size = font_size
+config.font = font
 config.dpi = 140
 config.freetype_load_target = "Light"
-config.command_palette_font_size = font_size
-config.char_select_font_size = font_size
 
 -- Colors
 config.color_scheme = "Ayu Mirage"
@@ -22,10 +18,6 @@ config.colors = {
 -- Window
 config.window_decorations = "RESIZE"
 config.window_padding = { bottom = 0, top = 0, left = 0, right = 0 }
-config.window_frame = {
-  font = wezterm.font(font_family, { weight = "Medium" }),
-  font_size = font_size,
-}
 
 -- Tab bar
 config.use_fancy_tab_bar = false
@@ -38,13 +30,24 @@ config.quick_select_patterns = {
 }
 
 -- Per-screen overrides
+
 local screen_overrides = {
-  ["Built-in Retina Display"] = { font_size = 11 },
-  ["Odyssey G95"] = { font_size = 7 },
+  ["Built-in Retina Display"] = {
+    font_size = 11,
+    command_palette_font_size = 11,
+    char_select_font_size = 11,
+    window_frame = { font = font, font_size = 11 },
+  },
+  ["Odyssey G95NC"] = {
+    font_size = 7,
+    command_palette_font_size = 7,
+    char_select_font_size = 7,
+    window_frame = { font = font, font_size = 7 },
+  },
 }
 
 wezterm.on("window-config-reloaded", function(window)
-  local screen = window:active_screen()
+  local screen = wezterm.gui.screens().active
   local overrides = screen_overrides[screen.name]
   if overrides then
     window:set_config_overrides(overrides)
