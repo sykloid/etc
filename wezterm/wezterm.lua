@@ -71,11 +71,17 @@ config.keys = {
   { key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
+  -- Pane zoom
+  { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+
   -- Selection
   { key = "d", mods = "LEADER", action = act.QuickSelect },
 
   -- General
   { key = "p", mods = "SUPER", action = act.ActivateCommandPalette },
+  { key = "m", mods = "SUPER|SHIFT", action = wezterm.action_callback(function(window)
+    window:maximize()
+  end) },
 }
 
 config.key_tables = {
