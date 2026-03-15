@@ -54,10 +54,25 @@ wezterm.on("window-config-reloaded", function(window)
   end
 end)
 
+local act = wezterm.action
+
+-- Mouse
+config.mouse_bindings = {
+  { event = { Up = { streak = 1, button = "Left" } }, mods = "NONE",
+    action = act.CompleteSelection("PrimarySelection") },
+  { event = { Up = { streak = 1, button = "Left" } }, mods = "SUPER",
+    action = act.OpenLinkAtMouseCursor },
+  { event = { Up = { streak = 2, button = "Left" } }, mods = "NONE",
+    action = act.SelectTextAtMouseCursor("Word") },
+  { event = { Up = { streak = 3, button = "Left" } }, mods = "NONE",
+    action = act.SelectTextAtMouseCursor("Line") },
+  { event = { Up = { streak = 4, button = "Left" } }, mods = "NONE",
+    action = act.SelectTextAtMouseCursor("SemanticZone") },
+}
+
 -- Keybindings
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
 
-local act = wezterm.action
 
 config.keys = {
   -- Pane navigation
