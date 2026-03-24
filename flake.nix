@@ -56,6 +56,7 @@
           luau-lsp
           gopls
           texlab
+          typescript-language-server
         ];
 
         programs.emacs = {

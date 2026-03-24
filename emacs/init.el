@@ -572,6 +572,12 @@ Lisp function does not specify a special indentation."
 
 (use-package nix-mode)
 
+(use-package typescript-ts-mode :ensure nil
+  :hook ((typescript-ts-mode . eglot-ensure)
+         (tsx-ts-mode . eglot-ensure))
+  :init
+  (add-to-list 'major-mode-remap-alist '(typescript-mode . typescript-ts-mode)))
+
 (use-package python :ensure nil
   :init
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
