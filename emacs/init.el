@@ -373,6 +373,7 @@ targets."
 (use-package eglot :ensure nil
   :config
   (add-to-list 'eglot-server-programs '(python-ts-mode . ("rass" "python")))
+  (add-to-list 'eglot-server-programs '(LaTeX-mode . ("texlab")))
 
   :general
   (with-prefix
@@ -565,6 +566,17 @@ Lisp function does not specify a special indentation."
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
 
 (use-package yaml-mode)
+
+(use-package auctex
+  :hook ((LaTeX-mode . eglot-ensure)
+         (LaTeX-mode . reftex-mode)
+         (LaTeX-mode . flyspell-mode)
+         (LaTeX-mode . LaTeX-math-mode))
+  :config
+  (setg TeX-auto-save t)
+  (setg TeX-parse-self t)
+  (setg TeX-PDF-mode t)
+  (setg reftex-plug-into-AUCTeX t))
 
 (provide 'init)
 ;;; init.el ends here

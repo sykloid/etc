@@ -54,6 +54,7 @@
           zsh
           jsonnet-language-server
           luau-lsp
+          texlab
         ];
 
         programs.emacs = {
