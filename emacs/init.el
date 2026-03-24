@@ -559,6 +559,10 @@ Lisp function does not specify a special indentation."
 
 (use-package markdown-mode)
 
+(use-package python :ensure nil
+  :init
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
+
 (use-package nix-mode)
 
 (use-package python :ensure nil
