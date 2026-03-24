@@ -100,6 +100,7 @@ config.keys = {
   { key = "d", mods = "LEADER", action = act.QuickSelect },
 
   -- General
+  { key = "Enter", mods = "ALT", action = act.DisableDefaultAssignment },
   { key = "p", mods = "SUPER", action = act.ActivateCommandPalette },
   { key = "m", mods = "SUPER|SHIFT", action = wezterm.action_callback(function(window)
     window:maximize()
