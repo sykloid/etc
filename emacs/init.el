@@ -563,6 +563,13 @@ Lisp function does not specify a special indentation."
   :init
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
 
+(use-package go-ts-mode :ensure nil
+  :hook (go-ts-mode . eglot-ensure)
+  :init
+  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode))
+  :config
+  (setq-default go-ts-mode-indent-offset 4))
+
 (use-package nix-mode)
 
 (use-package python :ensure nil
