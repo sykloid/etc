@@ -28,6 +28,14 @@
         imports = [ definition ];
       };
 
+      anl = { config, pkgs, ... }: {
+        home.enableNixpkgsReleaseCheck = false;
+        home.username = "pcshyamshankar";
+        home.homeDirectory = "/Users/pcshyamshankar";
+        home.stateVersion = "24.05";
+        imports = [ definition ];
+      };
+
       definition = {pkgs, config, lib, ...}:
       let
         flakePath = builtins.getEnv "FLAKE_PATH";
@@ -95,6 +103,11 @@
       homeConfigurations."linux" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-linux";
         modules = [ linux ];
+      };
+
+      homeConfigurations."anl" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+        modules = [ anl ];
       };
     };
 }

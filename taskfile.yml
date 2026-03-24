@@ -7,6 +7,5 @@ tasks:
     cmd: >-
       nix run home-manager/release-25.11 --
       switch
-      --flake ~/Projects/etc#darwin
+      --flake ~/Projects/etc#anl
       --impure
-      --show-trace
