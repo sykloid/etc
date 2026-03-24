@@ -46,8 +46,15 @@ local screen_overrides = {
   },
 }
 
-wezterm.on("window-config-reloaded", function(window)
+local last_screen = {}
+
+wezterm.on("window-resized", function(window)
   local screen = wezterm.gui.screens().active
+  local id = window:window_id()
+  if last_screen[id] == screen.name then
+    return
+  end
+  last_screen[id] = screen.name
   local overrides = screen_overrides[screen.name]
   if overrides then
     window:set_config_overrides(overrides)
