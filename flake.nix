@@ -65,6 +65,7 @@
           gopls
           texlab
           typescript-language-server
+          (callPackage ./nixpkgs/pi.nix { })
         ];
 
         programs.emacs = {
