@@ -96,7 +96,7 @@
         programs.home-manager.enable = true;
       };
     in {
-      homeConfigurations."darwin" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."atlantis" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-darwin";
         modules = [ darwin ];
       };

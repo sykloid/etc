@@ -3,9 +3,16 @@ version: "3"
 tasks:
   switch:
     vars:
-      FLAKE_PATH: "{{.TASKFILE_DIR}}"
+      HOSTNAME:
+        sh: hostname
+    deps:
+      - "switch:{{.HOSTNAME}}"
+
+  switch:*:
+    vars:
+      PROFILE: "{{index .MATCH 0}}"
     cmd: >-
       nix run home-manager/release-25.11 --
       switch
-      --flake ~/Projects/etc#anl
+      --flake ~/Projects/etc#{{.PROFILE}}
       --impure
