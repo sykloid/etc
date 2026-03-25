@@ -1,0 +1,9 @@
+{
+  "defaultThinkingLevel": "minimal",
+  "terminal": {
+    "clearOnShrink": true
+  },
+  "packages": [
+    "git:github.com/nicobailon/pi-powerline-footer"
+  ]
+}

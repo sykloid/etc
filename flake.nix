@@ -13,6 +13,7 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       darwin = { config, pkgs, ... }: {
+        _module.args.hostname = "atlantis";
         home.enableNixpkgsReleaseCheck = false;
         home.username = "sykloid";
         home.homeDirectory = "/Users/sykloid";
@@ -21,6 +22,7 @@
       };
 
       linux = { config, pkgs, ... }: {
+        _module.args.hostname = "linux";
         home.enableNixpkgsReleaseCheck = false;
         home.username = "sykloid";
         home.homeDirectory = "/home/sykloid";
@@ -29,6 +31,7 @@
       };
 
       anl = { config, pkgs, ... }: {
+        _module.args.hostname = "anl";
         home.enableNixpkgsReleaseCheck = false;
         home.username = "pcshyamshankar";
         home.homeDirectory = "/Users/pcshyamshankar";
@@ -36,13 +39,18 @@
         imports = [ definition ];
       };
 
-      definition = {pkgs, config, lib, ...}:
+      definition = {pkgs, config, lib, hostname, ...}:
       let
         flakePath = builtins.getEnv "FLAKE_PATH";
         link = path:
           if flakePath != ""
           then config.lib.file.mkOutOfStoreSymlink "${flakePath}/${path}"
           else ./. + "/${path}";
+        piBaseSettings = builtins.fromJSON (builtins.readFile ./pi/settings.json);
+        piHostSettings = let path = ./. + "/pi/${hostname}.settings.json"; in
+          if builtins.pathExists path then builtins.fromJSON (builtins.readFile path) else {};
+        piSettings = piBaseSettings // piHostSettings;
+        jsonFormat = pkgs.formats.json {};
       in {
         home.packages = with pkgs; [
           bat
@@ -88,6 +96,8 @@
           "Library/Application Support/nushell/config.nu".source = ./nushell/config.nu;
 
           ".config/wezterm/wezterm.lua".source = link "wezterm/wezterm.lua";
+
+          ".pi/agent/settings.json".source = jsonFormat.generate "pi-settings.json" piSettings;
         };
 
         home.sessionVariables = { };
