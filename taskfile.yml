@@ -16,3 +16,37 @@ tasks:
       switch
       --flake ~/Projects/etc#{{.PROFILE}}
       --impure
+
+  update-pi:
+    desc: "Update pi-coding-agent to a specific version (usage: task update-pi VERSION=x.y.z)"
+    requires:
+      vars: [VERSION]
+    vars:
+      NIX_FILE: nixpkgs/pi.nix
+      SRC_HASH:
+        sh: |
+          nix-prefetch-url \
+            "https://github.com/earendil-works/pi/releases/download/v{{.VERSION}}/pi-{{.VERSION}}-source.tar.gz" \
+            2>/dev/null | xargs nix hash convert --hash-algo sha256 --to sri
+    cmds:
+      # Update version
+      - sed -i '' -E 's/version = ".*"/version = "{{.VERSION}}"/' {{.NIX_FILE}}
+      # Update source hash
+      - sed -i '' -E 's|hash = "sha256-.*"|hash = "{{.SRC_HASH}}"|' {{.NIX_FILE}}
+      # Set npmDepsHash to fakeHash to trigger the hash mismatch
+      - sed -i '' -E 's|npmDepsHash = "sha256-.*"|npmDepsHash = lib.fakeHash|' {{.NIX_FILE}}
+      # Build just pi, capture the correct npmDepsHash from the error, and update
+      - |
+        NPM_HASH=$(nix build --impure --expr '
+          let flake = builtins.getFlake "git+file://'"$PWD"'";
+              pkgs = import flake.inputs.nixpkgs { system = "'"$(nix eval --impure --raw --expr builtins.currentSystem)"'"; };
+          in pkgs.callPackage ./{{.NIX_FILE}} {}' 2>&1 \
+          | grep 'got:' | awk '{print $2}')
+        if [ -z "$NPM_HASH" ]; then
+          echo "ERROR: could not determine npmDepsHash" >&2
+          exit 1
+        fi
+        sed -i '' "s|npmDepsHash = lib.fakeHash|npmDepsHash = \"$NPM_HASH\"|" {{.NIX_FILE}}
+        echo "Updated pi to {{.VERSION}}"
+        echo "  src hash:      {{.SRC_HASH}}"
+        echo "  npmDepsHash:    $NPM_HASH"

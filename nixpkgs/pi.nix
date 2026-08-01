@@ -1,7 +1,8 @@
 {
   lib,
   buildNpmPackage,
-  fetchFromGitHub,
+  fetchurl,
+  makeWrapper,
   nodejs_22,
   pkg-config,
   pixman,
@@ -26,33 +27,31 @@ let
 in
 buildNpmPackage (finalAttrs: {
   pname = "pi-coding-agent";
-  version = "0.62.0";
+  version = "0.83.0";
 
-  src = fetchFromGitHub {
-    owner = "badlogic";
-    repo = "pi-mono";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-nUK7R9kPkULg8eP9lwyqUpzPGRJeSRv3mDgBkHacf8I=";
+  src = fetchurl {
+    url = "https://github.com/earendil-works/pi/releases/download/v${finalAttrs.version}/pi-${finalAttrs.version}-source.tar.gz";
+    hash = "sha256-8iW4fsO0gl3VuU6SKoYpVYrdyjGhtNLCBq5Zio4mksA=";
   };
 
-  sourceRoot = "${finalAttrs.src.name}";
+  sourceRoot = "pi-${finalAttrs.version}";
 
-  npmDepsHash = "sha256-mzFtHU3xGFZxIaQ1XTkYLmQ4UCcn9HhPVfNJ0DHi7Ps=";
+  npmDepsHash = "sha256-AbSfP1Ion8bN309NUBQb1QSn2cIIUjNONmZgls9vnYE=";
 
   nodejs = nodejs_22;
 
-  nativeBuildInputs = [ pkg-config python3 ];
-
-  # Native deps for the `canvas` npm package (transitive dep via pi-ai).
-  buildInputs = [ pixman cairo pango libpng libjpeg giflib librsvg ];
-
   # The generate-models script fetches from external APIs, which fails in the
-  # sandbox and produces a reduced fallback that breaks tsgo type-checking.
-  # The committed models.generated.ts has the full model set — just use it.
+  # sandbox. The release source tarball includes pre-generated model data, so
+  # just skip the generate step and go straight to build:offline.
   postPatch = ''
     substituteInPlace packages/ai/package.json \
-      --replace-fail '"build": "npm run generate-models && tsgo' '"build": "tsgo'
+      --replace-fail '"build": "npm run generate-models && npm run build:offline"' '"build": "npm run build:offline"'
   '';
+
+  nativeBuildInputs = [ pkg-config python3 makeWrapper ];
+
+  # Native deps for the `canvas` npm package (dev dep that still runs install scripts).
+  buildInputs = [ pixman cairo pango libpng libjpeg giflib librsvg ];
 
   # Build only the workspace packages that coding-agent needs, in order.
   buildPhase = ''
@@ -70,7 +69,7 @@ buildNpmPackage (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    local pi_dir="$out/lib/node_modules/@mariozechner/pi-coding-agent"
+    local pi_dir="$out/lib/node_modules/@earendil-works/pi-coding-agent"
     mkdir -p "$pi_dir"
 
     # Copy coding-agent package contents
@@ -85,26 +84,28 @@ buildNpmPackage (finalAttrs: {
     # npm workspaces creates symlinks from node_modules/<pkg> -> packages/<pkg>.
     # Replace the ones coding-agent needs with actual built content.
     ${lib.concatStringsSep "\n" (lib.mapAttrsToList (name: dir: ''
-      rm -f "$pi_dir/node_modules/@mariozechner/${name}"
-      mkdir -p "$pi_dir/node_modules/@mariozechner/${name}"
-      cp -r "packages/${dir}/dist" "$pi_dir/node_modules/@mariozechner/${name}/"
-      cp "packages/${dir}/package.json" "$pi_dir/node_modules/@mariozechner/${name}/"
+      rm -f "$pi_dir/node_modules/@earendil-works/${name}"
+      mkdir -p "$pi_dir/node_modules/@earendil-works/${name}"
+      cp -r "packages/${dir}/dist" "$pi_dir/node_modules/@earendil-works/${name}/"
+      cp "packages/${dir}/package.json" "$pi_dir/node_modules/@earendil-works/${name}/"
     '') workspaceDeps)}
 
-    # Remove remaining broken workspace symlinks (mom, pods, web-ui, etc.)
+    # Remove remaining broken workspace symlinks (orchestrator, etc.)
     find "$pi_dir/node_modules" -type l ! -exec test -e {} \; -delete
 
-    # cli.js has a shebang; just symlink it
+    # Wrap cli.js so that npm/node are on PATH at runtime
+    # (pi spawns `npm install` for package management)
     mkdir -p "$out/bin"
-    ln -s "$pi_dir/dist/cli.js" "$out/bin/pi"
+    makeWrapper "$pi_dir/dist/cli.js" "$out/bin/pi" \
+      --prefix PATH : "${finalAttrs.nodejs}/bin"
 
     runHook postInstall
   '';
 
   meta = {
     description = "Terminal-based AI coding agent";
-    homepage = "https://github.com/badlogic/pi-mono";
-    changelog = "https://github.com/badlogic/pi-mono/releases/tag/v${finalAttrs.version}";
+    homepage = "https://github.com/earendil-works/pi";
+    changelog = "https://github.com/earendil-works/pi/releases/tag/v${finalAttrs.version}";
     license = lib.licenses.mit;
     mainProgram = "pi";
     platforms = lib.platforms.all;
