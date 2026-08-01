@@ -1,0 +1,9 @@
+{
+  "defaultProvider": "argo",
+  "defaultModel": "claudeopus48",
+  "defaultThinkingLevel": "minimal",
+  "packages": [
+  ],
+  "hideThinkingBlock": false,
+  "powerline": "default"
+}

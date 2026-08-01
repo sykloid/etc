@@ -8,9 +8,32 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Python packaging (uv2nix)
+    pyproject-nix = {
+      url = "github:pyproject-nix/pyproject.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    uv2nix = {
+      url = "github:pyproject-nix/uv2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pyproject-nix.follows = "pyproject-nix";
+    };
+    pyproject-build-systems = {
+      url = "github:pyproject-nix/build-system-pkgs";
+      inputs.pyproject-nix.follows = "pyproject-nix";
+      inputs.uv2nix.follows = "uv2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # MCP servers
+    mcp-atlassian-src = {
+      url = "github:sooperset/mcp-atlassian/v0.23.0";
+      flake = false;
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, pyproject-nix, uv2nix, pyproject-build-systems, mcp-atlassian-src, ... }:
     let
       darwin = { config, pkgs, ... }: {
         _module.args.hostname = "atlantis";
@@ -49,7 +72,9 @@
         piBaseSettings = builtins.fromJSON (builtins.readFile ./pi/settings.json);
         piHostSettings = let path = ./. + "/pi/${hostname}.settings.json"; in
           if builtins.pathExists path then builtins.fromJSON (builtins.readFile path) else {};
-        piSettings = piBaseSettings // piHostSettings;
+        piSettings = (lib.recursiveUpdate piBaseSettings piHostSettings) // {
+          packages = (piBaseSettings.packages or []) ++ (lib.subtractLists (piBaseSettings.packages or []) (piHostSettings.packages or []));
+        };
         jsonFormat = pkgs.formats.json {};
       in {
         home.packages = with pkgs; [
@@ -74,6 +99,9 @@
           texlab
           typescript-language-server
           (callPackage ./nixpkgs/pi.nix { })
+          (import ./nixpkgs/mcp-atlassian.nix {
+            inherit pkgs pyproject-nix uv2nix pyproject-build-systems mcp-atlassian-src;
+          })
         ];
 
         programs.emacs = {
@@ -98,7 +126,13 @@
           ".config/wezterm/wezterm.lua".source = link "wezterm/wezterm.lua";
 
           ".pi/agent/settings.json".source = jsonFormat.generate "pi-settings.json" piSettings;
-        };
+        }
+        // (let path = ./. + "/pi/${hostname}.models.json"; in
+          lib.optionalAttrs (builtins.pathExists path)
+          { ".pi/agent/models.json".source = path; })
+        // (let path = ./. + "/pi/${hostname}.mcp.json"; in
+          lib.optionalAttrs (builtins.pathExists path)
+          { ".pi/agent/mcp.json".source = path; });
 
         home.sessionVariables = { };
 

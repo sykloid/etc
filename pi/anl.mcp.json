@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "glab": {
+      "command": "glab",
+      "args": ["mcp", "serve"]
+    },
+    "TaskNotes": {
+      "url": "http://localhost:8192/mcp"
+    },
+    "Atlassian": {
+      "type": "stdio",
+      "command": "mcp-atlassian",
+      "args": [
+        "--toolsets", "all",
+        "--confluence-url", "https://apps.cels.anl.gov/confluence/",
+        "--confluence-username", "pcshyamshankar"
+      ],
+      "env": {
+        "CONFLUENCE_PERSONAL_TOKEN": "${CONFLUENCE_PERSONAL_TOKEN}"
+      }
+    },
+    "Slack": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "slack-mcp-server@latest", "--transport", "stdio"],
+      "env": {
+        "SLACK_MCP_XOXP_TOKEN": "${SLACK_MCP_XOXP_TOKEN}"
+      }
+    }
+  }
+}

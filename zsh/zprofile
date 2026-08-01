@@ -12,6 +12,10 @@ export FPATH=${HOME}/.zfunc:${FPATH}
 
 export EDITOR=emacs
 
+# Disable pi's startup network ops: CLI + extension update-available notices,
+# package update checks, and telemetry. Runtime MCP/model calls are unaffected.
+export PI_OFFLINE=1
+
 export LESS_TERMCAP_so=$(echo -e '\e[1;7m')
 export LESS_TERMCAP_se=$(echo -e '\e[0m')
 export MANROFFOPT="-c"

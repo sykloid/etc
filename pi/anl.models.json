@@ -1,0 +1,199 @@
+{
+  "providers": {
+    "argo": {
+      "baseUrl": "https://apps-dev.inside.anl.gov/argoapi/",
+      "api": "anthropic-messages",
+      "apiKey": "pcshyamshankar",
+      "models": [
+        {
+          "id": "claudeopus5",
+          "name": "Claude Opus 5",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudeopus48",
+          "name": "Claude Opus 4.8",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudeopus47",
+          "name": "Claude Opus 4.7",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudeopus46",
+          "name": "Claude Opus 4.6",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudeopus45",
+          "name": "Claude Opus 4.5",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudeopus41",
+          "name": "Claude Opus 4.1",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudesonnet5",
+          "name": "Claude Sonnet 5",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 256000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudesonnet46",
+          "name": "Claude Sonnet 4.6",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 256000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudesonnet45",
+          "name": "Claude Sonnet 4.5",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 256000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "claudehaiku45",
+          "name": "Claude Haiku 4.5",
+          "authHeader": true,
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 200000,
+          "maxTokens": 8192,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gpt56terra",
+          "name": "GPT-5.6 Terra",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "api": "openai-responses",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gpt56sol",
+          "name": "GPT-5.6 Sol",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "api": "openai-responses",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gpt55",
+          "name": "GPT-5.5",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "api": "openai-completions",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gpt5",
+          "name": "GPT-5",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "api": "openai-completions",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gpto4mini",
+          "name": "o4-mini",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 200000,
+          "maxTokens": 16384,
+          "api": "openai-responses",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gpto3",
+          "name": "o3",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 200000,
+          "maxTokens": 16384,
+          "api": "openai-responses",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gemini25pro",
+          "name": "Gemini 2.5 Pro",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "api": "google-generative-ai",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "gemini35flash",
+          "name": "Gemini 3.5 Flash",
+          "authHeader": true,
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "api": "google-generative-ai",
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        }
+      ]
+    }
+  }
+}
