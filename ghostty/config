@@ -1,0 +1,41 @@
+# Ghostty configuration
+
+# Font
+font-family = Iosevka Term SS01
+font-style = Medium
+font-size = 12
+font-thicken = true
+
+# Colors
+theme = Ayu Mirage
+background = #0A0A0A
+
+# Window
+macos-titlebar-style = tabs
+window-padding-x = 0
+window-padding-y = 0
+window-decoration = true
+
+macos-option-as-alt = true
+macos-non-native-fullscreen = true
+
+confirm-close-surface = true
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+
+# Keybindings
+keybind = ctrl+space>n=goto_split:left
+keybind = ctrl+space>e=goto_split:down
+keybind = ctrl+space>i=goto_split:up
+keybind = ctrl+space>o=goto_split:right
+
+keybind = ctrl+space>v=new_split:right
+keybind = ctrl+space>shift+v=new_split:left
+keybind = ctrl+space>s=new_split:down
+keybind = ctrl+space>shift+s=new_split:up
+
+keybind = ctrl+space>z=toggle_split_zoom
+
+keybind = ctrl+space>shift+z=toggle_fullscreen
+
+keybind = ctrl+space>c=new_tab

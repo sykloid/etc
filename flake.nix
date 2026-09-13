@@ -124,6 +124,7 @@
           "Library/Application Support/nushell/config.nu".source = ./nushell/config.nu;
 
           ".config/wezterm/wezterm.lua".source = link "wezterm/wezterm.lua";
+          ".config/ghostty/config".source = link "ghostty/config";
 
           ".pi/agent/settings.json".source = jsonFormat.generate "pi-settings.json" piSettings;
         }
