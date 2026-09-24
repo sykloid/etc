@@ -13,6 +13,7 @@
 ;;; * Package Management & Bootstrap
 (load-file (expand-file-name "elpaca-bootstrap.el" user-emacs-directory))
 (setq elpaca-lock-file (expand-file-name "elpaca.lock.el" user-emacs-directory))
+(elpaca-wait)
 
 (setq use-package-enable-imenu-support t)
 (require 'use-package)
@@ -62,7 +63,8 @@
 
   (setg custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file t)
-  (load-theme 'skywave)
+  (add-to-list 'custom-theme-load-path user-emacs-directory)
+  (load-theme 'skywave t)
 
   (prefer-coding-system       'utf-8)
   (set-default-coding-systems 'utf-8)
@@ -279,11 +281,6 @@
   (setg corfu-auto t)
   (setg corfu-auto-delay 0.2)
   (setg corfu-quit-no-match 'separator))
-
-(use-package corfu-terminal
-  :ensure (:repo "https://codeberg.org/akib/emacs-corfu-terminal.git")
-  :init
-  (corfu-terminal-mode 1))
 
 (use-package vertico
   :init
@@ -594,6 +591,11 @@ Lisp function does not specify a special indentation."
   (setg TeX-parse-self t)
   (setg TeX-PDF-mode t)
   (setg reftex-plug-into-AUCTeX t))
+
+;; In batch mode, drain all elpaca queues before exiting.
+(when noninteractive
+  (run-hooks 'after-init-hook)
+  (elpaca-wait))
 
 (provide 'init)
 ;;; init.el ends here

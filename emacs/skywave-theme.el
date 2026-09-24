@@ -1,4 +1,4 @@
-;;; skywave-theme.el -- Custom Emacs Theme
+;;; skywave-theme.el --- Custom Emacs Theme  -*- lexical-binding: t; -*-
 ;;; P.C. Shyamshankar 'sykloid' <shyam@sykloid.org>
 
 ;;; Commentary:

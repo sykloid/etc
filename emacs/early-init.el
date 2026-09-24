@@ -1,4 +1,4 @@
-;;; early-init.el --- Emacs Early Initialization
+;;; early-init.el --- Emacs Early Initialization  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;; This file is loaded before the package management infrastructure and the UI,

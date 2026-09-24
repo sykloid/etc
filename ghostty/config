@@ -1,5 +1,10 @@
 # Ghostty configuration
 
+# Shell
+# NOTE: reverted to system zsh; spack zsh@5.9 hangs on command substitution
+# (SIGCHLD race, fixed upstream in 5.9.1/5.9.2 which spack doesn't yet package).
+command = /bin/zsh -l
+
 # Font
 font-family = Iosevka Term SS01
 font-style = Medium

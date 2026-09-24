@@ -1,52 +1,157 @@
 version: "3"
 
+run: once
+
+vars:
+  STOW_TARGET: '{{.STOW_TARGET | default .HOME}}'
+  STOW_HOST: '{{.STOW_HOST}}'
+
+  SPACK_VERSION: v1.2.2
+  SPACK_SRC: '{{.TASKFILE_DIR}}/.spack'
+  SPACK_ENV: '{{.TASKFILE_DIR}}/spack'
+  SPACK: '{{.TASKFILE_DIR}}/.spack/bin/spack'
+  ETC_ENV_FILE: '{{.TASKFILE_DIR}}/profile.sh'
+
+  CONTAINER_PLATFORM: '{{.CONTAINER_PLATFORM | default "linux/amd64"}}'
+  CONTAINER_TAG: '{{.CONTAINER_TAG | default "etc"}}'
+
 tasks:
-  switch:
-    vars:
-      HOSTNAME:
-        sh: hostname
-    deps:
-      - "switch:{{.HOSTNAME}}"
-
-  switch:*:
-    vars:
-      PROFILE: "{{index .MATCH 0}}"
-    cmd: >-
-      nix run home-manager/release-25.11 --
-      switch
-      --flake ~/Projects/etc#{{.PROFILE}}
-      --impure
-
-  update-pi:
-    desc: "Update pi-coding-agent to a specific version (usage: task update-pi VERSION=x.y.z)"
-    requires:
-      vars: [VERSION]
-    vars:
-      NIX_FILE: nixpkgs/pi.nix
-      SRC_HASH:
-        sh: |
-          nix-prefetch-url \
-            "https://github.com/earendil-works/pi/releases/download/v{{.VERSION}}/pi-{{.VERSION}}-source.tar.gz" \
-            2>/dev/null | xargs nix hash convert --hash-algo sha256 --to sri
+  container:build:
+    desc: Build the container image.
     cmds:
-      # Update version
-      - sed -i '' -E 's/version = ".*"/version = "{{.VERSION}}"/' {{.NIX_FILE}}
-      # Update source hash
-      - sed -i '' -E 's|hash = "sha256-.*"|hash = "{{.SRC_HASH}}"|' {{.NIX_FILE}}
-      # Set npmDepsHash to fakeHash to trigger the hash mismatch
-      - sed -i '' -E 's|npmDepsHash = "sha256-.*"|npmDepsHash = lib.fakeHash|' {{.NIX_FILE}}
-      # Build just pi, capture the correct npmDepsHash from the error, and update
+      - podman build --platform '{{.CONTAINER_PLATFORM}}' -t '{{.CONTAINER_TAG}}' -f Containerfile '{{.TASKFILE_DIR}}'
+
+  spack:bootstrap:
+    desc: Provision Spack at the pinned version with the pinned builtin repo.
+    deps:
+      - spack:builtin
+      - spack:compilers
+
+  spack:builtin:
+    desc: Check out the builtin package repo at the pinned ref.
+    deps:
+      - spack:clone
+    status:
       - |
-        NPM_HASH=$(nix build --impure --expr '
-          let flake = builtins.getFlake "git+file://'"$PWD"'";
-              pkgs = import flake.inputs.nixpkgs { system = "'"$(nix eval --impure --raw --expr builtins.currentSystem)"'"; };
-          in pkgs.callPackage ./{{.NIX_FILE}} {}' 2>&1 \
-          | grep 'got:' | awk '{print $2}')
-        if [ -z "$NPM_HASH" ]; then
-          echo "ERROR: could not determine npmDepsHash" >&2
-          exit 1
-        fi
-        sed -i '' "s|npmDepsHash = lib.fakeHash|npmDepsHash = \"$NPM_HASH\"|" {{.NIX_FILE}}
-        echo "Updated pi to {{.VERSION}}"
-        echo "  src hash:      {{.SRC_HASH}}"
-        echo "  npmDepsHash:    $NPM_HASH"
+        BR=$('{{.SPACK}}' -e '{{.SPACK_ENV}}' repo list --json 2>/dev/null | jq -r '.[] | select(.namespace=="builtin") | .path')
+        test -n "$BR" || exit 1
+        REF=$('{{.SPACK}}' -e '{{.SPACK_ENV}}' config get repos --json 2>/dev/null | jq -r '.repos.builtin.commit // .repos.builtin.tag')
+        test -n "$REF" || exit 1
+        HEAD=$(git -C $BR rev-parse HEAD)
+        WANT=$(git -C $BR rev-list -n1 $REF)
+        test $HEAD = $WANT
+    cmds:
+      - "'{{.SPACK}}' -e '{{.SPACK_ENV}}' repo update builtin"
+
+  spack:clone:
+    desc: Clone Spack at the pinned version.
+    status:
+      - test "$(cat '{{.SPACK_SRC}}/.spack-version' 2>/dev/null)" = '{{.SPACK_VERSION}}'
+    cmds:
+      - rm -rf '{{.SPACK_SRC}}'
+      - git clone --depth 1 --branch '{{.SPACK_VERSION}}' https://github.com/spack/spack '{{.SPACK_SRC}}'
+      - echo '{{.SPACK_VERSION}}' > '{{.SPACK_SRC}}/.spack-version'
+
+  spack:compilers:
+    desc: Detect system compilers and record them in the user scope.
+    deps:
+      - spack:clone
+    status:
+      - |
+        N=$('{{.SPACK}}' config --scope user get packages --json 2>/dev/null | jq -r '.packages | keys | length')
+        test "${N:-0}" -ge 1
+    cmds:
+      - "'{{.SPACK}}' compiler find --scope user"
+
+  spack:env:
+    desc: Generate a source-able env file from the installed environment.
+    cmds:
+      - "'{{.SPACK}}' -e '{{.SPACK_ENV}}' env activate --sh '{{.SPACK_ENV}}' > '{{.ETC_ENV_FILE}}'"
+
+  spack:install:
+    desc: Install the pinned environment.
+    deps:
+      - spack:bootstrap
+    cmds:
+      - "'{{.SPACK}}' -e '{{.SPACK_ENV}}' install"
+      - task: spack:env
+
+  stow:
+    desc: Symlink all dotfiles.
+    cmds:
+      - task: stow:emacs
+      - task: stow:ghostty
+      - task: stow:git
+      - task: stow:nushell
+      - task: stow:pi
+      - task: stow:profile
+      - task: stow:zsh
+
+  stow:emacs:
+    desc: Symlink emacs configuration.
+    cmds:
+      - mkdir -p '{{.STOW_TARGET}}/.config/emacs'
+      - ln -sfn '{{.TASKFILE_DIR}}/emacs/early-init.el' '{{.STOW_TARGET}}/.config/emacs/early-init.el'
+      - ln -sfn '{{.TASKFILE_DIR}}/emacs/init.el' '{{.STOW_TARGET}}/.config/emacs/init.el'
+      - ln -sfn '{{.TASKFILE_DIR}}/emacs/elpaca-bootstrap.el' '{{.STOW_TARGET}}/.config/emacs/elpaca-bootstrap.el'
+      - ln -sfn '{{.TASKFILE_DIR}}/emacs/skywave-theme.el' '{{.STOW_TARGET}}/.config/emacs/skywave-theme.el'
+
+  stow:emacs-packages:
+    desc: Install emacs (elpaca) packages in batch mode.
+    deps:
+      - stow:emacs
+    cmds:
+      - emacs --batch -Q --eval '(setq user-emacs-directory "{{.STOW_TARGET}}/.config/emacs/")' -l '{{.STOW_TARGET}}/.config/emacs/init.el'
+
+  stow:ghostty:
+    desc: Symlink ghostty configuration and compile terminfo.
+    cmds:
+      - mkdir -p '{{.STOW_TARGET}}/.config/ghostty'
+      - ln -sfn '{{.TASKFILE_DIR}}/ghostty/config' '{{.STOW_TARGET}}/.config/ghostty/config'
+      - tic -x -o '{{.STOW_TARGET}}/.terminfo' '{{.TASKFILE_DIR}}/terminfo/xterm-ghostty.terminfo'
+
+  stow:git:
+    desc: Symlink git configuration.
+    cmds:
+      - ln -sfn '{{.TASKFILE_DIR}}/git/gitconfig' '{{.STOW_TARGET}}/.gitconfig'
+      - ln -sfn '{{.TASKFILE_DIR}}/git/gitignore' '{{.STOW_TARGET}}/.gitignore'
+
+  stow:nushell:
+    desc: Symlink nushell configuration.
+    vars:
+      NU_CONFIG_DIR:
+        sh: |
+          if [ "$(uname -s)" = Darwin ]; then
+            echo '{{.STOW_TARGET}}/Library/Application Support/nushell'
+          else
+            echo '{{.STOW_TARGET}}/.config/nushell'
+          fi
+    cmds:
+      - mkdir -p '{{.NU_CONFIG_DIR}}'
+      - ln -sfn '{{.TASKFILE_DIR}}/nushell/config.nu' '{{.NU_CONFIG_DIR}}/config.nu'
+
+  stow:profile:
+    desc: Symlink the generated environment profile.
+    deps:
+      - spack:env
+    cmds:
+      - mkdir -p '{{.STOW_TARGET}}/.config/etc'
+      - ln -sfn '{{.TASKFILE_DIR}}/profile.sh' '{{.STOW_TARGET}}/.config/etc/profile.sh'
+
+  stow:pi:
+    desc: Symlink pi configuration for the current host.
+    preconditions:
+      - sh: test -n '{{.STOW_HOST}}'
+        msg: STOW_HOST must be set (e.g. task stow:pi STOW_HOST=anl)
+      - sh: test -d '{{.TASKFILE_DIR}}/pi/{{.STOW_HOST}}'
+        msg: "No pi config directory for host '{{.STOW_HOST}}'"
+    cmds:
+      - mkdir -p '{{.STOW_TARGET}}/.pi/agent'
+      - ln -sfn '{{.TASKFILE_DIR}}/pi/{{.STOW_HOST}}/settings.json' '{{.STOW_TARGET}}/.pi/agent/settings.json'
+      - ln -sfn '{{.TASKFILE_DIR}}/pi/{{.STOW_HOST}}/models.json' '{{.STOW_TARGET}}/.pi/agent/models.json'
+
+  stow:zsh:
+    desc: Symlink zsh configuration.
+    cmds:
+      - ln -sfn '{{.TASKFILE_DIR}}/zsh/zprofile' '{{.STOW_TARGET}}/.zprofile'
+      - ln -sfn '{{.TASKFILE_DIR}}/zsh/zshrc' '{{.STOW_TARGET}}/.zshrc'

@@ -1,0 +1,16 @@
+{
+  "defaultProvider": "argo",
+  "defaultModel": "claudeopus48",
+  "defaultThinkingLevel": "minimal",
+  "hideThinkingBlock": false,
+  "powerline": "default",
+  "terminal": {
+    "clearOnShrink": true
+  },
+  "packages": [
+    "git:github.com/nicobailon/pi-powerline-footer@760f828",
+    "npm:pi-perplexity@0.4.0"
+  ],
+  "lastChangelogVersion": "0.85.1",
+  "theme": "dark"
+}

@@ -1,4 +1,4 @@
-;;; elpaca.el --- Elpaca Bootstrap
+;;; elpaca.el --- Elpaca Bootstrap  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; This snippet is taken directly from the Elpaca documentation.
 ;;; Code:

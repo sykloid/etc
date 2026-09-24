@@ -1,0 +1,21 @@
+spack:
+  specs:
+  - tree@2.1.0
+  - nushell@0.115.1
+  - zsh@5.9
+  - gh@2.96.0
+  - glab@1.109.0
+  - emacs@31.1 gui=none +treesitter
+  - pi@0.85.1
+  - ripgrep@15.2.0
+  view: true
+  concretizer:
+    unify: true
+  config:
+    install_tree:
+      root: ~/.local/share/etc-spack/opt
+  repos:
+    etc: repo/spack_repo/etc
+    builtin:
+      git: https://github.com/spack/spack-packages.git
+      commit: d00acb55ee9b53f7f0d57550cb07d35de9994848

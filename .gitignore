@@ -1,3 +1,6 @@
 .*
+profile.sh
+spack/spack.lock
 
 emacs/elpa
+emacs/etc

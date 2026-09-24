@@ -5,6 +5,9 @@
 # This file is loaded in all interactive shells. If the shell is also a login
 # shell, this file is loaded *after* zprofile.
 
+# * Environment
+[ -r ~/.config/etc/profile.sh ] && . ~/.config/etc/profile.sh
+
 # * Shell Options
 setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS
 setopt HIST_VERIFY EXTENDED_HISTORY HIST_SAVE_NO_DUPS SHARE_HISTORY
