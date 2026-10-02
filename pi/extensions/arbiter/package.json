@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@marcbachmann/cel-js": "^8.0.0",
+    "unbash": "^4.0.12",
     "yaml": "^2.8.0"
   },
   "devDependencies": {

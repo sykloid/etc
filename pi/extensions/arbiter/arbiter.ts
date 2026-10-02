@@ -4,6 +4,7 @@ import { join } from "node:path";
 import type { ExtensionContext } from "@earendil-works/pi-coding-agent";
 
 import { ToolHandler } from "./handler.js";
+import { BashHandler } from "./handlers/bash.js";
 import { PathHandler } from "./handlers/path.js";
 import type { ToolCall } from "./handler.js";
 import { loadRuleSet, type CompiledRuleSet, type Rule } from "./rule.js";
@@ -29,6 +30,8 @@ export class Arbiter {
     this.handlers.set("read", pathHandler);
     this.handlers.set("write", pathHandler);
     this.handlers.set("edit", pathHandler);
+
+    this.handlers.set("bash", new BashHandler());
   }
 
   /** The handler for a tool, falling back to the default handler. */
