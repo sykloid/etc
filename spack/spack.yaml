@@ -6,7 +6,7 @@ spack:
   - gh@2.96.0
   - glab@1.109.0
   - emacs@31.1 gui=none +treesitter
-  - pi@0.85.1
+  - pi@1.0.0
   - ripgrep@15.2.0
   view: true
   concretizer:

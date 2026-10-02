@@ -18,6 +18,10 @@ _platforms = {
 }
 
 _checksums = {
+    "1.0.0": {
+        "darwin-arm64": "97291e7d2eb2d7d95ab1f67d26de7902302201bc8786c132bbbc9e53fa8526cc",
+        "linux-x64": "8fd5543a52a889d60ad57ccbf6c969e73c75c5240aae18ac40b506947a63dc38",
+    },
     "0.85.1": {
         "darwin-arm64": "d5f70e3c0cf7398eac239fd0261ee074d98b7ba7f6b43fe3617f052ed5b79d06",
         "linux-x64": "494e498f47d74d21f40b3386f6a5e921a3d49531a169cab55bbdaca0ea1fe25a",
