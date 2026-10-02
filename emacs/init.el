@@ -372,6 +372,14 @@ targets."
   (add-to-list 'eglot-server-programs '(python-ts-mode . ("rass" "python")))
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("texlab")))
 
+  ;; Always present the code-action menu, even for a single action. Suppress the
+  ;; at-point suggestion-overlay shortcut that otherwise auto-executes a lone
+  ;; action without prompting.
+  (advice-add 'eglot-code-actions :around
+              (lambda (fn &rest args)
+                (let ((eglot--suggestion-overlay nil))
+                  (apply fn args))))
+
   :general
   (with-prefix
     "la" 'eglot-code-actions
