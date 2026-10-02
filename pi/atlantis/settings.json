@@ -7,7 +7,6 @@
   },
   "packages": [
     "git:github.com/nicobailon/pi-powerline-footer@760f828",
-    "git:github.com/sykloid/pi-auditor",
     "npm:pi-mcp-adapter@2.11.0",
     "npm:pi-perplexity@0.4.0"
   ]
