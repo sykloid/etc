@@ -1,0 +1,16 @@
+{
+  "name": "arbiter",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "description": "pi extension: tool-call auditing, policy enforcement, and sandboxed execution",
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "1.0.0"
+  }
+}

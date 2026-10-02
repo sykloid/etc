@@ -149,6 +149,15 @@ tasks:
       - mkdir -p '{{.STOW_TARGET}}/.pi/agent'
       - ln -sfn '{{.TASKFILE_DIR}}/pi/{{.STOW_HOST}}/settings.json' '{{.STOW_TARGET}}/.pi/agent/settings.json'
       - ln -sfn '{{.TASKFILE_DIR}}/pi/{{.STOW_HOST}}/models.json' '{{.STOW_TARGET}}/.pi/agent/models.json'
+      # Link extensions for auto-discovery under ~/.pi/agent.
+      - mkdir -p '{{.STOW_TARGET}}/.pi/agent/extensions'
+      - ln -sfn '{{.TASKFILE_DIR}}/pi/extensions/arbiter' '{{.STOW_TARGET}}/.pi/agent/extensions/arbiter'
+      # Install extension dependencies (runtime and dev/type-only) if declared.
+      - |
+        DEPS=$(jq -r '(.dependencies // {} | length) + (.devDependencies // {} | length)' '{{.TASKFILE_DIR}}/pi/extensions/arbiter/package.json' 2>/dev/null || echo 0)
+        if [ "${DEPS:-0}" -gt 0 ]; then
+          (cd '{{.TASKFILE_DIR}}/pi/extensions/arbiter' && npm install)
+        fi
 
   stow:zsh:
     desc: Symlink zsh configuration.

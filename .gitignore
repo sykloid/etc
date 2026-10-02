@@ -4,3 +4,5 @@ spack/spack.lock
 
 emacs/elpa
 emacs/etc
+
+node_modules
