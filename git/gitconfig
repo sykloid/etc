@@ -1,4 +1,7 @@
 ; Git Configuration
+[include]
+  path = ~/.gitconfig.local
+
 [user]
   name = P.C. Shyamshankar
 

@@ -11,6 +11,6 @@
     "git:github.com/nicobailon/pi-powerline-footer@760f828",
     "npm:pi-perplexity@0.4.0"
   ],
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "1.0.0",
   "theme": "dark"
 }
